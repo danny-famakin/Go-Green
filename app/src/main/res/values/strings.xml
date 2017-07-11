@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">GoGreen</string>
+    <string name="title_activity_reuse">reuseActivity</string>
+    <string name="title_activity_testing">testing</string>
 </resources>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/Users/melissaperez/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.4/5fe28b9518e58819180a43a850fbc0dd24b7c050/commons-lang3-3.4.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="5fe28b9518e58819180a43a850fbc0dd24b7c050">
+        <dex dex="/Users/melissaperez/Desktop/Go-Green/app/build/intermediates/pre-dexed/debug/commons-lang3-3.4_0d5521f24dacfda021c4e4ad73dc96208206c5cb.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/melissaperez/.android/build-cache/631477e6952ae87ea1b708cf4324a3e3f9ca4407/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="6a022bf00ccd0948a8180c505e8e458bbddd43a6">
+        <dex dex="/Users/melissaperez/Desktop/Go-Green/app/build/intermediates/pre-dexed/debug/classes_2c7b517b43adbb64e8562372869ab15def56f662.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/melissaperez/.android/build-cache/dcd080809eab84d985c7d7103bbcfb0f6b6a6316/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="cddcd0fb93bc70e27325f2f715b2710332004ebb">
+        <dex dex="/Users/melissaperez/Desktop/Go-Green/app/build/intermediates/pre-dexed/debug/classes_fbe44a979f52aeaa59fd324f4eee79c9e08d3604.jar" />
+    </item>
+
+</items>

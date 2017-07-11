@@ -1,5 +1,7 @@
 package com.codepath.gogreen;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -8,8 +10,11 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
+    Context context;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        context = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Button btnTransit = (Button) findViewById(R.id.btnTransit);
@@ -35,6 +40,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.btnBags:
+                Intent i = new Intent(context, ReuseActivity.class);
+                context.startActivity(i);
                 Log.d("clicked", "bags");
                 break;
 
