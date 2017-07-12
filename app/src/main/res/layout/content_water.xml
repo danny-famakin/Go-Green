@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="16dp"
+    tools:context="com.codepath.gogreen.WaterActivity">
+
+    <TextView
+        android:id="@+id/tvShower"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="22dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="24dp"
+        android:text="Average Shower Time" />
+
+    <ImageView
+        android:id="@+id/ivShower"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="17dp"
+        app:srcCompat="@mipmap/ic_launcher"
+        android:layout_marginLeft="23dp"
+        android:layout_marginStart="23dp"
+        android:layout_below="@+id/tvShower"
+        android:layout_alignLeft="@+id/tvShower"
+        android:layout_alignStart="@+id/tvShower" />
+
+    <TextView
+        android:id="@+id/tvShowerTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="28dp"
+        android:layout_marginStart="28dp"
+        android:text="00:00"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:layout_alignBottom="@+id/ivShower"
+        android:layout_toRightOf="@+id/tvShower"
+        android:layout_toEndOf="@+id/tvShower" />
+
+    <TextView
+        android:id="@+id/tvTimeUnit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ivShower"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_toEndOf="@+id/tvShowerTime"
+        android:layout_toRightOf="@+id/tvShowerTime"
+        android:text="min" />
+    <TextView
+        android:id="@+id/tvWaterInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_below="@+id/ivShower"
+        />
+
+
+</RelativeLayout>
