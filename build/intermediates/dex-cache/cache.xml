@@ -3,21 +3,30 @@
 
     <item
         is-multidex="false"
-        jar="/Users/famakindaniel7/.android/build-cache/b92b94431757bfa1a73b26c00c96625c6b25730b/output/jars/classes.jar"
+        jar="/Users/anyazhang/.gradle/caches/modules-2/files-2.1/org.apache.commons/commons-lang3/3.4/5fe28b9518e58819180a43a850fbc0dd24b7c050/commons-lang3-3.4.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="5fe28b9518e58819180a43a850fbc0dd24b7c050">
+        <dex dex="/Users/anyazhang/Documents/Go-Green/app/build/intermediates/pre-dexed/debug/commons-lang3-3.4_35ee83d80ff449249ff6ecd6971b869c436d9265.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/anyazhang/.android/build-cache/19a000b74f520bac299e7c472a0ca9847624cd09/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="26.0.0"
         sha1="6a022bf00ccd0948a8180c505e8e458bbddd43a6">
-        <dex dex="/Users/famakindaniel7/Downloads/Go-Green-master/app/build/intermediates/pre-dexed/debug/classes_3fadac1c7ce15ced7a88745adbf172f61674316a.jar" />
+        <dex dex="/Users/anyazhang/Documents/Go-Green/app/build/intermediates/pre-dexed/debug/classes_12e2f7e66503c839a71b960324ec231762397ab0.jar" />
     </item>
     <item
         is-multidex="false"
-        jar="/Users/famakindaniel7/.android/build-cache/9cc7fe84b4b12555463818aae70b866f3624ab0c/output/jars/classes.jar"
+        jar="/Users/anyazhang/.android/build-cache/190d675e3f22bc6a99ae3ceddda28c3c688db422/output/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="26.0.0"
         sha1="cddcd0fb93bc70e27325f2f715b2710332004ebb">
-        <dex dex="/Users/famakindaniel7/Downloads/Go-Green-master/app/build/intermediates/pre-dexed/debug/classes_bcc247f852a56880b4ee04ddb481916dfe102a93.jar" />
+        <dex dex="/Users/anyazhang/Documents/Go-Green/app/build/intermediates/pre-dexed/debug/classes_ecfeef7e3fa3c32102bfa41999cb0749ab70389d.jar" />
     </item>
 
 </items>

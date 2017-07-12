@@ -25,7 +25,7 @@ public class RecycleActivity extends AppCompatActivity implements View.OnClickLi
     }
     //@Override
     public void onClick(View view) {
-        Intent i = new Intent(this, RecycleLog.class);
+        Intent i = new Intent(this, LogRecycleActivity.class);
         startActivityForResult(i, REQUEST_CODE);
     }
 
