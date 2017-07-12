@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="/Users/famakindaniel7/.android/build-cache/b92b94431757bfa1a73b26c00c96625c6b25730b/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="6a022bf00ccd0948a8180c505e8e458bbddd43a6">
+        <dex dex="/Users/famakindaniel7/Downloads/Go-Green-master/app/build/intermediates/pre-dexed/debug/classes_3fadac1c7ce15ced7a88745adbf172f61674316a.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/famakindaniel7/.android/build-cache/9cc7fe84b4b12555463818aae70b866f3624ab0c/output/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="26.0.0"
+        sha1="cddcd0fb93bc70e27325f2f715b2710332004ebb">
+        <dex dex="/Users/famakindaniel7/Downloads/Go-Green-master/app/build/intermediates/pre-dexed/debug/classes_bcc247f852a56880b4ee04ddb481916dfe102a93.jar" />
+    </item>
+
+</items>

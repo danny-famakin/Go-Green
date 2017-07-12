@@ -16,8 +16,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".ReuseActivity" />
         <activity android:name=".PointsCounter"></activity>
+
+        <activity android:name=".RecycleActivity" />
+        <activity android:name=".RecycleLog"></activity>
+
+>
     </application>
 
 </manifest>
