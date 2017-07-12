@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="16dp"
+    tools:context="com.codepath.gogreen.TransitActivity">
+
+    <TextView
+        android:id="@+id/tvTransportation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="22dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginTop="24dp"
+        android:text="Public Transportation"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/tvBiking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvTransportation"
+        android:layout_alignStart="@+id/tvTransportation"
+        android:layout_below="@+id/tvTransportation"
+        android:layout_marginTop="120dp"
+        android:text="Biking/Walking" />
+
+    <TextView
+        android:id="@+id/tvCarpooling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvBiking"
+        android:layout_alignStart="@+id/tvBiking"
+        android:layout_below="@+id/tvBiking"
+        android:layout_marginTop="120dp"
+        android:text="Carpooling" />
+
+    <ImageView
+        android:id="@+id/ivTransportation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:srcCompat="@mipmap/ic_launcher"
+        android:layout_below="@+id/tvTransportation"
+        android:layout_alignRight="@+id/tvCarpooling"
+        android:layout_alignEnd="@+id/tvCarpooling" />
+
+    <ImageView
+        android:id="@+id/ivBiking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ivTransportation"
+        android:layout_alignStart="@+id/ivTransportation"
+        android:layout_below="@+id/tvBiking"
+        android:layout_marginTop="20dp"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <ImageView
+        android:id="@+id/ivCarpooling"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ivBiking"
+        android:layout_alignStart="@+id/ivBiking"
+        android:layout_below="@+id/tvCarpooling"
+        android:layout_marginTop="20dp"
+        app:srcCompat="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/tvShowerTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="80dp"
+        android:layout_marginStart="80dp"
+        android:text="0"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:layout_alignBottom="@+id/ivTransportation"
+        android:layout_toRightOf="@+id/tvTransportation"
+        android:layout_toEndOf="@+id/tvTransportation" />
+
+    <TextView
+        android:id="@+id/tvBikeDist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:layout_alignBottom="@+id/ivBiking"
+        android:layout_alignLeft="@+id/tvShowerTime"
+        android:layout_alignStart="@+id/tvShowerTime" />
+
+    <TextView
+        android:id="@+id/tvCarDist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:layout_alignBottom="@+id/ivCarpooling"
+        android:layout_alignLeft="@+id/tvBikeDist"
+        android:layout_alignStart="@+id/tvBikeDist" />
+
+    <TextView
+        android:id="@+id/tvTimeUnit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:text="mi"
+        android:layout_alignBottom="@+id/ivTransportation"
+        android:layout_toRightOf="@+id/tvShowerTime"
+        android:layout_toEndOf="@+id/tvShowerTime" />
+
+    <TextView
+        android:id="@+id/tvCarUnit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="mi"
+        android:layout_alignBottom="@+id/ivCarpooling"
+        android:layout_marginBottom="16dp"
+        android:layout_alignLeft="@+id/tvBikeUnit"
+        android:layout_alignStart="@+id/tvBikeUnit" />
+
+    <TextView
+        android:id="@+id/tvBikeUnit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/ivBiking"
+        android:layout_alignLeft="@+id/tvTimeUnit"
+        android:layout_alignStart="@+id/tvTimeUnit"
+        android:layout_marginBottom="16dp"
+        android:text="mi" />
+
+    <TextView
+        android:id="@+id/tvTransitInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:layout_below="@+id/ivCarpooling"
+        />
+
+
+</RelativeLayout>

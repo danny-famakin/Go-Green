@@ -16,6 +16,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".TransitActivity" />
+        <activity android:name=".LogTransitActivity" />
+        <activity android:name=".WaterActivity" />
+        <activity android:name=".LogWaterActivity"></activity>
     </application>
 
 </manifest>
