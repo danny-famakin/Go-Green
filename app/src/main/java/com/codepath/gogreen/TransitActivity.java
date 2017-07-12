@@ -23,7 +23,7 @@ public class TransitActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         context = this;
         setContentView(R.layout.activity_transit);
-        ImageView ivTransportation = (ImageView) findViewById(R.id.ivShower);
+        ImageView ivTransportation = (ImageView) findViewById(R.id.ivTransportation);
         ImageView ivBiking = (ImageView) findViewById(R.id.ivBiking);
         ImageView ivCarpooling = (ImageView) findViewById(R.id.ivCarpooling);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -33,7 +33,7 @@ public class TransitActivity extends AppCompatActivity implements View.OnClickLi
         ivBiking.setOnClickListener(this);
         ivCarpooling.setOnClickListener(this);
 
-        tvTransDist = (TextView) findViewById(R.id.tvShowerTime);
+        tvTransDist = (TextView) findViewById(R.id.tvTransDist);
         tvBikeDist = (TextView) findViewById(R.id.tvBikeDist);
         tvCarDist = (TextView) findViewById(R.id.tvCarDist);
 
