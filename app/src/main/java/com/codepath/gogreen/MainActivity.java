@@ -1,6 +1,7 @@
 package com.codepath.gogreen;
 
 import android.content.Intent;
+
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -40,10 +41,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.btnBottles:
-                //Log.d("clicked", "bottles");
                 //Launch new Activity
                 Intent i = new Intent(this, RecycleActivity.class);
                 startActivity(i);
+
+                Log.d("clicked", "bottles");
                 break;
 
         }

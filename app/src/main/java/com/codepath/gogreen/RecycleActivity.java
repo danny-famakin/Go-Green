@@ -12,14 +12,13 @@ import android.widget.TextView;
 public class RecycleActivity extends AppCompatActivity implements View.OnClickListener {
 
     private int REQUEST_CODE = 20;
-
+    int total;
     TextView tvBottles;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recycle);
         getSupportActionBar().setTitle("Recycle");
-        //getActionBar().setIcon();
         FloatingActionButton fabLog = (FloatingActionButton) findViewById(R.id.fabLog);
         fabLog.setOnClickListener(this);
         tvBottles = (TextView) findViewById(R.id.tvBottles);
@@ -36,8 +35,8 @@ public class RecycleActivity extends AppCompatActivity implements View.OnClickLi
         Log.d("onactivityresult", "starting");
         if (requestCode == REQUEST_CODE && resultCode == RESULT_OK){
             Log.d("onactivityresult", "request received");
-            String output = data.getStringExtra("input");
-            tvBottles.setText(output);
+            total += data.getIntExtra("input", 20);
+            tvBottles.setText(String.valueOf(total));
         }
     }
 }

@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">GoGreen</string>
+
     <string name="title_activity_recycle_log">RecycleLog</string>
 </resources>
