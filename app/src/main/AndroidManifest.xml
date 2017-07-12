@@ -17,7 +17,14 @@
             </intent-filter>
         </activity>
         <activity android:name=".ReuseActivity" />
-        <activity android:name=".PointsCounter"></activity>
+        <activity android:name=".LogReuseActivity"></activity>
+
+        <activity android:name=".RecycleActivity" />
+        <activity android:name=".LogRecycleActivity"></activity>
+        <activity android:name=".TransitActivity" />
+        <activity android:name=".LogTransitActivity" />
+        <activity android:name=".WaterActivity" />
+        <activity android:name=".LogWaterActivity"></activity>
     </application>
 
 </manifest>

@@ -9,7 +9,7 @@ import android.widget.EditText;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class PointsCounter extends AppCompatActivity {
+public class LogReuseActivity extends AppCompatActivity {
 
 
     EditText bags;
@@ -17,7 +17,7 @@ public class PointsCounter extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_points_counter);
+        setContentView(R.layout.activity_log_reuse);
         bags = (EditText) findViewById(R.id.bags);
 
     }

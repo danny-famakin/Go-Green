@@ -1,5 +1,19 @@
 <resources>
     <string name="app_name">GoGreen</string>
+
     <string name="title_activity_reuse">reuseActivity</string>
     <string name="title_activity_testing">testing</string>
+
+
+    <string name="title_activity_recycle_log">RecycleLog</string>
+    <string name="title_activity_main2">Main2Activity</string>
+    <string-array name="transportation_types">
+        <item>bus</item>
+        <item>subway</item>
+        <item>train</item>
+        <item>bike</item>
+        <item>walking</item>
+        <item>carpool</item>
+    </string-array>
+
 </resources>

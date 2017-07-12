@@ -21,12 +21,12 @@ public class ReuseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reuse);
 
-        // Creates fab and when clicked moves to PointsCounter Activity
+        // Creates fab and when clicked moves to LogReuseActivity Activity
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(ReuseActivity.this, PointsCounter.class);
+                Intent i = new Intent(ReuseActivity.this, LogReuseActivity.class);
                 startActivityForResult(i, REQUEST);
             }
         });
@@ -37,7 +37,7 @@ public class ReuseActivity extends AppCompatActivity {
         totalBags.setText(String.valueOf(total));
 
     }
-        // Receives results from PointsCounter
+        // Receives results from LogReuseActivity
         // Changes the value from the amount of total bags
         @Override
         protected void onActivityResult(int requestCode, int resultCode, Intent i) {
