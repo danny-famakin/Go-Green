@@ -13,8 +13,11 @@ public class ReuseActivity extends AppCompatActivity {
 
     int REQUEST = 1;
     TextView totalBags;
+    TextView pointsEarned;
     int total;
+    int totalBagPoints;
     SharedPreferences storedBags;
+    SharedPreferences storedPoints;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,9 +35,13 @@ public class ReuseActivity extends AppCompatActivity {
         });
 
         storedBags = getSharedPreferences("bags", 0);
+        storedPoints = getSharedPreferences("points", 0);
         total = storedBags.getInt("bagCount", 0);
+        totalBagPoints = storedPoints.getInt("pointCount", 0);
         totalBags = (TextView) findViewById(R.id.totalBags);
+        pointsEarned = (TextView) findViewById(R.id.pointsEarned);
         totalBags.setText(String.valueOf(total));
+        pointsEarned.setText(String.valueOf(totalBagPoints));
 
     }
         // Receives results from LogReuseActivity
@@ -47,7 +54,9 @@ public class ReuseActivity extends AppCompatActivity {
                 if (resultCode == RESULT_OK) {
                     Log.d("result", "received");
                     total += i.getIntExtra("bags", 1);
+                    totalBagPoints += i.getIntExtra("points", 1);
                     totalBags.setText(String.valueOf(total));
+                    pointsEarned.setText(String.valueOf(totalBagPoints));
 
                 }
             }
@@ -62,9 +71,15 @@ public class ReuseActivity extends AppCompatActivity {
         SharedPreferences storedBags = getSharedPreferences("bags", 0);
         SharedPreferences.Editor editor = storedBags.edit();
         editor.putInt("bagCount",total);
+        //Commit the edits
+        editor.commit();
+
+        SharedPreferences storedPoints = getSharedPreferences("points", 0);
+        SharedPreferences.Editor pointsEditor = storedPoints.edit();
+        pointsEditor.putInt("pointCount", totalBagPoints);
 
         // Commit the edits!
-        editor.commit();
+        pointsEditor.commit();
     }
         //http://oceancrusaders.org/plastic-crusades/plastic-statistics/
         //One of the biggest issues in our environment is plastic marine debris.
