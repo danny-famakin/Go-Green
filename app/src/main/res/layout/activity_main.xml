@@ -43,7 +43,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/btnBags"
         android:layout_marginBottom="66dp"
-        android:text="Bottles" />
+        android:text="Recycle"
+        android:textAllCaps="false" />
 
     <TextView
         android:id="@+id/tvReduce"
@@ -63,7 +64,7 @@
         android:layout_above="@+id/btnBags"
         android:layout_centerHorizontal="true" />
 
-    <TextView
+    <!--<TextView
         android:id="@+id/tvRecycle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -71,5 +72,5 @@
         android:text="Recycle"
         android:layout_above="@+id/btnBottles"
         android:layout_alignLeft="@+id/tvReduce"
-        android:layout_alignStart="@+id/tvReduce" />
+        android:layout_alignStart="@+id/tvReduce" />-->
 </RelativeLayout>
