@@ -22,8 +22,8 @@
         <activity android:name=".LogWaterActivity" />
         <activity
             android:name=".FeedActivity"
-            android:label="@string/title_activity_feed"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:label="GoGreen"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
