@@ -10,21 +10,26 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
+
+        </activity>
+        <activity android:name=".ReuseActivity" />
+        <activity android:name=".LogReuseActivity" />
+        <activity android:name=".RecycleActivity" />
+        <activity android:name=".LogRecycleActivity" />
+        <activity android:name=".TransitActivity" />
+        <activity android:name=".LogTransitActivity" />
+        <activity android:name=".WaterActivity" />
+        <activity android:name=".LogWaterActivity" />
+        <activity
+            android:name=".FeedActivity"
+            android:label="GoGreen"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ReuseActivity" />
-        <activity android:name=".LogReuseActivity"></activity>
-
-        <activity android:name=".RecycleActivity" />
-        <activity android:name=".LogRecycleActivity"></activity>
-        <activity android:name=".TransitActivity" />
-        <activity android:name=".LogTransitActivity" />
-        <activity android:name=".WaterActivity" />
-        <activity android:name=".LogWaterActivity"></activity>
     </application>
 
 </manifest>

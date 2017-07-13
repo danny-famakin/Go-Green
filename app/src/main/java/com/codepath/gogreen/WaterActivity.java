@@ -2,6 +2,7 @@ package com.codepath.gogreen;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -17,7 +18,11 @@ public class WaterActivity extends AppCompatActivity implements View.OnClickList
     TextView tvShowerTime;
     double totalShowerTime;
     double sampleSize;
+    double points;
+    static final double SHOWER_BASELINE = 10;
     static final int SECS_PER_MIN = 60;
+    TextView tvPoints;
+    SharedPreferences waterData;
 
 
     @Override
@@ -31,7 +36,7 @@ public class WaterActivity extends AppCompatActivity implements View.OnClickList
         fab.setOnClickListener(this);
 
         tvShowerTime = (TextView) findViewById(R.id.tvShowerTime);
-
+        tvPoints = (TextView) findViewById(R.id.tvPoints);
         TextView tvWaterInfo = (TextView) findViewById(R.id.tvWaterInfo);
 
         // Stat sources:
@@ -41,6 +46,16 @@ public class WaterActivity extends AppCompatActivity implements View.OnClickList
 
         );
 
+        waterData = getSharedPreferences("water", 0);
+        double storedShowerTime = getDouble(waterData, "showerTime", 0);
+        totalShowerTime = storedShowerTime;
+        double storedSampleSize = getDouble(waterData, "sampleSize", 0);
+        sampleSize = storedSampleSize;
+        double storedPoints = getDouble(waterData, "points", 0);
+        points = storedPoints;
+
+        tvPoints.setText(String.valueOf(points));
+        tvShowerTime.setText(stringifyTime(totalShowerTime / sampleSize));
 
     }
 
@@ -61,26 +76,58 @@ public class WaterActivity extends AppCompatActivity implements View.OnClickList
         if (requestCode == REQUEST_FAB) {
             // Make sure the request was successful
             if (resultCode == RESULT_OK) {
-                String timeStr = "";
-                double avgTime = updateAvg(data);
-                long minutes = (long) avgTime;
-                Log.d("minutes", String.valueOf(minutes));
-                long seconds = (long) ((avgTime - (double) minutes) * SECS_PER_MIN);
-                timeStr = String.valueOf(minutes) + ":" + String.format("%02d", seconds);
-                tvShowerTime.setText(timeStr);
+                double newTime = data.getDoubleExtra("time", 0);
+                double avgTime = updateAvg(newTime);
+                tvShowerTime.setText(stringifyTime(avgTime));
+
+                // calculate points awarded
+                double newPoints = 2 * (SHOWER_BASELINE - newTime);
+                points += newPoints;
+                tvPoints.setText(String.valueOf(points));
 
             }
         }
     }
 
-    private double updateAvg(Intent data) {
-        double newTime = data.getDoubleExtra("time", 0);
-//        Log.d("newtime", String.valueOf(newTime));
+    @Override
+    protected void onStop(){
+        super.onStop();
+
+        // We need an Editor object to make preference changes.
+        SharedPreferences.Editor editor = waterData.edit();
+
+        putDouble(editor, "showerTime", totalShowerTime);
+        putDouble(editor, "points", points);
+        putDouble(editor, "sampleSize", sampleSize);
+
+        // Commit the edits!
+        editor.commit();
+    }
+
+    private double updateAvg(Double newTime) {
+        //        Log.d("newtime", String.valueOf(newTime));
         totalShowerTime += newTime;
 //        Log.d("totaltime", String.valueOf(totalShowerTime));
         sampleSize += 1;
         double newAvg = (totalShowerTime) / sampleSize;
 //        Log.d("avgtime", String.valueOf(newAvg));
         return newAvg;
+    }
+
+    SharedPreferences.Editor putDouble(final SharedPreferences.Editor edit, final String key, final double value) {
+        return edit.putLong(key, Double.doubleToRawLongBits(value));
+    }
+
+    double getDouble(final SharedPreferences prefs, final String key, final double defaultValue) {
+        return Double.longBitsToDouble(prefs.getLong(key, Double.doubleToLongBits(defaultValue)));
+    }
+
+    public String stringifyTime(double timeDouble) {
+        String timeStr = "";
+        long minutes = (long) timeDouble;
+        Log.d("minutes", String.valueOf(minutes));
+        long seconds = (long) ((timeDouble - (double) minutes) * SECS_PER_MIN);
+        timeStr = String.valueOf(minutes) + ":" + String.format("%02d", seconds);
+        return timeStr;
     }
 }

@@ -15,6 +15,10 @@
         <item>walking</item>
         <item>carpool</item>
     </string-array>
+    <string name="title_activity_feed">FeedActivity</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
     <string-array name="materials">
         <item>bottles</item>
         <item>cans</item>

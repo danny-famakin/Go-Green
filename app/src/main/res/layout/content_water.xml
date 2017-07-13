@@ -61,6 +61,27 @@
         android:layout_marginTop="12dp"
         android:layout_below="@+id/ivShower"
         />
+    <TextView
+        android:id="@+id/tvPointsCaption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Points earned:"
+        android:textStyle="bold"
+        android:layout_marginTop="18dp"
+        android:layout_alignTop="@+id/tvPoints"
+        android:layout_toLeftOf="@+id/tvShowerTime"
+        android:layout_toStartOf="@+id/tvShowerTime" />
 
+    <TextView
+        android:id="@+id/tvPoints"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="100"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:textColor="@android:color/holo_green_dark"
+        android:layout_marginBottom="83dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignLeft="@+id/tvShowerTime"
+        android:layout_alignStart="@+id/tvShowerTime" />
 
 </RelativeLayout>

@@ -20,41 +20,43 @@
         android:id="@+id/tvLogNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Log Bottle Numbers"
+        android:text="Number of Materials Recycled"
         android:textSize="16sp"
         android:textStyle="bold"
-        android:layout_marginTop="14dp"
         android:layout_below="@+id/toolbar"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="12dp"
-        android:layout_marginStart="12dp" />
+        android:layout_toLeftOf="@+id/spMaterial"
+        android:layout_toStartOf="@+id/spMaterial"
+        android:layout_marginTop="15dp" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvLogNum"
+        android:layout_alignStart="@+id/tvLogNum"
+        android:layout_below="@+id/tvLogNum"
+        android:paddingTop="1dp"
+        android:text="You get 1 point for every material you recycle." />
 
     <TextView
         android:id="@+id/tvNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="38dp"
-
+        android:layout_marginTop="39dp"
         android:text="Number"
-        android:layout_below="@+id/tvLogNum"
-        android:layout_alignLeft="@+id/tvLogNum"
-        android:layout_alignStart="@+id/tvLogNum" />
+        android:layout_below="@+id/textView6" />
 
     <EditText
         android:id="@+id/etNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/tvNumber"
-        android:layout_alignBottom="@+id/tvNumber"
-        android:layout_marginLeft="46dp"
-        android:layout_marginStart="46dp"
-        android:layout_toEndOf="@+id/tvLogNum"
-        android:layout_toRightOf="@+id/tvLogNum"
         android:hint="number of recyclables"
         android:inputType="numberDecimal"
         android:textSize="14sp"
-        android:layout_margin="5dp"/>
+        android:layout_alignTop="@+id/tvNumber"
+        android:layout_alignRight="@+id/button"
+        android:layout_alignEnd="@+id/button" />
+
 
     <Button
         android:id="@+id/button"
@@ -73,9 +75,8 @@
         android:id="@+id/tvMaterial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="70dp"
         android:text="Material"
-        android:layout_below="@+id/etNumber"
+        android:layout_centerVertical="true"
         android:layout_alignLeft="@+id/tvNumber"
         android:layout_alignStart="@+id/tvNumber" />
 
@@ -83,12 +84,11 @@
         android:id="@+id/spMaterial"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/tvMaterial"
-        android:layout_alignEnd="@+id/etNumber"
-        android:layout_alignLeft="@id/etNumber"
-        android:layout_alignRight="@+id/etNumber"
-        android:layout_alignStart="@id/etNumber"
         android:entries="@array/materials"
-        android:layout_margin="5dp"/>
+        android:layout_alignTop="@+id/tvMaterial"
+        android:layout_alignLeft="@+id/etNumber"
+        android:layout_alignStart="@+id/etNumber" />
+
+
 
 </RelativeLayout>

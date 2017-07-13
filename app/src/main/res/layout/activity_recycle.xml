@@ -37,14 +37,15 @@
         android:layout_marginEnd="29dp"
         android:layout_marginRight="29dp"
         app:fabSize="normal"
-        app:srcCompat="@drawable/ic_add_black_24dp" />
+        app:srcCompat="@drawable/ic_add" />
 
     <TextView
         android:id="@+id/tvDYK"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
-        android:text="Did You Know?" />
+        android:text="Did You Know?"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/tvMainText"
@@ -79,6 +80,7 @@
         android:layout_below="@+id/tvMainText"
         android:layout_marginTop="26dp"
         android:text="Your Activity"
+        android:textSize="16sp"
         android:textStyle="bold" />
 
     <TextView
@@ -110,6 +112,26 @@
         android:layout_alignBottom="@+id/textView"
         android:layout_alignEnd="@+id/tvBottles"
         android:layout_alignRight="@+id/tvBottles"
+        android:text="0"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/textView"
+        android:layout_marginTop="37dp"
+        android:text="Total points accumulated:" />
+
+    <TextView
+        android:id="@+id/tvPoints"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView5"
+        android:layout_alignEnd="@+id/tvCans"
+        android:layout_alignRight="@+id/tvCans"
         android:text="0"
         android:textStyle="bold" />
 

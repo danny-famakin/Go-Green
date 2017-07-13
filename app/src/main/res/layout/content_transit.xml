@@ -141,5 +141,29 @@
         android:layout_below="@+id/ivCarpooling"
         />
 
+    <TextView
+        android:id="@+id/tvPointsCaption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Points earned:"
+        android:textStyle="bold"
+        android:layout_marginTop="18dp"
+        android:layout_alignTop="@+id/tvPoints"
+        android:layout_alignLeft="@+id/ivCarpooling"
+        android:layout_alignStart="@+id/ivCarpooling"
+        android:layout_marginLeft="11dp"
+        android:layout_marginStart="11dp" />
+
+    <TextView
+        android:id="@+id/tvPoints"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/tvCarDist"
+        android:layout_alignRight="@+id/tvCarDist"
+        android:layout_below="@+id/tvTransitInfo"
+        android:text="100"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:textColor="@android:color/holo_green_dark" />
+
 
 </RelativeLayout>
