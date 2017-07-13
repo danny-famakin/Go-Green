@@ -12,7 +12,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
+import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 
 import Fragments.TabPagerAdapter;
 
@@ -49,8 +54,34 @@ public class FeedActivity extends AppCompatActivity {
             }
         });
 
+
+        SubActionButton.Builder itemBuilder = new SubActionButton.Builder(this);
+// repeat many times:
+
+        SubActionButton button1 = createSubActionButton(R.drawable.ic_add);
+        SubActionButton button2 = createSubActionButton(R.drawable.ic_add);
+        SubActionButton button3 = createSubActionButton(R.drawable.ic_add);
+        SubActionButton button4 = createSubActionButton(R.drawable.ic_add);
+
+
+        FloatingActionMenu actionMenu = new FloatingActionMenu.Builder(this)
+                .addSubActionView(button1)
+                .addSubActionView(button2)
+                .addSubActionView(button3)
+                .addSubActionView(button4)
+                .attachTo(fab)
+                .build();
+
     }
 
+    public SubActionButton createSubActionButton(int iconId) {
+        SubActionButton.Builder itemBuilder = new SubActionButton.Builder(this);
+        int subActionButtonSize = 200;
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(subActionButtonSize, subActionButtonSize);
+        ImageView icon = new ImageView(this);
+        icon.setImageResource(iconId);
+        return itemBuilder.setContentView(icon).setLayoutParams(params).build();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
