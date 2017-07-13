@@ -16,8 +16,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ReuseActivity" />
+        <activity android:name=".LogReuseActivity"></activity>
+
         <activity android:name=".RecycleActivity" />
-        <activity android:name=".RecycleLog"></activity>
+        <activity android:name=".LogRecycleActivity"></activity>
+        <activity android:name=".TransitActivity" />
+        <activity android:name=".LogTransitActivity" />
+        <activity android:name=".WaterActivity" />
+        <activity android:name=".LogWaterActivity"></activity>
     </application>
 
 </manifest>
