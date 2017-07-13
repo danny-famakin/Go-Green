@@ -2,6 +2,10 @@ package com.codepath.gogreen;
 
 import android.content.Context;
 import android.content.Intent;
+
+
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -13,6 +17,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        context = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -30,10 +35,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
+        Intent i;
         switch (view.getId()) {
             case R.id.btnTransit:
                 Log.d("clicked", "transit");
-                Intent i = new Intent(context, TransitActivity.class);
+                i = new Intent(context, TransitActivity.class);
                 context.startActivity(i);
                 break;
 
@@ -44,10 +50,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
             case R.id.btnBags:
+                i = new Intent(context, ReuseActivity.class);
+                context.startActivity(i);
                 Log.d("clicked", "bags");
                 break;
 
             case R.id.btnBottles:
+                //Launch new Activity
+                i = new Intent(this, RecycleActivity.class);
+                startActivity(i);
+
                 Log.d("clicked", "bottles");
                 break;
 

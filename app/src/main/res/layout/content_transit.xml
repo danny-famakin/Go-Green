@@ -70,7 +70,7 @@
         app:srcCompat="@mipmap/ic_launcher" />
 
     <TextView
-        android:id="@+id/tvShowerTime"
+        android:id="@+id/tvTransDist"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="80dp"
@@ -88,8 +88,8 @@
         android:text="0"
         android:textAppearance="@style/TextAppearance.AppCompat.Display2"
         android:layout_alignBottom="@+id/ivBiking"
-        android:layout_alignLeft="@+id/tvShowerTime"
-        android:layout_alignStart="@+id/tvShowerTime" />
+        android:layout_alignLeft="@+id/tvTransDist"
+        android:layout_alignStart="@+id/tvTransDist" />
 
     <TextView
         android:id="@+id/tvCarDist"
@@ -110,8 +110,8 @@
         android:layout_marginStart="16dp"
         android:text="mi"
         android:layout_alignBottom="@+id/ivTransportation"
-        android:layout_toRightOf="@+id/tvShowerTime"
-        android:layout_toEndOf="@+id/tvShowerTime" />
+        android:layout_toRightOf="@+id/tvTransDist"
+        android:layout_toEndOf="@+id/tvTransDist" />
 
     <TextView
         android:id="@+id/tvCarUnit"
@@ -140,6 +140,30 @@
         android:layout_marginTop="12dp"
         android:layout_below="@+id/ivCarpooling"
         />
+
+    <TextView
+        android:id="@+id/tvPointsCaption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Points earned:"
+        android:textStyle="bold"
+        android:layout_marginTop="18dp"
+        android:layout_alignTop="@+id/tvPoints"
+        android:layout_alignLeft="@+id/ivCarpooling"
+        android:layout_alignStart="@+id/ivCarpooling"
+        android:layout_marginLeft="11dp"
+        android:layout_marginStart="11dp" />
+
+    <TextView
+        android:id="@+id/tvPoints"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/tvCarDist"
+        android:layout_alignRight="@+id/tvCarDist"
+        android:layout_below="@+id/tvTransitInfo"
+        android:text="100"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display2"
+        android:textColor="@android:color/holo_green_dark" />
 
 
 </RelativeLayout>
