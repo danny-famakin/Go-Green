@@ -57,10 +57,21 @@
         android:id="@+id/btSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/bags"
-        android:layout_alignRight="@+id/bags"
-        android:layout_below="@+id/bags"
-        android:layout_marginTop="125dp"
+        android:layout_marginTop="132dp"
         android:onClick="onSave"
-        android:text="Save" />
+        android:text="Save"
+        android:layout_below="@+id/bags"
+        android:layout_alignRight="@+id/bags"
+        android:layout_alignEnd="@+id/bags" />
+
+    <TextView
+        android:id="@+id/Points"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/numberBags"
+        android:layout_alignStart="@+id/numberBags"
+        android:layout_below="@+id/numberBags"
+        android:layout_marginTop="10dp"
+        android:text="For every bag reused 10 points will be awarded"
+        android:textColor="@android:color/black" />
 </RelativeLayout>
