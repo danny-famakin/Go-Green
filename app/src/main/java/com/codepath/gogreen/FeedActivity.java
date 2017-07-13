@@ -1,22 +1,25 @@
 package com.codepath.gogreen;
 
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
+import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 
 public class FeedActivity extends AppCompatActivity {
 
@@ -60,8 +63,34 @@ public class FeedActivity extends AppCompatActivity {
             }
         });
 
+
+        SubActionButton.Builder itemBuilder = new SubActionButton.Builder(this);
+// repeat many times:
+
+        SubActionButton button1 = createSubActionButton(R.drawable.ic_add);
+        SubActionButton button2 = createSubActionButton(R.drawable.ic_add);
+        SubActionButton button3 = createSubActionButton(R.drawable.ic_add);
+        SubActionButton button4 = createSubActionButton(R.drawable.ic_add);
+
+
+        FloatingActionMenu actionMenu = new FloatingActionMenu.Builder(this)
+                .addSubActionView(button1)
+                .addSubActionView(button2)
+                .addSubActionView(button3)
+                .addSubActionView(button4)
+                .attachTo(fab)
+                .build();
+
     }
 
+    public SubActionButton createSubActionButton(int iconId) {
+        SubActionButton.Builder itemBuilder = new SubActionButton.Builder(this);
+        int subActionButtonSize = 200;
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(subActionButtonSize, subActionButtonSize);
+        ImageView icon = new ImageView(this);
+        icon.setImageResource(iconId);
+        return itemBuilder.setContentView(icon).setLayoutParams(params).build();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
