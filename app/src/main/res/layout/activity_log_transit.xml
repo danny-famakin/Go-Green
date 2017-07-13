@@ -7,7 +7,7 @@
     tools:context="com.codepath.gogreen.LogTransitActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tvNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -31,7 +31,7 @@
         android:hint="# miles"
         android:inputType="number"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:layout_below="@+id/textView"
+        android:layout_below="@+id/tvNumber"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
@@ -55,8 +55,8 @@
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:layout_alignBaseline="@+id/etTime"
         android:layout_alignBottom="@+id/etTime"
-        android:layout_alignLeft="@+id/textView"
-        android:layout_alignStart="@+id/textView" />
+        android:layout_alignLeft="@+id/tvNumber"
+        android:layout_alignStart="@+id/tvNumber" />
 
     <TextView
         android:id="@+id/tvVehicle"

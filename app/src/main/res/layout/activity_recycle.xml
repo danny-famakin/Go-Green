@@ -85,12 +85,32 @@
         android:id="@+id/tvBottles"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/textView3"
-        android:layout_marginLeft="39dp"
-        android:layout_marginStart="39dp"
-        android:layout_toEndOf="@+id/textView3"
-        android:layout_toRightOf="@+id/textView3"
-        android:text="1"
+        android:layout_alignBaseline="@+id/textView3"
+        android:layout_alignBottom="@+id/textView3"
+        android:layout_marginEnd="37dp"
+        android:layout_marginRight="37dp"
+        android:layout_toLeftOf="@+id/fabLog"
+        android:layout_toStartOf="@+id/fabLog"
+        android:text="0"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:text="Total number of cans recycled:" />
+
+    <TextView
+        android:id="@+id/tvCans"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView"
+        android:layout_alignEnd="@+id/tvBottles"
+        android:layout_alignRight="@+id/tvBottles"
+        android:text="0"
         android:textStyle="bold" />
 
 </RelativeLayout>

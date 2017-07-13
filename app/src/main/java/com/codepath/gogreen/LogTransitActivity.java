@@ -52,7 +52,6 @@ public class LogTransitActivity extends AppCompatActivity implements AdapterView
     public void onNothingSelected(AdapterView<?> parent) {
         vehicleType = parent.getItemAtPosition(0).toString();
         Log.d("vehicle", vehicleType);
-
     }
 
     public void onSave(View view) {

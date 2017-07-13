@@ -15,5 +15,8 @@
         <item>walking</item>
         <item>carpool</item>
     </string-array>
-
+    <string-array name="materials">
+        <item>bottles</item>
+        <item>cans</item>
+    </string-array>
 </resources>
