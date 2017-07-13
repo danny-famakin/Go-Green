@@ -36,12 +36,12 @@
         android:layout_height="wrap_content"
         android:text="Number of Bags Reused:"
         android:textSize="16sp"
-        android:layout_marginTop="13dp"
-        android:layout_alignTop="@+id/imageView"
+        android:layout_marginLeft="25dp"
+        android:layout_marginStart="25dp"
+        android:layout_above="@+id/totalBags"
         android:layout_toRightOf="@+id/imageView"
         android:layout_toEndOf="@+id/imageView"
-        android:layout_marginLeft="25dp"
-        android:layout_marginStart="25dp" />
+        android:layout_marginBottom="13dp" />
 
     <TextView
         android:id="@+id/totalBags"
@@ -52,4 +52,24 @@
         android:layout_alignBottom="@+id/imageView"
         android:layout_alignLeft="@+id/bagsUsed"
         android:layout_alignStart="@+id/bagsUsed" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/totalBags"
+        android:layout_alignStart="@+id/totalBags"
+        android:layout_below="@+id/totalBags"
+        android:text="Number of Points:"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/pointsEarned"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView4"
+        android:layout_alignStart="@+id/textView4"
+        android:layout_below="@+id/textView4"
+        android:layout_marginTop="13dp"
+        android:text="0" />
 </RelativeLayout>

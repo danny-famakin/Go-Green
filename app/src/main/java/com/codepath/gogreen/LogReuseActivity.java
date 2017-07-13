@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -13,12 +14,14 @@ public class LogReuseActivity extends AppCompatActivity {
 
 
     EditText bags;
+    int points;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_reuse);
         bags = (EditText) findViewById(R.id.bags);
+
 
     }
 
@@ -28,6 +31,9 @@ public class LogReuseActivity extends AppCompatActivity {
             Intent i = new Intent();
             i.putExtra("bags", Integer.valueOf(bags.getText().toString()));
             setResult(RESULT_OK, i);
+            points = Integer.valueOf(bags.getText().toString()) * 10;
+            Toast.makeText(this, points + " points awarded", Toast.LENGTH_SHORT).show();
+            i.putExtra("points", points);
             finish();
         }
 
