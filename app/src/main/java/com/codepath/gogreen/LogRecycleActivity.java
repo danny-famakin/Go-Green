@@ -3,6 +3,7 @@ package com.codepath.gogreen;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,6 +25,8 @@ public class LogRecycleActivity extends AppCompatActivity implements  AdapterVie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_recycle);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         Button button = (Button) findViewById(R.id.button);
         button.setOnClickListener(this);
         etNumber = (EditText) findViewById(R.id.etNumber);

@@ -4,30 +4,42 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="5dp"
     tools:context="com.codepath.gogreen.LogRecycleActivity">
+
+    <include
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbar"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        />
 
     <TextView
         android:id="@+id/tvLogNum"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
         android:text="Log Bottle Numbers"
         android:textSize="16sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_marginTop="14dp"
+        android:layout_below="@+id/toolbar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp" />
 
     <TextView
         android:id="@+id/tvNumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/tvLogNum"
-        android:layout_marginTop="46dp"
+        android:layout_marginTop="38dp"
 
-        android:text="Number" />
+        android:text="Number"
+        android:layout_below="@+id/tvLogNum"
+        android:layout_alignLeft="@+id/tvLogNum"
+        android:layout_alignStart="@+id/tvLogNum" />
 
     <EditText
         android:id="@+id/etNumber"
@@ -41,7 +53,8 @@
         android:layout_toRightOf="@+id/tvLogNum"
         android:hint="number of recyclables"
         android:inputType="numberDecimal"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:layout_margin="5dp"/>
 
     <Button
         android:id="@+id/button"
@@ -53,17 +66,18 @@
         android:layout_marginBottom="56dp"
         android:layout_marginEnd="29dp"
         android:layout_marginRight="29dp"
-        android:text="DOne" />
+        android:text="DOne"
+        android:layout_margin="5dp"/>
 
     <TextView
         android:id="@+id/tvMaterial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_marginTop="70dp"
+        android:text="Material"
         android:layout_below="@+id/etNumber"
-        android:layout_marginTop="30dp"
-        android:text="Material" />
+        android:layout_alignLeft="@+id/tvNumber"
+        android:layout_alignStart="@+id/tvNumber" />
 
     <Spinner
         android:id="@+id/spMaterial"
@@ -74,6 +88,7 @@
         android:layout_alignLeft="@id/etNumber"
         android:layout_alignRight="@+id/etNumber"
         android:layout_alignStart="@id/etNumber"
-        android:entries="@array/materials" />
+        android:entries="@array/materials"
+        android:layout_margin="5dp"/>
 
 </RelativeLayout>

@@ -6,13 +6,19 @@
     android:layout_height="match_parent"
     tools:context="com.codepath.gogreen.LogReuseActivity">
 
+    <include
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/toolbar" />
+
     <TextView
         android:id="@+id/numberBags"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="17dp"
+        android:layout_marginTop="13dp"
         android:fontFamily="sans-serif"
         android:text="Number of Bags Reused"
         android:textColor="@android:color/black"
@@ -21,7 +27,7 @@
         android:typeface="normal"
         tools:layout_editor_absoluteX="7dp"
         tools:layout_editor_absoluteY="7dp"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/toolbar"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
@@ -29,49 +35,49 @@
         android:id="@+id/bagsReused"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/numberBags"
-        android:layout_alignStart="@+id/numberBags"
-        android:layout_below="@+id/numberBags"
-        android:layout_marginTop="105dp"
+        android:layout_marginTop="81dp"
         android:text="Bags Reused"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:layout_below="@+id/Points"
+        android:layout_alignLeft="@+id/Points"
+        android:layout_alignStart="@+id/Points" />
 
     <EditText
         android:id="@+id/bags"
         style="@style/Widget.AppCompat.AutoCompleteTextView"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/bagsReused"
-        android:layout_alignBottom="@+id/bagsReused"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginEnd="42dp"
-        android:layout_marginRight="42dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
         android:hint="# of bags"
         android:inputType="number"
         android:selectAllOnFocus="true"
         android:textColor="@android:color/black"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        android:layout_alignBaseline="@+id/bagsReused"
+        android:layout_alignBottom="@+id/bagsReused"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <Button
         android:id="@+id/btSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="132dp"
         android:onClick="onSave"
         android:text="Save"
-        android:layout_below="@+id/bags"
+        android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/bags"
-        android:layout_alignEnd="@+id/bags" />
+        android:layout_alignEnd="@+id/bags"
+        android:layout_marginBottom="146dp" />
 
     <TextView
         android:id="@+id/Points"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/numberBags"
-        android:layout_alignStart="@+id/numberBags"
-        android:layout_below="@+id/numberBags"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:text="For every bag reused 10 points will be awarded"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:layout_below="@+id/numberBags"
+        android:layout_alignLeft="@+id/numberBags"
+        android:layout_alignStart="@+id/numberBags" />
 </RelativeLayout>
