@@ -6,11 +6,6 @@
     android:layout_height="match_parent"
     tools:context="com.codepath.gogreen.LogWaterActivity">
 
-    <include
-        layout="@layout/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/toolbar" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -41,6 +36,9 @@
         android:layout_marginLeft="27dp"
         android:layout_marginStart="27dp" />
 
+
+
+
     <TextView
         android:id="@+id/tvShowerTime"
         android:layout_width="wrap_content"
@@ -51,6 +49,7 @@
         android:layout_alignBottom="@+id/etTime"
         android:layout_alignLeft="@+id/textView2"
         android:layout_alignStart="@+id/textView2" />
+
 
     <!--<Button
         android:id="@+id/btnSave"
