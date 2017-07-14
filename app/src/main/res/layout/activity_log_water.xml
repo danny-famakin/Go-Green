@@ -8,24 +8,23 @@
 
 
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_marginLeft="12dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="16dp"
-        android:text="Log Shower Length"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        android:id="@+id/textView2"
-        android:layout_below="@+id/toolbar"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:text="Shower Length"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
     <EditText
         android:id="@+id/etTime"
         style="@style/Widget.AppCompat.EditText"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="48dp"
         android:ems="10"
         android:hint="# minutes"
         android:inputType="number"
@@ -49,6 +48,16 @@
         android:layout_alignBottom="@+id/etTime"
         android:layout_alignLeft="@+id/textView2"
         android:layout_alignStart="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/tvPoints"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignStart="@+id/textView2"
+        android:layout_below="@+id/textView2"
+        android:layout_marginTop="8dp"
+        android:text="Earn 2 points per minute under 10!" />
 
 
     <!--<Button

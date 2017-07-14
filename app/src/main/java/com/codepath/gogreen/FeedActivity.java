@@ -170,7 +170,7 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
         }
 
         if (id == R.id.myProfile) {
-            Intent profile = new Intent(FeedActivity.this, MyProfile.class);
+            Intent profile = new Intent(FeedActivity.this, ProfileActivity.class);
             startActivity(profile);
             return true;
 

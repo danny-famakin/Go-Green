@@ -28,7 +28,7 @@ public class LogRecycleActivity extends AppCompatActivity implements  AdapterVie
         setSupportActionBar(toolbar);
         //Button button = (Button) findViewById(R.id.button);
         //button.setOnClickListener(this);
-        etNumber = (EditText) findViewById(R.id.etNumber);
+        etNumber = (EditText) findViewById(R.id.etItems);
 
         Spinner spMaterial = (Spinner) findViewById(R.id.spMaterial);
         spMaterial.setOnItemSelectedListener(this);

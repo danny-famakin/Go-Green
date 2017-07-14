@@ -23,7 +23,7 @@ public class LogReuseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_log_reuse);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        bags = (EditText) findViewById(R.id.bags);
+        bags = (EditText) findViewById(R.id.etBags);
 
 
     }
