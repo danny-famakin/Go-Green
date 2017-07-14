@@ -12,10 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".LogReuseActivity" />
-        <activity android:name=".LogRecycleActivity" />
-        <activity android:name=".LogTransitActivity" />
-        <activity android:name=".LogWaterActivity" />
         <activity
             android:name=".FeedActivity"
             android:label="GoGreen"

@@ -138,7 +138,7 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
 
     public SubActionButton createSubActionButton(int iconId) {
         SubActionButton.Builder itemBuilder = new SubActionButton.Builder(this);
-        int subActionButtonSize = 160;
+        int subActionButtonSize = 220;
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(subActionButtonSize, subActionButtonSize);
         ImageView icon = new ImageView(this);
         Glide.with(context)
@@ -163,11 +163,6 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
 
         if (id == R.id.myProfile) {
             Intent profile = new Intent(FeedActivity.this, ProfileActivity.class);
