@@ -24,6 +24,7 @@ import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 import Fragments.ModalFragment;
 import Fragments.TabPagerAdapter;
 import Fragments.TransitFragment;
+import Fragments.WaterFragment;
 
 
 public class FeedActivity extends AppCompatActivity implements ModalFragment.OnItemSelectedListener {
@@ -94,10 +95,10 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
         button2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ModalFragment modalFragment = ModalFragment.newInstance("water");
+                WaterFragment waterFragment = WaterFragment.newInstance();
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 // make change
-                ft.replace(R.id.flContainer, modalFragment);
+                ft.replace(R.id.flContainer, waterFragment);
                 // commit
                 ft.commit();
             }
