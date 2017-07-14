@@ -43,6 +43,7 @@ public class LogTransitActivity extends AppCompatActivity implements AdapterView
 
     }
 
+
     @Override
     public void onItemSelected(AdapterView<?> parent, View view,
                                int pos, long id) {

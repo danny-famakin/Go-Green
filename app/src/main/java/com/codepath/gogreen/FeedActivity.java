@@ -22,7 +22,11 @@ import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
 import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 
 import Fragments.ModalFragment;
+
+import Fragments.ReuseFragment;
+
 import Fragments.RecycleFragment;
+
 import Fragments.TabPagerAdapter;
 import Fragments.TransitFragment;
 import Fragments.WaterFragment;
@@ -69,8 +73,9 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
 
         SubActionButton button1 = createSubActionButton(R.drawable.ic_add_green3);
         SubActionButton button2 = createSubActionButton(R.drawable.ic_add);
-        SubActionButton button3 = createSubActionButton(R.drawable.ic_add);
+        SubActionButton button3 = createSubActionButton(R.drawable.ic_reuse);
         SubActionButton button4 = createSubActionButton(R.mipmap.ic_rec);
+
 
 
         FloatingActionMenu actionMenu = new FloatingActionMenu.Builder(this)
@@ -108,10 +113,10 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ModalFragment modalFragment = ModalFragment.newInstance("reuse");
+                ReuseFragment reuseFragment = ReuseFragment.newInstance();
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 // make change
-                ft.replace(R.id.flContainer, modalFragment);
+                ft.replace(R.id.flContainer, reuseFragment);
                 // commit
                 ft.commit();
             }
