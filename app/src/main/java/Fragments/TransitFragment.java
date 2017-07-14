@@ -2,6 +2,7 @@ package Fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,6 +23,8 @@ public class TransitFragment extends ModalFragment {
     EditText etDistance;
     LayoutInflater inflater;
     View v;
+    double[] pointValues = {5, 3, 1.5};
+
 
     public static TransitFragment newInstance() {
 
@@ -45,13 +48,11 @@ public class TransitFragment extends ModalFragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 vehicleType = parent.getItemAtPosition(pos).toString();
-                Log.d("vehicle", vehicleType);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 vehicleType = parent.getItemAtPosition(0).toString();
-                Log.d("vehicle", vehicleType);
             }
         });
 
@@ -66,12 +67,31 @@ public class TransitFragment extends ModalFragment {
         openModal(v);
     }
 
-
+    double newDistance;
     public void onSave() {
         Intent i = new Intent();
 
         if (isValid(etDistance, "Distance")) {
-            Log.d("transit", "save");
+            newDistance = Integer.parseInt(etDistance.getText().toString());
+            switch (vehicleType) {
+                case "bus":
+                case "subway":
+                case "train":
+                    updateDistance(0);
+                    break;
+                case "walking":
+                case "bike":
+                    updateDistance(1);
+                    break;
+                case "carpool":
+                    updateDistance(2);
+                    break;
+                default:
+                    Log.d("update", "failure");
+
+            }
+            listener.updateFeed(vehicleType, newDistance);
+
 //            i.putExtra("vehicle", vehicleType);
 //            i.putExtra("distance", Integer.parseInt(etDistance.getText().toString()));
 //            setResult(RESULT_OK, i);
@@ -82,6 +102,28 @@ public class TransitFragment extends ModalFragment {
         }
     }
 
+    private void updateDistance(int index) {
+        // Get stored data
+        SharedPreferences transitData = this.getActivity().getSharedPreferences("transit", 0);
+        double[] distances = new double[] {getDouble(transitData, "dist0", 0), getDouble(transitData, "dist1", 0),getDouble(transitData, "dist2", 0)};
+        double points = getDouble(transitData, "points", 0);
 
+       // update local copies of data
+        distances[index] += newDistance;
+        points += (pointValues[index] * newDistance);
+
+        Log.d("total points", String.valueOf(points));
+
+        // push local changes to storage
+        SharedPreferences.Editor editor = transitData.edit();
+
+        for (int i = 0; i < 3; i ++) {
+            putDouble(editor, "dist" + i, distances[i]);
+        }
+        putDouble(editor, "points", points);
+
+        // Commit the edits!
+        editor.commit();
+    }
 
 }

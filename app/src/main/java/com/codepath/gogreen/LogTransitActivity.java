@@ -28,7 +28,7 @@ public class LogTransitActivity extends AppCompatActivity implements AdapterView
         setSupportActionBar(toolbar);
         Spinner spVehicle = (Spinner) findViewById(R.id.spVehicle);
         tvDistance = (TextView) findViewById(R.id.tvShowerTime);
-        etDistance = (EditText) findViewById(R.id.etTransDist);
+        etDistance = (EditText) findViewById(R.id.etDistance);
         spVehicle.setOnItemSelectedListener(this);
 
         // Create an ArrayAdapter using the string array and a default spinner layout
