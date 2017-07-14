@@ -59,17 +59,6 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
-    <Button
-        android:id="@+id/btSave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="onSave"
-        android:text="Save"
-        android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/bags"
-        android:layout_alignEnd="@+id/bags"
-        android:layout_marginBottom="146dp" />
-
     <TextView
         android:id="@+id/Points"
         android:layout_width="wrap_content"
