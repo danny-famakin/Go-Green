@@ -3,6 +3,7 @@ package com.codepath.gogreen;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,9 +24,11 @@ public class LogTransitActivity extends AppCompatActivity implements AdapterView
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_transit);
 
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         Spinner spVehicle = (Spinner) findViewById(R.id.spVehicle);
         tvDistance = (TextView) findViewById(R.id.tvShowerTime);
-        etDistance = (EditText) findViewById(R.id.etTime);
+        etDistance = (EditText) findViewById(R.id.etDistance);
         spVehicle.setOnItemSelectedListener(this);
 
         // Create an ArrayAdapter using the string array and a default spinner layout

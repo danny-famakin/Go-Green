@@ -3,6 +3,7 @@ package com.codepath.gogreen;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -18,6 +19,8 @@ public class LogWaterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_water);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         TextView tvShower = (TextView) findViewById(R.id.tvShower);
         etTime = (EditText) findViewById(R.id.etTime);
     }
