@@ -1,14 +1,17 @@
 package com.codepath.gogreen;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -18,20 +21,26 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
 import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 
+import Fragments.ModalFragment;
 import Fragments.TabPagerAdapter;
+import Fragments.TransitFragment;
+
 
 public class FeedActivity extends AppCompatActivity {
 
     private TabPagerAdapter PagerAdapter;
     private ViewPager ViewPager;
+    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
+        context = this;
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -60,7 +69,7 @@ public class FeedActivity extends AppCompatActivity {
         SubActionButton.Builder itemBuilder = new SubActionButton.Builder(this);
 // repeat many times:
 
-        SubActionButton button1 = createSubActionButton(R.drawable.ic_add);
+        SubActionButton button1 = createSubActionButton(R.drawable.ic_add_green3);
         SubActionButton button2 = createSubActionButton(R.drawable.ic_add);
         SubActionButton button3 = createSubActionButton(R.drawable.ic_add);
         SubActionButton button4 = createSubActionButton(R.drawable.ic_add);
@@ -74,6 +83,55 @@ public class FeedActivity extends AppCompatActivity {
                 .attachTo(fab)
                 .build();
 
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("click", "transit");
+                TransitFragment transitFragment = TransitFragment.newInstance();
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                // make change
+                ft.replace(R.id.flContainer, transitFragment);
+                // commit
+                ft.commit();
+            }
+        });
+
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ModalFragment modalFragment = ModalFragment.newInstance("water");
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                // make change
+                ft.replace(R.id.flContainer, modalFragment);
+                // commit
+                ft.commit();
+            }
+        });
+
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ModalFragment modalFragment = ModalFragment.newInstance("reuse");
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                // make change
+                ft.replace(R.id.flContainer, modalFragment);
+                // commit
+                ft.commit();
+            }
+        });
+
+        button4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ModalFragment modalFragment = ModalFragment.newInstance("recycle");
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                // make change
+                ft.replace(R.id.flContainer, modalFragment);
+                // commit
+                ft.commit();
+            }
+        });
+
     }
 
     public SubActionButton createSubActionButton(int iconId) {
@@ -81,7 +139,10 @@ public class FeedActivity extends AppCompatActivity {
         int subActionButtonSize = 200;
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(subActionButtonSize, subActionButtonSize);
         ImageView icon = new ImageView(this);
-        icon.setImageResource(iconId);
+        Glide.with(context)
+                .load(iconId)
+                .into(icon);
+//        icon.setImageResource(R.drawable.ic_add_circle_black_24dp);
         return itemBuilder.setContentView(icon).setLayoutParams(params).build();
     }
 
