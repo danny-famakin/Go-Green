@@ -41,7 +41,7 @@ public class RecycleFragment extends ModalFragment {
         inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = inflater.inflate(R.layout.activity_log_recycle, null);
         Spinner spMaterial = (Spinner) view.findViewById(R.id.spMaterial);
-        etNumber = (EditText) view.findViewById(R.id.etNumber);
+        etNumber = (EditText) view.findViewById(R.id.etItems);
 
         spMaterial.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
             @Override

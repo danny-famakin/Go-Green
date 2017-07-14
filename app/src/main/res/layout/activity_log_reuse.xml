@@ -4,69 +4,59 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.codepath.gogreen.LogReuseActivity">
+    tools:context="com.codepath.gogreen.FeedActivity">
 
-    <include
-        layout="@layout/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/toolbar" />
 
     <TextView
-        android:id="@+id/numberBags"
+        android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginStart="15dp"
-        android:layout_marginTop="13dp"
-        android:fontFamily="sans-serif"
-        android:text="Number of Bags Reused"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:typeface="normal"
-        tools:layout_editor_absoluteX="7dp"
-        tools:layout_editor_absoluteY="7dp"
-        android:layout_below="@+id/toolbar"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/toolbar"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="16dp"
+        android:text="Reusable Bags"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
     <TextView
-        android:id="@+id/bagsReused"
+        android:id="@+id/tvPoints"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="81dp"
+        android:layout_alignLeft="@+id/tvTitle"
+        android:layout_alignStart="@+id/tvTitle"
+        android:layout_below="@+id/tvTitle"
+        android:layout_marginTop="8dp"
+        android:text="Earn 10 points each time you reuse a plastic bag!" />
+
+    <TextView
+        android:id="@+id/tvBags"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvPoints"
+        android:layout_alignStart="@+id/tvPoints"
+        android:layout_below="@+id/tvTitle"
+        android:layout_marginTop="56dp"
         android:text="Bags Reused"
-        android:textColor="@android:color/black"
-        android:layout_below="@+id/Points"
-        android:layout_alignLeft="@+id/Points"
-        android:layout_alignStart="@+id/Points" />
+        android:textAppearance="@style/TextAppearance.AppCompat" />
 
     <EditText
-        android:id="@+id/bags"
+        android:id="@+id/etBags"
         style="@style/Widget.AppCompat.AutoCompleteTextView"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:layout_marginRight="40dp"
+        android:layout_alignBaseline="@+id/tvBags"
+        android:layout_alignBottom="@+id/tvBags"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginEnd="41dp"
+        android:layout_marginRight="41dp"
         android:hint="# of bags"
         android:inputType="number"
         android:selectAllOnFocus="true"
         android:textColor="@android:color/black"
-        android:textSize="14sp"
-        android:layout_alignBaseline="@+id/bagsReused"
-        android:layout_alignBottom="@+id/bagsReused"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:textSize="14sp" />
 
-    <TextView
-        android:id="@+id/Points"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="For every bag reused 10 points will be awarded"
-        android:textColor="@android:color/black"
-        android:layout_below="@+id/numberBags"
-        android:layout_alignLeft="@+id/numberBags"
-        android:layout_alignStart="@+id/numberBags" />
+
 </RelativeLayout>

@@ -11,16 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"></activity>
 
-        <activity android:name=".ReuseActivity" />
-        <activity android:name=".LogReuseActivity" />
-        <activity android:name=".RecycleActivity" />
-        <activity android:name=".LogRecycleActivity" />
-        <activity android:name=".TransitActivity" />
-        <activity android:name=".LogTransitActivity" />
-        <activity android:name=".WaterActivity" />
-        <activity android:name=".LogWaterActivity" />
         <activity
             android:name=".FeedActivity"
             android:label="GoGreen"
@@ -31,7 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MyProfile"></activity>
+        <activity android:name=".ProfileActivity"></activity>
     </application>
 
 </manifest>

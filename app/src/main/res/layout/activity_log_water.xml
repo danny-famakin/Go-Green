@@ -4,28 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.codepath.gogreen.LogWaterActivity">
+    tools:context="com.codepath.gogreen.FeedActivity">
 
 
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="13dp"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="15dp"
-        android:text="Log Shower Length"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        android:id="@+id/textView2"
-        android:layout_below="@+id/toolbar"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="16dp"
+        android:text="Shower Length"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
     <EditText
         android:id="@+id/etTime"
         style="@style/Widget.AppCompat.EditText"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="48dp"
         android:ems="10"
         android:hint="# minutes"
         android:inputType="number"
@@ -33,8 +32,8 @@
         android:layout_below="@+id/textView2"
         android:layout_toRightOf="@+id/textView2"
         android:layout_toEndOf="@+id/textView2"
-        android:layout_marginLeft="27dp"
-        android:layout_marginStart="27dp" />
+        android:layout_marginLeft="24dp"
+        android:layout_marginStart="24dp" />
 
 
 
@@ -49,6 +48,16 @@
         android:layout_alignBottom="@+id/etTime"
         android:layout_alignLeft="@+id/textView2"
         android:layout_alignStart="@+id/textView2" />
+
+    <TextView
+        android:id="@+id/tvPoints"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignStart="@+id/textView2"
+        android:layout_below="@+id/textView2"
+        android:layout_marginTop="8dp"
+        android:text="Earn 2 points per minute under 10!" />
 
 
     <!--<Button

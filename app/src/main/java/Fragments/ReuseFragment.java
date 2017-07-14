@@ -41,7 +41,7 @@ public class ReuseFragment extends ModalFragment {
         super.onCreate(savedInstanceState);
         inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         v = inflater.inflate(R.layout.activity_log_reuse, null);
-        bags = (EditText) v.findViewById(R.id.bags);
+        bags = (EditText) v.findViewById(R.id.etBags);
         storedBags = this.getActivity().getSharedPreferences("bags", 0);
         storedPoints = this.getActivity().getSharedPreferences("points", 0);
         total = storedBags.getInt("bagCount", 0);

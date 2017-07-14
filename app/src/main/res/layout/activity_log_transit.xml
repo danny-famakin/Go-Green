@@ -4,35 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.codepath.gogreen.LogTransitActivity">
+    tools:context="com.codepath.gogreen.FeedActivity">
 
 
     <TextView
-        android:id="@+id/tvNumber"
+        android:id="@+id/tvItems"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="12dp"
-        android:text="Log Transit Miles"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"
-        android:layout_below="@+id/toolbar"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="16dp"
+        android:text="Transportation"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
     <EditText
         android:id="@+id/etDistance"
         style="@style/Widget.AppCompat.EditText"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="29dp"
-        android:layout_marginRight="29dp"
-        android:layout_marginTop="62dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="48dp"
         android:ems="10"
         android:hint="# miles"
         android:inputType="number"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:layout_below="@+id/tvNumber"
+        android:layout_below="@+id/tvItems"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
@@ -43,7 +43,7 @@
         android:layout_alignLeft="@+id/etDistance"
         android:layout_alignStart="@+id/etDistance"
         android:layout_below="@+id/etDistance"
-        android:layout_marginTop="47dp"
+        android:layout_marginTop="24dp"
         android:entries="@array/transportation_types" />
     />
 
@@ -53,8 +53,8 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/etDistance"
         android:layout_alignBottom="@+id/etDistance"
-        android:layout_alignLeft="@+id/tvNumber"
-        android:layout_alignStart="@+id/tvNumber"
+        android:layout_alignLeft="@+id/tvItems"
+        android:layout_alignStart="@+id/tvItems"
         android:text="Distance"
         android:textAppearance="@style/TextAppearance.AppCompat" />
 
@@ -62,11 +62,22 @@
         android:id="@+id/tvVehicle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Transportation type"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:layout_alignBaseline="@+id/spVehicle"
         android:layout_alignBottom="@+id/spVehicle"
         android:layout_alignLeft="@+id/tvDistance"
-        android:layout_alignStart="@+id/tvDistance"
-        android:text="Transportation type"
-        android:textAppearance="@style/TextAppearance.AppCompat" />
+        android:layout_alignStart="@+id/tvDistance" />
+
+    <TextView
+        android:id="@+id/tvPoints"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvItems"
+        android:layout_alignStart="@+id/tvItems"
+        android:layout_below="@+id/tvItems"
+        android:layout_marginTop="8dp"
+        android:text="Earn points for every mile of alternative transportation!" />
 
     <!--<Button-->
         <!--android:id="@+id/btnSave"-->
