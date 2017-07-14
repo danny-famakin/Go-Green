@@ -24,19 +24,19 @@
         android:textSize="16sp"
         android:textStyle="bold"
         android:layout_below="@+id/toolbar"
-        android:layout_toLeftOf="@+id/spMaterial"
-        android:layout_toStartOf="@+id/spMaterial"
-        android:layout_marginTop="15dp" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tvLogNum"
-        android:layout_alignStart="@+id/tvLogNum"
-        android:layout_below="@+id/tvLogNum"
         android:paddingTop="1dp"
-        android:text="You get 1 point for every material you recycle." />
+        android:text="You get 1 point for every material you recycle."
+        android:layout_marginTop="22dp"
+        android:layout_alignTop="@+id/tvLogNum"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <TextView
         android:id="@+id/tvNumber"
@@ -54,31 +54,20 @@
         android:inputType="numberDecimal"
         android:textSize="14sp"
         android:layout_alignTop="@+id/tvNumber"
-        android:layout_alignRight="@+id/button"
-        android:layout_alignEnd="@+id/button" />
-
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_marginBottom="56dp"
-        android:layout_marginEnd="29dp"
-        android:layout_marginRight="29dp"
-        android:text="DOne"
-        android:layout_margin="5dp"/>
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="30dp"
+        android:layout_marginEnd="30dp" />
 
     <TextView
         android:id="@+id/tvMaterial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Material"
-        android:layout_centerVertical="true"
-        android:layout_alignLeft="@+id/tvNumber"
-        android:layout_alignStart="@+id/tvNumber" />
+        android:layout_below="@+id/etNumber"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="68dp" />
 
     <Spinner
         android:id="@+id/spMaterial"
@@ -88,7 +77,5 @@
         android:layout_alignTop="@+id/tvMaterial"
         android:layout_alignLeft="@+id/etNumber"
         android:layout_alignStart="@+id/etNumber" />
-
-
 
 </RelativeLayout>

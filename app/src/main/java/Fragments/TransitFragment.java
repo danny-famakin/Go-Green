@@ -77,14 +77,14 @@ public class TransitFragment extends ModalFragment {
                 case "bus":
                 case "subway":
                 case "train":
-                    updateDistance(0);
+                    updateData(0);
                     break;
                 case "walking":
                 case "bike":
-                    updateDistance(1);
+                    updateData(1);
                     break;
                 case "carpool":
-                    updateDistance(2);
+                    updateData(2);
                     break;
                 default:
                     Log.d("update", "failure");
@@ -102,7 +102,7 @@ public class TransitFragment extends ModalFragment {
         }
     }
 
-    private void updateDistance(int index) {
+    private void updateData(int index) {
         // Get stored data
         SharedPreferences transitData = this.getActivity().getSharedPreferences("transit", 0);
         double[] distances = new double[] {getDouble(transitData, "dist0", 0), getDouble(transitData, "dist1", 0),getDouble(transitData, "dist2", 0)};

@@ -6,11 +6,6 @@
     android:layout_height="match_parent"
     tools:context="com.codepath.gogreen.LogTransitActivity">
 
-    <include
-        layout="@layout/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/toolbar" />
 
     <TextView
         android:id="@+id/tvNumber"
@@ -51,7 +46,6 @@
         android:layout_marginTop="47dp"
         android:entries="@array/transportation_types" />
     />
-
 
     <TextView
         android:id="@+id/tvDistance"
