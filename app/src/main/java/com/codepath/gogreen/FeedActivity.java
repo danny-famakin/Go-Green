@@ -22,6 +22,7 @@ import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
 import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 
 import Fragments.ModalFragment;
+import Fragments.RecycleFragment;
 import Fragments.TabPagerAdapter;
 import Fragments.TransitFragment;
 import Fragments.WaterFragment;
@@ -69,7 +70,7 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
         SubActionButton button1 = createSubActionButton(R.drawable.ic_add_green3);
         SubActionButton button2 = createSubActionButton(R.drawable.ic_add);
         SubActionButton button3 = createSubActionButton(R.drawable.ic_add);
-        SubActionButton button4 = createSubActionButton(R.drawable.ic_add);
+        SubActionButton button4 = createSubActionButton(R.mipmap.ic_rec);
 
 
         FloatingActionMenu actionMenu = new FloatingActionMenu.Builder(this)
@@ -119,10 +120,10 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
         button4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ModalFragment modalFragment = ModalFragment.newInstance("recycle");
+                RecycleFragment recycleFragment = RecycleFragment.newInstance();
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 // make change
-                ft.replace(R.id.flContainer, modalFragment);
+                ft.replace(R.id.flContainer, recycleFragment);
                 // commit
                 ft.commit();
             }
@@ -132,13 +133,13 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
 
     public SubActionButton createSubActionButton(int iconId) {
         SubActionButton.Builder itemBuilder = new SubActionButton.Builder(this);
-        int subActionButtonSize = 150;
+        int subActionButtonSize = 160;
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(subActionButtonSize, subActionButtonSize);
         ImageView icon = new ImageView(this);
         Glide.with(context)
                 .load(iconId)
                 .into(icon);
-//        icon.setImageResource(R.drawable.ic_add_circle_black_24dp);
+        //icon.setImageResource(R.drawable.ic_add_circle_black_24dp);
         return itemBuilder.setContentView(icon).setLayoutParams(params).build();
     }
 

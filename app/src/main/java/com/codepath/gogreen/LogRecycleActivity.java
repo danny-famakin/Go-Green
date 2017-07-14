@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
@@ -27,8 +26,8 @@ public class LogRecycleActivity extends AppCompatActivity implements  AdapterVie
         setContentView(R.layout.activity_log_recycle);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Button button = (Button) findViewById(R.id.button);
-        button.setOnClickListener(this);
+        //Button button = (Button) findViewById(R.id.button);
+        //button.setOnClickListener(this);
         etNumber = (EditText) findViewById(R.id.etNumber);
 
         Spinner spMaterial = (Spinner) findViewById(R.id.spMaterial);
