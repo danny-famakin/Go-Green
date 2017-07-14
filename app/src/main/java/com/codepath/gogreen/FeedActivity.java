@@ -76,7 +76,7 @@ public class FeedActivity extends AppCompatActivity {
 
     public SubActionButton createSubActionButton(int iconId) {
         SubActionButton.Builder itemBuilder = new SubActionButton.Builder(this);
-        int subActionButtonSize = 200;
+        int subActionButtonSize = 150;
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(subActionButtonSize, subActionButtonSize);
         ImageView icon = new ImageView(this);
         icon.setImageResource(iconId);
@@ -104,6 +104,8 @@ public class FeedActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
 
     /**
      * A placeholder fragment containing a simple view.
