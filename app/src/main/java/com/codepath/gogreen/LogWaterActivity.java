@@ -19,7 +19,7 @@ public class LogWaterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_water);
         TextView tvShower = (TextView) findViewById(R.id.tvShower);
-        etTime = (EditText) findViewById(R.id.etTime);
+        etTime = (EditText) findViewById(R.id.etTransDist);
     }
 
 

@@ -25,6 +25,7 @@ import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 
 import Fragments.ModalFragment;
 import Fragments.TabPagerAdapter;
+import Fragments.TransitFragment;
 
 public class FeedActivity extends AppCompatActivity {
 
@@ -83,10 +84,10 @@ public class FeedActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Log.d("click", "transit");
-                ModalFragment modalFragment = ModalFragment.newInstance("transit");
+                TransitFragment transitFragment = TransitFragment.newInstance();
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 // make change
-                ft.replace(R.id.flContainer, modalFragment);
+                ft.replace(R.id.flContainer, transitFragment);
                 // commit
                 ft.commit();
             }

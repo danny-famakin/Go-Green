@@ -20,12 +20,12 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
     <EditText
-        android:id="@+id/etTime"
+        android:id="@+id/etDistance"
         style="@style/Widget.AppCompat.EditText"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="27dp"
-        android:layout_marginRight="27dp"
+        android:layout_marginEnd="29dp"
+        android:layout_marginRight="29dp"
         android:layout_marginTop="62dp"
         android:ems="10"
         android:hint="# miles"
@@ -39,44 +39,44 @@
         android:id="@+id/spVehicle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/etTime"
-        android:layout_alignStart="@+id/etTime"
-        android:layout_below="@+id/etTime"
+        android:layout_alignLeft="@+id/etDistance"
+        android:layout_alignStart="@+id/etDistance"
+        android:layout_below="@+id/etDistance"
         android:layout_marginTop="47dp"
         android:entries="@array/transportation_types" />
     />
 
 
     <TextView
-        android:id="@+id/tvShowerTime"
+        android:id="@+id/tvDistance"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Distance"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        android:layout_alignBaseline="@+id/etTime"
-        android:layout_alignBottom="@+id/etTime"
+        android:layout_alignBaseline="@+id/etDistance"
+        android:layout_alignBottom="@+id/etDistance"
         android:layout_alignLeft="@+id/tvNumber"
-        android:layout_alignStart="@+id/tvNumber" />
+        android:layout_alignStart="@+id/tvNumber"
+        android:text="Distance"
+        android:textAppearance="@style/TextAppearance.AppCompat" />
 
     <TextView
         android:id="@+id/tvVehicle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/spVehicle"
-        android:layout_alignLeft="@+id/tvShowerTime"
-        android:layout_alignStart="@+id/tvShowerTime"
+        android:layout_alignLeft="@+id/tvDistance"
+        android:layout_alignStart="@+id/tvDistance"
         android:text="Transportation type"
         android:textAppearance="@style/TextAppearance.AppCompat" />
 
-    <Button
-        android:id="@+id/btnSave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/etTime"
-        android:layout_alignRight="@+id/etTime"
-        android:layout_below="@+id/spVehicle"
-        android:layout_marginTop="123dp"
-        android:onClick="onSave"
-        android:text="Save" />
+    <!--<Button-->
+        <!--android:id="@+id/btnSave"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_alignEnd="@+id/etTime"-->
+        <!--android:layout_alignRight="@+id/etTime"-->
+        <!--android:layout_below="@+id/spVehicle"-->
+        <!--android:layout_marginTop="123dp"-->
+        <!--android:onClick="onSave"-->
+        <!--android:text="Save" />-->
 
 </RelativeLayout>

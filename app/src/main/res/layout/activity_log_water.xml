@@ -20,7 +20,7 @@
         android:id="@+id/textView2" />
 
     <EditText
-        android:id="@+id/etTime"
+        android:id="@+id/etTransDist"
         style="@style/Widget.AppCompat.EditText"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
@@ -46,8 +46,8 @@
         android:layout_height="wrap_content"
         android:text="Time"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:layout_alignBaseline="@+id/etTime"
-        android:layout_alignBottom="@+id/etTime"
+        android:layout_alignBaseline="@+id/etTransDist"
+        android:layout_alignBottom="@+id/etTransDist"
         android:layout_alignLeft="@+id/textView2"
         android:layout_alignStart="@+id/textView2" />
 
@@ -55,8 +55,8 @@
         android:id="@+id/btnSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/etTime"
-        android:layout_alignRight="@+id/etTime"
+        android:layout_alignEnd="@+id/etTransDist"
+        android:layout_alignRight="@+id/etTransDist"
         android:layout_below="@+id/spVehicle"
         android:layout_marginTop="123dp"
         android:onClick="onSave"
