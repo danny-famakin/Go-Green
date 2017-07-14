@@ -52,7 +52,6 @@
         android:entries="@array/transportation_types" />
     />
 
-
     <TextView
         android:id="@+id/tvDistance"
         android:layout_width="wrap_content"
