@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.codepath.gogreen.models.Action;
 
@@ -31,17 +32,22 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ActionAdapter.ViewHolder holder, int position) {
         final Action action = mActions.get(position);
+        holder.tvAction.setText(action.get("actionType").toString());
+//        Log.d("action", action.getActionType());
+
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mActions.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        public TextView tvAction;
 
         public ViewHolder(View itemView) {
             super(itemView);
+            tvAction = (TextView) itemView.findViewById(R.id.tvAction);
         }
     }
 }
