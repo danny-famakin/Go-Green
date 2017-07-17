@@ -13,7 +13,6 @@ public class Action extends ParseObject {
     String subType;
     double magnitude;
     double points;
-    String timeStamp;
 
     public String getSubType() {
         return subType;
@@ -21,13 +20,16 @@ public class Action extends ParseObject {
 
     public void setSubType(String subType) {
         this.subType = subType;
+        this.put("subType", subType);
     }
+
     public long getUid() {
         return uid;
     }
 
     public void setUid(long uid) {
         this.uid = uid;
+        this.put("uid", uid);
     }
 
     public String getActionType() {
@@ -36,6 +38,7 @@ public class Action extends ParseObject {
 
     public void setActionType(String actionType) {
         this.actionType = actionType;
+        this.put("actionType", actionType);
     }
 
     public double getMagnitude() {
@@ -44,6 +47,7 @@ public class Action extends ParseObject {
 
     public void setMagnitude(double magnitude) {
         this.magnitude = magnitude;
+        this.put("magnitude", magnitude);
     }
 
     public double getPoints() {
@@ -52,13 +56,6 @@ public class Action extends ParseObject {
 
     public void setPoints(double points) {
         this.points = points;
-    }
-
-    public String getTimeStamp() {
-        return timeStamp;
-    }
-
-    public void setTimeStamp(String timeStamp) {
-        this.timeStamp = timeStamp;
+        this.put("points", points);
     }
 }

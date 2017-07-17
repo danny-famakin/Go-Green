@@ -4,12 +4,15 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.codepath.gogreen.R;
+import com.codepath.gogreen.models.Action;
+import com.parse.ParseException;
+import com.parse.SaveCallback;
 
 /**
  * Created by melissaperez on 7/14/17.
@@ -22,8 +25,7 @@ public class ReuseFragment extends ModalFragment {
     View v;
     int total;
     int totalBagPoints;
-    SharedPreferences storedBags;
-    SharedPreferences storedPoints;
+    SharedPreferences reuse;
 
 
 
@@ -42,10 +44,9 @@ public class ReuseFragment extends ModalFragment {
         inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         v = inflater.inflate(R.layout.activity_log_reuse, null);
         bags = (EditText) v.findViewById(R.id.etBags);
-        storedBags = this.getActivity().getSharedPreferences("bags", 0);
-        storedPoints = this.getActivity().getSharedPreferences("points", 0);
-        total = storedBags.getInt("bagCount", 0);
-        totalBagPoints = storedPoints.getInt("pointCount", 0);
+        reuse = this.getActivity().getSharedPreferences("reuse", 0);
+        total = reuse.getInt("bagCount", 0);
+        totalBagPoints = reuse.getInt("pointCount", 0);
 
         openModal(v);
     }
@@ -54,19 +55,34 @@ public class ReuseFragment extends ModalFragment {
         Intent i = new Intent();
 
         if(isValid(bags, "Number of bags reused")) {
-            total += Integer.valueOf(bags.getText().toString());
-            totalBagPoints = total * 10;
+            int newBags = Integer.valueOf(bags.getText().toString());
+            total += newBags;
+            double newPoints = newBags * 10;
+            totalBagPoints += newPoints;
             updatePoints();
 
-            Log.d("total", String.valueOf(total));
-            Log.d("totalBagPoiints", String.valueOf(totalBagPoints));
+            // save action in database
+            final Action action = new Action();
+            action.setUid(USER_ID);
+            action.setActionType("reuse");
+            action.setMagnitude(newBags);
+            action.setPoints(newPoints);
+
+            action.saveInBackground(new SaveCallback() {
+                @Override
+                public void done(ParseException e) {
+                    Toast.makeText(getActivity(), "Action logged", Toast.LENGTH_SHORT).show();
+                }
+            });
+            listener.updateFeed(action);
+
+
 
 
 //            i.putExtra("vehicle", vehicleType);
 //            i.putExtra("distance", Integer.parseInt(etDistance.getText().toString()));
 //            setResult(RESULT_OK, i);
 //            finish();
-            listener.updateFeed("bags", total);
             modal.dismiss();
         }
         else {
@@ -74,17 +90,14 @@ public class ReuseFragment extends ModalFragment {
     }
 
     private void updatePoints() {
-        SharedPreferences storedBags = this.getActivity().getSharedPreferences("bags", 0);
-        SharedPreferences.Editor editor = storedBags.edit();
+        SharedPreferences reuse = this.getActivity().getSharedPreferences("reuse", 0);
+        SharedPreferences.Editor editor = reuse.edit();
         editor.putInt("bagCount",total);
+        editor.putInt("pointCount", totalBagPoints);
+
         //Commit the edits
         editor.commit();
 
-        SharedPreferences storedPoints = this.getActivity().getSharedPreferences("points", 0);
-        SharedPreferences.Editor pointsEditor = storedPoints.edit();
-        pointsEditor.putInt("pointCount", totalBagPoints);
 
-        // Commit the edits!
-        pointsEditor.commit();
     }
 }

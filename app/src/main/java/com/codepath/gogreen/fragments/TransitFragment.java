@@ -11,15 +11,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.codepath.gogreen.R;
 import com.codepath.gogreen.models.Action;
 import com.parse.ParseException;
 import com.parse.SaveCallback;
-
-import java.util.Date;
-
-import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
 
 /**
  * Created by anyazhang on 7/13/17.
@@ -31,7 +28,6 @@ public class TransitFragment extends ModalFragment {
     LayoutInflater inflater;
     View v;
     double[] pointValues = {5, 3, 1.5};
-    public int USER_ID = 0;
 
 
     public static TransitFragment newInstance() {
@@ -98,7 +94,6 @@ public class TransitFragment extends ModalFragment {
                     Log.d("update", "failure");
 
             }
-            listener.updateFeed(vehicleType, newDistance);
 
 //            i.putExtra("vehicle", vehicleType);
 //            i.putExtra("distance", Integer.parseInt(etDistance.getText().toString()));
@@ -136,26 +131,20 @@ public class TransitFragment extends ModalFragment {
 
         // Add action to database
         final Action action = new Action();
-        action.put("uid", USER_ID);
-        action.put("actionType", "transit");
-        action.put("subType", vehicleType);
-        action.put("magnitude", newDistance);
-        action.put("points", newPoints);
-//        DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
-//        String date = df.format(Calendar.getInstance().getTime());
+        action.setUid(USER_ID);
+        action.setActionType("transit");
+        action.setSubType(vehicleType);
+        action.setMagnitude(newDistance);
+        action.setPoints(newPoints);
 
-//        Log.d("objectID", action.getObjectId());
-//        Log.d("createdAt", String.valueOf(action.getCreatedAt()));
         action.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
-                String actionId = action.getObjectId();  //Save objectID that was just created
-                Date createdAt = action.getCreatedAt();
-                Log.d(TAG, "objId:" + actionId);
-                Log.d(TAG, "createdAt:" + String.valueOf(createdAt));
-
+                Toast.makeText(getActivity(), "Action logged", Toast.LENGTH_SHORT).show();
             }
         });
+        listener.updateFeed(action);
+
 
     }
 

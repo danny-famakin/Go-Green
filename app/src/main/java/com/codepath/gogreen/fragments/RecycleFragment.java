@@ -12,8 +12,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.codepath.gogreen.R;
+import com.codepath.gogreen.models.Action;
+import com.parse.ParseException;
+import com.parse.SaveCallback;
 
 import static com.codepath.gogreen.R.array.materials;
 
@@ -65,11 +69,11 @@ public class RecycleFragment extends ModalFragment {
         spMaterial.setAdapter(adapter);
         openModal(view);
     }
-    double number;
+    double newMaterials;
     public void onSave() {
         Intent i = new Intent ();
         if (isValid(etNumber, "number")) {
-            number = Integer.parseInt(etNumber.getText().toString());
+            newMaterials = Integer.parseInt(etNumber.getText().toString());
             switch (materialType){
                 case "bottles":
                     updateNumber(0);
@@ -78,7 +82,6 @@ public class RecycleFragment extends ModalFragment {
                     updateNumber(1);
                     break;
             }
-            listener.updateFeed(materialType, number);
             modal.dismiss();
         }else{
         }
@@ -91,16 +94,42 @@ public class RecycleFragment extends ModalFragment {
         //tv.setText(String.valueOf(materials[index]));
         //
         //tvPoints.setText(String.valueOf(points));
+
+        // get stored data
         SharedPreferences recMaterials = this.getActivity().getSharedPreferences("recs", 0);
         double[] materials = new double[] {getDouble(recMaterials, "material1", 0), getDouble(recMaterials, "material2", 0)};
         double points = getDouble(recMaterials, "points", 0);
-        materials[index] += number;
-        points += (pointValues[index] * number);
+
+        // update local copies of data
+        materials[index] += newMaterials;
+        double newPoints = pointValues[index] * newMaterials;
+        points += newPoints;
+
+        // push changes
         SharedPreferences.Editor editor = recMaterials.edit();
         for (int i = 0; i < 2; i++){
             putDouble(editor, "material", materials[i]);
         }
         putDouble(editor, "points", points);
         editor.commit();
+
+        // save action in database
+        final Action action = new Action();
+        action.setUid(USER_ID);
+        action.setActionType("recycle");
+        action.setSubType(materialType);
+        action.setMagnitude(newMaterials);
+        action.setPoints(newPoints);
+
+
+        action.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                Toast.makeText(getActivity(), "Action logged", Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        listener.updateFeed(action);
+
     }
 }
