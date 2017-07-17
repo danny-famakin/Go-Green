@@ -15,4 +15,6 @@
         <item>bottles</item>
         <item>cans</item>
     </string-array>
+
+    <string name="current_year">2017</string>
 </resources>
