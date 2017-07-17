@@ -19,35 +19,22 @@
         android:text="Shower Length"
         android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
-    <EditText
-        android:id="@+id/etTime"
-        style="@style/Widget.AppCompat.EditText"
-        android:layout_width="140dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:ems="10"
-        android:hint="# minutes"
-        android:inputType="number"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        android:layout_below="@+id/textView2"
-        android:layout_toRightOf="@+id/textView2"
-        android:layout_toEndOf="@+id/textView2"
-        android:layout_marginLeft="24dp"
-        android:layout_marginStart="24dp" />
+    <!--<EditText-->
+        <!--android:id="@+id/etTime"-->
+        <!--style="@style/Widget.AppCompat.EditText"-->
+        <!--android:layout_width="140dp"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="48dp"-->
+        <!--android:ems="10"-->
+        <!--android:hint="# minutes"-->
+        <!--android:inputType="number"-->
+        <!--android:textAppearance="@style/TextAppearance.AppCompat"-->
+        <!--android:layout_below="@+id/textView2"-->
+        <!--android:layout_toRightOf="@+id/textView2"-->
+        <!--android:layout_toEndOf="@+id/textView2"-->
+        <!--android:layout_marginLeft="24dp"-->
+        <!--android:layout_marginStart="24dp" />-->
 
-
-
-
-    <TextView
-        android:id="@+id/tvShowerTime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Time"
-        android:textAppearance="@style/TextAppearance.AppCompat"
-        android:layout_alignBaseline="@+id/etTime"
-        android:layout_alignBottom="@+id/etTime"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_alignStart="@+id/textView2" />
 
     <TextView
         android:id="@+id/tvPoints"
@@ -58,6 +45,27 @@
         android:layout_below="@+id/textView2"
         android:layout_marginTop="8dp"
         android:text="Earn 2 points per minute under 10!" />
+
+    <TextView
+        android:id="@+id/tvTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvPoints"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="41dp"
+        android:text="00:00:00"
+        android:textColor="@color/colorPrimary"
+        android:textSize="70sp" />
+
+    <Button
+        android:id="@+id/btStartPause"
+        android:layout_width="90dp"
+        android:layout_height="40dp"
+        android:layout_alignEnd="@+id/tvTimer"
+        android:layout_alignRight="@+id/tvTimer"
+        android:layout_below="@+id/tvTimer"
+        android:layout_marginTop="25dp"
+        android:text="Start" />
 
 
     <!--<Button
