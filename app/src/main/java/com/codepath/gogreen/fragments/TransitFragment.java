@@ -1,4 +1,4 @@
-package Fragments;
+package com.codepath.gogreen.fragments;
 
 import android.content.Context;
 import android.content.Intent;
@@ -13,6 +13,13 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.codepath.gogreen.R;
+import com.codepath.gogreen.models.Action;
+import com.parse.ParseException;
+import com.parse.SaveCallback;
+
+import java.util.Date;
+
+import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
 
 /**
  * Created by anyazhang on 7/13/17.
@@ -24,6 +31,7 @@ public class TransitFragment extends ModalFragment {
     LayoutInflater inflater;
     View v;
     double[] pointValues = {5, 3, 1.5};
+    public int USER_ID = 0;
 
 
     public static TransitFragment newInstance() {
@@ -110,7 +118,8 @@ public class TransitFragment extends ModalFragment {
 
        // update local copies of data
         distances[index] += newDistance;
-        points += (pointValues[index] * newDistance);
+        double newPoints = (pointValues[index] * newDistance);
+        points += newPoints;
 
         Log.d("total points", String.valueOf(points));
 
@@ -124,6 +133,30 @@ public class TransitFragment extends ModalFragment {
 
         // Commit the edits!
         editor.commit();
+
+        // Add action to database
+        final Action action = new Action();
+        action.put("uid", USER_ID);
+        action.put("actionType", "transit");
+        action.put("subType", vehicleType);
+        action.put("magnitude", newDistance);
+        action.put("points", newPoints);
+//        DateFormat df = new SimpleDateFormat("EEE, d MMM yyyy, HH:mm");
+//        String date = df.format(Calendar.getInstance().getTime());
+
+//        Log.d("objectID", action.getObjectId());
+//        Log.d("createdAt", String.valueOf(action.getCreatedAt()));
+        action.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                String actionId = action.getObjectId();  //Save objectID that was just created
+                Date createdAt = action.getCreatedAt();
+                Log.d(TAG, "objId:" + actionId);
+                Log.d(TAG, "createdAt:" + String.valueOf(createdAt));
+
+            }
+        });
+
     }
 
 }

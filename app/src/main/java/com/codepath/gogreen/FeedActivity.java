@@ -18,18 +18,14 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.codepath.gogreen.fragments.ModalFragment;
+import com.codepath.gogreen.fragments.RecycleFragment;
+import com.codepath.gogreen.fragments.ReuseFragment;
+import com.codepath.gogreen.fragments.TabPagerAdapter;
+import com.codepath.gogreen.fragments.TransitFragment;
+import com.codepath.gogreen.fragments.WaterFragment;
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
 import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
-
-import Fragments.ModalFragment;
-
-import Fragments.ReuseFragment;
-
-import Fragments.RecycleFragment;
-
-import Fragments.TabPagerAdapter;
-import Fragments.TransitFragment;
-import Fragments.WaterFragment;
 
 
 public class FeedActivity extends AppCompatActivity implements ModalFragment.OnItemSelectedListener {
