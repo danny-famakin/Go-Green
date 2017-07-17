@@ -24,6 +24,7 @@ import com.codepath.gogreen.fragments.ReuseFragment;
 import com.codepath.gogreen.fragments.TabPagerAdapter;
 import com.codepath.gogreen.fragments.TransitFragment;
 import com.codepath.gogreen.fragments.WaterFragment;
+import com.codepath.gogreen.models.Action;
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
 import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 
@@ -134,7 +135,7 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
 
     public SubActionButton createSubActionButton(int iconId) {
         SubActionButton.Builder itemBuilder = new SubActionButton.Builder(this);
-        int subActionButtonSize = 220;
+        int subActionButtonSize = 160;
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(subActionButtonSize, subActionButtonSize);
         ImageView icon = new ImageView(this);
         Glide.with(context)
@@ -171,9 +172,8 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void updateFeed(String actionType, double magnitude) {
-        Log.d("FeedActivity", String.valueOf(magnitude) + " points awarded for " + actionType);
+    public void updateFeed(Action action) {
+        Log.d("FeedActivity", String.valueOf(action.getMagnitude()) + " points awarded for " + action.getActionType());
 
     }
 }

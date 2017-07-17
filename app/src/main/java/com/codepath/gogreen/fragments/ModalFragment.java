@@ -11,6 +11,7 @@ import android.widget.EditText;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.codepath.gogreen.models.Action;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -22,6 +23,7 @@ public class ModalFragment extends Fragment {
     Context context;
     MaterialDialog modal;
     public OnItemSelectedListener listener;
+    public int USER_ID = 0;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -77,7 +79,7 @@ public class ModalFragment extends Fragment {
 
     public interface OnItemSelectedListener {
         // This can be any number of events to be sent to the activity
-        void updateFeed(String actionType, double magnitude);
+        void updateFeed(Action action);
     }
 
     // Store the listener (activity) that will have events fired once the fragment is attached

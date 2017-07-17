@@ -9,8 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.codepath.gogreen.R;
+import com.codepath.gogreen.models.Action;
+import com.parse.ParseException;
+import com.parse.SaveCallback;
 
 /**
  * Created by anyazhang on 7/14/17.
@@ -172,8 +176,25 @@ public class WaterFragment extends ModalFragment {
         putDouble(editor, "sampleSize", sampleSize);
         editor.commit();
 
-        // update feed
-        listener.updateFeed("shower", newPoints);
+
+
+        // save action in database
+        final Action action = new Action();
+        action.setUid(USER_ID);
+        action.setActionType("water");
+        action.setMagnitude(newTime);
+        action.setPoints(newPoints);
+
+        action.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                Toast.makeText(getActivity(), "Action logged", Toast.LENGTH_SHORT).show();
+            }
+        });
+        listener.updateFeed(action);
+
+
+
     }
 
 
