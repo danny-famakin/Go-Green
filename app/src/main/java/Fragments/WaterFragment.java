@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.codepath.gogreen.R;
@@ -18,7 +17,7 @@ import com.codepath.gogreen.R;
  */
 
 public class WaterFragment extends ModalFragment {
-    EditText etTime;
+   // EditText etTime;
     LayoutInflater inflater;
     View v;
     public static final int SHOWER_BASELINE = 10;
@@ -52,7 +51,7 @@ public class WaterFragment extends ModalFragment {
         inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         v = inflater.inflate(R.layout.activity_log_water, null);
 
-        etTime = (EditText) v.findViewById(R.id.etTime);
+     //   etTime = (EditText) v.findViewById(R.id.etTime);
         showering = true;
         tvTimer = (TextView) v.findViewById(R.id.tvTimer);
         btStartPause = (Button) v.findViewById(R.id.btStartPause);
@@ -85,11 +84,15 @@ public class WaterFragment extends ModalFragment {
                     start = SystemClock.uptimeMillis();
                     v.postDelayed(runnable, 0);
                     showering = false;
+                    btStartPause.setText("Pause");
                 }
                 else {
                     timeBuff += millisecond;
                     v.removeCallbacks(runnable);
+                    Log.d("minutes", String.valueOf(minutes));
+                    Log.d("seconds", String.valueOf(seconds));
                     showering = true;
+                    btStartPause.setText("Resume");
                 }
 
             }
@@ -124,13 +127,13 @@ public class WaterFragment extends ModalFragment {
     };
 
     public void onSave() {
-        if (isValid(etTime, "Time")) {
+       // if (isValid(etTime, "Time")) {
             updateData();
 
             modal.dismiss();
-        }
-        else {
-        }
+       // }
+       // else {
+       // }
     }
 
     private void updateData() {
@@ -146,12 +149,14 @@ public class WaterFragment extends ModalFragment {
 
         // update local copies of data
         double newPoints;
-        newTime = Double.parseDouble(etTime.getText().toString());
-        newTime = minutes;
+        //newTime = Double.parseDouble(etTime.getText().toString());
+        newTime = minutes + (((double) seconds) / 60.0);
+        Log.d("newTime", String.valueOf(newTime));
         totalShowerTime += newTime;
 
         if (newTime < SHOWER_BASELINE) {
-            newPoints = 2 * (SHOWER_BASELINE - newTime);}
+            newPoints = 2 * (SHOWER_BASELINE - newTime);
+            Log.d("new points", String.valueOf(newPoints));}
         else {
             newPoints = 0;
         }
