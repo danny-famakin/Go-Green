@@ -1,4 +1,4 @@
-package Fragments;
+package com.codepath.gogreen.fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
