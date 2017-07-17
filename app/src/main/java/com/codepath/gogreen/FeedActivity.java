@@ -138,7 +138,7 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
 
     public SubActionButton createSubActionButton(int iconId) {
         SubActionButton.Builder itemBuilder = new SubActionButton.Builder(this);
-        int subActionButtonSize = 220;
+        int subActionButtonSize = 160;
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(subActionButtonSize, subActionButtonSize);
         ImageView icon = new ImageView(this);
         Glide.with(context)
