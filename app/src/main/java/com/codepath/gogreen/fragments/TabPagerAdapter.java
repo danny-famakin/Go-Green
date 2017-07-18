@@ -14,8 +14,9 @@ import com.codepath.gogreen.FeedActivity;
 public class TabPagerAdapter extends FragmentPagerAdapter {
     private String tabTitles[] = new String[] {"Feed", "Leaderboard"};
     private Context context;
-    FeedFragment feedFragment;
-    LeaderboardFragment leaderboardFragment;
+    public FeedFragment feedFragment;
+    public LeaderboardFragment leaderboardFragment;
+
     public TabPagerAdapter(FragmentManager fm, FeedActivity feedActivity){
         super(fm);
         feedFragment = new FeedFragment();

@@ -8,57 +8,62 @@ import com.parse.ParseObject;
  */
 @ParseClassName("Action")
 public class Action extends ParseObject {
-    long uid;
-    String actionType;
-    String subType;
-    double magnitude;
-    double points;
-    String timeStamp;
+    public long uid;
+    public String actionType;
+    public String subType;
+    public double magnitude;
+    public double points;
 
     public String getSubType() {
-        return subType;
+        return this.getString("subType");
+//        return subType;
     }
 
     public void setSubType(String subType) {
         this.subType = subType;
+        this.put("subType", subType);
     }
+
     public long getUid() {
-        return uid;
+        return this.getLong("uid");
+
+//        return uid;
     }
 
     public void setUid(long uid) {
         this.uid = uid;
+        this.put("uid", uid);
     }
 
     public String getActionType() {
-        return actionType;
+        return this.getString("actionType");
+
+//        return actionType;
     }
 
     public void setActionType(String actionType) {
         this.actionType = actionType;
+        this.put("actionType", actionType);
     }
 
     public double getMagnitude() {
-        return magnitude;
+        return this.getDouble("magnitude");
+//        return magnitude;
     }
 
     public void setMagnitude(double magnitude) {
         this.magnitude = magnitude;
+        this.put("magnitude", magnitude);
     }
 
     public double getPoints() {
-        return points;
+
+        return this.getDouble("points");
+//        return points;
     }
 
     public void setPoints(double points) {
         this.points = points;
-    }
-
-    public String getTimeStamp() {
-        return timeStamp;
-    }
-
-    public void setTimeStamp(String timeStamp) {
-        this.timeStamp = timeStamp;
+        this.put("points", points);
     }
 }

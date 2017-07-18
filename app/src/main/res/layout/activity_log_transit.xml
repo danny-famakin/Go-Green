@@ -62,7 +62,7 @@
         android:id="@+id/tvVehicle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Transportation type"
+        android:text="Mode"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:layout_alignBaseline="@+id/spVehicle"
         android:layout_alignBottom="@+id/spVehicle"

@@ -3,19 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    tools:context="com.codepath.gogreen.FeedActivity">
-
-    <!--<include
-        layout="@layout/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/toolbar"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        />-->
-
+    android:layout_height="match_parent"
+    tools:context="com.codepath.gogreen.LogRecycleActivity">
 
     <TextView
         android:id="@+id/tvTitle"
@@ -23,72 +12,70 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="5dp"
-        android:text="Number of Materials Recycled"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        android:layout_marginLeft="5dp" />
-
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="16dp"
+        android:text="Recycled Materials"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
     <TextView
         android:id="@+id/tvPoints"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Earn 1 point for each item recycled!"
 
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+
         android:layout_below="@+id/tvTitle"
-        android:layout_marginStart="5dp"
-        android:paddingTop="1dp"
-        android:text="You get 1 point for every material you recycle."
-        android:layout_marginLeft="5dp" />
-
+        android:layout_alignLeft="@+id/tvTitle"
+        android:layout_alignStart="@+id/tvTitle" />
 
     <TextView
         android:id="@+id/tvItems"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tvPoints"
-        android:layout_marginStart="5dp"
-        android:layout_marginTop="39dp"
-        android:text="Number"
-        android:layout_marginLeft="5dp" />
-
+        android:text="Items"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:layout_alignBaseline="@+id/etItems"
+        android:layout_alignBottom="@+id/etItems"
+        android:layout_alignLeft="@+id/tvPoints"
+        android:layout_alignStart="@+id/tvPoints" />
 
     <EditText
         android:id="@+id/etItems"
         style="@style/Widget.AppCompat.EditText"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/tvItems"
-        android:layout_marginEnd="30dp"
-        android:layout_marginRight="30dp"
-        android:hint="# recyclables"
+        android:layout_marginEnd="24dp"
+        android:layout_marginRight="24dp"
+        android:layout_marginTop="48dp"
+        android:ems="10"
+        android:hint="# items recycled"
         android:inputType="numberDecimal"
-        android:textSize="14sp" />
-
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:layout_below="@+id/tvTitle"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <TextView
         android:id="@+id/tvMaterial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Material"
-        android:layout_below="@+id/etItems"
         android:layout_alignLeft="@+id/tvItems"
-        android:layout_alignStart="@+id/tvItems" />
+        android:layout_alignStart="@+id/tvItems"
+        android:layout_below="@+id/etItems"
+        android:layout_marginTop="24dp"
+        android:text="Material"
+        android:textAppearance="@style/TextAppearance.AppCompat" />
 
     <Spinner
         android:id="@+id/spMaterial"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:entries="@array/materials"
+        android:layout_alignBaseline="@+id/tvMaterial"
+        android:layout_alignBottom="@+id/tvMaterial"
         android:layout_alignLeft="@+id/etItems"
-        android:layout_alignStart="@+id/etItems"
-        android:layout_alignTop="@+id/tvMaterial"
-        android:entries="@array/materials" />
+        android:layout_alignStart="@+id/etItems" />
 
 </RelativeLayout>

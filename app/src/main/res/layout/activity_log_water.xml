@@ -54,18 +54,18 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="41dp"
         android:text="00:00:00"
-        android:textColor="@color/colorPrimary"
-        android:textSize="70sp" />
+        android:textColor="@color/colorAccentDark"
+        android:textSize="55sp" />
 
     <Button
         android:id="@+id/btStartPause"
         android:layout_width="90dp"
         android:layout_height="40dp"
-        android:layout_alignEnd="@+id/tvTimer"
-        android:layout_alignRight="@+id/tvTimer"
-        android:layout_below="@+id/tvTimer"
         android:layout_marginTop="25dp"
-        android:text="Start" />
+        android:text="Start"
+        android:layout_below="@+id/tvTimer"
+        android:layout_centerHorizontal="true"
+/>
 
 
     <!--<Button

@@ -21,7 +21,7 @@ public class ParseApplication extends Application {
 
         // Use for troubleshooting -- remove this line for production
         Parse.setLogLevel(Parse.LOG_LEVEL_DEBUG);
-
+//        ParseFacebookUtils.initialize(this);
         // Use for monitoring Parse OkHttp traffic
         // Can be Level.BASIC, Level.HEADERS, or Level.BODY
         // See http://square.github.io/okhttp/3.x/logging-interceptor/ to see the options.
@@ -34,7 +34,7 @@ public class ParseApplication extends Application {
         // clientKey is not needed unless explicitly configured
         // any network interceptors must be added with the Configuration Builder given this syntax
         Parse.initialize(new Parse.Configuration.Builder(this)
-                .applicationId("myAppId") // should correspond to APP_ID env variable
+                .applicationId("334983630257569") // should correspond to APP_ID env variable
                 .clientKey(null)  // set explicitly unless clientKey is explicitly configured on Parse server
                 .clientBuilder(builder)
                 .server("https://go-green-app.herokuapp.com/parse/").build());
