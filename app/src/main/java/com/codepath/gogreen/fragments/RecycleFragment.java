@@ -125,11 +125,10 @@ public class RecycleFragment extends ModalFragment {
         action.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
-                Toast.makeText(getActivity(), "Action logged", Toast.LENGTH_SHORT).show();
-
+            Toast.makeText(getActivity(), "Action logged", Toast.LENGTH_SHORT).show();
+            listener.updateFeed(action);
             }
         });
-        listener.updateFeed(action);
 
     }
 }

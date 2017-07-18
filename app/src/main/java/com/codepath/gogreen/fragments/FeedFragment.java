@@ -54,7 +54,6 @@ public class FeedFragment extends Fragment {
         actions = new ArrayList<>();
         actionAdapter = new ActionAdapter(actions);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        linearLayoutManager.setReverseLayout(true);
         rvActions.setLayoutManager(linearLayoutManager);
         // set the adapter
         rvActions.setAdapter(actionAdapter);
@@ -68,8 +67,8 @@ public class FeedFragment extends Fragment {
         Log.d("addItems", String.valueOf(actionList.size()));
         for (int i = 0; i < actionList.size(); i++) {
             Action action = actionList.get(i);
-            actions.add(action);
-            actionAdapter.notifyItemInserted(actions.size() - 1);
+            actions.add(0, action);
+            actionAdapter.notifyItemInserted(0);
             Log.d("addItems", String.valueOf(actions.size()) + ": " + action.get("actionType"));
 
         }

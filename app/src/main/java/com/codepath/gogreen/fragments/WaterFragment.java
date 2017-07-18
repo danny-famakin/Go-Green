@@ -2,6 +2,7 @@ package com.codepath.gogreen.fragments;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
@@ -59,6 +60,8 @@ public class WaterFragment extends ModalFragment {
         showering = true;
         tvTimer = (TextView) v.findViewById(R.id.tvTimer);
         btStartPause = (Button) v.findViewById(R.id.btStartPause);
+        btStartPause.getBackground().setColorFilter(getActivity().getResources().getColor(R.color.offWhite), PorterDuff.Mode.MULTIPLY);
+        btStartPause.setTextColor(getActivity().getResources().getColor(R.color.colorPrimary));
 
 //        handler = new Handler() {
 //            @Override
@@ -89,6 +92,9 @@ public class WaterFragment extends ModalFragment {
                     v.postDelayed(runnable, 0);
                     showering = false;
                     btStartPause.setText("Pause");
+                    btStartPause.setTextColor(getActivity().getResources().getColor(R.color.red));
+
+
                 }
                 else {
                     timeBuff += millisecond;
@@ -97,6 +103,10 @@ public class WaterFragment extends ModalFragment {
                     Log.d("seconds", String.valueOf(seconds));
                     showering = true;
                     btStartPause.setText("Resume");
+                    btStartPause.setTextColor(getActivity().getResources().getColor(R.color.colorPrimary));
+
+
+//                    btStartPause.setTextColor(getActivity().getResources().getColor(R.color.colorPrimary));
                 }
 
             }
@@ -189,9 +199,9 @@ public class WaterFragment extends ModalFragment {
             @Override
             public void done(ParseException e) {
                 Toast.makeText(getActivity(), "Action logged", Toast.LENGTH_SHORT).show();
+                listener.updateFeed(action);
             }
         });
-        listener.updateFeed(action);
 
 
 

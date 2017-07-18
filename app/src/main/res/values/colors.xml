@@ -9,5 +9,10 @@
     <!--2f7700-->
     <color name="colorPrimaryDark">#267400</color>
     <color name="colorAccent">#1de9b6</color>
+    <color name="colorAccentDark">#00b686</color>
+    <color name="red">#b71c1c</color>
+    <color name="offWhite">#f5f5f5</color>
+
+
 
 </resources>

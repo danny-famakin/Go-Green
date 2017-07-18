@@ -72,9 +72,9 @@ public class ReuseFragment extends ModalFragment {
                 @Override
                 public void done(ParseException e) {
                     Toast.makeText(getActivity(), "Action logged", Toast.LENGTH_SHORT).show();
+                    listener.updateFeed(action);
                 }
             });
-            listener.updateFeed(action);
 
 
 
