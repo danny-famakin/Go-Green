@@ -12,6 +12,7 @@ import java.util.ArrayList;
 public class User extends ParseObject {
     long uid;
     String username;
+    String name;
     String email;
     String password;
     ArrayList<Long> friends;

@@ -54,6 +54,7 @@ public class FeedFragment extends Fragment {
         actions = new ArrayList<>();
         actionAdapter = new ActionAdapter(actions);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager.setReverseLayout(true);
         rvActions.setLayoutManager(linearLayoutManager);
         // set the adapter
         rvActions.setAdapter(actionAdapter);
