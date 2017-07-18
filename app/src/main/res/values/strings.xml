@@ -17,4 +17,7 @@
     </string-array>
 
     <string name="current_year">2017</string>
+    <string name="distance_units">mile</string>
+    <string name="shower_units">minute</string>
+
 </resources>

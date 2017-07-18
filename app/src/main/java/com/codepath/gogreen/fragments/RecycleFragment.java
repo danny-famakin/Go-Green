@@ -117,7 +117,7 @@ public class RecycleFragment extends ModalFragment {
         final Action action = new Action();
         action.setUid(USER_ID);
         action.setActionType("recycle");
-        action.setSubType(materialType);
+        action.setSubType(materialType.substring(0,materialType.length() - 1));
         action.setMagnitude(newMaterials);
         action.setPoints(newPoints);
 

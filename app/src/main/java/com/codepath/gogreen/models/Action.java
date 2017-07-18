@@ -8,14 +8,15 @@ import com.parse.ParseObject;
  */
 @ParseClassName("Action")
 public class Action extends ParseObject {
-    long uid;
-    String actionType;
-    String subType;
-    double magnitude;
-    double points;
+    public long uid;
+    public String actionType;
+    public String subType;
+    public double magnitude;
+    public double points;
 
     public String getSubType() {
-        return subType;
+        return this.getString("subType");
+//        return subType;
     }
 
     public void setSubType(String subType) {
@@ -24,7 +25,9 @@ public class Action extends ParseObject {
     }
 
     public long getUid() {
-        return uid;
+        return this.getLong("uid");
+
+//        return uid;
     }
 
     public void setUid(long uid) {
@@ -33,7 +36,9 @@ public class Action extends ParseObject {
     }
 
     public String getActionType() {
-        return actionType;
+        return this.getString("actionType");
+
+//        return actionType;
     }
 
     public void setActionType(String actionType) {
@@ -42,7 +47,8 @@ public class Action extends ParseObject {
     }
 
     public double getMagnitude() {
-        return magnitude;
+        return this.getDouble("magnitude");
+//        return magnitude;
     }
 
     public void setMagnitude(double magnitude) {
@@ -51,7 +57,9 @@ public class Action extends ParseObject {
     }
 
     public double getPoints() {
-        return points;
+
+        return this.getDouble("points");
+//        return points;
     }
 
     public void setPoints(double points) {

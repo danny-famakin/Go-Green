@@ -39,12 +39,14 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
     @Override
     public void onBindViewHolder(ActionAdapter.ViewHolder holder, int position) {
         final Action action = mActions.get(position);
-        holder.tvAction.setText(action.get("actionType").toString());
+        holder.tvAction.setText(composeActionBody(action));
 
-        String relativeTime = getRelativeTimeAgo(action.getCreatedAt());
-        holder.tvTimeStamp.setText(shortenTimeStamp(relativeTime));
-        holder.tvPoints.setText(action.get("points").toString());
-        Log.d("action", String.valueOf(action.getCreatedAt()));
+        Date timeStamp = (action.getCreatedAt());
+//        if (timeStamp == null) {
+//            timeStamp = Date
+//        }
+        holder.tvTimeStamp.setText(shortenTimeStamp(getRelativeTimeAgo(timeStamp)));
+        holder.tvPoints.setText("Points earned: " + String.format("%.1f", action.getDouble("points")));
 
     }
 
@@ -86,5 +88,72 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
             timestamp = splitTime[0] + " " + splitTime[1].substring(0, splitTime[1].length() - 1);
         }
         return timestamp;
+    }
+
+    public String composeActionBody(Action action) {
+        String body = "";
+        switch (action.getString("actionType").toString()) {
+            case "transit":
+                String vehicle;
+                String subType = action.getSubType();
+                Log.d("transit", subType);
+
+                if (subType.equals("bus") || subType.equals("subway") || subType.equals("train")) {
+                    body = "took the " + subType + " for";
+                }
+                else if (subType.equals("walk") || subType.equals("bike")) {
+                    body = checkPastTense(subType);
+                }
+                else if (subType.equals("carpool")) {
+                    body = "carpooled for";
+                }
+                else {
+                    Log.d("transit", "subtype none of the above");
+                }
+                body += " " + checkUnits(action.getMagnitude(), context.getResources().getString(R.string.distance_units), false);
+                break;
+            case "water":
+                body = "took a " + String.format("%.1f", action.getMagnitude()) + " " + context.getResources().getString(R.string.shower_units) + " shower";
+                break;
+            case "reuse":
+                body = "reused " + checkUnits(action.getMagnitude(), "bag", true);
+                break;
+            case "recycle":
+                body = "recycled " + checkUnits(action.getMagnitude(), action.getSubType(), true);
+                break;
+        }
+
+        return body;
+
+    }
+
+    // returns string containing plural form of unit only if magnitude != 1
+    public String checkUnits(double magnitude, String units, boolean castToInt) {
+        if (magnitude == 1.) {
+            if (castToInt) {
+                return (int) magnitude + " " + units;
+            }
+            else {
+                return String.format("%.1f", magnitude) + " " + units;
+            }
+        }
+        else {
+            if (castToInt) {
+                return (int) magnitude + " " + units + "s";
+            }
+            else {
+                return String.format("%.1f", magnitude) + " " + units + "s";
+            }
+        }
+    }
+
+    // appends "d" or "ed"
+    public String checkPastTense(String word) {
+        if (word.charAt(word.length() - 1) == 'e') {
+            return word + 'd';
+        }
+        else {
+            return word + "ed";
+        }
     }
 }

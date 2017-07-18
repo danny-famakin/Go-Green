@@ -73,4 +73,10 @@ public class FeedFragment extends Fragment {
 
         }
     }
+
+    public void addAction(Action action) {
+        actions.add(0, action);
+        actionAdapter.notifyItemInserted(0);
+        rvActions.scrollToPosition(0);
+    }
 }

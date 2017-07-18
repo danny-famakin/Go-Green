@@ -31,8 +31,8 @@ import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 
 public class FeedActivity extends AppCompatActivity implements ModalFragment.OnItemSelectedListener {
 
-    private TabPagerAdapter PagerAdapter;
-    private ViewPager ViewPager;
+    TabPagerAdapter PagerAdapter;
+    ViewPager ViewPager;
     Context context;
 
     @Override
@@ -173,6 +173,7 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
     }
 
     public void updateFeed(Action action) {
+        PagerAdapter.feedFragment.addAction(action);
         Log.d("FeedActivity", String.valueOf(action.getMagnitude()) + " points awarded for " + action.getActionType());
 
     }
