@@ -8,11 +8,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
+import com.codepath.gogreen.models.User;
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Arrays;
 import java.util.List;
@@ -21,11 +31,11 @@ import java.util.List;
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity {
-
+    Context context;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        final Context context = this;
+        context = this;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Button btnLogin = (Button) findViewById(R.id.btnLogin);
@@ -41,10 +51,12 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d("MyApp", "Uh oh. The user cancelled the Facebook login.");
                         } else if (user.isNew()) {
                             Log.d("MyApp", "User signed up and logged in through Facebook!");
+                            getFBUserDetails();
                             i = new Intent(context, FeedActivity.class);
                             context.startActivity(i);
                         } else {
                             Log.d("MyApp", "User logged in through Facebook!");
+                            getFBUserDetails();
                             i = new Intent(context, FeedActivity.class);
                             context.startActivity(i);
                         }
@@ -60,6 +72,59 @@ public class LoginActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         ParseFacebookUtils.onActivityResult(requestCode, resultCode, data);
+    }
+
+
+    private void getFBUserDetails() {
+
+        // Suggested by https://disqus.com/by/dominiquecanlas/
+        Bundle parameters = new Bundle();
+        parameters.putString("fields", "email,name,picture,friends");
+        new GraphRequest(
+                AccessToken.getCurrentAccessToken(),
+                "/me",
+                parameters,
+                HttpMethod.GET,
+                new GraphRequest.Callback() {
+                    public void onCompleted(GraphResponse response) {
+                        User user = new User();
+         /* handle the result */
+                        try {
+
+                            String email = response.getJSONObject().getString("email");
+                            Log.d("user", email);
+                            String name = response.getJSONObject().getString("name");
+                            Log.d("user", name);
+                            String id = response.getJSONObject().getString("id");
+                            Log.d("user", id);
+
+
+                            JSONObject picture = response.getJSONObject().getJSONObject("picture");
+                            JSONObject data = picture.getJSONObject("data");
+
+                            //  Returns a 50x50 profile picture
+                            String pictureUrl = data.getString("url");
+                            Log.d("user", pictureUrl);
+
+                            user.setEmail(email);
+                            user.setName(name);
+                            user.setProfileImgUrl(pictureUrl);
+                            user.setUid(id);
+
+                            user.saveInBackground(new SaveCallback() {
+                                @Override
+                                public void done(ParseException e) {
+                                    Toast.makeText(context, "User stored", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+        ).executeAsync();
+
     }
 
 }
