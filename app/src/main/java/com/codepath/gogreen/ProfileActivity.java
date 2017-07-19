@@ -25,6 +25,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         Glide.with(context)
                 .load("http://via.placeholder.com/300.png")
-                .placeholder(R.drawable.ic_placeholder).into(ivProfilePic);
+                .placeholder(R.drawable.ic_placeholder)
+                .into(ivProfilePic);
     }
 }

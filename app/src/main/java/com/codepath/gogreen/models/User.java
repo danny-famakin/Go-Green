@@ -16,4 +16,6 @@ public class User extends ParseObject {
     String email;
     String password;
     ArrayList<Long> friends;
+
+
 }
