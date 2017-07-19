@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+import com.facebook.AccessToken;
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
@@ -30,6 +31,10 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         Button btnLogin = (Button) findViewById(R.id.btnLogin);
         final List<String> permissions = Arrays.asList("public_profile", "email", "user_friends");
+        if(isLoggedIn()){
+            Intent i = new Intent(this, FeedActivity.class);
+            startActivity(i);
+        }
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -54,6 +59,11 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public boolean isLoggedIn() {
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        return accessToken != null;
     }
 
     @Override
