@@ -10,16 +10,15 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.codepath.gogreen.models.User;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
-import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
+import com.parse.SignUpCallback;
+import com.parse.ui.ParseLoginBuilder;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,33 +38,40 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Button btnLogin = (Button) findViewById(R.id.btnLogin);
-        final List<String> permissions = Arrays.asList("public_profile", "email", "user_friends");
+        final List<String> permissions = Arrays.asList(getResources().getStringArray(R.array.fb_permissions));
+        ParseUser.logOut();
         if(isLoggedIn()){
             Intent i = new Intent(this, FeedActivity.class);
             startActivity(i);
         }
+        else {
+            ParseLoginBuilder builder = new ParseLoginBuilder(LoginActivity.this);
+            startActivityForResult(builder.build(), 0);
+        }
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ParseFacebookUtils.logInWithReadPermissionsInBackground(LoginActivity.this, permissions, new LogInCallback() {
-                    @Override
-                        public void done(ParseUser user, ParseException err) {
-                        Intent i;
-                        if (user == null) {
-                            Log.d("MyApp", "Uh oh. The user cancelled the Facebook login.");
-                        } else if (user.isNew()) {
-                            Log.d("MyApp", "User signed up and logged in through Facebook!");
-                            getFBUserDetails();
-                            i = new Intent(context, FeedActivity.class);
-                            context.startActivity(i);
-                        } else {
-                            Log.d("MyApp", "User logged in through Facebook!");
-                            getFBUserDetails();
-                            i = new Intent(context, FeedActivity.class);
-                            context.startActivity(i);
-                        }
-                    }
-                });
+
+
+//                ParseFacebookUtils.logInWithReadPermissionsInBackground(LoginActivity.this, permissions, new LogInCallback() {
+//                    @Override
+//                    public void done(ParseUser user, ParseException err) {
+//                        Intent i;
+//                        if (user == null) {
+//                            Log.d("MyApp", "Uh oh. The user cancelled the Facebook login.");
+//                        } else if (user.isNew()) {
+//                            Log.d("MyApp", "User signed up and logged in through Facebook!");
+//                            getFBUserDetails();
+//                            i = new Intent(context, FeedActivity.class);
+//                            context.startActivity(i);
+//                        } else {
+//                            Log.d("MyApp", "User logged in through Facebook!");
+//                            getParseUserDetails();
+//                            i = new Intent(context, FeedActivity.class);
+//                            context.startActivity(i);
+//                        }
+//                    }
+//                });
 
             }
         });
@@ -96,7 +102,7 @@ public class LoginActivity extends AppCompatActivity {
                 HttpMethod.GET,
                 new GraphRequest.Callback() {
                     public void onCompleted(GraphResponse response) {
-                        User user = new User();
+                        ParseUser user = new ParseUser();
          /* handle the result */
                         try {
 
@@ -116,11 +122,11 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d("user", pictureUrl);
 
                             user.setEmail(email);
-                            user.setName(name);
-                            user.setProfileImgUrl(pictureUrl);
-                            user.setUid(id);
+                            user.put("name", name);
+                            user.put("profileImgUrl", pictureUrl);
+                            user.put("fbid", id);
 
-                            user.saveInBackground(new SaveCallback() {
+                            user.signUpInBackground(new SignUpCallback() {
                                 @Override
                                 public void done(ParseException e) {
                                     Toast.makeText(context, "User stored", Toast.LENGTH_SHORT).show();
@@ -136,4 +142,9 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    private void getParseUserDetails() {
+        ParseUser user = ParseUser.getCurrentUser();
+        Log.d("User", user.getString("name"));
+
+    }
 }

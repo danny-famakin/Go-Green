@@ -16,6 +16,12 @@
         <item>cans</item>
     </string-array>
 
+    <string-array name="fb_permissions">
+        <item>public_profile</item>
+        <item>user_friends</item>
+        <item>email</item>
+    </string-array>
+
     <string name="facebook_app_id">323447691448620</string>
     <string name="current_year">2017</string>
     <string name="distance_units">mile</string>
