@@ -26,7 +26,6 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ParseUser.logOut();
         if(!isLoggedIn()){
             ParseLoginBuilder builder = new ParseLoginBuilder(ProfileActivity.this);
             startActivityForResult(builder.build(), 0);
@@ -40,6 +39,7 @@ public class ProfileActivity extends AppCompatActivity {
         ivProfilePic = (ImageView) findViewById(R.id.ivProfilePic);
         tvName = (TextView) findViewById(R.id.tvName);
 
+        loadData();
 
     }
 
@@ -80,21 +80,23 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        currentUser = ParseUser.getCurrentUser();
         if (requestCode == 0 && resultCode == android.app.Activity.RESULT_OK) {
-            Log.d("User", "@" + currentUser.getString("profileImgUrl"));
-            Log.d("User", "@" + currentUser.getString("name"));
-
-            Glide.with(context)
-                    .load(currentUser.getString("profileImgUrl"))
-                    .placeholder(R.drawable.ic_placeholder)
-                    .into(ivProfilePic);
-
-            tvName.setText(currentUser.getString("name"));
+            loadData();
         } else {
 
         }
     }
 
+    public void loadData() {
+        currentUser = ParseUser.getCurrentUser();
+        Log.d("User", "@" + currentUser.getString("profileImgUrl"));
+        Log.d("User", "@" + currentUser.getString("name"));
 
+        Glide.with(context)
+                .load(currentUser.getString("profileImgUrl"))
+                .placeholder(R.drawable.ic_placeholder)
+                .into(ivProfilePic);
+
+        tvName.setText(currentUser.getString("name"));
+    }
 }
