@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merger version="3"><dataSet config="main"><source path="/Users/anyazhang/Documents/Go-Green/ParseUI-Widget/src/main/assets"/><source path="/Users/anyazhang/Documents/Go-Green/ParseUI-Widget/build/generated/assets/shaders/debug"/></dataSet><dataSet config="debug"><source path="/Users/anyazhang/Documents/Go-Green/ParseUI-Widget/src/debug/assets"/></dataSet></merger>
