@@ -8,9 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
-import com.codepath.gogreen.models.User;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
@@ -19,7 +17,6 @@ import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
-import com.parse.SaveCallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,10 +37,10 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         Button btnLogin = (Button) findViewById(R.id.btnLogin);
         final List<String> permissions = Arrays.asList("public_profile", "email", "user_friends");
-        if(isLoggedIn()){
-            Intent i = new Intent(this, FeedActivity.class);
-            startActivity(i);
-        }
+//        if(isLoggedIn()){
+//            Intent i = new Intent(this, FeedActivity.class);
+//            startActivity(i);
+//        }
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -72,10 +69,10 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public boolean isLoggedIn() {
-        AccessToken accessToken = AccessToken.getCurrentAccessToken();
-        return accessToken != null;
-    }
+//    public boolean isLoggedIn() {
+//        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+//        return accessToken != null;
+//    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -96,7 +93,7 @@ public class LoginActivity extends AppCompatActivity {
                 HttpMethod.GET,
                 new GraphRequest.Callback() {
                     public void onCompleted(GraphResponse response) {
-                        User user = new User();
+                        ParseUser parseUser = ParseUser.getCurrentUser();
          /* handle the result */
                         try {
 
@@ -115,17 +112,12 @@ public class LoginActivity extends AppCompatActivity {
                             String pictureUrl = data.getString("url");
                             Log.d("user", pictureUrl);
 
-                            user.setEmail(email);
-                            user.setName(name);
-                            user.setProfileImgUrl(pictureUrl);
-                            user.setUid(id);
+                            parseUser.setEmail(email);
+                            parseUser.put("name", name);
+                            parseUser.put("pictureUrl", pictureUrl);
+                            parseUser.put("id", id);
 
-                            user.saveInBackground(new SaveCallback() {
-                                @Override
-                                public void done(ParseException e) {
-                                    Toast.makeText(context, "User stored", Toast.LENGTH_SHORT).show();
-                                }
-                            });
+                            parseUser.saveInBackground();
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -135,5 +127,8 @@ public class LoginActivity extends AppCompatActivity {
         ).executeAsync();
 
     }
+
+
+
 
 }
