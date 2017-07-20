@@ -26,11 +26,6 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if(!isLoggedIn()){
-            ParseLoginBuilder builder = new ParseLoginBuilder(ProfileActivity.this);
-            startActivityForResult(builder.build(), 0);
-        }
-
         setContentView(R.layout.activity_my_profile);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -39,7 +34,18 @@ public class ProfileActivity extends AppCompatActivity {
         ivProfilePic = (ImageView) findViewById(R.id.ivProfilePic);
         tvName = (TextView) findViewById(R.id.tvName);
 
-        loadData();
+        if(!isLoggedIn()){
+            Log.d("loggedin", "false");
+            ParseLoginBuilder builder = new ParseLoginBuilder(ProfileActivity.this);
+            startActivityForResult(builder.build(), 0);
+        }
+
+        else {
+            Log.d("loggedin", "true");
+            loadData();
+        }
+
+
 
     }
 
@@ -54,9 +60,9 @@ public class ProfileActivity extends AppCompatActivity {
 
         currentUser = ParseUser.getCurrentUser();
         if (currentUser != null) {
-            showProfileLoggedIn();
+//            showProfileLoggedIn();
         } else {
-            showProfileLoggedOut();
+//            showProfileLoggedOut();
         }
     }
 
