@@ -40,7 +40,6 @@ public class ParseApplication extends Application {
                 .server("https://go-green-app.herokuapp.com/parse/").build());
 
         ParseObject.registerSubclass(Action.class);
-
         ParseFacebookUtils.initialize(this);
 
 
