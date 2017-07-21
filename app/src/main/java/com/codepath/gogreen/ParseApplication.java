@@ -5,6 +5,7 @@ import android.app.Application;
 import com.codepath.gogreen.models.Action;
 import com.codepath.gogreen.models.User;
 import com.parse.Parse;
+import com.parse.ParseFacebookUtils;
 import com.parse.ParseObject;
 
 import okhttp3.OkHttpClient;
@@ -34,7 +35,7 @@ public class ParseApplication extends Application {
         // clientKey is not needed unless explicitly configured
         // any network interceptors must be added with the Configuration Builder given this syntax
         Parse.initialize(new Parse.Configuration.Builder(this)
-                .applicationId("334983630257569") // should correspond to APP_ID env variable
+                .applicationId("myAppId") // should correspond to APP_ID env variable
                 .clientKey(null)  // set explicitly unless clientKey is explicitly configured on Parse server
                 .clientBuilder(builder)
                 .server("https://go-green-app.herokuapp.com/parse/").build());
@@ -42,6 +43,7 @@ public class ParseApplication extends Application {
         ParseObject.registerSubclass(Action.class);
         ParseObject.registerSubclass(User.class);
 
+        ParseFacebookUtils.initialize(this);
 
 
     }

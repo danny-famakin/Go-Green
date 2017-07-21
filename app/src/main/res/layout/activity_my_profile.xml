@@ -23,8 +23,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/toolbar"
-        android:layout_marginLeft="30dp"
-        android:layout_marginStart="30dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         app:srcCompat="@android:drawable/btn_star" />
 
@@ -33,12 +33,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/ivProfilePic"
-        android:layout_marginLeft="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="25dp"
-        android:layout_toEndOf="@+id/ivProfilePic"
+        android:layout_marginLeft="18dp"
+        android:layout_marginStart="18dp"
         android:layout_toRightOf="@+id/ivProfilePic"
-        android:text="Name" />
+        android:text="Name"
+        android:textColor="@color/cardview_shadow_start_color"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvJoin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvName"
+        android:layout_alignStart="@+id/tvName"
+        android:layout_below="@+id/tvName"
+        android:text="Join Date" />
 
 
 </RelativeLayout>

@@ -68,10 +68,10 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
         SubActionButton.Builder itemBuilder = new SubActionButton.Builder(this);
 // repeat many times:
 
-        SubActionButton button1 = createSubActionButton(R.drawable.ic_transit);
+        SubActionButton button1 = createSubActionButton(R.drawable.ic_transit2);
         SubActionButton button2 = createSubActionButton(R.drawable.ic_water);
-        SubActionButton button3 = createSubActionButton(R.drawable.ic_bag);
-        SubActionButton button4 = createSubActionButton(R.drawable.ic_can);
+        SubActionButton button3 = createSubActionButton(R.drawable.ic_bag3);
+        SubActionButton button4 = createSubActionButton(R.drawable.ic_can2);
 
 
 
@@ -81,6 +81,7 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
                 .addSubActionView(button3)
                 .addSubActionView(button4)
                 .attachTo(fab)
+                .setRadius(500)
                 .build();
 
         button1.setOnClickListener(new View.OnClickListener() {
@@ -135,7 +136,7 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
 
     public SubActionButton createSubActionButton(int iconId) {
         SubActionButton.Builder itemBuilder = new SubActionButton.Builder(this);
-        int subActionButtonSize = 220;
+        int subActionButtonSize = 280;
         FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(subActionButtonSize, subActionButtonSize);
         ImageView icon = new ImageView(this);
         Glide.with(context)
