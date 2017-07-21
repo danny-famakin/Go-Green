@@ -39,15 +39,11 @@ public class FeedFragment extends Fragment {
         final String userId = currentUser.getString("fbId");
 
         ParseQuery<Action> query = ParseQuery.getQuery("Action");
+        query.whereEqualTo("uid", userId);
         query.findInBackground(new FindCallback<Action>() {
             public void done(List<Action> actionList, ParseException e) {
                 if (e == null) {
-                    for (int i = 0; i < actionList.size(); i++) {
-                        Action action = actionList.get(i);
-                        if (action.getString("uid").equals(userId)) {
-                            addAction(action);
-                        }
-                    }
+                    addItems(actionList);
                 } else {
                     Log.d("action", "Error: " + e.getMessage());
                 }
