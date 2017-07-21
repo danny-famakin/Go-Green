@@ -32,12 +32,12 @@
         "source": "/Users/melissaperez/Go-Green/ParseUI-Login/src/main/res/layout/com_parse_ui_parse_signup_form.xml"
     },
     {
-        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/layout/messenger_button_send_white_round.xml",
-        "source": "/Users/anyazhang/.android/build-cache/a8fe0911452bddd7b6ab6e48a1ef2c5aeec4dde9/output/res/layout/messenger_button_send_white_round.xml"
-    },
-    {
         "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/layout/notification_template_icon_group.xml",
         "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/layout/notification_template_icon_group.xml"
+    },
+    {
+        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/layout/messenger_button_send_white_round.xml",
+        "source": "/Users/anyazhang/.android/build-cache/a8fe0911452bddd7b6ab6e48a1ef2c5aeec4dde9/output/res/layout/messenger_button_send_white_round.xml"
     },
     {
         "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/layout/abc_select_dialog_material.xml",
@@ -48,12 +48,12 @@
         "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/layout/abc_action_menu_item_layout.xml"
     },
     {
-        "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/layout/notification_template_custom_big.xml",
-        "source": "/Users/melissaperez/.android/build-cache/ade19dd7df75653b515f79bf8e0026b7d43ea680/output/res/layout/notification_template_custom_big.xml"
-    },
-    {
         "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/layout/select_dialog_item_material.xml",
         "source": "/Users/melissaperez/.android/build-cache/ade19dd7df75653b515f79bf8e0026b7d43ea680/output/res/layout/select_dialog_item_material.xml"
+    },
+    {
+        "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/layout/notification_template_custom_big.xml",
+        "source": "/Users/melissaperez/.android/build-cache/ade19dd7df75653b515f79bf8e0026b7d43ea680/output/res/layout/notification_template_custom_big.xml"
     },
     {
         "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/layout/support_simple_spinner_dropdown_item.xml",
@@ -80,12 +80,12 @@
         "source": "/Users/melissaperez/.android/build-cache/17fe4fe1564696e0bc2f840bde2e7f5e5e2ac7f1/output/res/layout/com_facebook_login_fragment.xml"
     },
     {
-        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/layout/com_parse_ui_parse_login_third_party_section.xml",
-        "source": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/src/main/res/layout/com_parse_ui_parse_login_third_party_section.xml"
-    },
-    {
         "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/layout/abc_dialog_title_material.xml",
         "source": "/Users/melissaperez/.android/build-cache/ade19dd7df75653b515f79bf8e0026b7d43ea680/output/res/layout/abc_dialog_title_material.xml"
+    },
+    {
+        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/layout/com_parse_ui_parse_login_third_party_section.xml",
+        "source": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/src/main/res/layout/com_parse_ui_parse_login_third_party_section.xml"
     },
     {
         "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/layout/abc_activity_chooser_view.xml",
@@ -132,12 +132,12 @@
         "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/layout/abc_action_bar_up_container.xml"
     },
     {
-        "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/layout/com_facebook_activity_layout.xml",
-        "source": "/Users/melissaperez/.android/build-cache/17fe4fe1564696e0bc2f840bde2e7f5e5e2ac7f1/output/res/layout/com_facebook_activity_layout.xml"
-    },
-    {
         "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/layout/notification_template_media_custom.xml",
         "source": "/Users/melissaperez/.android/build-cache/ade19dd7df75653b515f79bf8e0026b7d43ea680/output/res/layout/notification_template_media_custom.xml"
+    },
+    {
+        "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/layout/com_facebook_activity_layout.xml",
+        "source": "/Users/melissaperez/.android/build-cache/17fe4fe1564696e0bc2f840bde2e7f5e5e2ac7f1/output/res/layout/com_facebook_activity_layout.xml"
     },
     {
         "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/layout/abc_screen_simple.xml",
