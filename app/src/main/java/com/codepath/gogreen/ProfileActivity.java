@@ -15,6 +15,8 @@ import com.bumptech.glide.Glide;
 import com.parse.ParseUser;
 import com.parse.ui.ParseLoginBuilder;
 
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
+
 public class ProfileActivity extends AppCompatActivity {
 
     ImageView ivProfilePic;
@@ -77,6 +79,7 @@ public class ProfileActivity extends AppCompatActivity {
         Glide.with(context)
                 .load(currentUser.getString("profileImgUrl"))
                 .placeholder(R.drawable.ic_placeholder)
+                .bitmapTransform(new CropCircleTransformation(context))
                 .into(ivProfilePic);
 
         tvName.setText(currentUser.getString("name"));

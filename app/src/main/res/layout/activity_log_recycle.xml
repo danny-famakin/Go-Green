@@ -19,7 +19,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
     <TextView
-        android:id="@+id/tvPoints"
+        android:id="@+id/tvPointsCaption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -38,8 +38,8 @@
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:layout_alignBaseline="@+id/etItems"
         android:layout_alignBottom="@+id/etItems"
-        android:layout_alignLeft="@+id/tvPoints"
-        android:layout_alignStart="@+id/tvPoints" />
+        android:layout_alignLeft="@+id/tvPointsCaption"
+        android:layout_alignStart="@+id/tvPointsCaption" />
 
     <EditText
         android:id="@+id/etItems"
