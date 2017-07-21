@@ -246,7 +246,6 @@ public class ParseLoginFragment extends ParseLoginFragmentBase {
             if (isActivityDestroyed()) {
                 return;
             }
-
             if (user == null) {
                 loadingFinish();
                 if (e != null) {
@@ -265,6 +264,7 @@ public class ParseLoginFragment extends ParseLoginFragmentBase {
                         new GraphRequest.Callback() {
                             public void onCompleted(GraphResponse response) {
                                 ParseUser parseUser = ParseUser.getCurrentUser();
+
          /* handle the result */
                                 try {
 

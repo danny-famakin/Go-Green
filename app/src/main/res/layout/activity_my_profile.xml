@@ -18,28 +18,24 @@
 
     <ImageView
         android:id="@+id/ivProfilePic"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/toolbar"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_below="@+id/tvJoin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
         app:srcCompat="@android:drawable/btn_star" />
 
     <TextView
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/ivProfilePic"
-        android:layout_marginLeft="18dp"
-        android:layout_marginStart="18dp"
-        android:layout_toRightOf="@+id/ivProfilePic"
         android:text="Name"
         android:textColor="@color/cardview_shadow_start_color"
         android:textSize="24sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/toolbar"
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/tvJoin"
@@ -48,6 +44,7 @@
         android:layout_alignLeft="@+id/tvName"
         android:layout_alignStart="@+id/tvName"
         android:layout_below="@+id/tvName"
+        android:layout_centerHorizontal="true"
         android:text="Join Date" />
 
     <Button
