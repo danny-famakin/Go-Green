@@ -256,7 +256,7 @@ public class ParseLoginFragment extends ParseLoginFragmentBase {
         }
       } else if (user.isNew()) {
           Bundle parameters = new Bundle();
-          parameters.putString("fields", "email,name,picture.type(large)");
+          parameters.putString("fields", "email,name,picture.height(961)");
           new GraphRequest(
                   AccessToken.getCurrentAccessToken(),
                   "/me",
