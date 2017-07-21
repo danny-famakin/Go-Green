@@ -368,8 +368,7 @@ public class ParseLoginConfig {
       // Only for converting from activity meta-data.
       try {
         config.setFacebookLoginPermissions(stringArrayToCollection(context
-            .getResources().getStringArray(
-                bundle.getInt(FACEBOOK_LOGIN_PERMISSIONS))));
+            .getResources().getStringArray(R.array.fb_permissions_override)));
       } catch (NotFoundException e) {
         if (Parse.getLogLevel() <= Parse.LOG_LEVEL_ERROR) {
           Log.w(LOG_TAG, "Facebook permission string array resource not found");

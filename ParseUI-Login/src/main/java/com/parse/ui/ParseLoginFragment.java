@@ -52,339 +52,339 @@ import org.json.JSONObject;
  */
 public class ParseLoginFragment extends ParseLoginFragmentBase {
 
-  public interface ParseLoginFragmentListener {
-    public void onSignUpClicked(String username, String password);
+    public interface ParseLoginFragmentListener {
+        public void onSignUpClicked(String username, String password);
 
-    public void onLoginHelpClicked();
+        public void onLoginHelpClicked();
 
-    public void onLoginSuccess();
-  }
-
-  private static final String LOG_TAG = "ParseLoginFragment";
-  private static final String USER_OBJECT_NAME_FIELD = "name";
-
-  private View parseLogin;
-  private EditText usernameField;
-  private EditText passwordField;
-  private TextView parseLoginHelpButton;
-  private Button parseLoginButton;
-  private Button parseSignupButton;
-  private Button facebookLoginButton;
-  private Button twitterLoginButton;
-  private ParseLoginFragmentListener loginFragmentListener;
-  private ParseOnLoginSuccessListener onLoginSuccessListener;
-
-  private ParseLoginConfig config;
-
-  public static ParseLoginFragment newInstance(Bundle configOptions) {
-    ParseLoginFragment loginFragment = new ParseLoginFragment();
-    loginFragment.setArguments(configOptions);
-    return loginFragment;
-  }
-
-  @Override
-  public void onCreate(Bundle savedInstanceState) {
-    super.onCreate(savedInstanceState);
-  }
-
-  @Override
-  public View onCreateView(LayoutInflater inflater, ViewGroup parent,
-                           Bundle savedInstanceState) {
-    config = ParseLoginConfig.fromBundle(getArguments(), getActivity());
-
-    View v = inflater.inflate(R.layout.com_parse_ui_parse_login_fragment,
-        parent, false);
-    ImageView appLogo = (ImageView) v.findViewById(R.id.app_logo);
-    parseLogin = v.findViewById(R.id.parse_login);
-    usernameField = (EditText) v.findViewById(R.id.login_username_input);
-    passwordField = (EditText) v.findViewById(R.id.login_password_input);
-    parseLoginHelpButton = (Button) v.findViewById(R.id.parse_login_help);
-    parseLoginButton = (Button) v.findViewById(R.id.parse_login_button);
-    parseSignupButton = (Button) v.findViewById(R.id.parse_signup_button);
-    facebookLoginButton = (Button) v.findViewById(R.id.facebook_login);
-    twitterLoginButton = (Button) v.findViewById(R.id.twitter_login);
-
-    if (appLogo != null && config.getAppLogo() != null) {
-      appLogo.setImageResource(config.getAppLogo());
+        public void onLoginSuccess();
     }
-    if (allowParseLoginAndSignup()) {
-      setUpParseLoginAndSignup();
+
+    private static final String LOG_TAG = "ParseLoginFragment";
+    private static final String USER_OBJECT_NAME_FIELD = "name";
+
+    private View parseLogin;
+    private EditText usernameField;
+    private EditText passwordField;
+    private TextView parseLoginHelpButton;
+    private Button parseLoginButton;
+    private Button parseSignupButton;
+    private Button facebookLoginButton;
+    private Button twitterLoginButton;
+    private ParseLoginFragmentListener loginFragmentListener;
+    private ParseOnLoginSuccessListener onLoginSuccessListener;
+
+    private ParseLoginConfig config;
+
+    public static ParseLoginFragment newInstance(Bundle configOptions) {
+        ParseLoginFragment loginFragment = new ParseLoginFragment();
+        loginFragment.setArguments(configOptions);
+        return loginFragment;
     }
-    if (allowFacebookLogin()) {
-      setUpFacebookLogin();
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
-    if (allowTwitterLogin()) {
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup parent,
+                             Bundle savedInstanceState) {
+        config = ParseLoginConfig.fromBundle(getArguments(), getActivity());
+
+        View v = inflater.inflate(R.layout.com_parse_ui_parse_login_fragment,
+                parent, false);
+        ImageView appLogo = (ImageView) v.findViewById(R.id.app_logo);
+        parseLogin = v.findViewById(R.id.parse_login);
+        usernameField = (EditText) v.findViewById(R.id.login_username_input);
+        passwordField = (EditText) v.findViewById(R.id.login_password_input);
+        parseLoginHelpButton = (Button) v.findViewById(R.id.parse_login_help);
+        parseLoginButton = (Button) v.findViewById(R.id.parse_login_button);
+        parseSignupButton = (Button) v.findViewById(R.id.parse_signup_button);
+        facebookLoginButton = (Button) v.findViewById(R.id.facebook_login);
+        twitterLoginButton = (Button) v.findViewById(R.id.twitter_login);
+
+        if (appLogo != null && config.getAppLogo() != null) {
+            appLogo.setImageResource(config.getAppLogo());
+        }
+        if (allowParseLoginAndSignup()) {
+            setUpParseLoginAndSignup();
+        }
+        if (allowFacebookLogin()) {
+            setUpFacebookLogin();
+        }
+        if (allowTwitterLogin()) {
 //      setUpTwitterLogin();
-    }
-    return v;
-  }
-
-  @Override
-  public void onAttach(Context context) {
-    super.onAttach(context);
-
-    final Activity activity = getActivity();
-    if (activity instanceof ParseLoginFragmentListener) {
-      loginFragmentListener = (ParseLoginFragmentListener) activity;
-    } else {
-      throw new IllegalArgumentException(
-          "Activity must implemement ParseLoginFragmentListener");
+        }
+        return v;
     }
 
-    if (activity instanceof ParseOnLoginSuccessListener) {
-      onLoginSuccessListener = (ParseOnLoginSuccessListener) activity;
-    } else {
-      throw new IllegalArgumentException(
-          "Activity must implemement ParseOnLoginSuccessListener");
-    }
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
 
-    if (activity instanceof ParseOnLoadingListener) {
-      onLoadingListener = (ParseOnLoadingListener) activity;
-    } else {
-      throw new IllegalArgumentException(
-          "Activity must implemement ParseOnLoadingListener");
-    }
-  }
-
-  @Override
-  protected String getLogTag() {
-    return LOG_TAG;
-  }
-
-  private void setUpParseLoginAndSignup() {
-    parseLogin.setVisibility(View.VISIBLE);
-
-    if (config.isParseLoginEmailAsUsername()) {
-      usernameField.setHint(R.string.com_parse_ui_email_input_hint);
-      usernameField.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
-    }
-
-    if (config.getParseLoginButtonText() != null) {
-      parseLoginButton.setText(config.getParseLoginButtonText());
-    }
-
-    parseLoginButton.setOnClickListener(new OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        String username = usernameField.getText().toString();
-        String password = passwordField.getText().toString();
-
-        if (username.length() == 0) {
-          if (config.isParseLoginEmailAsUsername()) {
-            showToast(R.string.com_parse_ui_no_email_toast);
-          } else {
-            showToast(R.string.com_parse_ui_no_username_toast);
-          }
-        } else if (password.length() == 0) {
-          showToast(R.string.com_parse_ui_no_password_toast);
+        final Activity activity = getActivity();
+        if (activity instanceof ParseLoginFragmentListener) {
+            loginFragmentListener = (ParseLoginFragmentListener) activity;
         } else {
-          loadingStart(true);
-          ParseUser.logInInBackground(username, password, new LogInCallback() {
-            @Override
-            public void done(ParseUser user, ParseException e) {
-              if (isActivityDestroyed()) {
-                return;
-              }
+            throw new IllegalArgumentException(
+                    "Activity must implemement ParseLoginFragmentListener");
+        }
 
-              if (user != null) {
-                loadingFinish();
-                loginSuccess();
-              } else {
+        if (activity instanceof ParseOnLoginSuccessListener) {
+            onLoginSuccessListener = (ParseOnLoginSuccessListener) activity;
+        } else {
+            throw new IllegalArgumentException(
+                    "Activity must implemement ParseOnLoginSuccessListener");
+        }
+
+        if (activity instanceof ParseOnLoadingListener) {
+            onLoadingListener = (ParseOnLoadingListener) activity;
+        } else {
+            throw new IllegalArgumentException(
+                    "Activity must implemement ParseOnLoadingListener");
+        }
+    }
+
+    @Override
+    protected String getLogTag() {
+        return LOG_TAG;
+    }
+
+    private void setUpParseLoginAndSignup() {
+        parseLogin.setVisibility(View.VISIBLE);
+
+        if (config.isParseLoginEmailAsUsername()) {
+            usernameField.setHint(R.string.com_parse_ui_email_input_hint);
+            usernameField.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+        }
+
+        if (config.getParseLoginButtonText() != null) {
+            parseLoginButton.setText(config.getParseLoginButtonText());
+        }
+
+        parseLoginButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String username = usernameField.getText().toString();
+                String password = passwordField.getText().toString();
+
+                if (username.length() == 0) {
+                    if (config.isParseLoginEmailAsUsername()) {
+                        showToast(R.string.com_parse_ui_no_email_toast);
+                    } else {
+                        showToast(R.string.com_parse_ui_no_username_toast);
+                    }
+                } else if (password.length() == 0) {
+                    showToast(R.string.com_parse_ui_no_password_toast);
+                } else {
+                    loadingStart(true);
+                    ParseUser.logInInBackground(username, password, new LogInCallback() {
+                        @Override
+                        public void done(ParseUser user, ParseException e) {
+                            if (isActivityDestroyed()) {
+                                return;
+                            }
+
+                            if (user != null) {
+                                loadingFinish();
+                                loginSuccess();
+                            } else {
+                                loadingFinish();
+                                if (e != null) {
+                                    debugLog(getString(R.string.com_parse_ui_login_warning_parse_login_failed) +
+                                            e.toString());
+                                    if (e.getCode() == ParseException.OBJECT_NOT_FOUND) {
+                                        if (config.getParseLoginInvalidCredentialsToastText() != null) {
+                                            showToast(config.getParseLoginInvalidCredentialsToastText());
+                                        } else {
+                                            showToast(R.string.com_parse_ui_parse_login_invalid_credentials_toast);
+                                        }
+                                        passwordField.selectAll();
+                                        passwordField.requestFocus();
+                                    } else {
+                                        showToast(R.string.com_parse_ui_parse_login_failed_unknown_toast);
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
+        if (config.getParseSignupButtonText() != null) {
+            parseSignupButton.setText(config.getParseSignupButtonText());
+        }
+
+        parseSignupButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String username = usernameField.getText().toString();
+                String password = passwordField.getText().toString();
+
+                loginFragmentListener.onSignUpClicked(username, password);
+            }
+        });
+
+        if (config.getParseLoginHelpText() != null) {
+            parseLoginHelpButton.setText(config.getParseLoginHelpText());
+        }
+
+        parseLoginHelpButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loginFragmentListener.onLoginHelpClicked();
+            }
+        });
+    }
+
+
+    private LogInCallback facebookLoginCallbackV4 = new LogInCallback() {
+        @Override
+        public void done(ParseUser user, ParseException e) {
+            if (isActivityDestroyed()) {
+                return;
+            }
+
+            if (user == null) {
                 loadingFinish();
                 if (e != null) {
-                  debugLog(getString(R.string.com_parse_ui_login_warning_parse_login_failed) +
-                      e.toString());
-                  if (e.getCode() == ParseException.OBJECT_NOT_FOUND) {
-                    if (config.getParseLoginInvalidCredentialsToastText() != null) {
-                      showToast(config.getParseLoginInvalidCredentialsToastText());
-                    } else {
-                      showToast(R.string.com_parse_ui_parse_login_invalid_credentials_toast);
-                    }
-                    passwordField.selectAll();
-                    passwordField.requestFocus();
-                  } else {
-                    showToast(R.string.com_parse_ui_parse_login_failed_unknown_toast);
-                  }
+                    showToast(R.string.com_parse_ui_facebook_login_failed_toast);
+                    debugLog(getString(R.string.com_parse_ui_login_warning_facebook_login_failed) +
+                            e.toString());
                 }
-              }
-            }
-          });
-        }
-      }
-    });
-
-    if (config.getParseSignupButtonText() != null) {
-      parseSignupButton.setText(config.getParseSignupButtonText());
-    }
-
-    parseSignupButton.setOnClickListener(new OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        String username = usernameField.getText().toString();
-        String password = passwordField.getText().toString();
-
-        loginFragmentListener.onSignUpClicked(username, password);
-      }
-    });
-
-    if (config.getParseLoginHelpText() != null) {
-      parseLoginHelpButton.setText(config.getParseLoginHelpText());
-    }
-
-    parseLoginHelpButton.setOnClickListener(new OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        loginFragmentListener.onLoginHelpClicked();
-      }
-    });
-  }
-
-
-  private LogInCallback facebookLoginCallbackV4 = new LogInCallback() {
-    @Override
-    public void done(ParseUser user, ParseException e) {
-      if (isActivityDestroyed()) {
-        return;
-      }
-
-      if (user == null) {
-        loadingFinish();
-        if (e != null) {
-          showToast(R.string.com_parse_ui_facebook_login_failed_toast);
-          debugLog(getString(R.string.com_parse_ui_login_warning_facebook_login_failed) +
-                  e.toString());
-        }
-      } else if (user.isNew()) {
-          Bundle parameters = new Bundle();
-          parameters.putString("fields", "email,name,picture.type(large)");
-          new GraphRequest(
-                  AccessToken.getCurrentAccessToken(),
-                  "/me",
-                  parameters,
-                  HttpMethod.GET,
-                  new GraphRequest.Callback() {
-                      public void onCompleted(GraphResponse response) {
-                          ParseUser parseUser = ParseUser.getCurrentUser();
+            } else if (user.isNew()) {
+                Bundle parameters = new Bundle();
+                parameters.putString("fields", "email,name,picture.height(961)");
+                new GraphRequest(
+                        AccessToken.getCurrentAccessToken(),
+                        "/me",
+                        parameters,
+                        HttpMethod.GET,
+                        new GraphRequest.Callback() {
+                            public void onCompleted(GraphResponse response) {
+                                ParseUser parseUser = ParseUser.getCurrentUser();
          /* handle the result */
-                          try {
+                                try {
 
-                              String email = response.getJSONObject().getString("email");
-                              Log.d("user", email);
-                              String name = response.getJSONObject().getString("name");
-                              Log.d("user", name);
-                              String id = response.getJSONObject().getString("id");
-                              Log.d("user", id);
+                                    String email = response.getJSONObject().getString("email");
+                                    Log.d("user", email);
+                                    String name = response.getJSONObject().getString("name");
+                                    Log.d("user", name);
+                                    String id = response.getJSONObject().getString("id");
+                                    Log.d("user", id);
 
-                              JSONObject picture = response.getJSONObject().getJSONObject("picture");
-                              JSONObject data = picture.getJSONObject("data");
+                                    JSONObject picture = response.getJSONObject().getJSONObject("picture");
+                                    JSONObject data = picture.getJSONObject("data");
 
-                              //  Returns a 50x50 profile picture
-                              String profileImgUrl = data.getString("url");
-                              Log.d("user", profileImgUrl);
+                                    //  Returns a 50x50 profile picture
+                                    String profileImgUrl = data.getString("url");
+                                    Log.d("user", profileImgUrl);
 
-                              parseUser.setEmail(email);
-                              parseUser.put("name", name);
-                              parseUser.put("profileImgUrl", profileImgUrl);
-                              parseUser.put("fbId", id);
+                                    parseUser.setEmail(email);
+                                    parseUser.put("name", name);
+                                    parseUser.put("profileImgUrl", profileImgUrl);
+                                    parseUser.put("fbId", id);
 
-                              parseUser.saveInBackground();
+                                    parseUser.saveInBackground();
 
-                          } catch (JSONException e) {
-                              e.printStackTrace();
-                          }
-                      }
-                  }
-          ).executeAsync();
-          loginSuccess();
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                        }
+                ).executeAsync();
+                loginSuccess();
 
-      } else {
-        loginSuccess();
-      }
-    }
-  };
-
-  private void setUpFacebookLogin() {
-    facebookLoginButton.setVisibility(View.VISIBLE);
-
-    if (config.getFacebookLoginButtonText() != null) {
-      facebookLoginButton.setText(config.getFacebookLoginButtonText());
-    }
-
-    facebookLoginButton.setOnClickListener(new OnClickListener() {
-      @Override
-      public void onClick(View v) {
-        loadingStart(false); // Facebook login pop-up already has a spinner
-        if (config.isFacebookLoginNeedPublishPermissions()) {
-          ParseFacebookUtils.logInWithPublishPermissionsInBackground(getActivity(),
-                  config.getFacebookLoginPermissions(), facebookLoginCallbackV4);
-        } else {
-          ParseFacebookUtils.logInWithReadPermissionsInBackground(getActivity(),
-                  config.getFacebookLoginPermissions(), facebookLoginCallbackV4);
+            } else {
+                loginSuccess();
+            }
         }
-      }
-    });
-  }
+    };
 
-  private boolean allowParseLoginAndSignup() {
-    if (!config.isParseLoginEnabled()) {
-      return false;
-    }
+    private void setUpFacebookLogin() {
+        facebookLoginButton.setVisibility(View.VISIBLE);
 
-    if (usernameField == null) {
-      debugLog(R.string.com_parse_ui_login_warning_layout_missing_username_field);
-    }
-    if (passwordField == null) {
-      debugLog(R.string.com_parse_ui_login_warning_layout_missing_password_field);
-    }
-    if (parseLoginButton == null) {
-      debugLog(R.string.com_parse_ui_login_warning_layout_missing_login_button);
-    }
-    if (parseSignupButton == null) {
-      debugLog(R.string.com_parse_ui_login_warning_layout_missing_signup_button);
-    }
-    if (parseLoginHelpButton == null) {
-      debugLog(R.string.com_parse_ui_login_warning_layout_missing_login_help_button);
-    }
+        if (config.getFacebookLoginButtonText() != null) {
+            facebookLoginButton.setText(config.getFacebookLoginButtonText());
+        }
 
-    boolean result = (usernameField != null) && (passwordField != null)
-        && (parseLoginButton != null) && (parseSignupButton != null)
-        && (parseLoginHelpButton != null);
-
-    if (!result) {
-      debugLog(R.string.com_parse_ui_login_warning_disabled_username_password_login);
-    }
-    return result;
-  }
-
-  private boolean allowFacebookLogin() {
-    if (!config.isFacebookLoginEnabled()) {
-      return false;
+        facebookLoginButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loadingStart(false); // Facebook login pop-up already has a spinner
+                if (config.isFacebookLoginNeedPublishPermissions()) {
+                    ParseFacebookUtils.logInWithPublishPermissionsInBackground(getActivity(),
+                            config.getFacebookLoginPermissions(), facebookLoginCallbackV4);
+                } else {
+                    ParseFacebookUtils.logInWithReadPermissionsInBackground(getActivity(),
+                            config.getFacebookLoginPermissions(), facebookLoginCallbackV4);
+                }
+            }
+        });
     }
 
-    if (facebookLoginButton == null) {
-      debugLog(R.string.com_parse_ui_login_warning_disabled_facebook_login);
-      return false;
-    } else {
-      return true;
-    }
-  }
+    private boolean allowParseLoginAndSignup() {
+        if (!config.isParseLoginEnabled()) {
+            return false;
+        }
 
-  private boolean allowTwitterLogin() {
-    if (!config.isTwitterLoginEnabled()) {
-      return false;
+        if (usernameField == null) {
+            debugLog(R.string.com_parse_ui_login_warning_layout_missing_username_field);
+        }
+        if (passwordField == null) {
+            debugLog(R.string.com_parse_ui_login_warning_layout_missing_password_field);
+        }
+        if (parseLoginButton == null) {
+            debugLog(R.string.com_parse_ui_login_warning_layout_missing_login_button);
+        }
+        if (parseSignupButton == null) {
+            debugLog(R.string.com_parse_ui_login_warning_layout_missing_signup_button);
+        }
+        if (parseLoginHelpButton == null) {
+            debugLog(R.string.com_parse_ui_login_warning_layout_missing_login_help_button);
+        }
+
+        boolean result = (usernameField != null) && (passwordField != null)
+                && (parseLoginButton != null) && (parseSignupButton != null)
+                && (parseLoginHelpButton != null);
+
+        if (!result) {
+            debugLog(R.string.com_parse_ui_login_warning_disabled_username_password_login);
+        }
+        return result;
     }
 
-    if (twitterLoginButton == null) {
-      debugLog(R.string.com_parse_ui_login_warning_disabled_twitter_login);
-      return false;
-    } else {
-      return true;
-    }
-  }
+    private boolean allowFacebookLogin() {
+        if (!config.isFacebookLoginEnabled()) {
+            return false;
+        }
 
-  private void loginSuccess() {
-    onLoginSuccessListener.onLoginSuccess();
-      Log.d("login", "success");
-  }
+        if (facebookLoginButton == null) {
+            debugLog(R.string.com_parse_ui_login_warning_disabled_facebook_login);
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private boolean allowTwitterLogin() {
+        if (!config.isTwitterLoginEnabled()) {
+            return false;
+        }
+
+        if (twitterLoginButton == null) {
+            debugLog(R.string.com_parse_ui_login_warning_disabled_twitter_login);
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private void loginSuccess() {
+        onLoginSuccessListener.onLoginSuccess();
+        Log.d("login", "success");
+    }
 
 }
