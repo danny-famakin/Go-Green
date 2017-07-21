@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="/Users/melissaperez/Go-Green/ParseUI-Login/src/main/assets"/><source path="/Users/melissaperez/Go-Green/ParseUI-Login/build/generated/assets/shaders/release"/></dataSet><dataSet config="release"><source path="/Users/melissaperez/Go-Green/ParseUI-Login/src/release/assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="/Users/famakindaniel7/Go-Green/ParseUI-Login/src/main/assets"/><source path="/Users/famakindaniel7/Go-Green/ParseUI-Login/build/generated/assets/shaders/release"/></dataSet><dataSet config="release"><source path="/Users/famakindaniel7/Go-Green/ParseUI-Login/src/release/assets"/></dataSet></merger>

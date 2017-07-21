@@ -57,16 +57,8 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
-        PagerAdapter = new TabPagerAdapter(getSupportFragmentManager(), this);
 
-        // Set up the ViewPager with the sections adapter.
-        ViewPager = (ViewPager) findViewById(R.id.container);
-        ViewPager.setAdapter(PagerAdapter);
-
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
-        tabLayout.setupWithViewPager(ViewPager);
+        ParseUser.logOut();
 
         // check if necessary to display login screen
         currentUser = ParseUser.getCurrentUser();
@@ -80,7 +72,6 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
             Log.d("loggedin", "false");
             ParseLoginBuilder builder = new ParseLoginBuilder(FeedActivity.this);
             startActivityForResult(builder.build(), 0);
-            getFriends();
 
         }
 
@@ -185,6 +176,7 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
                             }
                             user.put("friends", friends);
                             user.saveInBackground();
+                            loadFeed();
                             } catch(JSONException e){
                                 e.printStackTrace();
                             }
@@ -244,6 +236,8 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (requestCode == 0 && resultCode == android.app.Activity.RESULT_OK) {
             loadData();
+            getFriends();
+
         } else {
 
         }
@@ -253,5 +247,18 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
         currentUser = ParseUser.getCurrentUser();
         Log.d("User", "@" + currentUser.getString("profileImgUrl"));
         Log.d("User", "@" + currentUser.getString("name"));
+    }
+
+    public void loadFeed() {
+        // Create the adapter that will return a fragment for each of the three
+        // primary sections of the activity.
+        PagerAdapter = new TabPagerAdapter(getSupportFragmentManager(), this);
+
+        // Set up the ViewPager with the sections adapter.
+        ViewPager = (ViewPager) findViewById(R.id.container);
+        ViewPager.setAdapter(PagerAdapter);
+
+        TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
+        tabLayout.setupWithViewPager(ViewPager);
     }
 }

@@ -81,7 +81,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
                     SpannableString str = new SpannableString(name + body);
                     str.setSpan(new StyleSpan(Typeface.BOLD), 0, name.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                     holder.tvAction.setText(str);
-                } else {
+                } else if (e != null) {
                     Log.d("action", "Error: " + e.getMessage());
                 }
             }
