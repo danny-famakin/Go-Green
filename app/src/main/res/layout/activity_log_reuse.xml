@@ -21,7 +21,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
     <TextView
-        android:id="@+id/tvPoints"
+        android:id="@+id/tvPointsCaption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/tvTitle"
@@ -34,8 +34,8 @@
         android:id="@+id/tvBags"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tvPoints"
-        android:layout_alignStart="@+id/tvPoints"
+        android:layout_alignLeft="@+id/tvPointsCaption"
+        android:layout_alignStart="@+id/tvPointsCaption"
         android:layout_below="@+id/tvTitle"
         android:layout_marginTop="56dp"
         android:text="Bags Reused"
