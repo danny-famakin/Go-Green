@@ -12,6 +12,7 @@ import android.widget.EditText;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.codepath.gogreen.models.Action;
+import com.parse.ParseUser;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -23,7 +24,7 @@ public class ModalFragment extends Fragment {
     Context context;
     MaterialDialog modal;
     public OnItemSelectedListener listener;
-    public int USER_ID = 0;
+    public String USER_ID = ParseUser.getCurrentUser().getString("fbId");
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

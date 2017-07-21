@@ -50,5 +50,15 @@
         android:layout_below="@+id/tvName"
         android:text="Join Date" />
 
+    <Button
+        android:id="@+id/btnLogOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/ivProfilePic"
+        android:layout_alignStart="@+id/ivProfilePic"
+        android:layout_below="@+id/ivProfilePic"
+        android:layout_marginTop="86dp"
+        android:text="Log Out" />
+
 
 </RelativeLayout>

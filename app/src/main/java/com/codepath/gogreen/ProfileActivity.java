@@ -6,12 +6,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.facebook.AccessToken;
 import com.parse.ParseUser;
 import com.parse.ui.ParseLoginBuilder;
 
@@ -34,55 +34,31 @@ public class ProfileActivity extends AppCompatActivity {
         ivProfilePic = (ImageView) findViewById(R.id.ivProfilePic);
         tvName = (TextView) findViewById(R.id.tvName);
 
-        if(!isLoggedIn()){
-            Log.d("loggedin", "false");
-            ParseLoginBuilder builder = new ParseLoginBuilder(ProfileActivity.this);
-            startActivityForResult(builder.build(), 0);
-        }
-
-        else {
+        currentUser = ParseUser.getCurrentUser();
+        if((currentUser != null)){
             Log.d("loggedin", "true");
             loadData();
         }
 
+        else {
+            Log.d("loggedin", "false");
+            ParseLoginBuilder builder = new ParseLoginBuilder(ProfileActivity.this);
+            startActivityForResult(builder.build(), 0);
 
-
-    }
-
-    public boolean isLoggedIn() {
-        AccessToken accessToken = AccessToken.getCurrentAccessToken();
-        return accessToken != null;
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-
-        currentUser = ParseUser.getCurrentUser();
-        if (currentUser != null) {
-//            showProfileLoggedIn();
-        } else {
-//            showProfileLoggedOut();
         }
-    }
 
+        Button btnLogOut = (Button) findViewById(R.id.btnLogOut);
+        btnLogOut.setOnClickListener(new View.OnClickListener() {
 
-    private void showProfileLoggedIn() {
-        Toast.makeText(this, "Logged in", Toast.LENGTH_SHORT).show();
-        Log.d("profile", currentUser.getString("name"));
-        Log.d("profile", currentUser.toString());
+            @Override
+            public void onClick(View v) {
+                ParseUser.logOut();
+                Log.d("feedactivity", "logged out");
+                Intent i = new Intent(context, FeedActivity.class);
+                context.startActivity(i);
 
-//        titleTextView.setText(R.string.profile_title_logged_in);
-//        emailTextView.setText(currentUser.getEmail());
-//        String fullName = currentUser.getString("name");
-//        if (fullName != null) {
-//            nameTextView.setText(fullName);
-//        }
-//        loginOrLogoutButton.setText(R.string.profile_logout_button_label);
-    }
-
-    private void showProfileLoggedOut() {
-        Log.d("profile", "logged out");
+            }
+        });
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {

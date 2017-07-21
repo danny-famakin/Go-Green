@@ -8,7 +8,7 @@ import com.parse.ParseObject;
  */
 @ParseClassName("Action")
 public class Action extends ParseObject {
-    public long uid;
+    public String uid;
     public String actionType;
     public String subType;
     public double magnitude;
@@ -24,13 +24,13 @@ public class Action extends ParseObject {
         this.put("subType", subType);
     }
 
-    public long getUid() {
-        return this.getLong("uid");
+    public String getUid() {
+        return this.getString("uid");
 
 //        return uid;
     }
 
-    public void setUid(long uid) {
+    public void setUid(String uid) {
         this.uid = uid;
         this.put("uid", uid);
     }

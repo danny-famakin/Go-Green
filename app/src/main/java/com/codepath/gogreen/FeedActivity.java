@@ -27,13 +27,17 @@ import com.codepath.gogreen.fragments.WaterFragment;
 import com.codepath.gogreen.models.Action;
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
 import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
+import com.parse.ParseUser;
+import com.parse.ui.ParseLoginBuilder;
 
 
 public class FeedActivity extends AppCompatActivity implements ModalFragment.OnItemSelectedListener {
 
     TabPagerAdapter PagerAdapter;
     ViewPager ViewPager;
-    Context context;
+    public Context context;
+    ParseUser currentUser;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +58,19 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(ViewPager);
 
+        // check if necessary to display login screen
+        currentUser = ParseUser.getCurrentUser();
+        if((currentUser != null)){
+            Log.d("loggedin", "true");
+            loadData();
+        }
+
+        else {
+            Log.d("loggedin", "false");
+            ParseLoginBuilder builder = new ParseLoginBuilder(FeedActivity.this);
+            startActivityForResult(builder.build(), 0);
+
+        }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -177,5 +194,19 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
         PagerAdapter.feedFragment.addAction(action);
         Log.d("FeedActivity", String.valueOf(action.getMagnitude()) + " points awarded for " + action.getActionType());
 
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        if (requestCode == 0 && resultCode == android.app.Activity.RESULT_OK) {
+            loadData();
+        } else {
+
+        }
+    }
+
+    public void loadData() {
+        currentUser = ParseUser.getCurrentUser();
+        Log.d("User", "@" + currentUser.getString("profileImgUrl"));
+        Log.d("User", "@" + currentUser.getString("name"));
     }
 }

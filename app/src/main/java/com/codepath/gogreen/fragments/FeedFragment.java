@@ -16,6 +16,7 @@ import com.codepath.gogreen.models.Action;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
+import com.parse.ParseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,16 +29,25 @@ public class FeedFragment extends Fragment {
     ArrayList<Action> actions;
     RecyclerView rvActions;
     ActionAdapter actionAdapter;
+    ParseUser currentUser;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        currentUser = ParseUser.getCurrentUser();
+        final String userId = currentUser.getString("fbId");
+
         ParseQuery<Action> query = ParseQuery.getQuery("Action");
         query.findInBackground(new FindCallback<Action>() {
             public void done(List<Action> actionList, ParseException e) {
                 if (e == null) {
-                    addItems(actionList);
+                    for (int i = 0; i < actionList.size(); i++) {
+                        Action action = actionList.get(i);
+                        if (action.getString("uid").equals(userId)) {
+                            addAction(action);
+                        }
+                    }
                 } else {
                     Log.d("action", "Error: " + e.getMessage());
                 }
