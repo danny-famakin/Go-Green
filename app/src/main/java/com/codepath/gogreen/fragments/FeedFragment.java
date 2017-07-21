@@ -18,6 +18,9 @@ import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,9 +40,19 @@ public class FeedFragment extends Fragment {
 
         currentUser = ParseUser.getCurrentUser();
         final String userId = currentUser.getString("fbId");
+        ArrayList<String> friendsList = new ArrayList<String>();
+        JSONArray friends = currentUser.getJSONArray("friends");
+        for (int i = 0; i < friends.length(); i++) {
+            try {
+                friendsList.add(friends.getString(i));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        friendsList.add(userId);
 
         ParseQuery<Action> query = ParseQuery.getQuery("Action");
-        query.whereEqualTo("uid", userId);
+        query.whereContainedIn("uid", friendsList);
         query.findInBackground(new FindCallback<Action>() {
             public void done(List<Action> actionList, ParseException e) {
                 if (e == null) {

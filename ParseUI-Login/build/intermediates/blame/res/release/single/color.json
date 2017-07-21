@@ -8,16 +8,24 @@
         "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/color/abc_tint_seek_thumb.xml"
     },
     {
-        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/abc_btn_colored_text_material.xml",
-        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/color/abc_btn_colored_text_material.xml"
+        "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/abc_secondary_text_material_dark.xml",
+        "source": "/Users/melissaperez/.android/build-cache/ade19dd7df75653b515f79bf8e0026b7d43ea680/output/res/color/abc_secondary_text_material_dark.xml"
     },
     {
-        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/abc_hint_foreground_material_light.xml",
-        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/color/abc_hint_foreground_material_light.xml"
+        "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/abc_primary_text_disable_only_material_dark.xml",
+        "source": "/Users/melissaperez/.android/build-cache/ade19dd7df75653b515f79bf8e0026b7d43ea680/output/res/color/abc_primary_text_disable_only_material_dark.xml"
+    },
+    {
+        "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/abc_primary_text_disable_only_material_light.xml",
+        "source": "/Users/melissaperez/.android/build-cache/ade19dd7df75653b515f79bf8e0026b7d43ea680/output/res/color/abc_primary_text_disable_only_material_light.xml"
     },
     {
         "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/abc_primary_text_material_light.xml",
         "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/color/abc_primary_text_material_light.xml"
+    },
+    {
+        "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/abc_secondary_text_material_light.xml",
+        "source": "/Users/melissaperez/.android/build-cache/ade19dd7df75653b515f79bf8e0026b7d43ea680/output/res/color/abc_secondary_text_material_light.xml"
     },
     {
         "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/com_facebook_send_button_text_color.xml",
@@ -32,8 +40,12 @@
         "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/color/switch_thumb_material_dark.xml"
     },
     {
-        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/abc_tint_edittext.xml",
-        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/color/abc_tint_edittext.xml"
+        "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/abc_btn_colored_borderless_text_material.xml",
+        "source": "/Users/melissaperez/.android/build-cache/ade19dd7df75653b515f79bf8e0026b7d43ea680/output/res/color/abc_btn_colored_borderless_text_material.xml"
+    },
+    {
+        "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/abc_tint_edittext.xml",
+        "source": "/Users/melissaperez/.android/build-cache/ade19dd7df75653b515f79bf8e0026b7d43ea680/output/res/color/abc_tint_edittext.xml"
     },
     {
         "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/abc_primary_text_material_dark.xml",
@@ -48,10 +60,6 @@
         "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/color/abc_tint_btn_checkable.xml"
     },
     {
-        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/abc_secondary_text_material_dark.xml",
-        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/color/abc_secondary_text_material_dark.xml"
-    },
-    {
         "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/abc_btn_colored_borderless_text_material.xml",
         "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/color/abc_btn_colored_borderless_text_material.xml"
     },
@@ -60,20 +68,24 @@
         "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/color/abc_hint_foreground_material_dark.xml"
     },
     {
-        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/switch_thumb_material_light.xml",
-        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/color/switch_thumb_material_light.xml"
+        "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/abc_tint_switch_track.xml",
+        "source": "/Users/melissaperez/.android/build-cache/ade19dd7df75653b515f79bf8e0026b7d43ea680/output/res/color/abc_tint_switch_track.xml"
     },
     {
-        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/com_parse_ui_parse_login_help_button_label_selector.xml",
-        "source": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/src/main/res/color/com_parse_ui_parse_login_help_button_label_selector.xml"
+        "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/com_parse_ui_parse_login_help_button_label_selector.xml",
+        "source": "/Users/melissaperez/Go-Green/ParseUI-Login/src/main/res/color/com_parse_ui_parse_login_help_button_label_selector.xml"
     },
     {
         "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/abc_primary_text_disable_only_material_light.xml",
         "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/color/abc_primary_text_disable_only_material_light.xml"
     },
     {
-        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/abc_secondary_text_material_light.xml",
-        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/color/abc_secondary_text_material_light.xml"
+        "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/com_facebook_button_text_color.xml",
+        "source": "/Users/melissaperez/.android/build-cache/17fe4fe1564696e0bc2f840bde2e7f5e5e2ac7f1/output/res/color/com_facebook_button_text_color.xml"
+    },
+    {
+        "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/abc_tint_spinner.xml",
+        "source": "/Users/melissaperez/.android/build-cache/ade19dd7df75653b515f79bf8e0026b7d43ea680/output/res/color/abc_tint_spinner.xml"
     },
     {
         "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/abc_tint_switch_track.xml",
@@ -86,6 +98,86 @@
     {
         "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/abc_primary_text_disable_only_material_dark.xml",
         "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/color/abc_primary_text_disable_only_material_dark.xml"
+    },
+    {
+        "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/abc_hint_foreground_material_light.xml",
+        "source": "/Users/melissaperez/.android/build-cache/ade19dd7df75653b515f79bf8e0026b7d43ea680/output/res/color/abc_hint_foreground_material_light.xml"
+    },
+    {
+        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/abc_btn_colored_text_material.xml",
+        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/color/abc_btn_colored_text_material.xml"
+    },
+    {
+        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/abc_hint_foreground_material_light.xml",
+        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/color/abc_hint_foreground_material_light.xml"
+    },
+    {
+        "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/abc_search_url_text.xml",
+        "source": "/Users/melissaperez/.android/build-cache/ade19dd7df75653b515f79bf8e0026b7d43ea680/output/res/color/abc_search_url_text.xml"
+    },
+    {
+        "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/abc_tint_seek_thumb.xml",
+        "source": "/Users/melissaperez/.android/build-cache/ade19dd7df75653b515f79bf8e0026b7d43ea680/output/res/color/abc_tint_seek_thumb.xml"
+    },
+    {
+        "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/com_facebook_send_button_text_color.xml",
+        "source": "/Users/melissaperez/.android/build-cache/17fe4fe1564696e0bc2f840bde2e7f5e5e2ac7f1/output/res/color/com_facebook_send_button_text_color.xml"
+    },
+    {
+        "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/abc_tint_default.xml",
+        "source": "/Users/melissaperez/.android/build-cache/ade19dd7df75653b515f79bf8e0026b7d43ea680/output/res/color/abc_tint_default.xml"
+    },
+    {
+        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/abc_tint_edittext.xml",
+        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/color/abc_tint_edittext.xml"
+    },
+    {
+        "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/switch_thumb_material_light.xml",
+        "source": "/Users/melissaperez/.android/build-cache/ade19dd7df75653b515f79bf8e0026b7d43ea680/output/res/color/switch_thumb_material_light.xml"
+    },
+    {
+        "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/abc_btn_colored_text_material.xml",
+        "source": "/Users/melissaperez/.android/build-cache/ade19dd7df75653b515f79bf8e0026b7d43ea680/output/res/color/abc_btn_colored_text_material.xml"
+    },
+    {
+        "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/abc_hint_foreground_material_dark.xml",
+        "source": "/Users/melissaperez/.android/build-cache/ade19dd7df75653b515f79bf8e0026b7d43ea680/output/res/color/abc_hint_foreground_material_dark.xml"
+    },
+    {
+        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/abc_secondary_text_material_dark.xml",
+        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/color/abc_secondary_text_material_dark.xml"
+    },
+    {
+        "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/abc_primary_text_material_light.xml",
+        "source": "/Users/melissaperez/.android/build-cache/ade19dd7df75653b515f79bf8e0026b7d43ea680/output/res/color/abc_primary_text_material_light.xml"
+    },
+    {
+        "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/abc_primary_text_material_dark.xml",
+        "source": "/Users/melissaperez/.android/build-cache/ade19dd7df75653b515f79bf8e0026b7d43ea680/output/res/color/abc_primary_text_material_dark.xml"
+    },
+    {
+        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/switch_thumb_material_light.xml",
+        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/color/switch_thumb_material_light.xml"
+    },
+    {
+        "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/abc_tint_btn_checkable.xml",
+        "source": "/Users/melissaperez/.android/build-cache/ade19dd7df75653b515f79bf8e0026b7d43ea680/output/res/color/abc_tint_btn_checkable.xml"
+    },
+    {
+        "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/switch_thumb_material_dark.xml",
+        "source": "/Users/melissaperez/.android/build-cache/ade19dd7df75653b515f79bf8e0026b7d43ea680/output/res/color/switch_thumb_material_dark.xml"
+    },
+    {
+        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/com_parse_ui_parse_login_help_button_label_selector.xml",
+        "source": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/src/main/res/color/com_parse_ui_parse_login_help_button_label_selector.xml"
+    },
+    {
+        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/abc_secondary_text_material_light.xml",
+        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/color/abc_secondary_text_material_light.xml"
+    },
+    {
+        "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/abc_tint_switch_thumb.xml",
+        "source": "/Users/melissaperez/.android/build-cache/ade19dd7df75653b515f79bf8e0026b7d43ea680/output/res/color/abc_tint_switch_thumb.xml"
     },
     {
         "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/color/abc_tint_spinner.xml",

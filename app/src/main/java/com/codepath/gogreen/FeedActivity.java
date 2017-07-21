@@ -25,10 +25,20 @@ import com.codepath.gogreen.fragments.TabPagerAdapter;
 import com.codepath.gogreen.fragments.TransitFragment;
 import com.codepath.gogreen.fragments.WaterFragment;
 import com.codepath.gogreen.models.Action;
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
 import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 import com.parse.ParseUser;
 import com.parse.ui.ParseLoginBuilder;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 
 public class FeedActivity extends AppCompatActivity implements ModalFragment.OnItemSelectedListener {
@@ -63,14 +73,18 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
         if((currentUser != null)){
             Log.d("loggedin", "true");
             loadData();
+            getFriends();
         }
 
         else {
             Log.d("loggedin", "false");
             ParseLoginBuilder builder = new ParseLoginBuilder(FeedActivity.this);
             startActivityForResult(builder.build(), 0);
+            getFriends();
 
         }
+
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -149,6 +163,37 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
             }
         });
 
+    }
+
+    public void getFriends() {
+        new GraphRequest(
+                AccessToken.getCurrentAccessToken(),
+                "/me/friends",
+                null,
+                HttpMethod.GET,
+                new GraphRequest.Callback() {
+                    public void onCompleted(GraphResponse response) {
+            /* handle the result */
+                        ParseUser user = ParseUser.getCurrentUser();
+                        try {
+                            ArrayList<String> friends = new ArrayList<String>();
+                            JSONArray jsonArrayFriends = response.getJSONObject().getJSONArray("data");
+                            for (int i = 0; i < jsonArrayFriends.length(); i++) {
+                                JSONObject friendlistObject = jsonArrayFriends.getJSONObject(i);
+                                String friendListID = friendlistObject.getString("id");
+                                friends.add(friendListID);
+                            }
+                            user.put("friends", friends);
+                            user.saveInBackground();
+                            } catch(JSONException e){
+                                e.printStackTrace();
+                            }
+
+
+
+                    }
+                }
+        ).executeAsync();
     }
 
     public SubActionButton createSubActionButton(int iconId) {

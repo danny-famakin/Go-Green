@@ -55,9 +55,9 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
 
 
         Date timeStamp = (action.getCreatedAt());
-//        if (timeStamp == null) {
-//            timeStamp = Date
-//        }
+        if (timeStamp == null) {
+            timeStamp = new Date();
+        }
         holder.tvTimeStamp.setText(shortenTimeStamp(getRelativeTimeAgo(timeStamp)));
         holder.tvPoints.setText(String.format("%.1f", action.getDouble("points")));
 
