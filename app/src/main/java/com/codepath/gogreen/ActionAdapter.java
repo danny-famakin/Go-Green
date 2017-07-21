@@ -55,9 +55,10 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
 
 
         Date timeStamp = (action.getCreatedAt());
-//        if (timeStamp == null) {
-//            timeStamp = Date
-//        }
+        if (timeStamp == null) {
+            timeStamp = new Date();
+        }
+
         holder.tvTimeStamp.setText(shortenTimeStamp(getRelativeTimeAgo(timeStamp)));
         holder.tvPoints.setText(String.format("%.1f", action.getDouble("points")));
 
@@ -110,8 +111,15 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
 
     public String getRelativeTimeAgo(Date date) {
         long dateMillis = date.getTime();
+        long currentMillis = new Date().getTime();
+
+        // ensure current time > date time
+        if (currentMillis < dateMillis) {
+            currentMillis = dateMillis;
+        }
+
         String relativeDate = DateUtils.getRelativeTimeSpanString(dateMillis,
-                    System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS).toString();
+                    currentMillis, DateUtils.SECOND_IN_MILLIS).toString();
 
         return relativeDate;
     }

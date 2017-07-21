@@ -2,7 +2,6 @@ package com.codepath.gogreen.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -25,7 +24,7 @@ import java.util.List;
  * Created by anyazhang on 7/13/17.
  */
 
-public class FeedFragment extends Fragment {
+public class FeedFragment extends FloatingMenuFragment {
     ArrayList<Action> actions;
     RecyclerView rvActions;
     ActionAdapter actionAdapter;
