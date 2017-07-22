@@ -37,6 +37,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
     private List<Action> mActions;
     Context context;
 
+
     public ActionAdapter(List<Action> actions) {
         mActions = actions;
     }
@@ -51,7 +52,6 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
     @Override
     public void onBindViewHolder(final ActionAdapter.ViewHolder holder, int position) {
         final Action action = mActions.get(position);
-
 
 
         Date timeStamp = (action.getCreatedAt());
@@ -70,10 +70,10 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
                     // load propic
                     String imgUrl = userList.get(0).getString("profileImgUrl");
                     Glide.with(context)
-                        .load(imgUrl)
-                        .placeholder(R.drawable.ic_placeholder)
-                        .bitmapTransform(new CropCircleTransformation(context))
-                        .into(holder.ivProfilePic);
+                            .load(imgUrl)
+                            .placeholder(R.drawable.ic_placeholder)
+                            .bitmapTransform(new CropCircleTransformation(context))
+                            .into(holder.ivProfilePic);
 
                     // load action body: bold name, compose rest of body using function below
                     String name = userList.get(0).getString("name");
@@ -111,7 +111,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
     public String getRelativeTimeAgo(Date date) {
         long dateMillis = date.getTime();
         String relativeDate = DateUtils.getRelativeTimeSpanString(dateMillis,
-                    System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS).toString();
+                System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS).toString();
 
         return relativeDate;
     }
@@ -140,14 +140,11 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
 
                 if (subType.equals("bus") || subType.equals("subway") || subType.equals("train")) {
                     body = "took the " + subType + " for";
-                }
-                else if (subType.equals("walk") || subType.equals("bike")) {
+                } else if (subType.equals("walk") || subType.equals("bike")) {
                     body = checkPastTense(subType);
-                }
-                else if (subType.equals("carpool")) {
+                } else if (subType.equals("carpool")) {
                     body = "carpooled for";
-                }
-                else {
+                } else {
                     Log.d("transit", "subtype none of the above");
                 }
                 body += " " + checkUnits(action.getMagnitude(), context.getResources().getString(R.string.distance_units), false);
@@ -172,16 +169,13 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
         if (magnitude == 1.) {
             if (castToInt) {
                 return (int) magnitude + " " + units;
-            }
-            else {
+            } else {
                 return String.format("%.1f", magnitude) + " " + units;
             }
-        }
-        else {
+        } else {
             if (castToInt) {
                 return (int) magnitude + " " + units + "s";
-            }
-            else {
+            } else {
                 return String.format("%.1f", magnitude) + " " + units + "s";
             }
         }
@@ -191,9 +185,14 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
     public String checkPastTense(String word) {
         if (word.charAt(word.length() - 1) == 'e') {
             return word + 'd';
-        }
-        else {
+        } else {
             return word + "ed";
         }
+    }
+
+    public void clear() {
+        int size = this.mActions.size();
+        this.mActions.clear();
+        notifyItemRangeRemoved(0, size);
     }
 }

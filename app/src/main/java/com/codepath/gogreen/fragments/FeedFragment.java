@@ -3,6 +3,7 @@ package com.codepath.gogreen.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.codepath.gogreen.ActionAdapter;
+import com.codepath.gogreen.DividerItemDecoration;
 import com.codepath.gogreen.R;
 import com.codepath.gogreen.models.Action;
 import com.parse.FindCallback;
@@ -33,6 +35,7 @@ public class FeedFragment extends Fragment {
     RecyclerView rvActions;
     ActionAdapter actionAdapter;
     ParseUser currentUser;
+    private SwipeRefreshLayout swipeContainer;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,9 +77,24 @@ public class FeedFragment extends Fragment {
         actionAdapter = new ActionAdapter(actions);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         rvActions.setLayoutManager(linearLayoutManager);
+        rvActions.addItemDecoration(new DividerItemDecoration(getContext()));
         // set the adapter
         rvActions.setAdapter(actionAdapter);
 
+        /*swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swiper);
+        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                actionAdapter.clear();
+                addItems(actions);
+                swipeContainer.setRefreshing(false);
+            }
+        });
+        // Configure the refreshing colors
+        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);*/
         return v;
     }
 
@@ -89,7 +107,6 @@ public class FeedFragment extends Fragment {
             actions.add(0, action);
             actionAdapter.notifyItemInserted(0);
             Log.d("addItems", String.valueOf(actions.size()) + ": " + action.get("actionType"));
-
         }
     }
 
@@ -98,6 +115,4 @@ public class FeedFragment extends Fragment {
         actionAdapter.notifyItemInserted(0);
         rvActions.scrollToPosition(0);
     }
-
-
 }
