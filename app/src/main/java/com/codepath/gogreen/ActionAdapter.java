@@ -58,7 +58,6 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
         if (timeStamp == null) {
             timeStamp = new Date();
         }
-
         holder.tvTimeStamp.setText(shortenTimeStamp(getRelativeTimeAgo(timeStamp)));
         holder.tvPoints.setText(String.format("%.1f", action.getDouble("points")));
 
@@ -82,7 +81,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
                     SpannableString str = new SpannableString(name + body);
                     str.setSpan(new StyleSpan(Typeface.BOLD), 0, name.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                     holder.tvAction.setText(str);
-                } else {
+                } else if (e != null) {
                     Log.d("action", "Error: " + e.getMessage());
                 }
             }
@@ -113,7 +112,6 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
         long dateMillis = date.getTime();
         long currentMillis = new Date().getTime();
 
-        // ensure current time > date time
         if (currentMillis < dateMillis) {
             currentMillis = dateMillis;
         }

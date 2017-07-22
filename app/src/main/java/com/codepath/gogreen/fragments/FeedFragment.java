@@ -30,24 +30,10 @@ public class FeedFragment extends FloatingMenuFragment {
     ActionAdapter actionAdapter;
     ParseUser currentUser;
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        currentUser = ParseUser.getCurrentUser();
-        final String userId = currentUser.getString("fbId");
-
-        ParseQuery<Action> query = ParseQuery.getQuery("Action");
-        query.whereEqualTo("uid", userId);
-        query.findInBackground(new FindCallback<Action>() {
-            public void done(List<Action> actionList, ParseException e) {
-                if (e == null) {
-                    addItems(actionList);
-                } else {
-                    Log.d("action", "Error: " + e.getMessage());
-                }
-            }
-        });
 
     }
 
@@ -64,6 +50,22 @@ public class FeedFragment extends FloatingMenuFragment {
         rvActions.setAdapter(actionAdapter);
 
         return v;
+    }
+
+    public void onFriendsLoaded(ArrayList<String> friendIdList) {
+        Log.d("friends", "onloaded");
+        Log.d("friends", friendIdList.get(0));
+        ParseQuery<Action> query = ParseQuery.getQuery("Action");
+        query.whereContainedIn("uid", friendIdList);
+        query.findInBackground(new FindCallback<Action>() {
+            public void done(List<Action> actionList, ParseException e) {
+                if (e == null) {
+                    addItems(actionList);
+                } else {
+                    Log.d("action", "Error: " + e.getMessage());
+                }
+            }
+        });
     }
 
     public void addItems(List<Action> actionList) {
@@ -84,4 +86,6 @@ public class FeedFragment extends FloatingMenuFragment {
         actionAdapter.notifyItemInserted(0);
         rvActions.scrollToPosition(0);
     }
+
+
 }

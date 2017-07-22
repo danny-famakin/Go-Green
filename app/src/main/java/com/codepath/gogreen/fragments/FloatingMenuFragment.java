@@ -17,6 +17,12 @@ import com.bumptech.glide.Glide;
 import com.codepath.gogreen.R;
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
 import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
+import com.parse.ParseUser;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.ArrayList;
 
 /**
  * Created by anyazhang on 7/21/17.
@@ -26,7 +32,8 @@ public class FloatingMenuFragment extends Fragment {
     LayoutInflater inflater;
     View v;
     Context context;
-
+    public ArrayList<String> friendIdList;
+    ParseUser currentUser;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,6 +52,22 @@ public class FloatingMenuFragment extends Fragment {
             }
         });
 
+        currentUser = ParseUser.getCurrentUser();
+        final String userId = currentUser.getString("fbId");
+        ArrayList<String> friendsList = new ArrayList<String>();
+        JSONArray friends = currentUser.getJSONArray("friends");
+        for (int i = 0; i < friends.length(); i++) {
+            try {
+                friendsList.add(friends.getString(i));
+                Log.d("friends add", friendsList.get(i));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        friendsList.add(userId);
+        Log.d("friends", "loaded");
+        Log.d("friends", friendsList.get(0));
+        onFriendsLoaded(friendsList);
 
 // repeat many times:
 
@@ -112,6 +135,7 @@ public class FloatingMenuFragment extends Fragment {
             }
         });
 
+
     }
 
     public SubActionButton createSubActionButton(int iconId) {
@@ -125,5 +149,10 @@ public class FloatingMenuFragment extends Fragment {
         //icon.setImageResource(R.drawable.ic_add_circle_black_24dp);
         return itemBuilder.setContentView(icon).setLayoutParams(params).build();
     }
+
+    public void onFriendsLoaded(ArrayList<String> friendsList) {
+
+    }
+
 
 }
