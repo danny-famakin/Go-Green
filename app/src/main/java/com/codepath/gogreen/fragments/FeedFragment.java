@@ -2,6 +2,7 @@ package com.codepath.gogreen.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,9 +21,6 @@ import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,41 +28,17 @@ import java.util.List;
  * Created by anyazhang on 7/13/17.
  */
 
-public class FeedFragment extends Fragment {
+public class FeedFragment extends FloatingMenuFragment {
     ArrayList<Action> actions;
     RecyclerView rvActions;
     ActionAdapter actionAdapter;
     ParseUser currentUser;
     private SwipeRefreshLayout swipeContainer;
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        currentUser = ParseUser.getCurrentUser();
-        final String userId = currentUser.getString("fbId");
-        ArrayList<String> friendsList = new ArrayList<String>();
-        JSONArray friends = currentUser.getJSONArray("friends");
-        for (int i = 0; i < friends.length(); i++) {
-            try {
-                friendsList.add(friends.getString(i));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        friendsList.add(userId);
-
-        ParseQuery<Action> query = ParseQuery.getQuery("Action");
-        query.whereContainedIn("uid", friendsList);
-        query.findInBackground(new FindCallback<Action>() {
-            public void done(List<Action> actionList, ParseException e) {
-                if (e == null) {
-                    addItems(actionList);
-                } else {
-                    Log.d("action", "Error: " + e.getMessage());
-                }
-            }
-        });
 
     }
 
@@ -96,6 +70,22 @@ public class FeedFragment extends Fragment {
                 android.R.color.holo_orange_light,
                 android.R.color.holo_red_light);*/
         return v;
+    }
+
+    public void onFriendsLoaded(ArrayList<String> friendIdList) {
+        Log.d("friends", "onloaded");
+        Log.d("friends", friendIdList.get(0));
+        ParseQuery<Action> query = ParseQuery.getQuery("Action");
+        query.whereContainedIn("uid", friendIdList);
+        query.findInBackground(new FindCallback<Action>() {
+            public void done(List<Action> actionList, ParseException e) {
+                if (e == null) {
+                    addItems(actionList);
+                } else {
+                    Log.d("action", "Error: " + e.getMessage());
+                }
+            }
+        });
     }
 
     public void addItems(List<Action> actionList) {
