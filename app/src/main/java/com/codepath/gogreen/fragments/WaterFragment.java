@@ -61,7 +61,6 @@ public class WaterFragment extends ModalFragment {
         inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         v = inflater.inflate(R.layout.activity_log_water, null);
 
-     //   etTime = (EditText) v.findViewById(R.id.etTime);
         showering = true;
         tvTimer = (TextView) v.findViewById(R.id.tvTimer);
         btStartPause = (Button) v.findViewById(R.id.btStartPause);
