@@ -60,9 +60,9 @@
 
         <ImageView
             android:id="@+id/ivLeaf"
-            android:layout_width="25dp"
+            android:layout_width="20dp"
             android:layout_height="match_parent"
             android:layout_marginLeft="4dp"
-            app:srcCompat="@drawable/ic_leaf2" />
+            app:srcCompat="@drawable/ic_leaf4" />
     </LinearLayout>
 </RelativeLayout>
