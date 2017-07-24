@@ -286,6 +286,7 @@ public class ParseLoginFragment extends ParseLoginFragmentBase {
                                     parseUser.put("name", name);
                                     parseUser.put("profileImgUrl", profileImgUrl);
                                     parseUser.put("fbId", id);
+                                    parseUser.put("totalPoints", 0);
 
                                     parseUser.saveInBackground();
 

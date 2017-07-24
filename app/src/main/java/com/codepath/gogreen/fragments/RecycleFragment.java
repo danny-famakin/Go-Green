@@ -16,8 +16,13 @@ import android.widget.Toast;
 
 import com.codepath.gogreen.R;
 import com.codepath.gogreen.models.Action;
+import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
 import com.parse.SaveCallback;
+
+import java.util.List;
 
 import static com.codepath.gogreen.R.array.materials;
 
@@ -31,6 +36,7 @@ public class RecycleFragment extends ModalFragment {
     LayoutInflater inflater;
     View view;
     double pointValues[] = {1,1};
+    double newPoints;
 
     public static RecycleFragment newInstance() {
         Bundle args = new Bundle();
@@ -82,6 +88,7 @@ public class RecycleFragment extends ModalFragment {
                     updateNumber(1);
                     break;
             }
+            updatePoints();
             modal.dismiss();
         }else{
         }
@@ -102,7 +109,7 @@ public class RecycleFragment extends ModalFragment {
 
         // update local copies of data
         materials[index] += newMaterials;
-        double newPoints = pointValues[index] * newMaterials;
+        newPoints = pointValues[index] * newMaterials;
         points += newPoints;
 
         // push changes
@@ -131,5 +138,25 @@ public class RecycleFragment extends ModalFragment {
             }
         });
 
+    }
+
+    private void updatePoints() {
+        final ParseUser currentUser = ParseUser.getCurrentUser();
+
+        ParseQuery<ParseUser> query = ParseQuery.getQuery("_User");
+        query.whereEqualTo("fbId", currentUser.get("fbId"));
+        query.findInBackground(new FindCallback<ParseUser>() {
+            public void done(List<ParseUser> userList, ParseException e) {
+                if (e == null && userList.size() > 0) {
+                    double points = userList.get(0).getInt("totalPoints");
+                    points += newPoints;
+                    currentUser.put("totalPoints", points);
+                    currentUser.saveInBackground();
+                    Log.d("pointssssssssssss", String.valueOf(points));
+                } else if (e != null) {
+                    Log.d("points", "Error: " + e.getMessage());
+                }
+            }
+        });
     }
 }

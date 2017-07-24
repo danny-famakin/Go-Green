@@ -34,7 +34,7 @@ public class ProfileActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         context = this;
         ParseUser currentUser = ParseUser.getCurrentUser();
-        String email = currentUser.getEmail();
+       // String email = currentUser.getEmail();
        // currentUser = ParseUser.getCurrentUser();
         //String imageURL = currentUser.getProfileImgUrl();
 

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -11,8 +12,13 @@ import android.widget.Toast;
 
 import com.codepath.gogreen.R;
 import com.codepath.gogreen.models.Action;
+import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
 import com.parse.SaveCallback;
+
+import java.util.List;
 
 /**
  * Created by melissaperez on 7/14/17.
@@ -25,6 +31,7 @@ public class ReuseFragment extends ModalFragment {
     View v;
     int total;
     int totalBagPoints;
+    int newPoints;
     SharedPreferences reuse;
 
 
@@ -57,7 +64,7 @@ public class ReuseFragment extends ModalFragment {
         if(isValid(bags, "Number of bags reused")) {
             int newBags = Integer.valueOf(bags.getText().toString());
             total += newBags;
-            double newPoints = newBags * 10;
+            newPoints = newBags * 10;
             totalBagPoints += newPoints;
             updatePoints();
 
@@ -90,6 +97,24 @@ public class ReuseFragment extends ModalFragment {
     }
 
     private void updatePoints() {
+        final ParseUser currentUser = ParseUser.getCurrentUser();
+
+        ParseQuery<ParseUser> query = ParseQuery.getQuery("_User");
+        query.whereEqualTo("fbId", currentUser.get("fbId"));
+        query.findInBackground(new FindCallback<ParseUser>() {
+            public void done(List<ParseUser> userList, ParseException e) {
+                if (e == null && userList.size() > 0) {
+                    double points = userList.get(0).getInt("totalPoints");
+                    points += newPoints;
+                    currentUser.put("totalPoints", points);
+                    currentUser.saveInBackground();
+                    Log.d("pointssssssssssss", String.valueOf(points));
+                } else if (e != null) {
+                    Log.d("points", "Error: " + e.getMessage());
+                }
+            }
+        });
+
         SharedPreferences reuse = this.getActivity().getSharedPreferences("reuse", 0);
         SharedPreferences.Editor editor = reuse.edit();
         editor.putInt("bagCount",total);
