@@ -28,12 +28,12 @@
         "source": "/Users/melissaperez/Go-Green/ParseUI-Login/src/main/res/drawable/com_parse_ui_parse_login_button_background_selector.xml"
     },
     {
-        "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/drawable/com_facebook_button_send_background.xml",
-        "source": "/Users/famakindaniel7/.android/build-cache/f28418cb5fe742106d0dd3b5c835abb969c54365/output/res/drawable/com_facebook_button_send_background.xml"
-    },
-    {
         "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/drawable/com_facebook_button_background.xml",
         "source": "/Users/anyazhang/.android/build-cache/a8fe0911452bddd7b6ab6e48a1ef2c5aeec4dde9/output/res/drawable/com_facebook_button_background.xml"
+    },
+    {
+        "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/drawable/com_facebook_button_send_background.xml",
+        "source": "/Users/famakindaniel7/.android/build-cache/f28418cb5fe742106d0dd3b5c835abb969c54365/output/res/drawable/com_facebook_button_send_background.xml"
     },
     {
         "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/drawable/messenger_button_blue_bg_selector.xml",

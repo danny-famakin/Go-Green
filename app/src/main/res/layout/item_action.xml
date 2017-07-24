@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent" android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="5dp">
 
     <ImageView
         android:id="@+id/ivProfilePic"
@@ -21,9 +23,9 @@
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
         android:layout_toEndOf="@+id/ivProfilePic"
+        android:layout_toLeftOf="@+id/tvTimeStamp"
         android:layout_toRightOf="@+id/ivProfilePic"
         android:layout_toStartOf="@+id/tvTimeStamp"
-        android:layout_toLeftOf="@+id/tvTimeStamp"
         android:text="TextView" />
 
     <TextView
@@ -42,7 +44,6 @@
         android:id="@+id/tvTimeStamp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""
         android:layout_alignBaseline="@+id/tvAction"
         android:layout_alignBottom="@+id/tvAction"
         android:layout_alignParentRight="true"
@@ -53,8 +54,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/tvPointsCaption"
-        android:layout_toEndOf="@+id/tvPointsCaption"
         android:layout_marginLeft="4dp"
+        android:layout_toEndOf="@+id/tvPointsCaption"
         android:text="0"
         android:textColor="@color/colorPrimary"
         android:textStyle="bold"
