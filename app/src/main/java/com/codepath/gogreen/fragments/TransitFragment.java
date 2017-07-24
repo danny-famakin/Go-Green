@@ -242,9 +242,8 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
                     points += newPoints;
                     currentUser.put("totalPoints", points);
                     currentUser.saveInBackground();
-                    Log.d("pointssssssssssss", String.valueOf(points));
                 } else if (e != null) {
-                    Log.d("points", "Error: " + e.getMessage());
+                    Log.e("points", "Error: " + e.getMessage());
                 }
             }
         });

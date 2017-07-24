@@ -27,12 +27,11 @@ public class LeaderboardFragment extends FloatingMenuFragment {
     ArrayList<ParseUser> users;
     RecyclerView rvUsers;
     UserAdapter userAdapter;
+    ArrayList<String> friendIdList;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
     }
 
     @Nullable
@@ -46,22 +45,31 @@ public class LeaderboardFragment extends FloatingMenuFragment {
         rvUsers.setLayoutManager(linearLayoutManager);
         // set the adapter
         rvUsers.setAdapter(userAdapter);
-
+        friendIdList = loadFriends();
+        update();
         return v;
     }
 
-    @Override
-    public void onFriendsLoaded(ArrayList<String> friendIdList) {
-        Log.d("leaderboard", "loaded");
-        Log.d("leaderboard", String.valueOf(friendIdList.size()));
+
+    public void addItems(List<ParseUser> userList) {
+        for (int i = 0; i < userList.size(); i++) {
+            ParseUser user= userList.get(i);
+            users.add(0, user);
+            userAdapter.notifyItemInserted(0);
+
+        }
+    }
+
+    public void update() {
+//        loadFriends();
         ParseQuery<ParseUser> query = ParseQuery.getQuery("_User");
         query.whereContainedIn("fbId", friendIdList);
         query.orderByAscending("totalPoints");
         query.findInBackground(new FindCallback<ParseUser>() {
             public void done(List<ParseUser> friendUserList, ParseException e) {
                 if (e == null) {
+                    userAdapter.clear();
                     addItems(friendUserList);
-                    Log.d("leaderboard", String.valueOf(friendUserList.size()));
                 } else {
                     Log.d("user", "Error: " + e.getMessage());
                 }
@@ -69,17 +77,28 @@ public class LeaderboardFragment extends FloatingMenuFragment {
         });
     }
 
-    public void addItems(List<ParseUser> userList) {
-        // iterate through JSON array
-        // for each entry, deserialize the JSON object
-        Log.d("addItems", String.valueOf(userList.size()));
-        for (int i = 0; i < userList.size(); i++) {
-            ParseUser user= userList.get(i);
-            users.add(0, user);
-            userAdapter.notifyItemInserted(0);
-            Log.d("addItems", String.valueOf(users.size()) + ": " + user.getString("name"));
+    // https://stackoverflow.com/questions/10024739/how-to-determine-when-fragment-becomes-visible-in-viewpager?rq=1
 
+    @Override
+    public void setUserVisibleHint(boolean visible)
+    {
+        super.setUserVisibleHint(visible);
+        if (visible && isResumed())
+        {
+            //Only manually call onResume if fragment is already visible
+            //Otherwise allow natural fragment lifecycle to call onResume
+            onVisible();
         }
+    }
+
+    public void onVisible()
+    {
+        if (!getUserVisibleHint())
+        {
+            return;
+        }
+        Log.d("leaderboard", "visible");
+        update();
     }
 
 }

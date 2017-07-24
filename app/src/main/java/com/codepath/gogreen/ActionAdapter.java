@@ -63,11 +63,11 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
         holder.tvTimeStamp.setText(shortenTimeStamp(relativeTime));
         holder.tvPoints.setText(String.format("%.1f", action.getDouble("points")));
 
+        // get user associated with action
         ParseQuery<ParseUser> query = ParseQuery.getQuery("_User");
         query.whereEqualTo("fbId", action.getUid());
         query.findInBackground(new FindCallback<ParseUser>() {
             public void done(List<ParseUser> userList, ParseException e) {
-                Log.d("actionListsize", String.valueOf(userList.size()));
                 if (e == null && userList.size() > 0) {
                     // load propic
                     String imgUrl = userList.get(0).getString("profileImgUrl");
@@ -84,7 +84,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
                     str.setSpan(new StyleSpan(Typeface.BOLD), 0, name.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                     holder.tvAction.setText(str);
                 } else if (e != null) {
-                    Log.d("action", "Error: " + e.getMessage());
+                    Log.e("action", "Error: " + e.getMessage());
                 }
             }
         });
@@ -121,7 +121,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
 
         String relativeDate = DateUtils.getRelativeTimeSpanString(dateMillis,
 
-                System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS).toString();
+                currentMillis, DateUtils.SECOND_IN_MILLIS).toString();
 
         return relativeDate;
     }
@@ -130,7 +130,6 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
         String[] splitTime = timestamp.trim().split("\\s+");
         List<String> times = Arrays.asList("second", "seconds", "minute", "minutes", "hour", "hours", "day", "days", "week", "weeks");
         // deal with recent tweets of form "# _ ago"
-        Log.d("splitTime", timestamp);
         if (splitTime.length > 1 && times.contains(splitTime[1])) {
             timestamp = splitTime[0] + splitTime[1].charAt(0);
         }
@@ -150,7 +149,6 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
             case "transit":
                 String vehicle;
                 String subType = action.getSubType();
-                Log.d("transit", subType);
 
                 if (subType.equals("bus") || subType.equals("subway") || subType.equals("train")) {
                     body = "took the " + subType + " for";
@@ -159,7 +157,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
                 } else if (subType.equals("carpool")) {
                     body = "carpooled for";
                 } else {
-                    Log.d("transit", "subtype none of the above");
+                    Log.e("transit", "subtype none of the above");
                 }
                 body += " " + checkUnits(action.getMagnitude(), context.getResources().getString(R.string.distance_units), false);
                 break;

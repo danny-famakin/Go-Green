@@ -63,13 +63,10 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
         // check if necessary to display login screen
         currentUser = ParseUser.getCurrentUser();
         if((currentUser != null)){
-            Log.d("loggedin", "true");
-            loadData();
             getFriends();
         }
 
         else {
-            Log.d("loggedin", "false");
             ParseLoginBuilder builder = new ParseLoginBuilder(FeedActivity.this);
             startActivityForResult(builder.build(), 0);
 
@@ -196,7 +193,6 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
         Glide.with(context)
                 .load(iconId)
                 .into(icon);
-        //icon.setImageResource(R.drawable.ic_add_circle_black_24dp);
         return itemBuilder.setContentView(icon).setLayoutParams(params).build();
     }
 
@@ -230,24 +226,19 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
 
     public void updateFeed(Action action) {
         PagerAdapter.feedFragment.addAction(action);
+
         Log.d("FeedActivity", String.valueOf(action.getMagnitude()) + " points awarded for " + action.getActionType());
+
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (requestCode == 0 && resultCode == android.app.Activity.RESULT_OK) {
-            loadData();
             getFriends();
-
         } else {
 
         }
     }
 
-    public void loadData() {
-        currentUser = ParseUser.getCurrentUser();
-        Log.d("User", "@" + currentUser.getString("profileImgUrl"));
-        Log.d("User", "@" + currentUser.getString("name"));
-    }
 
     public void loadFeed() {
         // Create the adapter that will return a fragment for each of the three
@@ -262,3 +253,4 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
         tabLayout.setupWithViewPager(ViewPager);
     }
 }
+

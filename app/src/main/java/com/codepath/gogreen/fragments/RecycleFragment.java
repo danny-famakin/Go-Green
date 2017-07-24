@@ -57,13 +57,11 @@ public class RecycleFragment extends ModalFragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
                 materialType = parent.getItemAtPosition(pos).toString();
-                Log.d("material", materialType);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
                 materialType = parent.getItemAtPosition(0).toString();
-                Log.d("material", materialType);
             }
         });
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -152,9 +150,8 @@ public class RecycleFragment extends ModalFragment {
                     points += newPoints;
                     currentUser.put("totalPoints", points);
                     currentUser.saveInBackground();
-                    Log.d("pointssssssssssss", String.valueOf(points));
                 } else if (e != null) {
-                    Log.d("points", "Error: " + e.getMessage());
+                    Log.e("points", "Error: " + e.getMessage());
                 }
             }
         });

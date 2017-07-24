@@ -32,7 +32,7 @@ public class FeedFragment extends FloatingMenuFragment {
     ActionAdapter actionAdapter;
     ParseUser currentUser;
     private SwipeRefreshLayout swipeContainer;
-
+    ArrayList<String> friendIdList;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,13 +52,15 @@ public class FeedFragment extends FloatingMenuFragment {
         rvActions.addItemDecoration(new DividerItemDecoration(getContext()));
         // set the adapter
         rvActions.setAdapter(actionAdapter);
+        friendIdList = loadFriends();
+        update();
 
         swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swiper);
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 actionAdapter.clear();
-                //onFriendsLoaded();
+                update();
                 swipeContainer.setRefreshing(false);
             }
         });
@@ -70,9 +72,7 @@ public class FeedFragment extends FloatingMenuFragment {
         return v;
     }
 
-    public void onFriendsLoaded(ArrayList<String> friendIdList) {
-        Log.d("friends", "onloaded");
-        Log.d("friends", friendIdList.get(0));
+    public void update() {
         ParseQuery<Action> query = ParseQuery.getQuery("Action");
         query.whereContainedIn("uid", friendIdList);
         query.findInBackground(new FindCallback<Action>() {
@@ -89,12 +89,10 @@ public class FeedFragment extends FloatingMenuFragment {
     public void addItems(List<Action> actionList) {
         // iterate through JSON array
         // for each entry, deserialize the JSON object
-        Log.d("addItems", String.valueOf(actionList.size()));
         for (int i = 0; i < actionList.size(); i++) {
             Action action = actionList.get(i);
             actions.add(0, action);
             actionAdapter.notifyItemInserted(0);
-            Log.d("addItems", String.valueOf(actions.size()) + ": " + action.get("actionType"));
         }
     }
 

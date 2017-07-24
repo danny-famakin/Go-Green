@@ -19,26 +19,43 @@ public class TabPagerAdapter extends FragmentPagerAdapter {
 
     public TabPagerAdapter(FragmentManager fm, FeedActivity feedActivity){
         super(fm);
-        feedFragment = new FeedFragment();
-        leaderboardFragment = new LeaderboardFragment();
     }
 
     @Override
     public Fragment getItem(int position) {
         if (position == 0){
+            feedFragment = getFeedInstance();
             return feedFragment;
         }else if (position == 1){
+            leaderboardFragment = getBoardInstance();
             return leaderboardFragment;
         } else {
             return null;
         }
     }
 
+    public FeedFragment getFeedInstance() {
+        if (feedFragment == null) {
+            feedFragment = new FeedFragment();
+        }
+        return feedFragment;
+    }
+
+    public LeaderboardFragment getBoardInstance() {
+        if (leaderboardFragment == null) {
+            leaderboardFragment = new LeaderboardFragment();
+        }
+        return leaderboardFragment;
+    }
+
     @Override
     public int getCount() {
         return 2;
     }
+
     public CharSequence getPageTitle (int position) {
         return tabTitles[position];
     }
+
+
 }

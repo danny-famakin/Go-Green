@@ -104,8 +104,6 @@ public class WaterFragment extends ModalFragment {
                 else {
                     timeBuff += millisecond;
                     v.removeCallbacks(runnable);
-                    Log.d("minutes", String.valueOf(minutes));
-                    Log.d("seconds", String.valueOf(seconds));
                     showering = true;
                     btStartPause.setText("Resume");
                     btStartPause.setTextColor(getActivity().getResources().getColor(R.color.colorPrimary));
@@ -175,7 +173,7 @@ public class WaterFragment extends ModalFragment {
 
         if (newTime < SHOWER_BASELINE) {
             newPoints = 2 * (SHOWER_BASELINE - newTime);
-            Log.d("new points", String.valueOf(newPoints));}
+        }
         else {
             newPoints = 0;
         }
@@ -191,16 +189,14 @@ public class WaterFragment extends ModalFragment {
                     points += newPoints;
                     currentUser.put("totalPoints", points);
                     currentUser.saveInBackground();
-                    Log.d("pointssssssssssss", String.valueOf(points));
                 } else if (e != null) {
-                    Log.d("points", "Error: " + e.getMessage());
+                    Log.e("points", "Error: " + e.getMessage());
                 }
             }
         });
 
         points += newPoints;
         sampleSize += 1;
-        Log.d("total points", String.valueOf(points));
 
         // push local changes to storage
         SharedPreferences.Editor editor = waterData.edit();
@@ -234,7 +230,6 @@ public class WaterFragment extends ModalFragment {
     public String stringifyTime(double timeDouble) {
         String timeStr = "";
         long minutes = (long) timeDouble;
-        Log.d("minutes", String.valueOf(minutes));
         long seconds = (long) ((timeDouble - (double) minutes) * SECS_PER_MIN);
         timeStr = String.valueOf(minutes) + ":" + String.format("%02d", seconds);
         return timeStr;
