@@ -14,8 +14,13 @@ import android.widget.Toast;
 
 import com.codepath.gogreen.R;
 import com.codepath.gogreen.models.Action;
+import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
 import com.parse.SaveCallback;
+
+import java.util.List;
 
 /**
  * Created by anyazhang on 7/14/17.
@@ -39,7 +44,7 @@ public class WaterFragment extends ModalFragment {
     int minutes;
     int milliseconds;
     boolean showering;
-
+    double newPoints;
 
     public static WaterFragment newInstance() {
 
@@ -162,7 +167,7 @@ public class WaterFragment extends ModalFragment {
         double points = getDouble(waterData, "points", 0);
 
         // update local copies of data
-        double newPoints;
+
         //newTime = Double.parseDouble(etTime.getText().toString());
         newTime = minutes + (((double) seconds) / 60.0);
         Log.d("newTime", String.valueOf(newTime));
@@ -174,6 +179,24 @@ public class WaterFragment extends ModalFragment {
         else {
             newPoints = 0;
         }
+
+        final ParseUser currentUser = ParseUser.getCurrentUser();
+
+        ParseQuery<ParseUser> query = ParseQuery.getQuery("_User");
+        query.whereEqualTo("fbId", currentUser.get("fbId"));
+        query.findInBackground(new FindCallback<ParseUser>() {
+            public void done(List<ParseUser> userList, ParseException e) {
+                if (e == null && userList.size() > 0) {
+                    double points = userList.get(0).getInt("totalPoints");
+                    points += newPoints;
+                    currentUser.put("totalPoints", points);
+                    currentUser.saveInBackground();
+                    Log.d("pointssssssssssss", String.valueOf(points));
+                } else if (e != null) {
+                    Log.d("points", "Error: " + e.getMessage());
+                }
+            }
+        });
 
         points += newPoints;
         sampleSize += 1;

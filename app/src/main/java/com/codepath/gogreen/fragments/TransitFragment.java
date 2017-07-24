@@ -38,11 +38,15 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.parse.FindCallback;
 import com.parse.ParseException;
+import com.parse.ParseQuery;
+import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 import static com.codepath.gogreen.R.id.map;
 
@@ -58,6 +62,7 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
     LayoutInflater inflater;
     View v;
     double[] pointValues = {5, 3, 1.5};
+    double newPoints;
 
     private static final String TAG = TransitFragment.class.getSimpleName();
     private GoogleMap mMap;
@@ -222,8 +227,27 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
 
        // update local copies of data
         distances[index] += newDistance;
-        double newPoints = (pointValues[index] * newDistance);
+        newPoints = (pointValues[index] * newDistance);
         points += newPoints;
+
+
+        final ParseUser currentUser = ParseUser.getCurrentUser();
+
+        ParseQuery<ParseUser> query = ParseQuery.getQuery("_User");
+        query.whereEqualTo("fbId", currentUser.get("fbId"));
+        query.findInBackground(new FindCallback<ParseUser>() {
+            public void done(List<ParseUser> userList, ParseException e) {
+                if (e == null && userList.size() > 0) {
+                    double points = userList.get(0).getInt("totalPoints");
+                    points += newPoints;
+                    currentUser.put("totalPoints", points);
+                    currentUser.saveInBackground();
+                    Log.d("pointssssssssssss", String.valueOf(points));
+                } else if (e != null) {
+                    Log.d("points", "Error: " + e.getMessage());
+                }
+            }
+        });
 
         Log.d("total points", String.valueOf(points));
 

@@ -37,6 +37,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
     private List<Action> mActions;
     Context context;
 
+
     public ActionAdapter(List<Action> actions) {
         mActions = actions;
     }
@@ -53,43 +54,41 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
         final Action action = mActions.get(position);
 
 
-
         Date timeStamp = (action.getCreatedAt());
         if (timeStamp == null) {
             timeStamp = new Date();
         }
         String relativeTime = getRelativeTimeAgo(timeStamp);
 
-        if (relativeTime != null) {
-            holder.tvTimeStamp.setText(shortenTimeStamp(relativeTime));
-            holder.tvPoints.setText(String.format("%.1f", action.getDouble("points")));
+        holder.tvTimeStamp.setText(shortenTimeStamp(relativeTime));
+        holder.tvPoints.setText(String.format("%.1f", action.getDouble("points")));
 
-            ParseQuery<ParseUser> query = ParseQuery.getQuery("_User");
-            query.whereEqualTo("fbId", action.getUid());
-            query.findInBackground(new FindCallback<ParseUser>() {
-                public void done(List<ParseUser> userList, ParseException e) {
-                    Log.d("actionListsize", String.valueOf(userList.size()));
-                    if (e == null && userList.size() > 0) {
-                        // load propic
-                        String imgUrl = userList.get(0).getString("profileImgUrl");
-                        Glide.with(context)
-                                .load(imgUrl)
-                                .placeholder(R.drawable.ic_placeholder)
-                                .bitmapTransform(new CropCircleTransformation(context))
-                                .into(holder.ivProfilePic);
+        ParseQuery<ParseUser> query = ParseQuery.getQuery("_User");
+        query.whereEqualTo("fbId", action.getUid());
+        query.findInBackground(new FindCallback<ParseUser>() {
+            public void done(List<ParseUser> userList, ParseException e) {
+                Log.d("actionListsize", String.valueOf(userList.size()));
+                if (e == null && userList.size() > 0) {
+                    // load propic
+                    String imgUrl = userList.get(0).getString("profileImgUrl");
+                    Glide.with(context)
+                            .load(imgUrl)
+                            .placeholder(R.drawable.ic_placeholder)
+                            .bitmapTransform(new CropCircleTransformation(context))
+                            .into(holder.ivProfilePic);
 
-                        // load action body: bold name, compose rest of body using function below
-                        String name = userList.get(0).getString("name");
-                        String body = " " + composeActionBody(action);
-                        SpannableString str = new SpannableString(name + body);
-                        str.setSpan(new StyleSpan(Typeface.BOLD), 0, name.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                        holder.tvAction.setText(str);
-                    } else if (e != null) {
-                        Log.d("action", "Error: " + e.getMessage());
-                    }
+                    // load action body: bold name, compose rest of body using function below
+                    String name = userList.get(0).getString("name");
+                    String body = " " + composeActionBody(action);
+                    SpannableString str = new SpannableString(name + body);
+                    str.setSpan(new StyleSpan(Typeface.BOLD), 0, name.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    holder.tvAction.setText(str);
+                } else if (e != null) {
+                    Log.d("action", "Error: " + e.getMessage());
                 }
-            });
-        }
+            }
+        });
+
     }
 
     @Override
@@ -121,7 +120,8 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
         }
 
         String relativeDate = DateUtils.getRelativeTimeSpanString(dateMillis,
-                    currentMillis, DateUtils.SECOND_IN_MILLIS).toString();
+
+                System.currentTimeMillis(), DateUtils.SECOND_IN_MILLIS).toString();
 
         return relativeDate;
     }
@@ -154,14 +154,11 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
 
                 if (subType.equals("bus") || subType.equals("subway") || subType.equals("train")) {
                     body = "took the " + subType + " for";
-                }
-                else if (subType.equals("walk") || subType.equals("bike")) {
+                } else if (subType.equals("walk") || subType.equals("bike")) {
                     body = checkPastTense(subType);
-                }
-                else if (subType.equals("carpool")) {
+                } else if (subType.equals("carpool")) {
                     body = "carpooled for";
-                }
-                else {
+                } else {
                     Log.d("transit", "subtype none of the above");
                 }
                 body += " " + checkUnits(action.getMagnitude(), context.getResources().getString(R.string.distance_units), false);
@@ -186,16 +183,13 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
         if (magnitude == 1.) {
             if (castToInt) {
                 return (int) magnitude + " " + units;
-            }
-            else {
+            } else {
                 return String.format("%.1f", magnitude) + " " + units;
             }
-        }
-        else {
+        } else {
             if (castToInt) {
                 return (int) magnitude + " " + units + "s";
-            }
-            else {
+            } else {
                 return String.format("%.1f", magnitude) + " " + units + "s";
             }
         }
@@ -205,9 +199,14 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
     public String checkPastTense(String word) {
         if (word.charAt(word.length() - 1) == 'e') {
             return word + 'd';
-        }
-        else {
+        } else {
             return word + "ed";
         }
+    }
+
+    public void clear() {
+        int size = this.mActions.size();
+        this.mActions.clear();
+        notifyItemRangeRemoved(0, size);
     }
 }

@@ -41,7 +41,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         Log.d("user", user.getString("name"));
         holder.tvRank.setText(String.valueOf(position + 1));
         holder.tvName.setText(user.getString("name"));
-        holder.tvPoints.setText(user.getString("totalPoints"));
+        double leadernoardPts = user.getDouble("totalPoints");
+        holder.tvPoints.setText(String.format("%.1f", leadernoardPts));
 
         Glide.with(context)
             .load(user.getString("profileImgUrl"))

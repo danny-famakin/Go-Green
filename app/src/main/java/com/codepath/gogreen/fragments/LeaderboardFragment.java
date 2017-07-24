@@ -56,7 +56,7 @@ public class LeaderboardFragment extends FloatingMenuFragment {
         Log.d("leaderboard", String.valueOf(friendIdList.size()));
         ParseQuery<ParseUser> query = ParseQuery.getQuery("_User");
         query.whereContainedIn("fbId", friendIdList);
-        query.orderByDescending("totalPoints");
+        query.orderByAscending("totalPoints");
         query.findInBackground(new FindCallback<ParseUser>() {
             public void done(List<ParseUser> friendUserList, ParseException e) {
                 if (e == null) {
