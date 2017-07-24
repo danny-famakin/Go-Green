@@ -38,11 +38,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(UserAdapter.ViewHolder holder, int position) {
         ParseUser user = mUsers.get(position);
-        Log.d("user", user.getString("name"));
         holder.tvRank.setText(String.valueOf(position + 1));
         holder.tvName.setText(user.getString("name"));
-        double leadernoardPts = user.getDouble("totalPoints");
-        holder.tvPoints.setText(String.format("%.1f", leadernoardPts));
+        double points = user.getDouble("totalPoints");
+        holder.tvPoints.setText(String.format("%.1f", points));
 
         Glide.with(context)
             .load(user.getString("profileImgUrl"))
@@ -70,4 +69,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             ivProfilePic = (ImageView) itemView.findViewById(R.id.ivProfilePic);
         }
     }
+
+    public void clear() {
+        mUsers.clear();
+        notifyDataSetChanged();
+    }
+
 }

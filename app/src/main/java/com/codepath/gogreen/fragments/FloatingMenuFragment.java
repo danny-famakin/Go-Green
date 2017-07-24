@@ -35,9 +35,10 @@ public class FloatingMenuFragment extends Fragment {
     public ArrayList<String> friendIdList;
     ParseUser currentUser;
 
+
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
         context = getActivity();
         inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         v = inflater.inflate(R.layout.fragment_floating_menu, null);
@@ -52,22 +53,7 @@ public class FloatingMenuFragment extends Fragment {
             }
         });
 
-        currentUser = ParseUser.getCurrentUser();
-        final String userId = currentUser.getString("fbId");
-        ArrayList<String> friendsList = new ArrayList<String>();
-        JSONArray friends = currentUser.getJSONArray("friends");
-        for (int i = 0; i < friends.length(); i++) {
-            try {
-                friendsList.add(friends.getString(i));
-                Log.d("friends add", friendsList.get(i));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-        friendsList.add(userId);
-        Log.d("friends", "loaded");
-        Log.d("friends", friendsList.get(0));
-        onFriendsLoaded(friendsList);
+        loadFriends();
 
 // repeat many times:
 
@@ -148,6 +134,22 @@ public class FloatingMenuFragment extends Fragment {
                 .into(icon);
         //icon.setImageResource(R.drawable.ic_add_circle_black_24dp);
         return itemBuilder.setContentView(icon).setLayoutParams(params).build();
+    }
+
+    public ArrayList<String> loadFriends() {
+        currentUser = ParseUser.getCurrentUser();
+        final String userId = currentUser.getString("fbId");
+        ArrayList<String> friendsList = new ArrayList<String>();
+        JSONArray friends = currentUser.getJSONArray("friends");
+        for (int i = 0; i < friends.length(); i++) {
+            try {
+                friendsList.add(friends.getString(i));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        friendsList.add(userId);
+        return friendsList;
     }
 
     public void onFriendsLoaded(ArrayList<String> friendsList) {
