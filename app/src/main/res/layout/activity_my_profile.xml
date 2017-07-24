@@ -20,42 +20,39 @@
         android:id="@+id/ivProfilePic"
         android:layout_width="150dp"
         android:layout_height="150dp"
+        app:srcCompat="@android:drawable/btn_star"
         android:layout_below="@+id/tvJoin"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        app:srcCompat="@android:drawable/btn_star" />
+        android:layout_marginTop="16dp" />
 
     <TextView
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Name"
-        android:textColor="@color/cardview_shadow_start_color"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginTop="16dp"
         android:layout_below="@+id/toolbar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="Name"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/btnLogOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log Out"
+        android:layout_marginBottom="11dp"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
     <TextView
         android:id="@+id/tvJoin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tvName"
-        android:layout_alignStart="@+id/tvName"
         android:layout_below="@+id/tvName"
+        android:layout_marginTop="8dp"
         android:layout_centerHorizontal="true"
-        android:text="Join Date" />
-
-    <Button
-        android:id="@+id/btnLogOut"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/ivProfilePic"
-        android:layout_alignStart="@+id/ivProfilePic"
-        android:layout_below="@+id/ivProfilePic"
-        android:layout_marginTop="86dp"
-        android:text="Log Out" />
+        android:text="TextView" />
 
 
 </RelativeLayout>

@@ -47,6 +47,8 @@ import com.parse.ParseUser;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Date;
+
 /**
  * Fragment for the user login screen.
  */
@@ -287,6 +289,7 @@ public class ParseLoginFragment extends ParseLoginFragmentBase {
                                     parseUser.put("profileImgUrl", profileImgUrl);
                                     parseUser.put("fbId", id);
                                     parseUser.put("totalPoints", 0);
+                                    parseUser.put("joinDate", new Date());
 
                                     parseUser.saveInBackground();
 
