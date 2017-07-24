@@ -58,34 +58,38 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
         if (timeStamp == null) {
             timeStamp = new Date();
         }
-        holder.tvTimeStamp.setText(shortenTimeStamp(getRelativeTimeAgo(timeStamp)));
-        holder.tvPoints.setText(String.format("%.1f", action.getDouble("points")));
+        String relativeTime = getRelativeTimeAgo(timeStamp);
 
-        ParseQuery<ParseUser> query = ParseQuery.getQuery("_User");
-        query.whereEqualTo("fbId", action.getUid());
-        query.findInBackground(new FindCallback<ParseUser>() {
-            public void done(List<ParseUser> userList, ParseException e) {
-                Log.d("actionListsize", String.valueOf(userList.size()));
-                if (e == null && userList.size() > 0) {
-                    // load propic
-                    String imgUrl = userList.get(0).getString("profileImgUrl");
-                    Glide.with(context)
-                        .load(imgUrl)
-                        .placeholder(R.drawable.ic_placeholder)
-                        .bitmapTransform(new CropCircleTransformation(context))
-                        .into(holder.ivProfilePic);
+        if (relativeTime != null) {
+            holder.tvTimeStamp.setText(shortenTimeStamp(relativeTime));
+            holder.tvPoints.setText(String.format("%.1f", action.getDouble("points")));
 
-                    // load action body: bold name, compose rest of body using function below
-                    String name = userList.get(0).getString("name");
-                    String body = " " + composeActionBody(action);
-                    SpannableString str = new SpannableString(name + body);
-                    str.setSpan(new StyleSpan(Typeface.BOLD), 0, name.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    holder.tvAction.setText(str);
-                } else if (e != null) {
-                    Log.d("action", "Error: " + e.getMessage());
+            ParseQuery<ParseUser> query = ParseQuery.getQuery("_User");
+            query.whereEqualTo("fbId", action.getUid());
+            query.findInBackground(new FindCallback<ParseUser>() {
+                public void done(List<ParseUser> userList, ParseException e) {
+                    Log.d("actionListsize", String.valueOf(userList.size()));
+                    if (e == null && userList.size() > 0) {
+                        // load propic
+                        String imgUrl = userList.get(0).getString("profileImgUrl");
+                        Glide.with(context)
+                                .load(imgUrl)
+                                .placeholder(R.drawable.ic_placeholder)
+                                .bitmapTransform(new CropCircleTransformation(context))
+                                .into(holder.ivProfilePic);
+
+                        // load action body: bold name, compose rest of body using function below
+                        String name = userList.get(0).getString("name");
+                        String body = " " + composeActionBody(action);
+                        SpannableString str = new SpannableString(name + body);
+                        str.setSpan(new StyleSpan(Typeface.BOLD), 0, name.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                        holder.tvAction.setText(str);
+                    } else if (e != null) {
+                        Log.d("action", "Error: " + e.getMessage());
+                    }
                 }
-            }
-        });
+            });
+        }
     }
 
     @Override
@@ -126,12 +130,16 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
         String[] splitTime = timestamp.trim().split("\\s+");
         List<String> times = Arrays.asList("second", "seconds", "minute", "minutes", "hour", "hours", "day", "days", "week", "weeks");
         // deal with recent tweets of form "# _ ago"
-        if (times.contains(splitTime[1])) {
+        Log.d("splitTime", timestamp);
+        if (splitTime.length > 1 && times.contains(splitTime[1])) {
             timestamp = splitTime[0] + splitTime[1].charAt(0);
         }
         // deal with old tweets of form M D, Y
-        else if (splitTime[2].equals(context.getString(R.string.current_year))) {
+        else if (splitTime.length > 2 && splitTime[2].equals(context.getString(R.string.current_year))) {
             timestamp = splitTime[0] + " " + splitTime[1].substring(0, splitTime[1].length() - 1);
+        }
+        else if (splitTime[0].equals("Yesterday")) {
+            timestamp = "1d";
         }
         return timestamp;
     }
