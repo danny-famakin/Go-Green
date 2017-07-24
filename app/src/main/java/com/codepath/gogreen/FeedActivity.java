@@ -204,6 +204,7 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_feed, menu);
+
         return true;
 
     }
@@ -230,7 +231,6 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
     public void updateFeed(Action action) {
         PagerAdapter.feedFragment.addAction(action);
         Log.d("FeedActivity", String.valueOf(action.getMagnitude()) + " points awarded for " + action.getActionType());
-
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {

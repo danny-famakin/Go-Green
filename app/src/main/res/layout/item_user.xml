@@ -10,7 +10,8 @@
         android:layout_toRightOf="@+id/tvRank"
         android:layout_toEndOf="@+id/tvRank"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_marginLeft="16dp"
         app:srcCompat="@drawable/ic_placeholder" />
 

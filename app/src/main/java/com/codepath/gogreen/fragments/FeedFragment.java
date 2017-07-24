@@ -2,8 +2,6 @@ package com.codepath.gogreen.fragments;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -55,12 +53,12 @@ public class FeedFragment extends FloatingMenuFragment {
         // set the adapter
         rvActions.setAdapter(actionAdapter);
 
-        /*swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swiper);
+        swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swiper);
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 actionAdapter.clear();
-                addItems(actions);
+                //onFriendsLoaded();
                 swipeContainer.setRefreshing(false);
             }
         });
@@ -68,7 +66,7 @@ public class FeedFragment extends FloatingMenuFragment {
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);*/
+                android.R.color.holo_red_light);
         return v;
     }
 
