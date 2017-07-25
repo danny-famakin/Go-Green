@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,6 +22,10 @@ import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -36,6 +41,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
 
     private List<Action> mActions;
     Context context;
+
 
 
     public ActionAdapter(List<Action> actions) {
@@ -89,6 +95,44 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
             }
         });
 
+
+                    int counter = 0;
+
+                    JSONArray ids = action.getJSONArray("favorited");
+                    ParseUser current = ParseUser.getCurrentUser();
+
+
+                    if(ids == null){
+                        holder.ivFavorite.setImageResource(R.drawable.ic_fave);
+                    }
+                    else{
+                        for(int a = 0; a < ids.length(); a++ ){
+                            try {
+                                if(String.valueOf(ids.get(a)).equals(current.getString("fbId")) ){
+                                    counter++;
+                                    holder.ivFavorite.setImageResource(R.drawable.ic_faved);
+                                    break;
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                        if(counter == 0){
+                            holder.ivFavorite.setImageResource(R.drawable.ic_fave);
+
+                        }
+                    }
+
+
+
+
+
+
+
+
+
+
     }
 
     @Override
@@ -101,6 +145,8 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
         public TextView tvTimeStamp;
         public TextView tvPoints;
         public ImageView ivProfilePic;
+        public ImageButton ivFavorite;
+        public ImageButton ibReply;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -108,6 +154,47 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
             tvTimeStamp = (TextView) itemView.findViewById(R.id.tvTimeStamp);
             tvPoints = (TextView) itemView.findViewById(R.id.tvPoints);
             ivProfilePic = (ImageView) itemView.findViewById(R.id.ivProfilePic);
+            ivFavorite = (ImageButton) itemView.findViewById(R.id.ivFavorite);
+            ibReply = (ImageButton) itemView.findViewById(R.id.ivReply);
+
+            ivFavorite.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                int position = getAdapterPosition();
+                int counter = 0;
+                final Action toFavorite = mActions.get(position);
+                ParseUser current = ParseUser.getCurrentUser();
+                ArrayList<String> ids = toFavorite.getFavorited();
+                if(ids == null){
+                    ids = new ArrayList<String>();
+                    ids.add(current.getString("fbId"));
+                    toFavorite.setFavorited(ids);
+                    toFavorite.saveInBackground();
+                    ivFavorite.setImageResource(R.drawable.ic_faved);
+                }
+                else{
+                    for(int i = 0; i < ids.size(); i++ ){
+                        if(ids.get(i).equals(current.getString("fbId")) ){
+                            counter++;
+                            ids.remove(i);
+                            ivFavorite.setImageResource(R.drawable.ic_fave);
+                            toFavorite.setFavorited(ids);
+                            toFavorite.saveInBackground();
+                            break;
+                        }
+
+                    }
+                    if(counter == 0){
+                        ids.add(current.getString("fbId"));
+                        ivFavorite.setImageResource(R.drawable.ic_faved);
+                        toFavorite.setFavorited(ids);
+                        toFavorite.saveInBackground();
+                    }
+                }
+
+
+            }
+        });
         }
     }
 
@@ -207,4 +294,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
         this.mActions.clear();
         notifyItemRangeRemoved(0, size);
     }
+
+
+
 }

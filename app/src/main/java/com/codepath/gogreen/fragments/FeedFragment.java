@@ -65,10 +65,10 @@ public class FeedFragment extends FloatingMenuFragment {
             }
         });
         // Configure the refreshing colors
-        swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
+        swipeContainer.setColorSchemeResources(R.color.colorAccent,
+                R.color.colorAccentDark,
+                R.color.colorPrimary,
+                R.color.colorPrimaryDark);
         return v;
     }
 

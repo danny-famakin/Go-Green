@@ -37,6 +37,8 @@ public class RecycleFragment extends ModalFragment {
     View view;
     double pointValues[] = {1,1};
     double newPoints;
+    int INT_MIN = 1;
+    int INT_MAX = 200;
 
     public static RecycleFragment newInstance() {
         Bundle args = new Bundle();
@@ -76,7 +78,7 @@ public class RecycleFragment extends ModalFragment {
     double newMaterials;
     public void onSave() {
         Intent i = new Intent ();
-        if (isValid(etNumber, "number")) {
+        if (isValid(etNumber, INT_MIN, INT_MAX)) {
             newMaterials = Integer.parseInt(etNumber.getText().toString());
             switch (materialType){
                 case "bottles":
