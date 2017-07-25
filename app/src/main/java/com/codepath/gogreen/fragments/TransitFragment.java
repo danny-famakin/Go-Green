@@ -12,6 +12,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
+import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -80,7 +81,7 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
     private boolean mLocationPermissionGranted;
     private static final long INTERVAL = 1000 * 5 * 1; //1 minute
     private static final long FASTEST_INTERVAL = 1000 * 5 * 1;
-    private static final float SMALLEST_DISPLACEMENT = 0.25F;
+    private static final float SMALLEST_DISPLACEMENT = 1.00F;
 
     // The geographical location where the device is currently located. That is, the last-known
     // location retrieved by the Fused Location Provider.
@@ -112,9 +113,9 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
     protected void createLocationRequest() {
         mLocationRequest = new LocationRequest();
         mLocationRequest.setInterval(INTERVAL);
-        //mLocationRequest.setFastestInterval(FASTEST_INTERVAL);
+        mLocationRequest.setFastestInterval(FASTEST_INTERVAL);
         mLocationRequest.setSmallestDisplacement(SMALLEST_DISPLACEMENT);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+        mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
         if (ContextCompat.checkSelfPermission(getContext(),
                 android.Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
@@ -125,54 +126,72 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        v = inflater.inflate(R.layout.activity_log_transit, null);
 
-        Spinner spVehicle = (Spinner) v.findViewById(R.id.spVehicle);
-        distance = (TextView) v.findViewById(R.id.distance);
+            inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            v = inflater.inflate(R.layout.activity_log_transit, null);
 
-        spVehicle.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-                vehicleType = parent.getItemAtPosition(pos).toString();
+            Spinner spVehicle = (Spinner) v.findViewById(R.id.spVehicle);
+            distance = (TextView) v.findViewById(R.id.distance);
+
+            spVehicle.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                    vehicleType = parent.getItemAtPosition(pos).toString();
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+                    vehicleType = parent.getItemAtPosition(0).toString();
+                }
+            });
+
+            // Create an ArrayAdapter using the string array and a default spinner layout
+            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getActivity(),
+                    R.array.transportation_types, android.R.layout.simple_spinner_item);
+            // Specify the layout to use when the list of choices appears
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            // Apply the adapter to the spinner
+            spVehicle.setAdapter(adapter);
+
+            openModal(v);
+
+            if (savedInstanceState != null) {
+                mLastKnownLocation = savedInstanceState.getParcelable(KEY_LOCATION);
+                mCameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION);
             }
 
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                vehicleType = parent.getItemAtPosition(0).toString();
-            }
-        });
+            track = (ToggleButton) v.findViewById(R.id.start_tracking);
+            track.setOnClickListener(this);
+            // Build the Play services client for use by the Fused Location Provider and the Places API.
+            // Use the addApi() method to request the Google Places API and the Fused Location Provider.
+            //createLocationRequest();
+            mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
+                    .enableAutoManage(getActivity() /*FragmentActivity */,
+                            this /* OnConnectionFailedListener */)
+                    .addConnectionCallbacks(this)
+                    .addApi(LocationServices.API)
+                    .addApi(Places.GEO_DATA_API)
+                    .addApi(Places.PLACE_DETECTION_API)
+                    .build();
+            mGoogleApiClient.connect();
 
-        // Create an ArrayAdapter using the string array and a default spinner layout
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getActivity(),
-        R.array.transportation_types, android.R.layout.simple_spinner_item);
-        // Specify the layout to use when the list of choices appears
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        // Apply the adapter to the spinner
-        spVehicle.setAdapter(adapter);
 
-        openModal(v);
-
-        if (savedInstanceState != null) {
-            mLastKnownLocation = savedInstanceState.getParcelable(KEY_LOCATION);
-            mCameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION);
-        }
-
-        track = (ToggleButton) v.findViewById(R.id.start_tracking);
-        track.setOnClickListener(this);
-        // Build the Play services client for use by the Fused Location Provider and the Places API.
-        // Use the addApi() method to request the Google Places API and the Fused Location Provider.
-        //createLocationRequest();
-        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
-                .enableAutoManage(getActivity() /*FragmentActivity */,
-                        this /* OnConnectionFailedListener */)
-                .addConnectionCallbacks(this)
-                .addApi(LocationServices.API)
-                .addApi(Places.GEO_DATA_API)
-                .addApi(Places.PLACE_DETECTION_API)
-                .build();
-        mGoogleApiClient.connect();
     }
+
+
+
+    @Override
+    public void onDestroy()
+    {
+        super.onDestroy();
+        try{
+            SupportMapFragment fragment = (SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.map);
+            if (fragment != null && fragment.isResumed()) getFragmentManager().beginTransaction().remove(fragment).commit();
+        }catch (InflateException e){
+
+        }
+    }
+
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -209,10 +228,7 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
 
             }
 
-//            i.putExtra("vehicle", vehicleType);
-//            i.putExtra("distance", Integer.parseInt(etDistance.getText().toString()));
-//            setResult(RESULT_OK, i);
-//            finish();
+
             modal.dismiss();
         }
         else {
@@ -281,7 +297,7 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
 
     @Override
     public void onConnected(@Nullable Bundle connectionHint) {
-// Build the map.
+    // Build the map.
         SupportMapFragment mapFragment = (SupportMapFragment) getFragmentManager()
                 .findFragmentById(map);
         mapFragment.getMapAsync(this);
@@ -399,20 +415,21 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
     private void beginTrack() {
         Location location = mLastKnownLocation;
         if (mLastKnownLocation != null) {
-            //mGoogleApiClient.connect();
+            mGoogleApiClient.connect();
             onLocationChanged(location);
         }
     }
 
     @Override
     public void onLocationChanged(Location location) {
+
         double latitude = location.getLatitude();
         double longitude = location.getLongitude();
         LatLng latLng = new LatLng(latitude, longitude);
 
          /*Display latitude*/
         //((TextView) findViewById(R.id.latitude)).setText(Double.toString(location.getLatitude()));
-
+        if (location != null)
         points.add(latLng);
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(new LatLng(points.get(0).latitude, points.get(0).longitude))
@@ -427,16 +444,17 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
         double totalDistance = 0;
         int i;
         for (i = 0; i < points.size(); i++){
-            LatLng start = new LatLng(latLng.latitude, latLng.longitude);
-            LatLng end = new LatLng(latLng.latitude, latLng.longitude);
-            dist = CalculationByDistance(start, end);
+            LatLng start = new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude());
+            LatLng end = new LatLng(location.getLatitude(), location.getLongitude());
+            dist = (CalculationByDistance(start, end)) * 0.000621371;
+
             totalDistance += dist;
         }
         ((TextView) v.findViewById(R.id.distance)).setText(Double.toString(totalDistance));
     }
 
     public double CalculationByDistance(LatLng StartP, LatLng EndP) {
-        int Radius=6371;//radius of earth in Km
+        int Radius=6371000;//radius of earth in Km
         double lat1 = StartP.latitude;
         double lat2 = EndP.latitude;
         double lon1 = StartP.longitude;

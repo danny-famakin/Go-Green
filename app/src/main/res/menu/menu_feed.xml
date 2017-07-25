@@ -4,11 +4,17 @@
     tools:context="com.codepath.gogreen.FeedActivity">
 
     <item
+        android:id="@+id/action_search"
+        app:actionViewClass="android.support.v7.widget.SearchView"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="Search"
+        app:showAsAction="always|collapseActionView" />
+
+    <item
         android:id="@+id/myProfile"
         android:icon="@drawable/ic_profile_icon"
         app:showAsAction="always"
         android:title="Profile">
     </item>
-
 
 </menu>
