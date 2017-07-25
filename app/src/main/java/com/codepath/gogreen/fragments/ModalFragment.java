@@ -101,17 +101,23 @@ public class ModalFragment extends Fragment {
     }
 
     // adapted from https://www.excella.com/insights/how-do-i-validate-an-android-form
-    public boolean isValid(EditText editText, String description) {
+    public boolean isValid(EditText editText, int min, int max) {
         String text = editText.getText().toString();
+        String errormsg;
+        if (StringUtils.isBlank(text)) {
+            errormsg = "field required!";
+        } else if (Integer.parseInt(text) < min){
+            errormsg = "minimum = " + String.valueOf(min);
 
-        if (StringUtils.isNotBlank(text)) {
+        } else if (Integer.parseInt(text) > max) {
+            errormsg = "maximum = " + String.valueOf(max);
+        } else {
             editText.setError(null);
             return true;
-        } else {
-            editText.setError(description + " is required!");
-            return false;
-
         }
+        editText.setError(errormsg);
+        return false;
+
     }
 
     SharedPreferences.Editor putDouble(final SharedPreferences.Editor edit, final String key, final double value) {

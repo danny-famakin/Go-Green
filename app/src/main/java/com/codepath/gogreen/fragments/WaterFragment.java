@@ -35,16 +35,18 @@ public class WaterFragment extends ModalFragment {
     double newTime;
     TextView tvTimer;
     Button btStartPause;
+    TextView tvErrorMsg;
     long millisecond;
     long start;
     long timeBuff;
-    long uptadeTime;
+    long updateTime;
    // Handler handler;
     int seconds;
     int minutes;
     int milliseconds;
     boolean showering;
     double newPoints;
+    int MIN_SECS = 30;
 
     public static WaterFragment newInstance() {
 
@@ -64,6 +66,7 @@ public class WaterFragment extends ModalFragment {
      //   etTime = (EditText) v.findViewById(R.id.etTime);
         showering = true;
         tvTimer = (TextView) v.findViewById(R.id.tvTimer);
+        tvErrorMsg = (TextView) v.findViewById(R.id.tvErrorMsg);
         btStartPause = (Button) v.findViewById(R.id.btStartPause);
         btStartPause.getBackground().setColorFilter(getActivity().getResources().getColor(R.color.offWhite), PorterDuff.Mode.MULTIPLY);
         btStartPause.setTextColor(getActivity().getResources().getColor(R.color.colorPrimary));
@@ -124,15 +127,15 @@ public class WaterFragment extends ModalFragment {
 
             millisecond = SystemClock.uptimeMillis() - start;
 
-            uptadeTime = timeBuff + millisecond;
+            updateTime = timeBuff + millisecond;
 
-            seconds = (int) (uptadeTime / 1000);
+            seconds = (int) (updateTime / 1000);
 
             minutes = seconds / 60;
 
             seconds = seconds % 60;
 
-            milliseconds = (int) (uptadeTime % 1000);
+            milliseconds = (int) (updateTime % 1000);
 
             tvTimer.setText("" + minutes + ":"
                     + String.format("%02d", seconds) + ":"
@@ -143,14 +146,21 @@ public class WaterFragment extends ModalFragment {
 
     };
 
+    public boolean isValid() {
+        if (60 * minutes + seconds > MIN_SECS) {
+            tvErrorMsg.setVisibility(View.GONE);
+            return true;
+        }
+        tvErrorMsg.setVisibility(View.VISIBLE);
+        return false;
+    }
+
     public void onSave() {
-       // if (isValid(etTime, "Time")) {
+        if (isValid()) {
             updateData();
 
             modal.dismiss();
-       // }
-       // else {
-       // }
+        }
     }
 
     private void updateData() {

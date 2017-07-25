@@ -33,6 +33,8 @@ public class ReuseFragment extends ModalFragment {
     int totalBagPoints;
     int newPoints;
     SharedPreferences reuse;
+    int INT_MIN = 1;
+    int INT_MAX = 10;
 
 
 
@@ -61,7 +63,7 @@ public class ReuseFragment extends ModalFragment {
     public void onSave() {
         Intent i = new Intent();
 
-        if(isValid(bags, "Number of bags reused")) {
+        if(isValid(bags, INT_MIN, INT_MAX)) {
             int newBags = Integer.valueOf(bags.getText().toString());
             total += newBags;
             newPoints = newBags * 10;
