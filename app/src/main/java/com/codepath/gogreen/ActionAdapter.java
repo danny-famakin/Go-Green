@@ -2,6 +2,8 @@ package com.codepath.gogreen;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -25,7 +27,6 @@ import com.parse.ParseUser;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -101,7 +102,6 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
                     JSONArray ids = action.getJSONArray("favorited");
                     ParseUser current = ParseUser.getCurrentUser();
 
-
                     if(ids == null){
                         holder.ivFavorite.setImageResource(R.drawable.ic_fave);
                     }
@@ -122,6 +122,9 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
                             holder.ivFavorite.setImageResource(R.drawable.ic_fave);
 
                         }
+                    }
+                    if(ids != null){
+                        holder.tvLikes.setText(String.valueOf(ids.length()));
                     }
 
 
@@ -147,6 +150,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
         public ImageView ivProfilePic;
         public ImageButton ivFavorite;
         public ImageButton ibReply;
+        public TextView tvLikes;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -156,39 +160,51 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
             ivProfilePic = (ImageView) itemView.findViewById(R.id.ivProfilePic);
             ivFavorite = (ImageButton) itemView.findViewById(R.id.ivFavorite);
             ibReply = (ImageButton) itemView.findViewById(R.id.ivReply);
+            tvLikes = (TextView) itemView.findViewById(R.id.tvLikes);
 
             ivFavorite.setOnClickListener(new View.OnClickListener(){
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(View v) {
                 int position = getAdapterPosition();
                 int counter = 0;
                 final Action toFavorite = mActions.get(position);
                 ParseUser current = ParseUser.getCurrentUser();
-                ArrayList<String> ids = toFavorite.getFavorited();
+                JSONArray ids = toFavorite.getJSONArray("favorited");
+                Log.d("hopeee", String.valueOf(ids));
                 if(ids == null){
-                    ids = new ArrayList<String>();
-                    ids.add(current.getString("fbId"));
+                    ids.put(current.getString("fbId"));
                     toFavorite.setFavorited(ids);
                     toFavorite.saveInBackground();
                     ivFavorite.setImageResource(R.drawable.ic_faved);
+                    int likes = Integer.valueOf(tvLikes.getText().toString());
+                    tvLikes.setText(String.valueOf(likes + 1));
                 }
                 else{
-                    for(int i = 0; i < ids.size(); i++ ){
-                        if(ids.get(i).equals(current.getString("fbId")) ){
-                            counter++;
-                            ids.remove(i);
-                            ivFavorite.setImageResource(R.drawable.ic_fave);
-                            toFavorite.setFavorited(ids);
-                            toFavorite.saveInBackground();
-                            break;
+                    for(int i = 0; i < ids.length(); i++ ){
+                        try {
+                            if(ids.get(i).equals(current.getString("fbId")) ){
+                                counter++;
+                                ids.remove(i);
+                                ivFavorite.setImageResource(R.drawable.ic_fave);
+                                toFavorite.setFavorited(ids);
+                                toFavorite.saveInBackground();
+                                int likes = Integer.valueOf(tvLikes.getText().toString());
+                                tvLikes.setText(String.valueOf(likes - 1));
+                                break;
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
 
                     }
                     if(counter == 0){
-                        ids.add(current.getString("fbId"));
+                        ids.put(current.getString("fbId"));
                         ivFavorite.setImageResource(R.drawable.ic_faved);
                         toFavorite.setFavorited(ids);
                         toFavorite.saveInBackground();
+                        int likes = Integer.valueOf(tvLikes.getText().toString());
+                        tvLikes.setText(String.valueOf(likes + 1));
                     }
                 }
 

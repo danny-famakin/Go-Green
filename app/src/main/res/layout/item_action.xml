@@ -94,4 +94,13 @@
         android:layout_alignTop="@+id/tvPointsCaption"
         app:srcCompat="@drawable/ic_leaf4" />
 
+    <TextView
+        android:id="@+id/tvLikes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:layout_alignBottom="@+id/ivFavorite"
+        android:layout_toLeftOf="@+id/tvPointsCaption"
+        android:layout_toStartOf="@+id/tvPointsCaption" />
+
 </RelativeLayout>
