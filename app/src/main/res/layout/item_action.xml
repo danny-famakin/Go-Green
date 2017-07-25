@@ -61,6 +61,27 @@
         android:textStyle="bold"
         android:layout_toRightOf="@+id/tvPointsCaption" />
 
+    <ImageButton
+        android:id="@+id/ibFavorite"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignLeft="@+id/tvPointsCaption"
+        android:layout_alignStart="@+id/tvPointsCaption"
+        android:layout_below="@+id/ivProfilePic"
+        android:layout_marginTop="19dp"
+        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/ic_favorite" />
+
+    <ImageButton
+        android:id="@+id/ibReply"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_alignTop="@+id/ibFavorite"
+        android:layout_centerHorizontal="true"
+        android:background="@android:color/transparent"
+        app:srcCompat="@drawable/ic_reply" />
+
+
     <ImageView
         android:id="@+id/ivLeaf"
         android:layout_width="16dp"
@@ -69,4 +90,5 @@
         android:layout_alignStart="@+id/tvAction"
         android:layout_alignTop="@+id/tvPointsCaption"
         app:srcCompat="@drawable/ic_leaf4" />
+
 </RelativeLayout>

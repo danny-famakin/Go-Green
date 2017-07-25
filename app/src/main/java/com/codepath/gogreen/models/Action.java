@@ -3,6 +3,8 @@ package com.codepath.gogreen.models;
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
 
+import java.util.ArrayList;
+
 /**
  * Created by anyazhang on 7/14/17.
  */
@@ -13,6 +15,7 @@ public class Action extends ParseObject {
     public String subType;
     public double magnitude;
     public double points;
+    public ArrayList<String> favorited;
 
     public String getSubType() {
         return this.getString("subType");
@@ -65,5 +68,15 @@ public class Action extends ParseObject {
     public void setPoints(double points) {
         this.points = points;
         this.put("points", points);
+    }
+
+    public void setFavorited(ArrayList<String> favorited) {
+        this.favorited = favorited;
+        this.put("favorited", favorited);
+
+    }
+
+    public ArrayList<String> getFavorited(){
+        return favorited;
     }
 }
