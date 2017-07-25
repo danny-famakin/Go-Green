@@ -7,8 +7,10 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -100,7 +102,7 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
                 .addSubActionView(button3)
                 .addSubActionView(button4)
                 .attachTo(fab)
-                .setRadius(500)
+                .setRadius(400)
                 .build();
 
         button1.setOnClickListener(new View.OnClickListener() {
@@ -200,7 +202,23 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_feed, menu);
-
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // perform query here
+                Intent i = new Intent(context, Search.class);
+                i.putExtra("search_users", query);
+                context.startActivity(i);
+                searchView.clearFocus();
+                return true;
+            }
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
         return true;
 
     }
