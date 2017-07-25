@@ -155,6 +155,4 @@ public class FloatingMenuFragment extends Fragment {
     public void onFriendsLoaded(ArrayList<String> friendsList) {
 
     }
-
-
 }

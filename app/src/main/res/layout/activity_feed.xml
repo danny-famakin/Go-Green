@@ -8,10 +8,10 @@
     android:fitsSystemWindows="true"
     tools:context="com.codepath.gogreen.FeedActivity">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
 
     <include
         android:id="@+id/toolbar"
@@ -20,16 +20,22 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true" />
+        android:layout_alignParentTop="true"
+        app:layout_scrollFlags="scroll|exitUntilCollapsed"/>
 
     <android.support.design.widget.TabLayout
         android:id="@+id/sliding_tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        app:layout_anchor="@+id/toolbar"
+        android:layout_below="@id/toolbar"
         app:layout_anchorGravity="bottom"
         app:tabMode="fixed"/>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/sliding_tabs"/>
 
     <FrameLayout
         android:layout_width="wrap_content"
@@ -37,7 +43,7 @@
         android:id="@+id/flContainer">
     </FrameLayout>
 
-
+</RelativeLayout>
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"

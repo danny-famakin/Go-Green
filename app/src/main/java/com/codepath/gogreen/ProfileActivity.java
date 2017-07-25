@@ -15,6 +15,10 @@ import com.bumptech.glide.Glide;
 import com.parse.ParseUser;
 import com.parse.ui.ParseLoginBuilder;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -24,6 +28,7 @@ public class ProfileActivity extends AppCompatActivity {
     ParseUser currentUser;
     TextView tvName;
     String imageURL;
+    TextView tvJoinDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +41,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         ivProfilePic = (ImageView) findViewById(R.id.ivProfilePic);
         tvName = (TextView) findViewById(R.id.tvName);
+        tvJoinDate = (TextView) findViewById(R.id.tvJoin);
 
         currentUser = ParseUser.getCurrentUser();
 
@@ -82,5 +88,11 @@ public class ProfileActivity extends AppCompatActivity {
                 .into(ivProfilePic);
 
         tvName.setText(currentUser.getString("name"));
+        SimpleDateFormat sdf = new SimpleDateFormat("MMMM YYYY", Locale.US);
+        Date joinDate = currentUser.getDate("joinDate");
+        if (joinDate != null) {
+            String dateString = "Joined in " + sdf.format(joinDate);
+            tvJoinDate.setText(dateString);
+        }
     }
 }

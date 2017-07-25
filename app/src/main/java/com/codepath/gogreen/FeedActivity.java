@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -199,6 +200,7 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_feed, menu);
+
         return true;
 
     }
@@ -224,6 +226,8 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
 
     public void updateFeed(Action action) {
         PagerAdapter.feedFragment.addAction(action);
+
+        Log.d("FeedActivity", String.valueOf(action.getMagnitude()) + " points awarded for " + action.getActionType());
 
     }
 

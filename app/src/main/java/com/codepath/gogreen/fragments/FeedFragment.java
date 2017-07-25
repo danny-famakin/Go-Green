@@ -55,12 +55,12 @@ public class FeedFragment extends FloatingMenuFragment {
         friendIdList = loadFriends();
         update();
 
-        /*swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swiper);
+        swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swiper);
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 actionAdapter.clear();
-                addItems(actions);
+                update();
                 swipeContainer.setRefreshing(false);
             }
         });
@@ -68,7 +68,7 @@ public class FeedFragment extends FloatingMenuFragment {
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
                 android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);*/
+                android.R.color.holo_red_light);
         return v;
     }
 
