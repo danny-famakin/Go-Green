@@ -103,14 +103,14 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
 
 
                     if(ids == null){
-                        holder.ibFavorite.setImageResource(R.drawable.ic_favorite);
+                        holder.ivFavorite.setImageResource(R.drawable.ic_fave);
                     }
                     else{
                         for(int a = 0; a < ids.length(); a++ ){
                             try {
                                 if(String.valueOf(ids.get(a)).equals(current.getString("fbId")) ){
                                     counter++;
-                                    holder.ibFavorite.setImageResource(R.drawable.ic_favorited);
+                                    holder.ivFavorite.setImageResource(R.drawable.ic_faved);
                                     break;
                                 }
                             } catch (JSONException e) {
@@ -119,7 +119,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
 
                         }
                         if(counter == 0){
-                            holder.ibFavorite.setImageResource(R.drawable.ic_favorite);
+                            holder.ivFavorite.setImageResource(R.drawable.ic_fave);
 
                         }
                     }
@@ -145,7 +145,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
         public TextView tvTimeStamp;
         public TextView tvPoints;
         public ImageView ivProfilePic;
-        public ImageButton ibFavorite;
+        public ImageButton ivFavorite;
         public ImageButton ibReply;
 
         public ViewHolder(View itemView) {
@@ -154,10 +154,10 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
             tvTimeStamp = (TextView) itemView.findViewById(R.id.tvTimeStamp);
             tvPoints = (TextView) itemView.findViewById(R.id.tvPoints);
             ivProfilePic = (ImageView) itemView.findViewById(R.id.ivProfilePic);
-            ibFavorite = (ImageButton) itemView.findViewById(R.id.ibFavorite);
-            ibReply = (ImageButton) itemView.findViewById(R.id.ibReply);
+            ivFavorite = (ImageButton) itemView.findViewById(R.id.ivFavorite);
+            ibReply = (ImageButton) itemView.findViewById(R.id.ivReply);
 
-            ibFavorite.setOnClickListener(new View.OnClickListener(){
+            ivFavorite.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 int position = getAdapterPosition();
@@ -170,14 +170,14 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
                     ids.add(current.getString("fbId"));
                     toFavorite.setFavorited(ids);
                     toFavorite.saveInBackground();
-                    ibFavorite.setImageResource(R.drawable.ic_favorited);
+                    ivFavorite.setImageResource(R.drawable.ic_faved);
                 }
                 else{
                     for(int i = 0; i < ids.size(); i++ ){
                         if(ids.get(i).equals(current.getString("fbId")) ){
                             counter++;
                             ids.remove(i);
-                            ibFavorite.setImageResource(R.drawable.ic_favorite);
+                            ivFavorite.setImageResource(R.drawable.ic_fave);
                             toFavorite.setFavorited(ids);
                             toFavorite.saveInBackground();
                             break;
@@ -186,7 +186,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
                     }
                     if(counter == 0){
                         ids.add(current.getString("fbId"));
-                        ibFavorite.setImageResource(R.drawable.ic_favorited);
+                        ivFavorite.setImageResource(R.drawable.ic_faved);
                         toFavorite.setFavorited(ids);
                         toFavorite.saveInBackground();
                     }

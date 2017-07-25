@@ -88,7 +88,7 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
 // repeat many times:
 
         SubActionButton button1 = createSubActionButton(R.drawable.ic_transit2);
-        SubActionButton button2 = createSubActionButton(R.drawable.ic_water);
+        SubActionButton button2 = createSubActionButton(R.drawable.ic_water2);
         SubActionButton button3 = createSubActionButton(R.drawable.ic_bag3);
         SubActionButton button4 = createSubActionButton(R.drawable.ic_can2);
 
