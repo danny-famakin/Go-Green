@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.codepath.gogreen.fragments.CommentFragment">
+
+        <ImageView
+            android:id="@+id/ivProfilePic"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="16dp"
+            app:srcCompat="@drawable/ic_placeholder" />
+
+        <TextView
+            android:id="@+id/tvAction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/ivProfilePic"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@+id/ivProfilePic"
+            android:layout_toLeftOf="@+id/tvTimeStamp"
+            android:layout_toRightOf="@+id/ivProfilePic"
+            android:layout_toStartOf="@+id/tvTimeStamp"
+            android:text="TextView" />
+
+        <TextView
+            android:id="@+id/tvPointsCaption"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/ivLeaf"
+            android:layout_toEndOf="@+id/ivLeaf"
+            android:layout_below="@+id/tvAction"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginBottom="16dp"
+            android:text="Points earned:" />
+
+        <TextView
+            android:id="@+id/tvTimeStamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tvAction"
+            android:layout_alignBottom="@+id/tvAction"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:id="@+id/tvPoints"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tvPointsCaption"
+            android:layout_marginLeft="4dp"
+            android:layout_toEndOf="@+id/tvPointsCaption"
+            android:text="0"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            android:layout_toRightOf="@+id/tvPointsCaption" />
+
+        <ImageButton
+            android:id="@+id/ivFavorite"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_alignLeft="@+id/tvPointsCaption"
+            android:layout_alignStart="@+id/tvPointsCaption"
+            android:layout_below="@+id/tvPoints"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/ic_fave"
+            android:layout_marginBottom="8dp"/>
+
+        <ImageButton
+            android:id="@+id/ivReply"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:background="@android:color/transparent"
+            app:srcCompat="@drawable/ic_reply"
+            android:layout_alignTop="@+id/ivFavorite"
+            android:layout_toRightOf="@+id/tvPointsCaption"
+            android:layout_toEndOf="@+id/tvPointsCaption" />
+
+
+        <ImageView
+            android:id="@+id/ivLeaf"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_alignLeft="@+id/tvAction"
+            android:layout_alignStart="@+id/tvAction"
+            android:layout_alignTop="@+id/tvPointsCaption"
+            app:srcCompat="@drawable/ic_leaf4" />
+
+        <TextView
+            android:id="@+id/tvLikes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:layout_alignBottom="@+id/ivFavorite"
+            android:layout_toLeftOf="@+id/tvPointsCaption"
+            android:layout_toStartOf="@+id/tvPointsCaption" />
+
+    <FrameLayout
+        android:id="@+id/flContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/ivFavorite">
+
+    </FrameLayout>
+
+</RelativeLayout>

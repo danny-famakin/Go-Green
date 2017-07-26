@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -15,9 +17,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.codepath.gogreen.fragments.CommentFragment;
 import com.codepath.gogreen.models.Action;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -38,7 +42,7 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
  * Created by melissaperez on 7/17/17.
  */
 
-public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder> {
+public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder>  {
 
     private List<Action> mActions;
     Context context;
@@ -151,6 +155,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
         public ImageButton ivFavorite;
         public ImageButton ibReply;
         public TextView tvLikes;
+        public RelativeLayout rlAction;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -161,6 +166,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
             ivFavorite = (ImageButton) itemView.findViewById(R.id.ivFavorite);
             ibReply = (ImageButton) itemView.findViewById(R.id.ivReply);
             tvLikes = (TextView) itemView.findViewById(R.id.tvLikes);
+            rlAction = (RelativeLayout) itemView.findViewById(R.id.rlAction);
 
             ivFavorite.setOnClickListener(new View.OnClickListener(){
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -173,6 +179,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
                 JSONArray ids = toFavorite.getJSONArray("favorited");
                 Log.d("hopeee", String.valueOf(ids));
                 if(ids == null){
+                    ids = new JSONArray();
                     ids.put(current.getString("fbId"));
                     toFavorite.setFavorited(ids);
                     toFavorite.saveInBackground();
@@ -211,6 +218,21 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
 
             }
         });
+            rlAction.setOnClickListener(new View.OnClickListener() {
+
+
+                @Override
+                public void onClick(View v) {
+                    CommentFragment commentFragment = CommentFragment.newInstance();
+                    FragmentTransaction ft = ((AppCompatActivity) context).getSupportFragmentManager()
+                            .beginTransaction();
+                    // make change
+                    ft.replace(R.id.flContainer, commentFragment);
+                    // commit
+                    ft.commit();
+
+                }
+            });
         }
     }
 
