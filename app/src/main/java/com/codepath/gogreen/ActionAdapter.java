@@ -272,7 +272,13 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
                 body = "reused " + checkUnits(action.getMagnitude(), "bag", true);
                 break;
             case "recycle":
-                body = "recycled " + checkUnits(action.getMagnitude(), action.getSubType(), true);
+                String units = action.getSubType();
+                String suffix = "";
+                if (action.getSubType().equals("paper")) {
+                    units = "sheet";
+                    suffix = " of paper";
+                }
+                body = "recycled " + checkUnits(action.getMagnitude(), units, true) + suffix;
                 break;
         }
 

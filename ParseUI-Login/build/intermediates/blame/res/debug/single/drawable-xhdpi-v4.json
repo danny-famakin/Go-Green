@@ -17,11 +17,11 @@
     },
     {
         "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/com_facebook_tooltip_blue_background.9.png",
-        "source": "/Users/famakindaniel7/.android/build-cache/f28418cb5fe742106d0dd3b5c835abb969c54365/output/res/drawable-xhdpi-v4/com_facebook_tooltip_blue_background.9.png"
+        "source": "/Users/famakindaniel7/.android/build-cache/65b744043945fbfef49a086777704f4091c5d16c/output/res/drawable-xhdpi-v4/com_facebook_tooltip_blue_background.9.png"
     },
     {
         "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/com_facebook_tooltip_black_xout.png",
-        "source": "/Users/famakindaniel7/.android/build-cache/f28418cb5fe742106d0dd3b5c835abb969c54365/output/res/drawable-xhdpi-v4/com_facebook_tooltip_black_xout.png"
+        "source": "/Users/famakindaniel7/.android/build-cache/65b744043945fbfef49a086777704f4091c5d16c/output/res/drawable-xhdpi-v4/com_facebook_tooltip_black_xout.png"
     },
     {
         "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_ic_menu_selectall_mtrl_alpha.png",
@@ -76,12 +76,12 @@
         "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/drawable-xhdpi-v4/abc_popup_background_mtrl_mult.9.png"
     },
     {
-        "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png",
-        "source": "/Users/melissaperez/.android/build-cache/ade19dd7df75653b515f79bf8e0026b7d43ea680/output/res/drawable-xhdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png"
-    },
-    {
         "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_ic_menu_copy_mtrl_am_alpha.png",
         "source": "/Users/famakindaniel7/.android/build-cache/08d8b3b42e3b02e764e2e5751aba8a1a82b1592f/output/res/drawable-xhdpi-v4/abc_ic_menu_copy_mtrl_am_alpha.png"
+    },
+    {
+        "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png",
+        "source": "/Users/melissaperez/.android/build-cache/ade19dd7df75653b515f79bf8e0026b7d43ea680/output/res/drawable-xhdpi-v4/abc_scrubber_control_to_pressed_mtrl_005.png"
     },
     {
         "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_menu_hardkey_panel_mtrl_mult.9.png",
@@ -157,7 +157,7 @@
     },
     {
         "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/com_facebook_close.png",
-        "source": "/Users/famakindaniel7/.android/build-cache/f28418cb5fe742106d0dd3b5c835abb969c54365/output/res/drawable-xhdpi-v4/com_facebook_close.png"
+        "source": "/Users/famakindaniel7/.android/build-cache/65b744043945fbfef49a086777704f4091c5d16c/output/res/drawable-xhdpi-v4/com_facebook_close.png"
     },
     {
         "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_textfield_default_mtrl_alpha.9.png",
@@ -168,16 +168,16 @@
         "source": "/Users/anyazhang/.android/build-cache/a8fe0911452bddd7b6ab6e48a1ef2c5aeec4dde9/output/res/drawable-xhdpi-v4/messenger_bubble_small_white.png"
     },
     {
-        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/com_facebook_tooltip_blue_bottomnub.png",
-        "source": "/Users/anyazhang/.android/build-cache/a8fe0911452bddd7b6ab6e48a1ef2c5aeec4dde9/output/res/drawable-xhdpi-v4/com_facebook_tooltip_blue_bottomnub.png"
-    },
-    {
         "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_cab_background_top_mtrl_alpha.9.png",
         "source": "/Users/melissaperez/.android/build-cache/ade19dd7df75653b515f79bf8e0026b7d43ea680/output/res/drawable-xhdpi-v4/abc_cab_background_top_mtrl_alpha.9.png"
     },
     {
+        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/com_facebook_tooltip_blue_bottomnub.png",
+        "source": "/Users/anyazhang/.android/build-cache/a8fe0911452bddd7b6ab6e48a1ef2c5aeec4dde9/output/res/drawable-xhdpi-v4/com_facebook_tooltip_blue_bottomnub.png"
+    },
+    {
         "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/com_facebook_button_send_icon_white.png",
-        "source": "/Users/famakindaniel7/.android/build-cache/f28418cb5fe742106d0dd3b5c835abb969c54365/output/res/drawable-xhdpi-v4/com_facebook_button_send_icon_white.png"
+        "source": "/Users/famakindaniel7/.android/build-cache/65b744043945fbfef49a086777704f4091c5d16c/output/res/drawable-xhdpi-v4/com_facebook_button_send_icon_white.png"
     },
     {
         "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/notify_panel_notification_icon_bg.png",
@@ -221,7 +221,7 @@
     },
     {
         "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/com_facebook_tooltip_black_topnub.png",
-        "source": "/Users/famakindaniel7/.android/build-cache/f28418cb5fe742106d0dd3b5c835abb969c54365/output/res/drawable-xhdpi-v4/com_facebook_tooltip_black_topnub.png"
+        "source": "/Users/famakindaniel7/.android/build-cache/65b744043945fbfef49a086777704f4091c5d16c/output/res/drawable-xhdpi-v4/com_facebook_tooltip_black_topnub.png"
     },
     {
         "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/messenger_bubble_large_blue.png",
@@ -257,11 +257,11 @@
     },
     {
         "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/com_facebook_button_icon_white.png",
-        "source": "/Users/famakindaniel7/.android/build-cache/f28418cb5fe742106d0dd3b5c835abb969c54365/output/res/drawable-xhdpi-v4/com_facebook_button_icon_white.png"
+        "source": "/Users/famakindaniel7/.android/build-cache/65b744043945fbfef49a086777704f4091c5d16c/output/res/drawable-xhdpi-v4/com_facebook_button_icon_white.png"
     },
     {
         "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/messenger_bubble_large_white.png",
-        "source": "/Users/famakindaniel7/.android/build-cache/f28418cb5fe742106d0dd3b5c835abb969c54365/output/res/drawable-xhdpi-v4/messenger_bubble_large_white.png"
+        "source": "/Users/famakindaniel7/.android/build-cache/65b744043945fbfef49a086777704f4091c5d16c/output/res/drawable-xhdpi-v4/messenger_bubble_large_white.png"
     },
     {
         "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/com_facebook_close.png",
@@ -288,16 +288,16 @@
         "source": "/Users/melissaperez/.android/build-cache/ade19dd7df75653b515f79bf8e0026b7d43ea680/output/res/drawable-xhdpi-v4/abc_ic_menu_cut_mtrl_alpha.png"
     },
     {
-        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_ic_star_black_36dp.png",
-        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/drawable-xhdpi-v4/abc_ic_star_black_36dp.png"
-    },
-    {
         "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_ic_star_black_36dp.png",
         "source": "/Users/famakindaniel7/.android/build-cache/08d8b3b42e3b02e764e2e5751aba8a1a82b1592f/output/res/drawable-xhdpi-v4/abc_ic_star_black_36dp.png"
     },
     {
+        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_ic_star_black_36dp.png",
+        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/drawable-xhdpi-v4/abc_ic_star_black_36dp.png"
+    },
+    {
         "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/com_facebook_tooltip_blue_topnub.png",
-        "source": "/Users/famakindaniel7/.android/build-cache/f28418cb5fe742106d0dd3b5c835abb969c54365/output/res/drawable-xhdpi-v4/com_facebook_tooltip_blue_topnub.png"
+        "source": "/Users/famakindaniel7/.android/build-cache/65b744043945fbfef49a086777704f4091c5d16c/output/res/drawable-xhdpi-v4/com_facebook_tooltip_blue_topnub.png"
     },
     {
         "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_scrubber_control_to_pressed_mtrl_000.png",
@@ -329,7 +329,7 @@
     },
     {
         "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/com_facebook_button_send_icon_blue.png",
-        "source": "/Users/famakindaniel7/.android/build-cache/f28418cb5fe742106d0dd3b5c835abb969c54365/output/res/drawable-xhdpi-v4/com_facebook_button_send_icon_blue.png"
+        "source": "/Users/famakindaniel7/.android/build-cache/65b744043945fbfef49a086777704f4091c5d16c/output/res/drawable-xhdpi-v4/com_facebook_button_send_icon_blue.png"
     },
     {
         "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_textfield_activated_mtrl_alpha.9.png",
@@ -437,7 +437,7 @@
     },
     {
         "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/messenger_bubble_small_white.png",
-        "source": "/Users/famakindaniel7/.android/build-cache/f28418cb5fe742106d0dd3b5c835abb969c54365/output/res/drawable-xhdpi-v4/messenger_bubble_small_white.png"
+        "source": "/Users/famakindaniel7/.android/build-cache/65b744043945fbfef49a086777704f4091c5d16c/output/res/drawable-xhdpi-v4/messenger_bubble_small_white.png"
     },
     {
         "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_textfield_search_activated_mtrl_alpha.9.png",
@@ -445,7 +445,7 @@
     },
     {
         "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/messenger_bubble_large_blue.png",
-        "source": "/Users/famakindaniel7/.android/build-cache/f28418cb5fe742106d0dd3b5c835abb969c54365/output/res/drawable-xhdpi-v4/messenger_bubble_large_blue.png"
+        "source": "/Users/famakindaniel7/.android/build-cache/65b744043945fbfef49a086777704f4091c5d16c/output/res/drawable-xhdpi-v4/messenger_bubble_large_blue.png"
     },
     {
         "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_ic_star_black_16dp.png",
@@ -457,7 +457,7 @@
     },
     {
         "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/com_facebook_button_icon_blue.png",
-        "source": "/Users/famakindaniel7/.android/build-cache/f28418cb5fe742106d0dd3b5c835abb969c54365/output/res/drawable-xhdpi-v4/com_facebook_button_icon_blue.png"
+        "source": "/Users/famakindaniel7/.android/build-cache/65b744043945fbfef49a086777704f4091c5d16c/output/res/drawable-xhdpi-v4/com_facebook_button_icon_blue.png"
     },
     {
         "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_list_focused_holo.9.png",
@@ -469,7 +469,7 @@
     },
     {
         "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/com_facebook_tooltip_black_background.9.png",
-        "source": "/Users/famakindaniel7/.android/build-cache/f28418cb5fe742106d0dd3b5c835abb969c54365/output/res/drawable-xhdpi-v4/com_facebook_tooltip_black_background.9.png"
+        "source": "/Users/famakindaniel7/.android/build-cache/65b744043945fbfef49a086777704f4091c5d16c/output/res/drawable-xhdpi-v4/com_facebook_tooltip_black_background.9.png"
     },
     {
         "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_cab_background_top_mtrl_alpha.9.png",
@@ -517,7 +517,7 @@
     },
     {
         "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/com_facebook_tooltip_blue_xout.png",
-        "source": "/Users/famakindaniel7/.android/build-cache/f28418cb5fe742106d0dd3b5c835abb969c54365/output/res/drawable-xhdpi-v4/com_facebook_tooltip_blue_xout.png"
+        "source": "/Users/famakindaniel7/.android/build-cache/65b744043945fbfef49a086777704f4091c5d16c/output/res/drawable-xhdpi-v4/com_facebook_tooltip_blue_xout.png"
     },
     {
         "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_textfield_activated_mtrl_alpha.9.png",
@@ -541,7 +541,7 @@
     },
     {
         "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/com_facebook_button_like_icon_selected.png",
-        "source": "/Users/famakindaniel7/.android/build-cache/f28418cb5fe742106d0dd3b5c835abb969c54365/output/res/drawable-xhdpi-v4/com_facebook_button_like_icon_selected.png"
+        "source": "/Users/famakindaniel7/.android/build-cache/65b744043945fbfef49a086777704f4091c5d16c/output/res/drawable-xhdpi-v4/com_facebook_button_like_icon_selected.png"
     },
     {
         "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_list_longpressed_holo.9.png",
@@ -613,7 +613,7 @@
     },
     {
         "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/messenger_bubble_small_blue.png",
-        "source": "/Users/famakindaniel7/.android/build-cache/f28418cb5fe742106d0dd3b5c835abb969c54365/output/res/drawable-xhdpi-v4/messenger_bubble_small_blue.png"
+        "source": "/Users/famakindaniel7/.android/build-cache/65b744043945fbfef49a086777704f4091c5d16c/output/res/drawable-xhdpi-v4/messenger_bubble_small_blue.png"
     },
     {
         "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_ic_menu_copy_mtrl_am_alpha.png",
@@ -753,7 +753,7 @@
     },
     {
         "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/messenger_button_send_round_shadow.png",
-        "source": "/Users/famakindaniel7/.android/build-cache/f28418cb5fe742106d0dd3b5c835abb969c54365/output/res/drawable-xhdpi-v4/messenger_button_send_round_shadow.png"
+        "source": "/Users/famakindaniel7/.android/build-cache/65b744043945fbfef49a086777704f4091c5d16c/output/res/drawable-xhdpi-v4/messenger_button_send_round_shadow.png"
     },
     {
         "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_text_select_handle_left_mtrl_dark.png",
@@ -805,7 +805,7 @@
     },
     {
         "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/com_facebook_tooltip_blue_bottomnub.png",
-        "source": "/Users/famakindaniel7/.android/build-cache/f28418cb5fe742106d0dd3b5c835abb969c54365/output/res/drawable-xhdpi-v4/com_facebook_tooltip_blue_bottomnub.png"
+        "source": "/Users/famakindaniel7/.android/build-cache/65b744043945fbfef49a086777704f4091c5d16c/output/res/drawable-xhdpi-v4/com_facebook_tooltip_blue_bottomnub.png"
     },
     {
         "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/notification_bg_low_pressed.9.png",
@@ -817,7 +817,7 @@
     },
     {
         "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/com_facebook_tooltip_black_bottomnub.png",
-        "source": "/Users/famakindaniel7/.android/build-cache/f28418cb5fe742106d0dd3b5c835abb969c54365/output/res/drawable-xhdpi-v4/com_facebook_tooltip_black_bottomnub.png"
+        "source": "/Users/famakindaniel7/.android/build-cache/65b744043945fbfef49a086777704f4091c5d16c/output/res/drawable-xhdpi-v4/com_facebook_tooltip_black_bottomnub.png"
     },
     {
         "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-xhdpi-v4/abc_text_select_handle_middle_mtrl_light.png",

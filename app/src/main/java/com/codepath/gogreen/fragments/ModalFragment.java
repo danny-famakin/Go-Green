@@ -1,7 +1,6 @@
 package com.codepath.gogreen.fragments;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,9 +11,14 @@ import android.widget.EditText;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.codepath.gogreen.models.Action;
+import com.parse.GetCallback;
+import com.parse.ParseException;
+import com.parse.ParseObject;
 import com.parse.ParseUser;
 
 import org.apache.commons.lang3.StringUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by anyazhang on 7/13/17.
@@ -25,6 +29,7 @@ public class ModalFragment extends Fragment {
     MaterialDialog modal;
     public OnItemSelectedListener listener;
     public String USER_ID = ParseUser.getCurrentUser().getString("fbId");
+    public String[] resources = new String[] {"emissions", "fuel", "water", "trees"};
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -120,11 +125,35 @@ public class ModalFragment extends Fragment {
 
     }
 
-    SharedPreferences.Editor putDouble(final SharedPreferences.Editor edit, final String key, final double value) {
-        return edit.putLong(key, Double.doubleToRawLongBits(value));
+    public void updateResources(final double newPoints, final double newMagnitude, final Double[] subTypeConstants) {
+
+        ParseUser.getCurrentUser().fetchInBackground(new GetCallback<ParseObject>() {
+            @Override
+            public void done(ParseObject object, ParseException e) {
+                ParseUser currentUser = (ParseUser) object;
+                double points = currentUser.getInt("totalPoints");
+                points += newPoints;
+                currentUser.put("totalPoints", points);
+
+                JSONObject resourceData = new JSONObject();
+                JSONObject resourceJSON = currentUser.getJSONObject("resourceData");
+//                Double[] subTypeConstants = actionConstants.get(subType);
+
+                if (resourceJSON != null) {
+                    for (int j = 0; j < resources.length; j++) {
+                        String resource = resources[j];
+                        try {
+                            resourceData.put(resource, resourceJSON.getDouble(resource) + (subTypeConstants[j] * newMagnitude));
+                        } catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
+                    currentUser.put("resourceData", resourceData);
+                }
+
+                currentUser.saveInBackground();
+            }
+        });
     }
 
-    double getDouble(final SharedPreferences prefs, final String key, final double defaultValue) {
-        return Double.longBitsToDouble(prefs.getLong(key, Double.doubleToLongBits(defaultValue)));
-    }
 }
