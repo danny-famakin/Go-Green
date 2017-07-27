@@ -208,7 +208,7 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
             @Override
             public boolean onQueryTextSubmit(String query) {
                 // perform query here
-                Intent i = new Intent(context, Search.class);
+                Intent i = new Intent(context, SearchActivity.class);
                 i.putExtra("search_users", query);
                 context.startActivity(i);
                 searchView.clearFocus();

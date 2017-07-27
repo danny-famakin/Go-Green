@@ -1,8 +1,6 @@
 package com.codepath.gogreen.fragments;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
@@ -14,13 +12,8 @@ import android.widget.Toast;
 
 import com.codepath.gogreen.R;
 import com.codepath.gogreen.models.Action;
-import com.parse.FindCallback;
 import com.parse.ParseException;
-import com.parse.ParseQuery;
-import com.parse.ParseUser;
 import com.parse.SaveCallback;
-
-import java.util.List;
 
 /**
  * Created by anyazhang on 7/14/17.
@@ -30,7 +23,7 @@ public class WaterFragment extends ModalFragment {
    // EditText etTime;
     LayoutInflater inflater;
     View v;
-    public static final int SHOWER_BASELINE = 10;
+    public static final double SHOWER_BASELINE = 8.2;
     public static final int SECS_PER_MIN = 60;
     double newTime;
     TextView tvTimer;
@@ -47,6 +40,7 @@ public class WaterFragment extends ModalFragment {
     boolean showering;
     double newPoints;
     int MIN_SECS = 30;
+    Double[] waterConstants = new Double[] {0.1499, 0.0102, 9.46, 0.};
 
     public static WaterFragment newInstance() {
 
@@ -60,6 +54,7 @@ public class WaterFragment extends ModalFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         v = inflater.inflate(R.layout.activity_log_water, null);
 
@@ -67,7 +62,6 @@ public class WaterFragment extends ModalFragment {
         tvTimer = (TextView) v.findViewById(R.id.tvTimer);
         tvErrorMsg = (TextView) v.findViewById(R.id.tvErrorMsg);
         btStartPause = (Button) v.findViewById(R.id.btStartPause);
-        btStartPause.getBackground().setColorFilter(getActivity().getResources().getColor(R.color.offWhite), PorterDuff.Mode.MULTIPLY);
         btStartPause.setTextColor(getActivity().getResources().getColor(R.color.colorPrimary));
 
 //        handler = new Handler() {
@@ -163,56 +157,21 @@ public class WaterFragment extends ModalFragment {
     }
 
     private void updateData() {
-        // Get stored data
-
-
-
-
-        SharedPreferences waterData = this.getActivity().getSharedPreferences("water", 0);
-        double totalShowerTime = getDouble(waterData, "showerTime", 0);
-        double sampleSize = getDouble(waterData, "sampleSize", 0);
-        double points = getDouble(waterData, "points", 0);
-
-        // update local copies of data
 
         //newTime = Double.parseDouble(etTime.getText().toString());
         newTime = minutes + (((double) seconds) / 60.0);
         Log.d("newTime", String.valueOf(newTime));
-        totalShowerTime += newTime;
 
+        double savedTime;
         if (newTime < SHOWER_BASELINE) {
-            newPoints = 2 * (SHOWER_BASELINE - newTime);
+            savedTime = (SHOWER_BASELINE - newTime);
         }
         else {
-            newPoints = 0;
+            savedTime = 0;
         }
+        newPoints = 2 * savedTime;
 
-        final ParseUser currentUser = ParseUser.getCurrentUser();
-
-        ParseQuery<ParseUser> query = ParseQuery.getQuery("_User");
-        query.whereEqualTo("fbId", currentUser.get("fbId"));
-        query.findInBackground(new FindCallback<ParseUser>() {
-            public void done(List<ParseUser> userList, ParseException e) {
-                if (e == null && userList.size() > 0) {
-                    double points = userList.get(0).getInt("totalPoints");
-                    points += newPoints;
-                    currentUser.put("totalPoints", points);
-                    currentUser.saveInBackground();
-                } else if (e != null) {
-                    Log.e("points", "Error: " + e.getMessage());
-                }
-            }
-        });
-
-        points += newPoints;
-        sampleSize += 1;
-
-        // push local changes to storage
-        SharedPreferences.Editor editor = waterData.edit();
-        putDouble(editor, "showerTime", totalShowerTime);
-        putDouble(editor, "points", points);
-        putDouble(editor, "sampleSize", sampleSize);
-        editor.commit();
+        updateResources(newPoints, savedTime, waterConstants);
 
 
 

@@ -23,7 +23,7 @@ import java.util.List;
 
 
 
-public class Search extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity {
     String search;
     ArrayList<ParseUser> mUsers;
     RecyclerView rvResult;
@@ -68,7 +68,7 @@ public class Search extends AppCompatActivity {
                         userAdapter.notifyItemInserted(0);
                     }
                 } else {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(Search.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(SearchActivity.this);
                     builder.setMessage(e.getMessage())
                             .setTitle("User not found")
                             .setPositiveButton("Done", null);
