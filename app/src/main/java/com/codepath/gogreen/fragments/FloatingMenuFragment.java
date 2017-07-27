@@ -137,6 +137,12 @@ public class FloatingMenuFragment extends Fragment {
     }
 
     public ArrayList<String> loadFriends() {
+//        ParseUser.getCurrentUser().fetchInBackground(new GetCallback<ParseObject>() {
+//            @Override
+//            public void done(ParseObject object, ParseException e) {
+//
+//            }
+//        });
         currentUser = ParseUser.getCurrentUser();
         final String userId = currentUser.getString("fbId");
         ArrayList<String> friendsList = new ArrayList<String>();

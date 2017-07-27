@@ -65,7 +65,8 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
         // check if necessary to display login screen
         currentUser = ParseUser.getCurrentUser();
         if((currentUser != null)){
-            getFriends();
+        //getFriends();
+            loadFeed();
         }
 
         else {
@@ -251,7 +252,7 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (requestCode == 0 && resultCode == android.app.Activity.RESULT_OK) {
-            getFriends();
+//            getFriends();
         } else {
 
         }
