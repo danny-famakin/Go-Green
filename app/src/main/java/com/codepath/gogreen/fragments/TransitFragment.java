@@ -2,7 +2,6 @@ package com.codepath.gogreen.fragments;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
@@ -39,17 +38,13 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
-import com.parse.FindCallback;
 import com.parse.ParseException;
-import com.parse.ParseQuery;
-import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.List;
-
-import static com.codepath.gogreen.R.id.map;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by anyazhang on 7/13/17.
@@ -64,6 +59,9 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
     View v;
     double[] pointValues = {5, 3, 1.5};
     double newPoints;
+    Map<String, Double[]> transitConstants = new HashMap<String, Double[]>();
+    double totalDistance;
+
 
     private static final String TAG = TransitFragment.class.getSimpleName();
     private GoogleMap mMap;
@@ -127,53 +125,59 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-            inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            v = inflater.inflate(R.layout.activity_log_transit, null);
+        transitConstants.put("bus", new Double[] {0.2976, .0077, 0., 0.});
+        transitConstants.put("subway", new Double[] {.7408, .0454, 0., 0.});
+        transitConstants.put("train", new Double[] {0.7408, .0454, 0., 0.});
+        transitConstants.put("bike", new Double[] {0.9590, .0856, 0., 0.});
+        transitConstants.put("walk", new Double[] {0.9590, 0.0843, 0., 0.});
 
-            Spinner spVehicle = (Spinner) v.findViewById(R.id.spVehicle);
-            distance = (TextView) v.findViewById(R.id.distance);
+        inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        v = inflater.inflate(R.layout.activity_log_transit, null);
 
-            spVehicle.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
-                    vehicleType = parent.getItemAtPosition(pos).toString();
-                }
+        Spinner spVehicle = (Spinner) v.findViewById(R.id.spVehicle);
+        distance = (TextView) v.findViewById(R.id.tvDistCounter);
 
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-                    vehicleType = parent.getItemAtPosition(0).toString();
-                }
-            });
-
-            // Create an ArrayAdapter using the string array and a default spinner layout
-            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getActivity(),
-                    R.array.transportation_types, android.R.layout.simple_spinner_item);
-            // Specify the layout to use when the list of choices appears
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            // Apply the adapter to the spinner
-            spVehicle.setAdapter(adapter);
-
-            openModal(v);
-
-            if (savedInstanceState != null) {
-                mLastKnownLocation = savedInstanceState.getParcelable(KEY_LOCATION);
-                mCameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION);
+        spVehicle.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+                vehicleType = parent.getItemAtPosition(pos).toString();
             }
 
-            track = (ToggleButton) v.findViewById(R.id.start_tracking);
-            track.setOnClickListener(this);
-            // Build the Play services client for use by the Fused Location Provider and the Places API.
-            // Use the addApi() method to request the Google Places API and the Fused Location Provider.
-            //createLocationRequest();
-            mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
-                    .enableAutoManage(getActivity() /*FragmentActivity */,
-                            this /* OnConnectionFailedListener */)
-                    .addConnectionCallbacks(this)
-                    .addApi(LocationServices.API)
-                    .addApi(Places.GEO_DATA_API)
-                    .addApi(Places.PLACE_DETECTION_API)
-                    .build();
-            mGoogleApiClient.connect();
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                vehicleType = parent.getItemAtPosition(0).toString();
+            }
+        });
+
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getActivity(),
+                R.array.transportation_types, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        spVehicle.setAdapter(adapter);
+
+        openModal(v);
+
+        if (savedInstanceState != null) {
+            mLastKnownLocation = savedInstanceState.getParcelable(KEY_LOCATION);
+            mCameraPosition = savedInstanceState.getParcelable(KEY_CAMERA_POSITION);
+        }
+
+        track = (ToggleButton) v.findViewById(R.id.btnTrack);
+        track.setOnClickListener(this);
+        // Build the Play services client for use by the Fused Location Provider and the Places API.
+        // Use the addApi() method to request the Google Places API and the Fused Location Provider.
+        //createLocationRequest();
+        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
+                .enableAutoManage(getActivity() /*FragmentActivity */,
+                        this /* OnConnectionFailedListener */)
+                .addConnectionCallbacks(this)
+                .addApi(LocationServices.API)
+                .addApi(Places.GEO_DATA_API)
+                .addApi(Places.PLACE_DETECTION_API)
+                .build();
+        mGoogleApiClient.connect();
 
 
     }
@@ -236,46 +240,56 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
     }
 
     private void updateData(int index) {
-        // Get stored data
-        SharedPreferences transitData = this.getActivity().getSharedPreferences("transit", 0);
-        double[] distances = new double[] {getDouble(transitData, "dist0", 0), getDouble(transitData, "dist1", 0),getDouble(transitData, "dist2", 0)};
-        double points = getDouble(transitData, "points", 0);
-
-       // update local copies of data
-        distances[index] += newDistance;
         newPoints = (pointValues[index] * newDistance);
-        points += newPoints;
+        updateResources(newPoints, newDistance, transitConstants.get(vehicleType));
+
+//        ParseUser.getCurrentUser().fetchInBackground(new GetCallback<ParseObject>() {
+//            @Override
+//            public void done(ParseObject object, ParseException e) {
+//                ParseUser currentUser = (ParseUser) object;
+//                double points = currentUser.getInt("totalPoints");
+//                points += newPoints;
+//                currentUser.put("totalPoints", points);
+//
+//                JSONObject resourceData = new JSONObject();
+//                JSONObject resourceJSON = currentUser.getJSONObject("resourceData");
+//                Double[] vehicleConstants = transitConstants.get(vehicleType);
+//
+//                if (resourceJSON != null) {
+//                    for (int j = 0; j < resources.length; j++) {
+//                        String resource = resources[j];
+//                        try {
+//                            resourceData.put(resource, resourceJSON.getDouble(resource) + (vehicleConstants[j] * newDistance));
+//                            Log.d("resourceData", resource+": " + String.valueOf(resourceJSON.getDouble(resource) + (vehicleConstants[j] * newDistance)));
+//                        } catch (JSONException e1) {
+//                            e1.printStackTrace();
+//                        }
+//                    }
+//                    currentUser.put("resourceData", resourceData);
+//                }
+//
+//                currentUser.saveInBackground();
+//            }
+//        });
 
 
-        final ParseUser currentUser = ParseUser.getCurrentUser();
+//        ParseQuery<ParseUser> query = ParseQuery.getQuery("_User");
+//        query.whereEqualTo("fbId", currentUser.get("fbId"));
+//        query.findInBackground(new FindCallback<ParseUser>() {
+//            public void done(List<ParseUser> userList, ParseException e) {
+//                if (e == null && userList.size() > 0) {
+//                    ParseUser user =
+//                    double points = userList.get(0).getInt("totalPoints");
+//                    points += newPoints;
+//                    currentUser.put("totalPoints", points);
+//                    currentUser.saveInBackground();
+//                    for (int i = 0; i <  )
+//                } else if (e != null) {
+//                    Log.e("points", "Error: " + e.getMessage());
+//                }
+//            }
+//        });
 
-        ParseQuery<ParseUser> query = ParseQuery.getQuery("_User");
-        query.whereEqualTo("fbId", currentUser.get("fbId"));
-        query.findInBackground(new FindCallback<ParseUser>() {
-            public void done(List<ParseUser> userList, ParseException e) {
-                if (e == null && userList.size() > 0) {
-                    double points = userList.get(0).getInt("totalPoints");
-                    points += newPoints;
-                    currentUser.put("totalPoints", points);
-                    currentUser.saveInBackground();
-                } else if (e != null) {
-                    Log.e("points", "Error: " + e.getMessage());
-                }
-            }
-        });
-
-        Log.d("total points", String.valueOf(points));
-
-        // push local changes to storage
-        SharedPreferences.Editor editor = transitData.edit();
-
-        for (int i = 0; i < 3; i ++) {
-            putDouble(editor, "dist" + i, distances[i]);
-        }
-        putDouble(editor, "points", points);
-
-        // Commit the edits!
-        editor.commit();
 
         // Add action to database
         final Action action = new Action();
@@ -297,9 +311,9 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
 
     @Override
     public void onConnected(@Nullable Bundle connectionHint) {
-    // Build the map.
+        // Build the map.
         SupportMapFragment mapFragment = (SupportMapFragment) getFragmentManager()
-                .findFragmentById(map);
+                .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         createLocationRequest();
     }
@@ -430,7 +444,7 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
          /*Display latitude*/
         //((TextView) findViewById(R.id.latitude)).setText(Double.toString(location.getLatitude()));
         if (location != null)
-        points.add(latLng);
+            points.add(latLng);
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(new LatLng(points.get(0).latitude, points.get(0).longitude))
                 .zoom(17)
@@ -441,16 +455,12 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
 
         redrawLine();
 
-        double totalDistance = 0;
-        int i;
-        for (i = 0; i < points.size(); i++){
-            LatLng start = new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude());
-            LatLng end = new LatLng(location.getLatitude(), location.getLongitude());
-            dist = (CalculationByDistance(start, end)) * 0.000621371;
+        LatLng start = new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude());
+        LatLng end = new LatLng(latLng.latitude, latLng.longitude);
+        dist = (CalculationByDistance(start, end)) * 0.000621371;
 
-            totalDistance += dist;
-        }
-        ((TextView) v.findViewById(R.id.distance)).setText(Double.toString(totalDistance));
+        totalDistance += dist;
+        ((TextView) v.findViewById(R.id.tvDistCounter)).setText(String.format("%.2f", totalDistance));
     }
 
     public double CalculationByDistance(LatLng StartP, LatLng EndP) {
@@ -478,13 +488,13 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
 
     private void redrawLine(){
         mMap.clear();  //clears all Markers and Polylines
-        PolylineOptions options = new PolylineOptions().width(10).color(Color.BLUE).geodesic(true);
+        PolylineOptions options = new PolylineOptions().width(25).color(Color.BLUE).geodesic(true);
         for (int i = 0; i < points.size(); i++) {
             LatLng point = points.get(i);
             options.add(point);
         }
         mMap.addMarker(new MarkerOptions()
-                .position(new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude()))); //add Marker in current position
+                .position(new LatLng(points.get(0).latitude, points.get(0).longitude))); //add Marker in current position
         polyline = mMap.addPolyline(options);//add Polyline
     }
 

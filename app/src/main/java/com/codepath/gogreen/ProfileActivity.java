@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.bumptech.glide.Glide;
 import com.parse.ParseUser;
@@ -21,6 +22,8 @@ import java.util.Locale;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
+import static android.view.View.GONE;
+
 public class ProfileActivity extends AppCompatActivity {
 
     ImageView ivProfilePic;
@@ -28,6 +31,7 @@ public class ProfileActivity extends AppCompatActivity {
     ParseUser currentUser;
     TextView tvName;
     String imageURL;
+    ToggleButton addFriend;
     TextView tvJoinDate;
 
     @Override
@@ -42,7 +46,8 @@ public class ProfileActivity extends AppCompatActivity {
         ivProfilePic = (ImageView) findViewById(R.id.ivProfilePicDet);
         tvName = (TextView) findViewById(R.id.tvName);
         tvJoinDate = (TextView) findViewById(R.id.tvJoin);
-
+        addFriend = (ToggleButton) findViewById(R.id.addFriends);
+        addFriend.setVisibility(GONE);
         currentUser = ParseUser.getCurrentUser();
 
         // ensure user logged in

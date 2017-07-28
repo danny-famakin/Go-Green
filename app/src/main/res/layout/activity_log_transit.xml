@@ -4,74 +4,118 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_width="match_parent">
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="16dp"
+        android:text="Transit"
+        android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
+
+    <TextView
+        android:id="@+id/tvPointsCaption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tvTitle"
+        android:layout_alignStart="@+id/tvTitle"
+        android:layout_below="@+id/tvTitle"
+        android:layout_marginTop="8dp"
+        android:text="Earn points for using alternative transit!!" />
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/tvPointsCaption"
+        android:layout_marginTop="8dp"
         android:id="@+id/flMap">
-
         <fragment
-            android:id="@+id/map"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="450dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true" />
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="335dp"
+        android:layout_alignParentLeft="true" />
+
+
+
+
     </FrameLayout>
 
-
+    <ToggleButton
+        android:id="@+id/btnTrack"
+        android:layout_width="90dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="12dp"
+        android:background="@color/offWhite"
+        android:gravity="center"
+        android:textColor="@color/colorPrimary"
+        android:textOff="Start"
+        android:textOn="Pause"
+        android:layout_alignBottom="@id/flMap"
+        android:layout_marginBottom="16dp"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/flMap"
+        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true">
-
-
-        <ToggleButton
-            android:id="@+id/start_tracking"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark"
-            android:textColor="@color/offWhite"
-            android:textOff="Start Tracking"
-            android:textOn="Stop Tracking"
-            android:layout_gravity="bottom"
-            android:layout_marginRight="16dp"
-            android:layout_marginLeft="16dp"
-            android:gravity="center"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="17dp" />
+        android:id="@+id/relativeLayout">
 
         <TextView
-            android:id="@+id/distance"
+            android:id="@+id/tvDistCounter"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/start_tracking"
-            android:layout_marginRight="5dp"
-            android:layout_marginBottom="5dp"
-            android:text="0"
-            android:layout_alignBottom="@+id/spVehicle"
-            android:layout_alignStart="@+id/start_tracking"
-            android:layout_alignLeft="@+id/start_tracking" />
+            android:text="0.00"
+            android:textColor="@color/colorAccentDark"
+            android:textSize="55sp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/tvDistUnits"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="mi"
+            android:textColor="@color/colorAccentDark"
+            android:textSize="24sp"
+
+            android:layout_alignBaseline="@+id/tvDistCounter"
+            android:layout_alignBottom="@+id/tvDistCounter"
+            android:layout_toEndOf="@+id/tvDistCounter"
+            android:layout_toRightOf="@+id/tvDistCounter" />
+
+        <TextView
+            android:id="@+id/tvVehicle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/tvDistCounter"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="8dp"
+            android:text="Mode"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textSize="16sp" />
+
 
         <Spinner
-            android:layout_width="5dp"
+            android:layout_width="wrap_content"
             android:id="@+id/spVehicle"
             android:layout_height="wrap_content"
             android:entries="@array/transportation_types"
-            android:layout_alignParentTop="false"
-            android:layout_toEndOf="@+id/distance"
-            android:layout_alignEnd="@id/start_tracking"
-            android:layout_below="@id/start_tracking"
-            android:layout_marginBottom="5dp"
-            android:layout_toRightOf="@+id/distance"
-            android:layout_alignRight="@id/start_tracking" />
+            android:layout_alignBaseline="@id/tvVehicle"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"/>
+
 
     </RelativeLayout>
+
+
 
 </RelativeLayout>

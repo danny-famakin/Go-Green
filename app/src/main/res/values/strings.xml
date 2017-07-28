@@ -8,12 +8,13 @@
         <item>train</item>
         <item>bike</item>
         <item>walking</item>
-        <item>carpool</item>
     </string-array>
 
     <string-array name="materials">
         <item>bottles</item>
         <item>cans</item>
+        <item>sheets of paper</item>
+
     </string-array>
 
     <string-array name="fb_permissions">

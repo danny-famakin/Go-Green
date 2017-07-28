@@ -99,9 +99,13 @@
         android:id="@+id/tvLikes"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0"
         android:layout_alignBottom="@+id/ivFavorite"
+        android:layout_marginRight="2dp"
         android:layout_toLeftOf="@+id/tvPointsCaption"
-        android:layout_toStartOf="@+id/tvPointsCaption" />
+        android:layout_toStartOf="@+id/tvPointsCaption"
+        android:elevation="0dp"
+        android:paddingBottom="2dp"
+        android:text="0"
+        android:textAllCaps="false" />
 
 </RelativeLayout>
