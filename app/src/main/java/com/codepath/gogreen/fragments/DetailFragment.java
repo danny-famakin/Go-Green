@@ -138,7 +138,7 @@ public class DetailFragment extends Fragment {
         commentAdapter = new CommentAdapter(comments);
         rvComments.setAdapter(commentAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        linearLayoutManager.setReverseLayout(true);
+//        linearLayoutManager.setReverseLayout(true);
         rvComments.setLayoutManager(linearLayoutManager);
         rvComments.addItemDecoration(new DividerItemDecoration(getContext()));
         // set the adapter
@@ -203,8 +203,8 @@ public class DetailFragment extends Fragment {
         for (int i = 0; i < commentList.size(); i++) {
             Comment comment = commentList.get(i);
             Log.d("comment", comment.getString("uid"));
-            comments.add(0, comment);
-            commentAdapter.notifyItemInserted(0);
+            comments.add(comments.size(), comment);
+            commentAdapter.notifyItemInserted(comments.size());
         }
     }
 

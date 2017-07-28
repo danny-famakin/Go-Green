@@ -14,8 +14,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="14dp"
         android:layout_marginStart="14dp"
-        android:layout_marginTop="13dp"
-        app:srcCompat="@android:color/black" />
+        android:layout_marginTop="13dp" />
 
     <TextView
         android:id="@+id/tvName"
@@ -25,8 +24,7 @@
         android:layout_marginLeft="12dp"
         android:layout_marginStart="12dp"
         android:layout_toEndOf="@+id/ivComment"
-        android:layout_toRightOf="@+id/ivComment"
-        android:text="TextView" />
+        android:layout_toRightOf="@+id/ivComment" />
 
     <TextView
         android:id="@+id/tvPost"
@@ -35,7 +33,6 @@
         android:layout_alignLeft="@+id/tvName"
         android:layout_alignStart="@+id/tvName"
         android:layout_below="@+id/tvName"
-        android:text="TextView"
-        android:layout_marginBottom="5dp"/>
+        android:layout_marginBottom="12dp" />
 
 </RelativeLayout>

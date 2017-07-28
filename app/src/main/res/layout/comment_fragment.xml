@@ -111,7 +111,7 @@
             android:layout_height="1dp"
             android:background="@android:color/darker_gray"
             android:layout_below="@id/rlPost"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="6dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:id="@+id/line" />
@@ -120,21 +120,25 @@
             android:id="@+id/etWriteComment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rvComments"
+            android:layout_below="@+id/line2"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:layout_toLeftOf="@+id/btComment"
-            android:layout_toStartOf="@+id/btComment" />
+            android:layout_toStartOf="@+id/btComment"
+            android:layout_marginTop="6dp"/>
 
-        <Button
-            android:id="@+id/btComment"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="onPost"
-            android:text="Reply"
-            android:layout_below="@+id/rvComments"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
+    <Button
+        android:id="@+id/btComment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/etWriteComment"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/rvComments"
+        android:background="@android:color/transparent"
+        android:onClick="onPost"
+        android:text="Reply"
+        android:textColor="@color/colorAccent" />
 
 
         <android.support.v7.widget.RecyclerView
@@ -142,6 +146,17 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scrollbars="vertical"
-            android:layout_below="@+id/line" />
+            android:layout_below="@+id/line"
+            />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@android:color/darker_gray"
+        android:layout_below="@id/rvComments"
+        android:layout_marginTop="6dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:id="@+id/line2" />
 
 </RelativeLayout>
