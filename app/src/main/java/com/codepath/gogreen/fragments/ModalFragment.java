@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -15,6 +17,7 @@ import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 
 import org.apache.commons.lang3.StringUtils;
 import org.json.JSONException;
@@ -125,7 +128,8 @@ public class ModalFragment extends Fragment {
 
     }
 
-    public void updateResources(final double newPoints, final double newMagnitude, final Double[] subTypeConstants) {
+    public void updateResources(final String actionType, final String subType, final double newPoints, final double newMagnitude, final Double[] subTypeConstants, final double showerLength) {
+        final JSONObject actionResourceData = new JSONObject();
 
         ParseUser.getCurrentUser().fetchInBackground(new GetCallback<ParseObject>() {
             @Override
@@ -135,7 +139,7 @@ public class ModalFragment extends Fragment {
                 points += newPoints;
                 currentUser.put("totalPoints", points);
 
-                JSONObject resourceData = new JSONObject();
+                JSONObject userResourceData = new JSONObject();
                 JSONObject resourceJSON = currentUser.getJSONObject("resourceData");
 //                Double[] subTypeConstants = actionConstants.get(subType);
 
@@ -143,17 +147,46 @@ public class ModalFragment extends Fragment {
                     for (int j = 0; j < resources.length; j++) {
                         String resource = resources[j];
                         try {
-                            resourceData.put(resource, resourceJSON.getDouble(resource) + (subTypeConstants[j] * newMagnitude));
+                            userResourceData.put(resource, resourceJSON.getDouble(resource) + (subTypeConstants[j] * newMagnitude));
+                            actionResourceData.put(resource, (subTypeConstants[j] * newMagnitude));
+                            Log.d("resourcedata", resource+" "+ String.valueOf((subTypeConstants[j] * newMagnitude)));
                         } catch (JSONException e1) {
                             e1.printStackTrace();
                         }
                     }
-                    currentUser.put("resourceData", resourceData);
+                    currentUser.put("resourceData", userResourceData);
+                    final Action action = new Action();
+                    action.setUid(USER_ID);
+                    action.setActionType(actionType);
+                    if (subType != null) {
+                        action.setSubType(subType);
+                    }
+                    if (showerLength != 0) {
+                        action.setMagnitude(showerLength);
+                    }
+                    else {
+                        action.setMagnitude(newMagnitude);
+                    }
+                    action.setPoints(newPoints);
+                    action.put("resourceData", actionResourceData);
+
+                    action.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            Toast.makeText(getActivity(), "Action logged", Toast.LENGTH_SHORT).show();
+                            listener.updateFeed(action);
+                        }
+                    });
                 }
 
                 currentUser.saveInBackground();
             }
         });
+
+
+
+
+
     }
 
 }

@@ -6,12 +6,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.codepath.gogreen.R;
-import com.codepath.gogreen.models.Action;
-import com.parse.ParseException;
-import com.parse.SaveCallback;
 
 /**
  * Created by melissaperez on 7/14/17.
@@ -58,22 +54,8 @@ public class ReuseFragment extends ModalFragment {
             total += newBags;
             newPoints = newBags * 10;
             totalBagPoints += newPoints;
-            updateResources(newPoints, newBags, bagConstants);
+            updateResources("reuse", null, newPoints, newBags, bagConstants, 0);
 
-            // save action in database
-            final Action action = new Action();
-            action.setUid(USER_ID);
-            action.setActionType("reuse");
-            action.setMagnitude(newBags);
-            action.setPoints(newPoints);
-
-            action.saveInBackground(new SaveCallback() {
-                @Override
-                public void done(ParseException e) {
-                    Toast.makeText(getActivity(), "Action logged", Toast.LENGTH_SHORT).show();
-                    listener.updateFeed(action);
-                }
-            });
 
 
 

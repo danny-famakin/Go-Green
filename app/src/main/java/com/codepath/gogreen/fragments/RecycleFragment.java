@@ -4,19 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.codepath.gogreen.R;
-import com.codepath.gogreen.models.Action;
-import com.parse.ParseException;
-import com.parse.SaveCallback;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -113,24 +108,8 @@ public class RecycleFragment extends ModalFragment {
         newPoints = pointValues[index] * newMaterials;
 
         // save action in database
-        final Action action = new Action();
-        action.setUid(USER_ID);
-        action.setActionType("recycle");
-        action.setSubType(materialType);
-        action.setMagnitude(newMaterials);
-        action.setPoints(newPoints);
 
-
-        action.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-            Log.d("time", action.getCreatedAt().toString());
-            Toast.makeText(getActivity(), "Action logged", Toast.LENGTH_SHORT).show();
-            listener.updateFeed(action);
-            }
-        });
-
-        updateResources(newPoints, newMaterials, recycleConstants.get(materialType));
+        updateResources("recycle", materialType, newPoints, newMaterials, recycleConstants.get(materialType), 0);
 
     }
 
