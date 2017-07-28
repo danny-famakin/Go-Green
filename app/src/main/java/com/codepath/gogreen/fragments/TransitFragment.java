@@ -241,7 +241,7 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
 
     private void updateData(int index) {
         newPoints = (pointValues[index] * newDistance);
-        updateResources(newPoints, newDistance, transitConstants.get(vehicleType));
+        updateResources("transit", vehicleType, newPoints, newDistance, transitConstants.get(vehicleType));
 
 //        ParseUser.getCurrentUser().fetchInBackground(new GetCallback<ParseObject>() {
 //            @Override
