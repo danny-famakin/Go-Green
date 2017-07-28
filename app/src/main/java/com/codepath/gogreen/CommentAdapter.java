@@ -39,15 +39,16 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
     @Override
     public CommentAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        Log.d("commentAdapter", "oncreateviewholder");
         context = parent.getContext();
         View itemView = LayoutInflater.from(context).inflate(R.layout.item_comment, parent, false);
         return new ViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(final CommentAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(final CommentAdapter.ViewHolder holder, final int position) {
         final Comment comment = mComments.get(position);
-
+        Log.d("commentAdapter", "onBindViewHolder");
         //holder.tvPost.setText();
 
         ParseQuery<ParseUser> query = ParseQuery.getQuery("_User");
@@ -65,10 +66,12 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
                     // load action body: bold name, compose rest of body using function below
                     String name = userList.get(0).getString("name");
-                    String body = userList.get(0).getString("body");
-                    SpannableString str = new SpannableString(name + body);
+                    Log.d("comment", String.valueOf(position) + name);
+                    String body = comment.getString("body");
+                    SpannableString str = new SpannableString(name);
                     str.setSpan(new StyleSpan(Typeface.BOLD), 0, name.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    holder.tvPost.setText(str);
+                    holder.tvName.setText(str);
+                    holder.tvPost.setText(body);
                 } else if (e != null) {
                     Log.e("action", "Error: " + e.getMessage());
                 }
@@ -80,13 +83,14 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mComments.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         ImageView ivComment;
         TextView tvPost;
+        TextView tvName;
 
 
         public ViewHolder(View itemView) {
@@ -94,6 +98,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
             ivComment = (ImageView) itemView.findViewById(R.id.ivComment);
             tvPost = (TextView) itemView.findViewById(R.id.tvPost);
+            tvName = (TextView) itemView.findViewById(R.id.tvName);
 
         }
     }

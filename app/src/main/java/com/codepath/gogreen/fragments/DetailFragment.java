@@ -3,7 +3,10 @@ package com.codepath.gogreen.fragments;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.StyleSpan;
@@ -18,6 +21,8 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
+import com.codepath.gogreen.CommentAdapter;
+import com.codepath.gogreen.DividerItemDecoration;
 import com.codepath.gogreen.R;
 import com.codepath.gogreen.models.Action;
 import com.codepath.gogreen.models.Comment;
@@ -26,11 +31,13 @@ import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
-public class DetailFragment extends ModalFragment {
+
+public class DetailFragment extends Fragment {
 
     LayoutInflater inflater;
     View v;
@@ -45,7 +52,11 @@ public class DetailFragment extends ModalFragment {
     EditText etWriteComment;
     Button btComment;
     String actionID;
-    CommentFragment commentFragment;
+    ArrayList<Comment> comments;
+    RecyclerView rvComments;
+    CommentAdapter commentAdapter;
+    MaterialDialog modal;
+    ParseUser user;
 
     public static DetailFragment newInstance() {
 
@@ -56,17 +67,34 @@ public class DetailFragment extends ModalFragment {
         return fragment;
     }
 
+
+
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        v = inflater.inflate(R.layout.comment_fragment, null);
+        user = ParseUser.getCurrentUser();
+
+//        if (v != null) {
+//            ViewGroup parent = (ViewGroup) v.getParent();
+//            if (parent != null) {
+//                parent.removeView(v);
+//            }
+//        }
+//        try {
+//            v = inflater.inflate(R.layout.comment_fragment, container, false);
+//        } catch (InflateException e) {
+//
+//        }
+
         String fbId = getArguments().getString("fbId");
         String points = getArguments().getString("points");
         String relativeTime = getArguments().getString("relativeTime");
         actionID = getArguments().getString("objectID");
         final String body = getArguments().getString("body");
         context = getActivity();
-        inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        v = inflater.inflate(R.layout.comment_fragment, null);
+
         ivProfilePicDet = (ImageView) v.findViewById(R.id.ivProfilePicDet);
         tvAction = (TextView) v.findViewById(R.id.tvAction);
         tvPoints = (TextView) v.findViewById(R.id.tvPoints);
@@ -76,6 +104,7 @@ public class DetailFragment extends ModalFragment {
         ivReply = (ImageButton) v.findViewById(R.id.ivReply);
         etWriteComment = (EditText) v.findViewById(R.id.etWriteComment);
         btComment = (Button) v.findViewById(R.id.btComment);
+        rvComments = (RecyclerView) v.findViewById(R.id.rvComments);
         tvPoints.setText(points);
         tvTimeStamp.setText(relativeTime);
 
@@ -86,7 +115,7 @@ public class DetailFragment extends ModalFragment {
                 if (e == null && userList.size() > 0) {
                     // load propic
                     String imgUrl = userList.get(0).getString("profileImgUrl");
-                    Log.d("imageeee",imgUrl);
+                    Log.d("imageeee", imgUrl);
                     Glide.with(context)
                             .load(imgUrl)
                             .placeholder(R.drawable.ic_placeholder)
@@ -104,20 +133,23 @@ public class DetailFragment extends ModalFragment {
             }
         });
 
-        Bundle bundle = new Bundle();
-        bundle.putString("aid", actionID);
 
-        commentFragment = CommentFragment.newInstance();
-        commentFragment.setArguments(bundle);
-        FragmentTransaction transaction = getChildFragmentManager().beginTransaction();
-        transaction.add(R.id.commentContainer, commentFragment);
-        transaction.commit();
+        comments = new ArrayList<>();
+        commentAdapter = new CommentAdapter(comments);
+        rvComments.setAdapter(commentAdapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        linearLayoutManager.setReverseLayout(true);
+        rvComments.setLayoutManager(linearLayoutManager);
+        rvComments.addItemDecoration(new DividerItemDecoration(getContext()));
+        // set the adapter
+        //  rvComments.setAdapter(commentAdapter);
+
 
 
         modal = new MaterialDialog.Builder(getContext())
                 .customView(v, false)
                 .show();
-
+        update();
 
         btComment.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,33 +160,52 @@ public class DetailFragment extends ModalFragment {
                     public void done(List<Action> actionList, ParseException e) {
                         Log.d("listSizeee", String.valueOf(actionList.size()));
                         if (e == null && actionList.size() > 0) {
-                            Action action;
                             Comment comment = new Comment();
-                            action = actionList.get(0);
-                            comment.setUid(action.getUid());
+                            comment.setUid(user.getString("fbId"));
                             comment.setBody(etWriteComment.getText().toString());
                             comment.setAid(actionID);
                             Log.d("commentUidddd", comment.getUid());
 
                             comment.saveInBackground();
+                            update();
+                            etWriteComment.setText("");
                         } else if (e != null) {
                             Log.e("points", "Error: " + e.getMessage());
                         }
                     }
                 });
 
-
-
-
-
             }
         });
-
-
 
     }
 
 
+    public void update() {
+        ParseQuery<Comment> query = ParseQuery.getQuery("Comment");
+        query.whereEqualTo("aid", actionID);
+        query.findInBackground(new FindCallback<Comment>() {
+            public void done(List<Comment> commentList, ParseException e) {
+                if (e == null) {
+                    commentAdapter.clear();
+                    addItems(commentList);
+                } else {
+                    Log.d("action", "Error: " + e.getMessage());
+                }
+            }
+        });
+    }
 
+
+    public void addItems(List<Comment> commentList) {
+        // iterate through JSON array
+        // for each entry, deserialize the JSON object
+        for (int i = 0; i < commentList.size(); i++) {
+            Comment comment = commentList.get(i);
+            Log.d("comment", comment.getString("uid"));
+            comments.add(0, comment);
+            commentAdapter.notifyItemInserted(0);
+        }
+    }
 
 }
