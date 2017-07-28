@@ -39,9 +39,26 @@
         android:layout_width="match_parent"
         android:layout_height="335dp"
         android:layout_alignParentLeft="true" />
+
+
+
+
     </FrameLayout>
 
-
+    <ToggleButton
+        android:id="@+id/btnTrack"
+        android:layout_width="90dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="12dp"
+        android:background="@color/offWhite"
+        android:gravity="center"
+        android:textColor="@color/colorPrimary"
+        android:textOff="Start"
+        android:textOn="Pause"
+        android:layout_alignBottom="@id/flMap"
+        android:layout_marginBottom="16dp"/>
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -49,20 +66,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:id="@+id/relativeLayout">
-
-        <ToggleButton
-            android:id="@+id/btnTrack"
-            android:layout_width="90dp"
-            android:layout_height="40dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="bottom"
-            android:layout_marginTop="12dp"
-            android:background="@color/offWhite"
-            android:gravity="center"
-            android:textColor="@color/colorPrimary"
-            android:textOff="Start"
-            android:textOn="Pause" />
 
         <TextView
             android:id="@+id/tvDistCounter"
@@ -72,7 +75,7 @@
             android:textColor="@color/colorAccentDark"
             android:textSize="55sp"
             android:layout_centerHorizontal="true"
-            android:layout_below="@+id/btnTrack" />
+            android:layout_marginTop="8dp"/>
 
         <TextView
             android:id="@+id/tvDistUnits"
@@ -90,14 +93,15 @@
         <TextView
             android:id="@+id/tvVehicle"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
+            android:layout_below="@+id/tvDistCounter"
+            android:layout_marginLeft="24dp"
             android:layout_marginTop="8dp"
-            android:layout_marginLeft="16dp"
-            android:layout_height="wrap_content"
             android:text="Mode"
             android:textAppearance="@style/TextAppearance.AppCompat"
-            android:layout_below="@+id/tvDistCounter" />
+            android:textSize="16sp" />
 
 
         <Spinner
