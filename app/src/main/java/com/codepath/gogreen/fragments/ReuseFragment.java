@@ -54,7 +54,7 @@ public class ReuseFragment extends ModalFragment {
             total += newBags;
             newPoints = newBags * 10;
             totalBagPoints += newPoints;
-            updateResources("reuse", null, newPoints, newBags, bagConstants);
+            updateResources("reuse", null, newPoints, newBags, bagConstants, 0);
 
 
 

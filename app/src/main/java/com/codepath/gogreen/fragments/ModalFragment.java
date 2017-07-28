@@ -128,7 +128,7 @@ public class ModalFragment extends Fragment {
 
     }
 
-    public void updateResources(final String actionType, final String subType, final double newPoints, final double newMagnitude, final Double[] subTypeConstants) {
+    public void updateResources(final String actionType, final String subType, final double newPoints, final double newMagnitude, final Double[] subTypeConstants, final double showerLength) {
         final JSONObject actionResourceData = new JSONObject();
 
         ParseUser.getCurrentUser().fetchInBackground(new GetCallback<ParseObject>() {
@@ -161,7 +161,12 @@ public class ModalFragment extends Fragment {
                     if (subType != null) {
                         action.setSubType(subType);
                     }
-                    action.setMagnitude(newMagnitude);
+                    if (showerLength != 0) {
+                        action.setMagnitude(showerLength);
+                    }
+                    else {
+                        action.setMagnitude(newMagnitude);
+                    }
                     action.setPoints(newPoints);
                     action.put("resourceData", actionResourceData);
 

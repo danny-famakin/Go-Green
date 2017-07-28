@@ -109,7 +109,7 @@ public class RecycleFragment extends ModalFragment {
 
         // save action in database
 
-        updateResources("recycle", materialType, newPoints, newMaterials, recycleConstants.get(materialType));
+        updateResources("recycle", materialType, newPoints, newMaterials, recycleConstants.get(materialType), 0);
 
     }
 
