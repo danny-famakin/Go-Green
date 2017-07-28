@@ -39,7 +39,7 @@ public class ProfileActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         context = this;
 
-        ivProfilePic = (ImageView) findViewById(R.id.ivProfilePic);
+        ivProfilePic = (ImageView) findViewById(R.id.ivProfilePicDet);
         tvName = (TextView) findViewById(R.id.tvName);
         tvJoinDate = (TextView) findViewById(R.id.tvJoin);
 

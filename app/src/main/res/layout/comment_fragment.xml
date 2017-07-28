@@ -4,38 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.codepath.gogreen.fragments.CommentFragment">
+    tools:context="com.codepath.gogreen.fragments.DetailFragment">
 
         <ImageView
-            android:id="@+id/ivProfilePic"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
+            android:id="@+id/ivProfilePicDet"
+            android:layout_width="62dp"
+            android:layout_height="62dp"
+            android:layout_marginLeft="9dp"
+            android:layout_marginStart="9dp"
             android:layout_marginTop="16dp"
-            app:srcCompat="@drawable/ic_placeholder" />
+            app:srcCompat="@drawable/ic_placeholder"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
 
         <TextView
             android:id="@+id/tvAction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/ivProfilePic"
-            android:layout_marginLeft="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_toEndOf="@+id/ivProfilePic"
+            android:text="TextView"
+            android:layout_marginLeft="9dp"
+            android:layout_marginStart="9dp"
             android:layout_toLeftOf="@+id/tvTimeStamp"
-            android:layout_toRightOf="@+id/ivProfilePic"
             android:layout_toStartOf="@+id/tvTimeStamp"
-            android:text="TextView" />
+            android:layout_alignTop="@+id/ivProfilePicDet"
+            android:layout_toRightOf="@+id/ivProfilePicDet"
+            android:layout_toEndOf="@+id/ivProfilePicDet" />
 
         <TextView
             android:id="@+id/tvPointsCaption"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/tvAction"
             android:layout_toRightOf="@+id/ivLeaf"
             android:layout_toEndOf="@+id/ivLeaf"
-            android:layout_below="@+id/tvAction"
             android:layout_marginTop="8dp"
             android:layout_marginLeft="4dp"
             android:layout_marginBottom="16dp"
@@ -45,6 +47,8 @@
             android:id="@+id/tvTimeStamp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginRight="9dp"
+            android:layout_marginEnd="9dp"
             android:layout_alignBaseline="@+id/tvAction"
             android:layout_alignBottom="@+id/tvAction"
             android:layout_alignParentRight="true"
@@ -100,16 +104,37 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="0"
-            android:layout_alignBottom="@+id/ivFavorite"
-            android:layout_toLeftOf="@+id/tvPointsCaption"
-            android:layout_toStartOf="@+id/tvPointsCaption" />
+            android:layout_alignTop="@+id/ivFavorite"
+            android:layout_toLeftOf="@+id/ivFavorite"
+            android:layout_toStartOf="@+id/ivFavorite" />
+
+        <EditText
+            android:id="@+id/etWriteComment"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_alignParentBottom="true"
+            android:layout_toStartOf="@+id/btComment"
+            android:layout_toLeftOf="@+id/btComment" />
 
     <FrameLayout
-        android:id="@+id/flContainer"
+        android:id="@+id/commentContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/etWriteComment"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/ivFavorite">
 
     </FrameLayout>
+
+    <Button
+        android:id="@+id/btComment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reply"
+        android:onClick="onPost"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/tvTimeStamp"
+        android:layout_toStartOf="@+id/tvTimeStamp" />
 
 </RelativeLayout>

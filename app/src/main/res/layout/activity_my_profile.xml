@@ -17,7 +17,7 @@
         />
 
     <ImageView
-        android:id="@+id/ivProfilePic"
+        android:id="@+id/ivProfilePicDet"
         android:layout_width="150dp"
         android:layout_height="150dp"
         app:srcCompat="@android:drawable/btn_star"

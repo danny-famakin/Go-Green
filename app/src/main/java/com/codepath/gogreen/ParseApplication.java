@@ -3,6 +3,7 @@ package com.codepath.gogreen;
 import android.app.Application;
 
 import com.codepath.gogreen.models.Action;
+import com.codepath.gogreen.models.Comment;
 import com.parse.Parse;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseObject;
@@ -40,6 +41,7 @@ public class ParseApplication extends Application {
                 .server("https://go-green-app.herokuapp.com/parse/").build());
 
         ParseObject.registerSubclass(Action.class);
+        ParseObject.registerSubclass(Comment.class);
         ParseFacebookUtils.initialize(this);
 
 

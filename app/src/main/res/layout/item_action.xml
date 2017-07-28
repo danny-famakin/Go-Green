@@ -7,7 +7,7 @@
     android:paddingLeft="5dp">
 
     <ImageView
-        android:id="@+id/ivProfilePic"
+        android:id="@+id/ivProfilePicDet"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_alignParentLeft="true"
@@ -20,12 +20,12 @@
         android:id="@+id/tvAction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/ivProfilePic"
+        android:layout_alignTop="@+id/ivProfilePicDet"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
-        android:layout_toEndOf="@+id/ivProfilePic"
+        android:layout_toEndOf="@+id/ivProfilePicDet"
         android:layout_toLeftOf="@+id/tvTimeStamp"
-        android:layout_toRightOf="@+id/ivProfilePic"
+        android:layout_toRightOf="@+id/ivProfilePicDet"
         android:layout_toStartOf="@+id/tvTimeStamp"
         android:text="TextView" />
 

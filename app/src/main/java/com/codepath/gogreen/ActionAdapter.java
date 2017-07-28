@@ -3,6 +3,7 @@ package com.codepath.gogreen;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -21,7 +22,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.codepath.gogreen.fragments.CommentFragment;
+import com.codepath.gogreen.fragments.DetailFragment;
 import com.codepath.gogreen.models.Action;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -46,6 +47,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
 
     private List<Action> mActions;
     Context context;
+    String relativeTime;
 
 
 
@@ -69,7 +71,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
         if (timeStamp == null) {
             timeStamp = new Date();
         }
-        String relativeTime = getRelativeTimeAgo(timeStamp);
+        relativeTime = getRelativeTimeAgo(timeStamp);
 
         holder.tvTimeStamp.setText(shortenTimeStamp(relativeTime));
         holder.tvPoints.setText(String.format("%.1f", action.getDouble("points")));
@@ -162,7 +164,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
             tvAction = (TextView) itemView.findViewById(R.id.tvAction);
             tvTimeStamp = (TextView) itemView.findViewById(R.id.tvTimeStamp);
             tvPoints = (TextView) itemView.findViewById(R.id.tvPoints);
-            ivProfilePic = (ImageView) itemView.findViewById(R.id.ivProfilePic);
+            ivProfilePic = (ImageView) itemView.findViewById(R.id.ivProfilePicDet);
             ivFavorite = (ImageButton) itemView.findViewById(R.id.ivFavorite);
             ibReply = (ImageButton) itemView.findViewById(R.id.ivReply);
             tvLikes = (TextView) itemView.findViewById(R.id.tvLikes);
@@ -177,7 +179,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
                 final Action toFavorite = mActions.get(position);
                 ParseUser current = ParseUser.getCurrentUser();
                 JSONArray ids = toFavorite.getJSONArray("favorited");
-                Log.d("hopeee", String.valueOf(ids));
+             //   Log.d("hopeee", String.valueOf(ids));
                 if(ids == null){
                     ids = new JSONArray();
                     ids.put(current.getString("fbId"));
@@ -223,11 +225,22 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
 
                 @Override
                 public void onClick(View v) {
-                    CommentFragment commentFragment = CommentFragment.newInstance();
+                    final int position = getAdapterPosition();
+                    final Action currentAction = mActions.get(position);
+                    String body = " " + composeActionBody(currentAction);
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("fbId", currentAction.getUid());
+                    bundle.putString("body", body);
+                    bundle.putString("points",String.format("%.1f", currentAction.getDouble("points")));
+                    bundle.putString("relativeTime", shortenTimeStamp(relativeTime));
+                    bundle.putString("objectID", currentAction.getObjectId().toString());
+                    DetailFragment detailFragment = DetailFragment.newInstance();
+                    detailFragment.setArguments(bundle);
                     FragmentTransaction ft = ((AppCompatActivity) context).getSupportFragmentManager()
                             .beginTransaction();
                     // make change
-                    ft.replace(R.id.flContainer, commentFragment);
+                    ft.replace(R.id.flContainer, detailFragment, "TAG_FRAGMENT");
                     // commit
                     ft.commit();
 

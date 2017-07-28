@@ -16,6 +16,7 @@ public class Action extends ParseObject {
     public double magnitude;
     public double points;
     public JSONArray favorited;
+    public Comment comments;
 
     public String getSubType() {
         return this.getString("subType");

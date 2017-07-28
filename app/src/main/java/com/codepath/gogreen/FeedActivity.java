@@ -111,7 +111,7 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
                 TransitFragment transitFragment = TransitFragment.newInstance();
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 // make change
-                ft.replace(R.id.flContainer, transitFragment);
+                ft.replace(R.id.flContainer, transitFragment,"TAG_FRAGMENT");
                 // commit
                 ft.commit();
             }
@@ -123,7 +123,7 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
                 WaterFragment waterFragment = WaterFragment.newInstance();
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 // make change
-                ft.replace(R.id.flContainer, waterFragment);
+                ft.replace(R.id.flContainer, waterFragment, "TAG_FRAGMENT");
                 // commit
                 ft.commit();
             }
@@ -135,7 +135,7 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
                 ReuseFragment reuseFragment = ReuseFragment.newInstance();
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 // make change
-                ft.replace(R.id.flContainer, reuseFragment);
+                ft.replace(R.id.flContainer, reuseFragment, "TAG_FRAGMENT");
                 // commit
                 ft.commit();
             }
@@ -147,7 +147,7 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
                 RecycleFragment recycleFragment = RecycleFragment.newInstance();
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 // make change
-                ft.replace(R.id.flContainer, recycleFragment);
+                ft.replace(R.id.flContainer, recycleFragment, "TAG_FRAGMENT");
                 // commit
                 ft.commit();
             }

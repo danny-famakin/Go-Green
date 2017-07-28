@@ -24,7 +24,7 @@
         android:textColor="@color/colorPrimaryDark" />
 
     <ImageView
-        android:id="@+id/ivProfilePic"
+        android:id="@+id/ivProfilePicDet"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginLeft="12dp"
