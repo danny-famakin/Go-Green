@@ -54,5 +54,28 @@
         android:layout_centerHorizontal="true"
         android:text="TextView" />
 
+    <TextView
+        android:id="@+id/tvPointsCaption"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Total points:"
+        android:layout_marginRight="26dp"
+        android:layout_marginEnd="26dp"
+        android:layout_alignBottom="@+id/tvPoints"
+        android:layout_toLeftOf="@+id/tvPoints"
+        android:layout_toStartOf="@+id/tvPoints"
+        android:layout_marginBottom="21dp" />
+
+    <TextView
+        android:id="@+id/tvPoints"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="55sp"
+        android:layout_below="@+id/ivProfilePic"
+        android:layout_alignRight="@+id/btnLogOut"
+        android:layout_alignEnd="@+id/btnLogOut"
+        android:layout_marginTop="14dp" />
+
 
 </RelativeLayout>
