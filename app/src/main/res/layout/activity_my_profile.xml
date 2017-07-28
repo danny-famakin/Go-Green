@@ -25,6 +25,21 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp" />
 
+    <ToggleButton
+        android:id="@+id/addFriends"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignLeft="@+id/btnLogOut"
+        android:layout_alignStart="@+id/btnLogOut"
+        android:layout_below="@+id/ivProfilePic"
+        android:layout_marginTop="7dp"
+        android:background="@color/colorAccent"
+        android:paddingLeft="-3dp"
+        android:paddingRight="-3dp"
+        android:textColor="@color/offWhite"
+        android:textOff="Add"
+        android:textOn="Friends" />
+
     <TextView
         android:id="@+id/tvName"
         android:layout_width="wrap_content"

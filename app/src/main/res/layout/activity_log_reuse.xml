@@ -28,18 +28,19 @@
         android:layout_alignStart="@+id/tvTitle"
         android:layout_below="@+id/tvTitle"
         android:layout_marginTop="8dp"
-        android:text="Earn 10 points each time you reuse a plastic bag!" />
+        android:text="Earn 10 points each time you reuse a shopping bag!" />
 
     <TextView
         android:id="@+id/tvBags"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tvPointsCaption"
-        android:layout_alignStart="@+id/tvPointsCaption"
-        android:layout_below="@+id/tvTitle"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="31dp"
         android:text="Bags Reused"
-        android:textAppearance="@style/TextAppearance.AppCompat" />
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textSize="16sp"
+        android:layout_below="@+id/tvPointsCaption"
+        android:layout_alignLeft="@+id/tvPointsCaption"
+        android:layout_alignStart="@+id/tvPointsCaption" />
 
     <EditText
         android:id="@+id/etBags"

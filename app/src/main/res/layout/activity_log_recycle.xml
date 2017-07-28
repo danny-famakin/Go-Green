@@ -34,18 +34,22 @@
         android:id="@+id/tvItems"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Items"
-        android:textAppearance="@style/TextAppearance.AppCompat"
         android:layout_alignBaseline="@+id/etItems"
         android:layout_alignBottom="@+id/etItems"
         android:layout_alignLeft="@+id/tvPointsCaption"
-        android:layout_alignStart="@+id/tvPointsCaption" />
+        android:layout_alignStart="@+id/tvPointsCaption"
+        android:text="Items"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textSize="16sp" />
 
     <EditText
         android:id="@+id/etItems"
         style="@style/Widget.AppCompat.EditText"
         android:layout_width="140dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/tvTitle"
         android:layout_marginEnd="24dp"
         android:layout_marginRight="24dp"
         android:layout_marginTop="48dp"
@@ -53,9 +57,7 @@
         android:hint="# items recycled"
         android:inputType="numberDecimal"
         android:textAppearance="@style/TextAppearance.AppCompat"
-        android:layout_below="@+id/tvTitle"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/tvMaterial"
@@ -66,7 +68,8 @@
         android:layout_below="@+id/etItems"
         android:layout_marginTop="24dp"
         android:text="Material"
-        android:textAppearance="@style/TextAppearance.AppCompat" />
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:textSize="16sp" />
 
     <Spinner
         android:id="@+id/spMaterial"

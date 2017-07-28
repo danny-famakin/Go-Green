@@ -1,53 +1,5 @@
 [
     {
-        "outputFile": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v13/values-v13.xml",
-        "map": [
-            {
-                "to": {
-                    "startLine": 2,
-                    "startColumn": 4,
-                    "startOffset": 55,
-                    "endColumn": 58,
-                    "endOffset": 109
-                },
-                "from": {
-                    "file": "/Users/famakindaniel7/.android/build-cache/08d8b3b42e3b02e764e2e5751aba8a1a82b1592f/output/res/values-v13/values-v13.xml",
-                    "position": {
-                        "startLine": 2,
-                        "startColumn": 4,
-                        "startOffset": 55,
-                        "endColumn": 58,
-                        "endOffset": 109
-                    }
-                }
-            }
-        ]
-    },
-    {
-        "outputFile": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v13/values-v13.xml",
-        "map": [
-            {
-                "to": {
-                    "startLine": 2,
-                    "startColumn": 4,
-                    "startOffset": 55,
-                    "endColumn": 58,
-                    "endOffset": 109
-                },
-                "from": {
-                    "file": "/Users/melissaperez/.android/build-cache/ade19dd7df75653b515f79bf8e0026b7d43ea680/output/res/values-v13/values-v13.xml",
-                    "position": {
-                        "startLine": 2,
-                        "startColumn": 4,
-                        "startOffset": 55,
-                        "endColumn": 58,
-                        "endOffset": 109
-                    }
-                }
-            }
-        ]
-    },
-    {
         "outputFile": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v13/values-v13.xml",
         "map": [
             {

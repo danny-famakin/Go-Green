@@ -1,6 +1,7 @@
 package com.codepath.gogreen;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
@@ -43,8 +44,6 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
     private List<Action> mActions;
     Context context;
 
-
-
     public ActionAdapter(List<Action> actions) {
         mActions = actions;
     }
@@ -60,7 +59,6 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
     public void onBindViewHolder(final ActionAdapter.ViewHolder holder, int position) {
         final Action action = mActions.get(position);
 
-
         Date timeStamp = (action.getCreatedAt());
         if (timeStamp == null) {
             timeStamp = new Date();
@@ -70,6 +68,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
         holder.tvTimeStamp.setText(shortenTimeStamp(relativeTime));
         holder.tvPoints.setText(String.format("%.1f", action.getDouble("points")));
 
+
         // get user associated with action
         ParseQuery<ParseUser> query = ParseQuery.getQuery("_User");
         query.whereEqualTo("fbId", action.getUid());
@@ -77,12 +76,25 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
             public void done(List<ParseUser> userList, ParseException e) {
                 if (e == null && userList.size() > 0) {
                     // load propic
-                    String imgUrl = userList.get(0).getString("profileImgUrl");
+                    final String imgUrl = userList.get(0).getString("profileImgUrl");
+                    final String username = userList.get(0).getString("name");
                     Glide.with(context)
                             .load(imgUrl)
                             .placeholder(R.drawable.ic_placeholder)
                             .bitmapTransform(new CropCircleTransformation(context))
                             .into(holder.ivProfilePic);
+                    //Load user profile on clicking profile image
+                    holder.ivProfilePic.setOnClickListener(new View.OnClickListener(){
+
+                        @Override
+                        public void onClick(View v) {
+
+                            Intent i = new Intent (context, OtherUserActivity.class);
+                            i.putExtra("profImage", imgUrl);
+                            i.putExtra("screen_name", username);
+                            context.startActivity(i);
+                        }
+                    });
 
                     // load action body: bold name, compose rest of body using function below
                     String name = userList.get(0).getString("name");
@@ -96,7 +108,6 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
             }
         });
 
-
                     int counter = 0;
 
                     JSONArray ids = action.getJSONArray("favorited");
@@ -108,7 +119,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
                     else{
                         for(int a = 0; a < ids.length(); a++ ){
                             try {
-                                if(String.valueOf(ids.get(a)).equals(current.getString("fbId")) ){
+                                if(String.valueOf(ids.get(a)).equals(current.getString("fbId"))){
                                     counter++;
                                     holder.ivFavorite.setImageResource(R.drawable.ic_faved);
                                     break;
@@ -126,16 +137,6 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
                     if(ids != null){
                         holder.tvLikes.setText(String.valueOf(ids.length()));
                     }
-
-
-
-
-
-
-
-
-
-
     }
 
     @Override
@@ -149,7 +150,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
         public TextView tvPoints;
         public ImageView ivProfilePic;
         public ImageButton ivFavorite;
-        public ImageButton ibReply;
+        public ImageButton ivReply;
         public TextView tvLikes;
 
         public ViewHolder(View itemView) {
@@ -159,7 +160,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
             tvPoints = (TextView) itemView.findViewById(R.id.tvPoints);
             ivProfilePic = (ImageView) itemView.findViewById(R.id.ivProfilePic);
             ivFavorite = (ImageButton) itemView.findViewById(R.id.ivFavorite);
-            ibReply = (ImageButton) itemView.findViewById(R.id.ivReply);
+            ivReply = (ImageButton) itemView.findViewById(R.id.ivReply);
             tvLikes = (TextView) itemView.findViewById(R.id.tvLikes);
 
             ivFavorite.setOnClickListener(new View.OnClickListener(){

@@ -46,8 +46,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.codepath.gogreen.R.id.map;
-
 /**
  * Created by anyazhang on 7/13/17.
  */
@@ -315,7 +313,7 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
     public void onConnected(@Nullable Bundle connectionHint) {
         // Build the map.
         SupportMapFragment mapFragment = (SupportMapFragment) getFragmentManager()
-                .findFragmentById(map);
+                .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         createLocationRequest();
     }
