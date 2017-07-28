@@ -17,16 +17,8 @@ public class Action extends ParseObject {
     public double magnitude;
     public double points;
     public JSONArray favorited;
-<<<<<<< HEAD
-<<<<<<< HEAD
-    public Comment comments;
-=======
-    public ParseUser user;
-=======
     public JSONObject resourceData;
->>>>>>> 7fdbb8189dce7e8aa2d51cac5fb9264f21d8acb0
 
->>>>>>> 63cfe2caac5bf62e319760dd3849797cf39d0be7
 
     public String getSubType() {
         return this.getString("subType");

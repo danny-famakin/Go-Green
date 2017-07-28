@@ -82,7 +82,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             tvRank = (TextView) itemView.findViewById(R.id.tvRank);
             tvName = (TextView) itemView.findViewById(R.id.tvName);
             tvPoints = (TextView) itemView.findViewById(R.id.tvPoints);
-            ivProfilePic = (ImageView) itemView.findViewById(R.id.ivProfilePicDet);
+            ivProfilePic = (ImageView) itemView.findViewById(R.id.ivProfilePic);
         }
     }
 
