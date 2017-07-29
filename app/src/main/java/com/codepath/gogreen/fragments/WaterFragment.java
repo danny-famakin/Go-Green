@@ -171,7 +171,7 @@ public class WaterFragment extends ModalFragment {
         }
         newPoints = 2 * savedTime;
 
-        updateResources(newPoints, savedTime, waterConstants);
+        updateResources("water", null, newPoints, savedTime, waterConstants, newTime);
 
 
 

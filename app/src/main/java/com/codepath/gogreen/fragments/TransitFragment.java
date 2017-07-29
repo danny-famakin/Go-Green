@@ -22,7 +22,6 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.codepath.gogreen.R;
-import com.codepath.gogreen.models.Action;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -38,15 +37,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
-import com.parse.ParseException;
-import com.parse.SaveCallback;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
-import static com.codepath.gogreen.R.id.map;
 
 /**
  * Created by anyazhang on 7/13/17.
@@ -243,7 +238,7 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
 
     private void updateData(int index) {
         newPoints = (pointValues[index] * newDistance);
-        updateResources(newPoints, newDistance, transitConstants.get(vehicleType));
+        updateResources("transit", vehicleType, newPoints, newDistance, transitConstants.get(vehicleType), 0);
 
 //        ParseUser.getCurrentUser().fetchInBackground(new GetCallback<ParseObject>() {
 //            @Override
@@ -292,22 +287,6 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
 //            }
 //        });
 
-
-        // Add action to database
-        final Action action = new Action();
-        action.setUid(USER_ID);
-        action.setActionType("transit");
-        action.setSubType(vehicleType);
-        action.setMagnitude(newDistance);
-        action.setPoints(newPoints);
-
-        action.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                Toast.makeText(getActivity(), "Action logged", Toast.LENGTH_SHORT).show();
-                listener.updateFeed(action);
-            }
-        });
     }
 
 
@@ -315,7 +294,7 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
     public void onConnected(@Nullable Bundle connectionHint) {
         // Build the map.
         SupportMapFragment mapFragment = (SupportMapFragment) getFragmentManager()
-                .findFragmentById(map);
+                .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         createLocationRequest();
     }

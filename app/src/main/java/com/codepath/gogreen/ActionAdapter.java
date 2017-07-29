@@ -4,7 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
+import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -16,9 +19,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.codepath.gogreen.fragments.DetailFragment;
 import com.codepath.gogreen.models.Action;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -39,10 +44,11 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
  * Created by melissaperez on 7/17/17.
  */
 
-public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder> {
+public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder>  {
 
     private List<Action> mActions;
     Context context;
+    String relativeTime;
 
     public ActionAdapter(List<Action> actions) {
         mActions = actions;
@@ -63,7 +69,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
         if (timeStamp == null) {
             timeStamp = new Date();
         }
-        String relativeTime = getRelativeTimeAgo(timeStamp);
+        relativeTime = getRelativeTimeAgo(timeStamp);
 
         holder.tvTimeStamp.setText(shortenTimeStamp(relativeTime));
         holder.tvPoints.setText(String.format("%.1f", action.getDouble("points")));
@@ -152,18 +158,20 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
         public TextView tvPoints;
         public ImageView ivProfilePic;
         public ImageButton ivFavorite;
-        public ImageButton ibReply;
+        public ImageButton ivReply;
         public TextView tvLikes;
+        public RelativeLayout rlAction;
 
         public ViewHolder(View itemView) {
             super(itemView);
             tvAction = (TextView) itemView.findViewById(R.id.tvAction);
             tvTimeStamp = (TextView) itemView.findViewById(R.id.tvTimeStamp);
             tvPoints = (TextView) itemView.findViewById(R.id.tvPoints);
-            ivProfilePic = (ImageView) itemView.findViewById(R.id.ivProfilePic);
+            ivProfilePic = (ImageView) itemView.findViewById(R.id.ivProfilePicDet);
             ivFavorite = (ImageButton) itemView.findViewById(R.id.ivFavorite);
-            ibReply = (ImageButton) itemView.findViewById(R.id.ivReply);
+            ivReply = (ImageButton) itemView.findViewById(R.id.ivReply);
             tvLikes = (TextView) itemView.findViewById(R.id.tvLikes);
+            rlAction = (RelativeLayout) itemView.findViewById(R.id.rlAction);
 
             ivFavorite.setOnClickListener(new View.OnClickListener(){
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -174,8 +182,9 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
                 final Action toFavorite = mActions.get(position);
                 ParseUser current = ParseUser.getCurrentUser();
                 JSONArray ids = toFavorite.getJSONArray("favorited");
-                Log.d("hopeee", String.valueOf(ids));
+             //   Log.d("hopeee", String.valueOf(ids));
                 if(ids == null){
+                    ids = new JSONArray();
                     ids.put(current.getString("fbId"));
                     toFavorite.setFavorited(ids);
                     toFavorite.saveInBackground();
@@ -214,6 +223,32 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
 
             }
         });
+            rlAction.setOnClickListener(new View.OnClickListener() {
+
+
+                @Override
+                public void onClick(View v) {
+                    final int position = getAdapterPosition();
+                    final Action currentAction = mActions.get(position);
+                    String body = " " + composeActionBody(currentAction);
+
+                    Bundle bundle = new Bundle();
+                    bundle.putString("fbId", currentAction.getUid());
+                    bundle.putString("body", body);
+                    bundle.putString("points",String.format("%.1f", currentAction.getDouble("points")));
+                    bundle.putString("relativeTime", shortenTimeStamp(relativeTime));
+                    bundle.putString("objectID", currentAction.getObjectId().toString());
+                    DetailFragment detailFragment = DetailFragment.newInstance();
+                    detailFragment.setArguments(bundle);
+                    FragmentTransaction ft = ((AppCompatActivity) context).getSupportFragmentManager()
+                            .beginTransaction();
+                    // make change
+                    ft.replace(R.id.flContainer, detailFragment, "TAG_FRAGMENT");
+                    // commit
+                    ft.commit();
+
+                }
+            });
         }
     }
 

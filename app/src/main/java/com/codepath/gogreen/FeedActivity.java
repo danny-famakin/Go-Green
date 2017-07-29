@@ -1,7 +1,10 @@
 package com.codepath.gogreen;
 
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,6 +18,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -49,6 +53,11 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
     ViewPager ViewPager;
     public Context context;
     ParseUser currentUser;
+    FloatingActionMenu actionMenu;
+    SubActionButton button1;
+    SubActionButton button2;
+    SubActionButton button3;
+    SubActionButton button4;
 
 
     @Override
@@ -76,7 +85,7 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
 
 
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        final FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -89,14 +98,14 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
         SubActionButton.Builder itemBuilder = new SubActionButton.Builder(this);
 // repeat many times:
 
-        SubActionButton button1 = createSubActionButton(R.drawable.ic_transit2);
-        SubActionButton button2 = createSubActionButton(R.drawable.ic_water2);
-        SubActionButton button3 = createSubActionButton(R.drawable.ic_bag3);
-        SubActionButton button4 = createSubActionButton(R.drawable.ic_can2);
+        button1 = createSubActionButton(R.drawable.ic_transit2);
+        button2 = createSubActionButton(R.drawable.ic_water2);
+        button3 = createSubActionButton(R.drawable.ic_bag3);
+        button4 = createSubActionButton(R.drawable.ic_can2);
 
 
 
-        FloatingActionMenu actionMenu = new FloatingActionMenu.Builder(this)
+        actionMenu = new FloatingActionMenu.Builder(this)
                 .addSubActionView(button1)
                 .addSubActionView(button2)
                 .addSubActionView(button3)
@@ -111,7 +120,7 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
                 TransitFragment transitFragment = TransitFragment.newInstance();
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 // make change
-                ft.replace(R.id.flContainer, transitFragment);
+                ft.replace(R.id.flContainer, transitFragment,"TAG_FRAGMENT");
                 // commit
                 ft.commit();
             }
@@ -123,7 +132,7 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
                 WaterFragment waterFragment = WaterFragment.newInstance();
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 // make change
-                ft.replace(R.id.flContainer, waterFragment);
+                ft.replace(R.id.flContainer, waterFragment, "TAG_FRAGMENT");
                 // commit
                 ft.commit();
             }
@@ -135,7 +144,7 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
                 ReuseFragment reuseFragment = ReuseFragment.newInstance();
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 // make change
-                ft.replace(R.id.flContainer, reuseFragment);
+                ft.replace(R.id.flContainer, reuseFragment, "TAG_FRAGMENT");
                 // commit
                 ft.commit();
             }
@@ -147,13 +156,60 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
                 RecycleFragment recycleFragment = RecycleFragment.newInstance();
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 // make change
-                ft.replace(R.id.flContainer, recycleFragment);
+                ft.replace(R.id.flContainer, recycleFragment, "TAG_FRAGMENT");
                 // commit
                 ft.commit();
             }
         });
 
+        actionMenu.setStateChangeListener(new FloatingActionMenu.MenuStateChangeListener() {
+            @Override
+            public void onMenuOpened(FloatingActionMenu menu) {
+                Log.d("menu", "opened");
+                // Rotate the icon of rightLowerButton 45 degrees clockwise
+                fab.setRotation(0);
+                PropertyValuesHolder pvhR = PropertyValuesHolder.ofFloat(View.ROTATION, 135);
+                ObjectAnimator animation = ObjectAnimator.ofPropertyValuesHolder(fab, pvhR);
+                animation.start();
+            }
+
+            @Override
+            public void onMenuClosed(FloatingActionMenu menu) {
+                Log.d("menu", "closed");
+
+                // Rotate the icon of rightLowerButton 45 degrees counter-clockwise
+                fab.setRotation(135);
+                PropertyValuesHolder pvhR = PropertyValuesHolder.ofFloat(View.ROTATION, 0);
+                ObjectAnimator animation = ObjectAnimator.ofPropertyValuesHolder(fab, pvhR);
+                animation.start();
+            }
+
+        });
     }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (actionMenu.isOpen()) {
+//set close when touch outside it
+            Rect rect1 = new Rect();
+            button1.getGlobalVisibleRect(rect1);
+            Rect rect2 = new Rect();
+            button2.getGlobalVisibleRect(rect2);
+            Rect rect3 = new Rect();
+            button3.getGlobalVisibleRect(rect3);
+            Rect rect4 = new Rect();
+            button4.getGlobalVisibleRect(rect4);
+            if (!(rect3.contains((int) ev.getX(), (int) ev.getY())
+                    || rect2.contains((int) ev.getX(), (int) ev.getY())
+                    || rect1.contains((int) ev.getX(), (int) ev.getY())
+                    || rect4.contains((int) ev.getX(), (int) ev.getY()))) {
+                actionMenu.close(true);
+                return true;
+            }
+        }
+        return super.dispatchTouchEvent(ev);
+    }
+
 
     public void getFriends() {
         new GraphRequest(

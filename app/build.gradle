@@ -31,14 +31,22 @@ dependencies {
     })
 
 
-    compile 'com.github.bumptech.glide:glide:3.8.0'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'org.apache.commons:commons-lang3:3.4'
 
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'org.apache.commons:commons-lang3:3.4'
-    compile 'com.oguzdev:CircularFloatingActionMenu:1.0.2'
     compile 'com.github.bumptech.glide:glide:3.8.0'
+
+    //    compile 'com.parse:parseui-login-android:0.0.2'
+    // for logging API calls to LogCat
+    compile project(':ParseUI-Login')
+
+//    compile project(':ParseUI-Widget')
+
+
+    compile 'com.github.bumptech.glide:glide:3.8.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'org.apache.commons:commons-lang3:3.4'
+    compile 'com.oguzdev:CircularFloatingActionMenu:1.0.2'
     compile 'com.afollestad.material-dialogs:core:0.9.4.5'
     compile 'com.afollestad.material-dialogs:commons:0.9.4.5'
     compile 'com.android.support:appcompat-v7:25.3.1'
@@ -46,16 +54,16 @@ dependencies {
     compile 'com.google.android.gms:play-services-maps:11.0.1'
     compile 'com.google.android.gms:play-services-location:11.0.1'
     compile 'com.google.android.gms:play-services-places:11.0.1'
-
-    testCompile 'junit:junit:4.12'
-//    compile 'com.parse:parseui-login-android:0.0.2'
     compile 'com.parse:parseui-widget-android:0.0.2'
     compile 'com.parse.bolts:bolts-android:1.4.0'
     compile 'com.parse:parse-android:1.15.1'
     compile 'com.parse:parsefacebookutils-v4-android:1.10.3@aar'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.6.0' // for logging API calls to LogCat
+    compile 'com.squareup.okhttp3:logging-interceptor:3.6.0'
     compile 'com.android.support:recyclerview-v7:25.3.1'
     compile 'com.facebook.android:facebook-android-sdk:4.+'
+    compile 'jp.wasabeef:glide-transformations:2.0.2'
+    testCompile 'junit:junit:4.12'
+
     compile project(':ParseUI-Login')
     compile 'org.parceler:parceler-api:1.1.6'
 
@@ -63,6 +71,5 @@ dependencies {
     annotationProcessor 'org.parceler:parceler:1.1.6'
 
 //    compile project(':ParseUI-Widget')
-
 
 }

@@ -1,5 +1,7 @@
 package com.codepath.gogreen.fragments;
 
+import android.animation.ObjectAnimator;
+import android.animation.PropertyValuesHolder;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -43,7 +45,7 @@ public class FloatingMenuFragment extends Fragment {
         inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         v = inflater.inflate(R.layout.fragment_floating_menu, null);
 
-        FloatingActionButton fab = (FloatingActionButton) v.findViewById(R.id.fab);
+        final FloatingActionButton fab = (FloatingActionButton) v.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -72,6 +74,8 @@ public class FloatingMenuFragment extends Fragment {
                 .attachTo(fab)
                 .setRadius(500)
                 .build();
+
+        actionMenu.getSubActionItems();
 
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,6 +125,30 @@ public class FloatingMenuFragment extends Fragment {
             }
         });
 
+        actionMenu.setStateChangeListener(new FloatingActionMenu.MenuStateChangeListener() {
+            @Override
+            public void onMenuOpened(FloatingActionMenu menu) {
+                Log.d("menu", "opened");
+                // Rotate the icon of rightLowerButton 45 degrees clockwise
+                fab.setRotation(0);
+                PropertyValuesHolder pvhR = PropertyValuesHolder.ofFloat(View.ROTATION, 45);
+                ObjectAnimator animation = ObjectAnimator.ofPropertyValuesHolder(fab, pvhR);
+                animation.start();
+            }
+
+            @Override
+            public void onMenuClosed(FloatingActionMenu menu) {
+                Log.d("menu", "closed");
+
+                // Rotate the icon of rightLowerButton 45 degrees counter-clockwise
+                fab.setRotation(45);
+                PropertyValuesHolder pvhR = PropertyValuesHolder.ofFloat(View.ROTATION, 0);
+                ObjectAnimator animation = ObjectAnimator.ofPropertyValuesHolder(fab, pvhR);
+                animation.start();
+            }
+        });
+
+
 
     }
 
@@ -158,7 +186,4 @@ public class FloatingMenuFragment extends Fragment {
         return friendsList;
     }
 
-    public void onFriendsLoaded(ArrayList<String> friendsList) {
-
-    }
 }

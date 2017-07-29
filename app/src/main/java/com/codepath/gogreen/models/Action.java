@@ -2,9 +2,9 @@ package com.codepath.gogreen.models;
 
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
-import com.parse.ParseUser;
 
 import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  * Created by anyazhang on 7/14/17.
@@ -17,7 +17,7 @@ public class Action extends ParseObject {
     public double magnitude;
     public double points;
     public JSONArray favorited;
-    public ParseUser user;
+    public JSONObject resourceData;
 
 
     public String getSubType() {
@@ -34,13 +34,6 @@ public class Action extends ParseObject {
         return this.getString("uid");
 
     //        return uid;
-    }
-    public ParseUser getUser(){
-        return user;
-    }
-    public void setUser(ParseUser user){
-        this.user = user;
-        this.put("user", user);
     }
 
     public void setUid(String uid) {
@@ -89,4 +82,6 @@ public class Action extends ParseObject {
     public JSONArray getFavorited(){
         return favorited;
     }
+
+
 }
