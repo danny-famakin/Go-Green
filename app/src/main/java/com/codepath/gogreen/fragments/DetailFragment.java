@@ -30,8 +30,13 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
@@ -57,6 +62,7 @@ public class DetailFragment extends Fragment {
     CommentAdapter commentAdapter;
     MaterialDialog modal;
     ParseUser user;
+    Action action;
 
     public static DetailFragment newInstance() {
 
@@ -108,9 +114,9 @@ public class DetailFragment extends Fragment {
         tvPoints.setText(points);
         tvTimeStamp.setText(relativeTime);
 
-        ParseQuery<ParseUser> query = ParseQuery.getQuery("_User");
-        query.whereEqualTo("fbId", fbId);
-        query.findInBackground(new FindCallback<ParseUser>() {
+        ParseQuery<ParseUser> userQuery = ParseQuery.getQuery("_User");
+        userQuery.whereEqualTo("fbId", fbId);
+        userQuery.findInBackground(new FindCallback<ParseUser>() {
             public void done(List<ParseUser> userList, ParseException e) {
                 if (e == null && userList.size() > 0) {
                     // load propic
@@ -134,6 +140,35 @@ public class DetailFragment extends Fragment {
         });
 
 
+        ParseQuery<Action> actionQuery = ParseQuery.getQuery("Action");
+        actionQuery.whereEqualTo("objectId", actionID);
+        actionQuery.findInBackground(new FindCallback<Action>() {
+            public void done(List<Action> actionList, ParseException e) {
+                if (e == null && actionList.size() > 0) {
+                    Log.d("actionComments", "reloading");
+                    action = actionList.get(0);
+                    // load original comments
+                    JSONArray commentJSON= action.getJSONArray("comments");
+                    if (commentJSON == null) {
+                        commentJSON = new JSONArray();
+                        action.put("comments", commentJSON);
+                    }
+                    for (int i = 0; i < commentJSON.length(); i++) {
+                        try {
+                            Log.d("actionComments", "adding comment");
+                            addComment(Comment.fromJSON(commentJSON.getJSONObject(i)));
+                        } catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
+
+                } else if (e != null) {
+                    Log.e("points", "Error: " + e.getMessage());
+                }
+            }
+        });
+
+
         comments = new ArrayList<>();
         commentAdapter = new CommentAdapter(comments);
         rvComments.setAdapter(commentAdapter);
@@ -144,68 +179,48 @@ public class DetailFragment extends Fragment {
         // set the adapter
         //  rvComments.setAdapter(commentAdapter);
 
-
-
-        modal = new MaterialDialog.Builder(getContext())
-                .customView(v, false)
-                .show();
-        update();
-
+        // add new comments from reply field
         btComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ParseQuery<Action> query = ParseQuery.getQuery("Action");
-                query.whereEqualTo("objectId", actionID);
-                query.findInBackground(new FindCallback<Action>() {
-                    public void done(List<Action> actionList, ParseException e) {
-                        Log.d("listSizeee", String.valueOf(actionList.size()));
-                        if (e == null && actionList.size() > 0) {
-                            Comment comment = new Comment();
-                            comment.setUid(user.getString("fbId"));
-                            comment.setBody(etWriteComment.getText().toString());
-                            comment.setAid(actionID);
-                            Log.d("commentUidddd", comment.getUid());
+                Comment comment = new Comment();
+                comment.setUid(user.getString("fbId"));
+                comment.setBody(etWriteComment.getText().toString());
+                Date date = new Date();
+                comment.setDate(date);
+                Log.d("timestamp created", date.toString());
 
-                            comment.saveInBackground();
-                            update();
-                            etWriteComment.setText("");
-                        } else if (e != null) {
-                            Log.e("points", "Error: " + e.getMessage());
-                        }
+                addComment(comment);
+                JSONArray commentArray = action.getJSONArray("comments");
+                commentArray.put(comment.toJSON());
+                action.put("comments", commentArray);
+
+                action.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        Log.d("actionComments", "new: "+ String.valueOf(comments.size()));
+                        etWriteComment.setText("");
                     }
                 });
 
             }
         });
 
+        modal = new MaterialDialog.Builder(getContext())
+                .customView(v, false)
+                .show();
+
+
     }
 
 
-    public void update() {
-        ParseQuery<Comment> query = ParseQuery.getQuery("Comment");
-        query.whereEqualTo("aid", actionID);
-        query.findInBackground(new FindCallback<Comment>() {
-            public void done(List<Comment> commentList, ParseException e) {
-                if (e == null) {
-                    commentAdapter.clear();
-                    addItems(commentList);
-                } else {
-                    Log.d("action", "Error: " + e.getMessage());
-                }
-            }
-        });
-    }
 
-
-    public void addItems(List<Comment> commentList) {
+    public void addComment(Comment comment) {
         // iterate through JSON array
         // for each entry, deserialize the JSON object
-        for (int i = 0; i < commentList.size(); i++) {
-            Comment comment = commentList.get(i);
-            Log.d("comment", comment.getString("uid"));
-            comments.add(comments.size(), comment);
-            commentAdapter.notifyItemInserted(comments.size());
-        }
+        Log.d("comment", comment.getUid());
+        comments.add(comments.size(), comment);
+        commentAdapter.notifyItemInserted(comments.size());
     }
 
 }
