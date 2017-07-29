@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v12/values-v12.xml",
+        "outputFile": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v12/values-v12.xml",
         "map": [
             {
                 "to": {
@@ -12,7 +12,7 @@
                     "endOffset": 274
                 },
                 "from": {
-                    "file": "/Users/melissaperez/.android/build-cache/ade19dd7df75653b515f79bf8e0026b7d43ea680/output/res/values-v12/values-v12.xml",
+                    "file": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/values-v12/values-v12.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,
@@ -33,7 +33,7 @@
                     "endOffset": 474
                 },
                 "from": {
-                    "file": "/Users/melissaperez/.android/build-cache/ade19dd7df75653b515f79bf8e0026b7d43ea680/output/res/values-v12/values-v12.xml",
+                    "file": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/values-v12/values-v12.xml",
                     "position": {
                         "startLine": 5,
                         "startColumn": 4,
@@ -53,7 +53,7 @@
                     "endOffset": 593
                 },
                 "from": {
-                    "file": "/Users/melissaperez/.android/build-cache/ade19dd7df75653b515f79bf8e0026b7d43ea680/output/res/values-v12/values-v12.xml",
+                    "file": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/values-v12/values-v12.xml",
                     "position": {
                         "startLine": 8,
                         "startColumn": 4,
@@ -72,7 +72,7 @@
                     "endOffset": 688
                 },
                 "from": {
-                    "file": "/Users/melissaperez/.android/build-cache/ade19dd7df75653b515f79bf8e0026b7d43ea680/output/res/values-v12/values-v12.xml",
+                    "file": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/values-v12/values-v12.xml",
                     "position": {
                         "startLine": 9,
                         "startColumn": 4,

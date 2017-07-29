@@ -51,7 +51,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent (context, OtherUserActivity.class);
-                i.putExtra("screen_name", String.valueOf(user.get("name")));
+                i.putExtra("screenName", String.valueOf(user.get("name")));
                 i.putExtra("profImage", user.getString("profileImgUrl"));
                 i.putExtra("Id", String.valueOf(user.get("fbId")));
                 context.startActivity(i);
