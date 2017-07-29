@@ -34,7 +34,7 @@ public class OtherUserActivity extends AppCompatActivity {
     Context context;
     ImageView profileImage;
     TextView tvName, tvJoinDate;
-    String screen_name;
+    String screenName;
     String profImg;
     String Id;
     ToggleButton addFriends;
@@ -50,6 +50,7 @@ public class OtherUserActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         context = this;
+
         profileImage = (ImageView) findViewById(R.id.ivProfilePicDet);
         tvName = (TextView) findViewById(R.id.tvName);
         tvJoinDate = (TextView) findViewById(R.id.tvJoin);
@@ -57,7 +58,7 @@ public class OtherUserActivity extends AppCompatActivity {
         addFriends = (ToggleButton) findViewById(R.id.addFriends);
         logOut.setVisibility(GONE);
 
-        screen_name = getIntent().getStringExtra("screen_name");
+        screenName = getIntent().getStringExtra("screenName");
         profImg = getIntent().getStringExtra("profImage");
         Id = getIntent().getStringExtra("Id");
 
@@ -128,7 +129,7 @@ public class OtherUserActivity extends AppCompatActivity {
                 .placeholder(R.drawable.ic_placeholder)
                 .bitmapTransform(new CropCircleTransformation(context))
                 .into(profileImage);
-        tvName.setText(screen_name);
+        tvName.setText(screenName);
 
 
 

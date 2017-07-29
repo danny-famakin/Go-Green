@@ -18,6 +18,7 @@ public class Action extends ParseObject {
     public double points;
     public JSONArray favorited;
     public JSONObject resourceData;
+    public JSONArray comments;
 
 
     public String getSubType() {

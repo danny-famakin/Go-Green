@@ -39,8 +39,13 @@ import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
@@ -69,7 +74,10 @@ public class DetailFragment extends Fragment {
     CommentAdapter commentAdapter;
     MaterialDialog modal;
     ParseUser user;
+
     String fuel, water, trees, emissions, actionType, numberOf, subType, body;
+
+    Action action;
 
     public static DetailFragment newInstance() {
 
@@ -93,7 +101,7 @@ public class DetailFragment extends Fragment {
         String points = getArguments().getString("points");
         String relativeTime = getArguments().getString("relativeTime");
         actionID = getArguments().getString("objectID");
-         body = getArguments().getString("body");
+        body = getArguments().getString("body");
         context = getActivity();
 
         ivProfilePicDet = (ImageView) v.findViewById(R.id.ivProfilePicDet);
@@ -108,6 +116,7 @@ public class DetailFragment extends Fragment {
         rvComments = (RecyclerView) v.findViewById(R.id.rvComments);
         tvPoints.setText(points);
         tvTimeStamp.setText(relativeTime);
+
 
         fuel = getArguments().getString("fuel");
         water = getArguments().getString("water");
@@ -143,44 +152,66 @@ public class DetailFragment extends Fragment {
         });
 
 
+        ParseQuery<Action> actionQuery = ParseQuery.getQuery("Action");
+        actionQuery.whereEqualTo("objectId", actionID);
+        actionQuery.findInBackground(new FindCallback<Action>() {
+            public void done(List<Action> actionList, ParseException e) {
+                if (e == null && actionList.size() > 0) {
+                    Log.d("actionComments", "reloading");
+                    action = actionList.get(0);
+                    // load original comments
+                    JSONArray commentJSON = action.getJSONArray("comments");
+                    if (commentJSON == null) {
+                        commentJSON = new JSONArray();
+                        action.put("comments", commentJSON);
+                    }
+                    for (int i = 0; i < commentJSON.length(); i++) {
+                        try {
+                            Log.d("actionComments", "adding comment");
+                            addComment(Comment.fromJSON(commentJSON.getJSONObject(i)));
+                        } catch (JSONException e1) {
+                            e1.printStackTrace();
+                        }
+                    }
+
+                } else if (e != null) {
+                    Log.e("points", "Error: " + e.getMessage());
+                }
+            }
+        });
+
+
         comments = new ArrayList<>();
         commentAdapter = new CommentAdapter(comments);
         rvComments.setAdapter(commentAdapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        linearLayoutManager.setReverseLayout(true);
+//        linearLayoutManager.setReverseLayout(true);
         rvComments.setLayoutManager(linearLayoutManager);
         rvComments.addItemDecoration(new DividerItemDecoration(getContext()));
         // set the adapter
         //  rvComments.setAdapter(commentAdapter);
 
-
-
-        modal = new MaterialDialog.Builder(getContext())
-                .customView(v, false)
-                .show();
-        update();
-
+        // add new comments from reply field
         btComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ParseQuery<Action> query = ParseQuery.getQuery("Action");
-                query.whereEqualTo("objectId", actionID);
-                query.findInBackground(new FindCallback<Action>() {
-                    public void done(List<Action> actionList, ParseException e) {
-                        Log.d("listSizeee", String.valueOf(actionList.size()));
-                        if (e == null && actionList.size() > 0) {
-                            Comment comment = new Comment();
-                            comment.setUid(user.getString("fbId"));
-                            comment.setBody(etWriteComment.getText().toString());
-                            comment.setAid(actionID);
-                            Log.d("commentUidddd", comment.getUid());
+                Comment comment = new Comment();
+                comment.setUid(user.getString("fbId"));
+                comment.setBody(etWriteComment.getText().toString());
+                Date date = new Date();
+                comment.setDate(date);
+                Log.d("timestamp created", date.toString());
 
-                            comment.saveInBackground();
-                            update();
-                            etWriteComment.setText("");
-                        } else if (e != null) {
-                            Log.e("points", "Error: " + e.getMessage());
-                        }
+                addComment(comment);
+                JSONArray commentArray = action.getJSONArray("comments");
+                commentArray.put(comment.toJSON());
+                action.put("comments", commentArray);
+
+                action.saveInBackground(new SaveCallback() {
+                    @Override
+                    public void done(ParseException e) {
+                        Log.d("actionComments", "new: " + String.valueOf(comments.size()));
+                        etWriteComment.setText("");
                     }
                 });
 
@@ -188,22 +219,25 @@ public class DetailFragment extends Fragment {
         });
         pieChart = (PieChart) v.findViewById(R.id.pieChart);
 
-        if (actionType.equals("reuse")){
+
+        if (actionType.equals("reuse")) {
             pieChart.setCenterText("Reuse");
             drawPieChart(pieChart);
-        }
-        else if (actionType.equals("recycle")&&subType.equals("can")){
+        } else if (actionType.equals("recycle") && subType.equals("can")) {
             pieChart.setCenterText("Cans");
             drawPieChart(pieChart);
-        }
-        else if (actionType.equals("recycle")&&subType.equals("bottle")){
+        } else if (actionType.equals("recycle") && subType.equals("bottle")) {
             pieChart.setCenterText("Bottles");
             drawPieChart(pieChart);
-        }
-        else if (actionType.equals("recycle")&&subType.equals("paper")) {
+        } else if (actionType.equals("recycle") && subType.equals("paper")) {
             pieChart.setCenterText("Paper");
             drawPieChart(pieChart);
         }
+
+
+        modal = new MaterialDialog.Builder(getContext())
+                .customView(v, false)
+                .show();
     }
 
     public void drawPieChart(PieChart pChart){
@@ -281,31 +315,16 @@ public class DetailFragment extends Fragment {
         pChart.setRotationEnabled(true);
     }
 
-    public void update() {
-        ParseQuery<Comment> query = ParseQuery.getQuery("Comment");
-        query.whereEqualTo("aid", actionID);
-        query.findInBackground(new FindCallback<Comment>() {
-            public void done(List<Comment> commentList, ParseException e) {
-                if (e == null) {
-                    commentAdapter.clear();
-                    addItems(commentList);
-                } else {
-                    Log.d("action", "Error: " + e.getMessage());
-                }
-            }
-        });
-    }
 
 
-    public void addItems(List<Comment> commentList) {
+
+
+    public void addComment(Comment comment) {
         // iterate through JSON array
         // for each entry, deserialize the JSON object
-        for (int i = 0; i < commentList.size(); i++) {
-            Comment comment = commentList.get(i);
-            Log.d("comment", comment.getString("uid"));
-            comments.add(0, comment);
-            commentAdapter.notifyItemInserted(0);
-        }
+        Log.d("comment", comment.getUid());
+        comments.add(comments.size(), comment);
+        commentAdapter.notifyItemInserted(comments.size());
     }
 
 }

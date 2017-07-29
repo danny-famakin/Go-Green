@@ -57,9 +57,6 @@ public class ReuseFragment extends ModalFragment {
             updateResources("reuse", null, newPoints, newBags, bagConstants, 0);
 
 
-
-
-
 //            i.putExtra("vehicle", vehicleType);
 //            i.putExtra("distance", Integer.parseInt(etDistance.getText().toString()));
 //            setResult(RESULT_OK, i);
