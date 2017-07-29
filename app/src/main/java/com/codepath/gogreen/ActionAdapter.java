@@ -78,6 +78,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
                     // load propic
                     final String imgUrl = userList.get(0).getString("profileImgUrl");
                     final String username = userList.get(0).getString("name");
+                    final String Id = userList.get(0).getString("fbId");
                     Glide.with(context)
                             .load(imgUrl)
                             .placeholder(R.drawable.ic_placeholder)
@@ -92,6 +93,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
                             Intent i = new Intent (context, OtherUserActivity.class);
                             i.putExtra("profImage", imgUrl);
                             i.putExtra("screen_name", username);
+                            i.putExtra("Id", Id);
                             context.startActivity(i);
                         }
                     });

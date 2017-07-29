@@ -74,6 +74,10 @@ public class OtherUserActivity extends AppCompatActivity {
                         if (friendsList.get(i).equals(Id)){
                             addFriends.setText("Friends");
                         }
+                        if (Id.equals(currentUser.get("fbId"))){
+                            addFriends.setVisibility(GONE);
+                            tvName.setText("Your Profile");
+                        }
                     } catch (JSONException e1) {
                         e1.printStackTrace();
                     }
@@ -95,6 +99,8 @@ public class OtherUserActivity extends AppCompatActivity {
                         try {
                             if (friendsList.get(i) != Id) {
                                 friendsList.put(Id);
+                                currentUser.put("friends", friendsList);
+                                currentUser.saveInBackground();
                             }
 
                         } catch (JSONException e1) {
