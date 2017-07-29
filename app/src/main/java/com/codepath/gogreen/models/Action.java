@@ -79,6 +79,15 @@ public class Action extends ParseObject {
 
     }
 
+    public void setResourceData(JSONObject resourceData){
+        this.resourceData = resourceData;
+        this.put("resourceData", resourceData);
+    }
+
+    public JSONObject getResourceData(){
+        return resourceData;
+    }
+
     public JSONArray getFavorited(){
         return favorited;
     }

@@ -1,6 +1,7 @@
 package com.codepath.gogreen.fragments;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
@@ -26,6 +28,13 @@ import com.codepath.gogreen.DividerItemDecoration;
 import com.codepath.gogreen.R;
 import com.codepath.gogreen.models.Action;
 import com.codepath.gogreen.models.Comment;
+import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.highlight.Highlight;
+import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -35,6 +44,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
+
+import static com.facebook.login.widget.ProfilePictureView.TAG;
 
 
 public class DetailFragment extends Fragment {
@@ -51,12 +62,14 @@ public class DetailFragment extends Fragment {
     Context context;
     EditText etWriteComment;
     Button btComment;
+    PieChart pieChart;
     String actionID;
     ArrayList<Comment> comments;
     RecyclerView rvComments;
     CommentAdapter commentAdapter;
     MaterialDialog modal;
     ParseUser user;
+    String fuel, water, trees, emissions, actionType, numberOf, subType, body;
 
     public static DetailFragment newInstance() {
 
@@ -76,23 +89,11 @@ public class DetailFragment extends Fragment {
         v = inflater.inflate(R.layout.comment_fragment, null);
         user = ParseUser.getCurrentUser();
 
-//        if (v != null) {
-//            ViewGroup parent = (ViewGroup) v.getParent();
-//            if (parent != null) {
-//                parent.removeView(v);
-//            }
-//        }
-//        try {
-//            v = inflater.inflate(R.layout.comment_fragment, container, false);
-//        } catch (InflateException e) {
-//
-//        }
-
         String fbId = getArguments().getString("fbId");
         String points = getArguments().getString("points");
         String relativeTime = getArguments().getString("relativeTime");
         actionID = getArguments().getString("objectID");
-        final String body = getArguments().getString("body");
+         body = getArguments().getString("body");
         context = getActivity();
 
         ivProfilePicDet = (ImageView) v.findViewById(R.id.ivProfilePicDet);
@@ -107,6 +108,14 @@ public class DetailFragment extends Fragment {
         rvComments = (RecyclerView) v.findViewById(R.id.rvComments);
         tvPoints.setText(points);
         tvTimeStamp.setText(relativeTime);
+
+        fuel = getArguments().getString("fuel");
+        water = getArguments().getString("water");
+        trees = getArguments().getString("trees");
+        emissions = getArguments().getString("emissions");
+        actionType = getArguments().getString("actionType");
+        numberOf = getArguments().getString("numberOf");
+        subType = getArguments().getString("subType");
 
         ParseQuery<ParseUser> query = ParseQuery.getQuery("_User");
         query.whereEqualTo("fbId", fbId);
@@ -177,9 +186,100 @@ public class DetailFragment extends Fragment {
 
             }
         });
+        pieChart = (PieChart) v.findViewById(R.id.pieChart);
 
+        if (actionType.equals("reuse")){
+            pieChart.setCenterText("Reuse");
+            drawPieChart(pieChart);
+        }
+        else if (actionType.equals("recycle")&&subType.equals("can")){
+            pieChart.setCenterText("Cans");
+            drawPieChart(pieChart);
+        }
+        else if (actionType.equals("recycle")&&subType.equals("bottle")){
+            pieChart.setCenterText("Bottles");
+            drawPieChart(pieChart);
+        }
+        else if (actionType.equals("recycle")&&subType.equals("paper")) {
+            pieChart.setCenterText("Paper");
+            drawPieChart(pieChart);
+        }
     }
 
+    public void drawPieChart(PieChart pChart){
+        final double[] yData = {Double.parseDouble(numberOf) * Double.parseDouble(fuel), Double.parseDouble(numberOf) *Double.parseDouble(water),
+                Double.parseDouble(numberOf) *Double.parseDouble(trees), Double.parseDouble(numberOf) *Double.parseDouble(emissions)};
+        final String[] xData = {"Fuel", "Water", "Trees", "Emissions"};
+
+        ArrayList<PieEntry> yEntry = new ArrayList<>();
+        ArrayList<String> xEntry = new ArrayList<>();
+
+        for (int i = 0; i < yData.length; i++) {
+            double aYData = yData[i];
+            yEntry.add(new PieEntry((float) aYData));
+        }
+        for (String aXData : xData) {
+            xEntry.add(aXData);
+        }
+        PieDataSet dataSet = new PieDataSet(yEntry, "Environmental Impact");
+        dataSet.setSliceSpace(3);
+        dataSet.setValueTextSize(12);
+        dataSet.setSelectionShift(7);
+
+        ArrayList<Integer> colors = new ArrayList<>();
+        colors.add(Color.BLUE);
+        colors.add(Color.CYAN);
+        //colors.add(Color.GREEN);
+        colors.add(Color.rgb(153, 255, 153));
+        //colors.add(Color.YELLOW);
+        colors.add(Color.rgb(229, 255, 204));
+
+        dataSet.setColors(colors);
+
+        pChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
+            @Override
+            public void onValueSelected(Entry e, Highlight h) {
+                Log.d(TAG, "onValueSelected: " + e.toString());
+                Log.d(TAG, "onValueSelected: " + h.toString());
+                int pos = e.toString().indexOf("0.0");
+                String envValues = e.toString().substring(pos + 6);
+
+                for (int i = 0; i < yData.length; i++) {
+                    if (yData[i] == Double.parseDouble(envValues)) {
+                        pos = i;
+                        break;
+                    }
+                }
+                String env = xData[pos];
+                if (env.equals("Emissions")) {
+                    Toast.makeText(getContext(), env + " reduced by: " + pos + "lbs", Toast.LENGTH_SHORT).show();
+                } else if (env.equals("Water")){
+                    Toast.makeText(getContext(), env + " saved: " + pos + "L" , Toast.LENGTH_SHORT).show();
+                }
+                else if (env.equals("Fuel")){
+                    Toast.makeText(getContext(), env + " saved: " + pos + "lbs", Toast.LENGTH_SHORT).show();
+                }
+                else if (env.equals("Trees")){
+                    Toast.makeText(getContext(), env + " saved: " + pos + " " + env, Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onNothingSelected() {
+
+            }
+        });
+
+        PieData data = new PieData(dataSet);
+        pChart.setData(data);
+        pChart.invalidate();
+        pChart.getLegend().setEnabled(false);
+        pChart.getDescription().setEnabled(false);
+        data.setDrawValues(false);
+        pChart.setHoleRadius(50);
+        pChart.setTransparentCircleAlpha(1);
+        pChart.setRotationEnabled(true);
+    }
 
     public void update() {
         ParseQuery<Comment> query = ParseQuery.getQuery("Comment");

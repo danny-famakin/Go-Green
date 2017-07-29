@@ -104,6 +104,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
                         }
                     });
 
+
                     // load action body: bold name, compose rest of body using function below
                     String name = userList.get(0).getString("name");
                     String body = " " + composeActionBody(action);
@@ -228,6 +229,8 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
 
                 @Override
                 public void onClick(View v) {
+
+
                     final int position = getAdapterPosition();
                     final Action currentAction = mActions.get(position);
                     String body = " " + composeActionBody(currentAction);
@@ -238,8 +241,20 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
                     bundle.putString("points",String.format("%.1f", currentAction.getDouble("points")));
                     bundle.putString("relativeTime", shortenTimeStamp(relativeTime));
                     bundle.putString("objectID", currentAction.getObjectId().toString());
+                    bundle.putString("actionType", currentAction.getActionType());
+                    bundle.putString("numberOf", String.valueOf(currentAction.getMagnitude()));
+                    bundle.putString("subType", currentAction.getSubType());
+                    try {
+                        bundle.putString("fuel", String.valueOf(currentAction.getJSONObject("resourceData").get("fuel")));
+                        bundle.putString("water", String.valueOf(currentAction.getJSONObject("resourceData").get("water")));
+                        bundle.putString("trees", String.valueOf(currentAction.getJSONObject("resourceData").get("trees")));
+                        bundle.putString("emissions", String.valueOf(currentAction.getJSONObject("resourceData").get("emissions")));
+                    }catch (JSONException e1){
+                        e1.printStackTrace();
+                    }
                     DetailFragment detailFragment = DetailFragment.newInstance();
                     detailFragment.setArguments(bundle);
+
                     FragmentTransaction ft = ((AppCompatActivity) context).getSupportFragmentManager()
                             .beginTransaction();
                     // make change

@@ -25,7 +25,6 @@ import org.json.JSONException;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 import static android.view.View.GONE;
-import static com.codepath.gogreen.R.id.ivProfilePic;
 
 /**
  * Created by famakindaniel7 on 7/25/17.
@@ -51,7 +50,7 @@ public class OtherUserActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         context = this;
-        profileImage = (ImageView) findViewById(ivProfilePic);
+        profileImage = (ImageView) findViewById(R.id.ivProfilePicDet);
         tvName = (TextView) findViewById(R.id.tvName);
         tvJoinDate = (TextView) findViewById(R.id.tvJoin);
         logOut = (Button) findViewById(R.id.btnLogOut);
