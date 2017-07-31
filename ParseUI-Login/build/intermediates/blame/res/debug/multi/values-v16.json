@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v16/values-v16.xml",
+        "outputFile": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/incremental/mergeDebugResources/merged.dir/values-v16/values-v16.xml",
         "map": [
             {
                 "to": {
@@ -11,7 +11,7 @@
                     "endOffset": 116
                 },
                 "from": {
-                    "file": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/values-v16/values-v16.xml",
+                    "file": "/Users/famakindaniel7/.android/build-cache/08d8b3b42e3b02e764e2e5751aba8a1a82b1592f/output/res/values-v16/values-v16.xml",
                     "position": {
                         "startLine": 2,
                         "startColumn": 4,

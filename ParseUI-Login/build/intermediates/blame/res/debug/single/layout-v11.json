@@ -1,26 +1,26 @@
 [
     {
-        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/layout-v11/notification_media_cancel_action.xml",
-        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/layout-v11/notification_media_cancel_action.xml"
+        "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/layout-v11/notification_template_big_media_custom.xml",
+        "source": "/Users/famakindaniel7/.android/build-cache/08d8b3b42e3b02e764e2e5751aba8a1a82b1592f/output/res/layout-v11/notification_template_big_media_custom.xml"
     },
     {
-        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/layout-v11/notification_template_big_media_custom.xml",
-        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/layout-v11/notification_template_big_media_custom.xml"
+        "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/layout-v11/notification_template_big_media_narrow.xml",
+        "source": "/Users/famakindaniel7/.android/build-cache/08d8b3b42e3b02e764e2e5751aba8a1a82b1592f/output/res/layout-v11/notification_template_big_media_narrow.xml"
     },
     {
-        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/layout-v11/notification_template_big_media_narrow.xml",
-        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/layout-v11/notification_template_big_media_narrow.xml"
+        "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/layout-v11/notification_media_cancel_action.xml",
+        "source": "/Users/famakindaniel7/.android/build-cache/08d8b3b42e3b02e764e2e5751aba8a1a82b1592f/output/res/layout-v11/notification_media_cancel_action.xml"
     },
     {
-        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/layout-v11/notification_template_big_media_narrow_custom.xml",
-        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/layout-v11/notification_template_big_media_narrow_custom.xml"
+        "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/layout-v11/notification_template_big_media_narrow_custom.xml",
+        "source": "/Users/famakindaniel7/.android/build-cache/08d8b3b42e3b02e764e2e5751aba8a1a82b1592f/output/res/layout-v11/notification_template_big_media_narrow_custom.xml"
     },
     {
-        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/layout-v11/notification_template_big_media.xml",
-        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/layout-v11/notification_template_big_media.xml"
+        "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/layout-v11/notification_media_action.xml",
+        "source": "/Users/famakindaniel7/.android/build-cache/08d8b3b42e3b02e764e2e5751aba8a1a82b1592f/output/res/layout-v11/notification_media_action.xml"
     },
     {
-        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/layout-v11/notification_media_action.xml",
-        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/layout-v11/notification_media_action.xml"
+        "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/layout-v11/notification_template_big_media.xml",
+        "source": "/Users/famakindaniel7/.android/build-cache/08d8b3b42e3b02e764e2e5751aba8a1a82b1592f/output/res/layout-v11/notification_template_big_media.xml"
     }
 ]

@@ -44,6 +44,7 @@ import com.parse.ParseException;
 import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -290,6 +291,7 @@ public class ParseLoginFragment extends ParseLoginFragmentBase {
                                     parseUser.put("fbId", id);
                                     parseUser.put("totalPoints", 0);
                                     parseUser.put("joinDate", new Date());
+                                    parseUser.put("friends", new JSONArray());
                                     JSONObject resourceData = new JSONObject();
                                     resourceData.put("emissions", 0.0);
                                     resourceData.put("fuel", 0.0);

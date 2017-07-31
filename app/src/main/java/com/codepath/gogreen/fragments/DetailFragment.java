@@ -233,6 +233,9 @@ public class DetailFragment extends Fragment {
         } else if (actionType.equals("recycle") && subType.equals("paper")) {
             pieChart.setCenterText("Paper");
             drawPieChart(pieChart);
+        }else if (actionType.equals("transit")&& subType.equals("bus")){
+            pieChart.setCenterText("Bus");
+            drawPieChart(pieChart);
         }
 
 
@@ -276,26 +279,34 @@ public class DetailFragment extends Fragment {
             public void onValueSelected(Entry e, Highlight h) {
                 Log.d(TAG, "onValueSelected: " + e.toString());
                 Log.d(TAG, "onValueSelected: " + h.toString());
-                int pos = e.toString().indexOf("0.0");
-                String envValues = e.toString().substring(pos + 6);
 
+                int pos = e.toString().indexOf("E");
+                String envValues = e.toString().substring(pos + 16);
+
+                int vos = 0;
                 for (int i = 0; i < yData.length; i++) {
                     if (yData[i] == Double.parseDouble(envValues)) {
-                        pos = i;
+
+                        String str = h.toString().substring(14,15);
+                        vos = Integer.parseInt(str);
                         break;
                     }
                 }
-                String env = xData[pos];
+
+
+                String env = xData[vos];
+                Log.d("MessagesF", String.valueOf(vos));
+
                 if (env.equals("Emissions")) {
-                    Toast.makeText(getContext(), env + " reduced by: " + pos + "lbs", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), env + " reduced by: " + envValues + "lbs", Toast.LENGTH_SHORT).show();
                 } else if (env.equals("Water")){
-                    Toast.makeText(getContext(), env + " saved: " + pos + "L" , Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), env + " saved: " + envValues + "L" , Toast.LENGTH_SHORT).show();
                 }
                 else if (env.equals("Fuel")){
-                    Toast.makeText(getContext(), env + " saved: " + pos + "lbs", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), env + " saved: " + envValues + "lbs", Toast.LENGTH_SHORT).show();
                 }
                 else if (env.equals("Trees")){
-                    Toast.makeText(getContext(), env + " saved: " + pos + " " + env, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), env + " saved: " + envValues + " " + env, Toast.LENGTH_SHORT).show();
                 }
             }
 
