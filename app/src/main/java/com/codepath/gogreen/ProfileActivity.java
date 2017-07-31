@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.bumptech.glide.Glide;
+import com.github.mikephil.charting.charts.BarChart;
 import com.parse.ParseUser;
 import com.parse.ui.ParseLoginBuilder;
 
@@ -33,6 +34,7 @@ public class ProfileActivity extends AppCompatActivity {
     String imageURL;
     ToggleButton addFriend;
     TextView tvJoinDate;
+    BarChart barChart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +49,7 @@ public class ProfileActivity extends AppCompatActivity {
         tvName = (TextView) findViewById(R.id.tvName);
         tvJoinDate = (TextView) findViewById(R.id.tvJoin);
         addFriend = (ToggleButton) findViewById(R.id.addFriends);
+        barChart = (BarChart) findViewById(R.id.barChart);
         addFriend.setVisibility(GONE);
         currentUser = ParseUser.getCurrentUser();
 
