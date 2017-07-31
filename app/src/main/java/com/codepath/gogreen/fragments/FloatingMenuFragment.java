@@ -175,6 +175,7 @@ public class FloatingMenuFragment extends Fragment {
         final String userId = currentUser.getString("fbId");
         ArrayList<String> friendsList = new ArrayList<String>();
         JSONArray friends = currentUser.getJSONArray("friends");
+
         for (int i = 0; i < friends.length(); i++) {
             try {
                 friendsList.add(friends.getString(i));

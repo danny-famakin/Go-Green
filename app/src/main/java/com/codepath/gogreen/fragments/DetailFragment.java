@@ -195,26 +195,27 @@ public class DetailFragment extends Fragment {
         btComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Comment comment = new Comment();
-                comment.setUid(user.getString("fbId"));
-                comment.setBody(etWriteComment.getText().toString());
-                Date date = new Date();
-                comment.setDate(date);
-                Log.d("timestamp created", date.toString());
+                if (!etWriteComment.getText().toString().equals("")) {
+                    Comment comment = new Comment();
+                    comment.setUid(user.getString("fbId"));
+                    comment.setBody(etWriteComment.getText().toString());
+                    Date date = new Date();
+                    comment.setDate(date);
+                    Log.d("timestamp created", date.toString());
 
-                addComment(comment);
-                JSONArray commentArray = action.getJSONArray("comments");
-                commentArray.put(comment.toJSON());
-                action.put("comments", commentArray);
+                    addComment(comment);
+                    JSONArray commentArray = action.getJSONArray("comments");
+                    commentArray.put(comment.toJSON());
+                    action.put("comments", commentArray);
 
-                action.saveInBackground(new SaveCallback() {
-                    @Override
-                    public void done(ParseException e) {
-                        Log.d("actionComments", "new: " + String.valueOf(comments.size()));
-                        etWriteComment.setText("");
-                    }
-                });
-
+                    action.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            Log.d("actionComments", "new: " + String.valueOf(comments.size()));
+                            etWriteComment.setText("");
+                        }
+                    });
+                }
             }
         });
         pieChart = (PieChart) v.findViewById(R.id.pieChart);
@@ -234,6 +235,18 @@ public class DetailFragment extends Fragment {
             drawPieChart(pieChart);
         }else if (actionType.equals("transit")&& subType.equals("bus")){
             pieChart.setCenterText("Bus");
+            drawPieChart(pieChart);
+        }else if (actionType.equals("transit")&& subType.equals("subway")){
+            pieChart.setCenterText("Subway");
+            drawPieChart(pieChart);
+        }else if (actionType.equals("transit")&& subType.equals("train")){
+            pieChart.setCenterText("Train");
+            drawPieChart(pieChart);
+        }else if (actionType.equals("transit")&& subType.equals("bike")){
+            pieChart.setCenterText("Bike");
+            drawPieChart(pieChart);
+        }else if (actionType.equals("transit")&& subType.equals("walking")){
+            pieChart.setCenterText("Walking");
             drawPieChart(pieChart);
         }
 
