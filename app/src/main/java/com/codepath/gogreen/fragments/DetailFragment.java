@@ -195,7 +195,7 @@ public class DetailFragment extends Fragment {
         btComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (etWriteComment.getText().toString().equals("")) {
+                if (!etWriteComment.getText().toString().equals("")) {
                     Comment comment = new Comment();
                     comment.setUid(user.getString("fbId"));
                     comment.setBody(etWriteComment.getText().toString());
