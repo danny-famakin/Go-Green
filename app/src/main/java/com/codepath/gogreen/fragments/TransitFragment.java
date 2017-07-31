@@ -76,7 +76,7 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
     private boolean mLocationPermissionGranted;
     private static final long INTERVAL = 1000 * 5 * 1; //1 minute
     private static final long FASTEST_INTERVAL = 1000 * 5 * 1;
-    private static final float SMALLEST_DISPLACEMENT = 1.00F;
+    private static final float SMALLEST_DISPLACEMENT = 0.25F;
 
     // The geographical location where the device is currently located. That is, the last-known
     // location retrieved by the Fused Location Provider.
@@ -240,52 +240,6 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
         newPoints = (pointValues[index] * newDistance);
         updateResources("transit", vehicleType, newPoints, newDistance, transitConstants.get(vehicleType), 0);
 
-//        ParseUser.getCurrentUser().fetchInBackground(new GetCallback<ParseObject>() {
-//            @Override
-//            public void done(ParseObject object, ParseException e) {
-//                ParseUser currentUser = (ParseUser) object;
-//                double points = currentUser.getInt("totalPoints");
-//                points += newPoints;
-//                currentUser.put("totalPoints", points);
-//
-//                JSONObject resourceData = new JSONObject();
-//                JSONObject resourceJSON = currentUser.getJSONObject("resourceData");
-//                Double[] vehicleConstants = transitConstants.get(vehicleType);
-//
-//                if (resourceJSON != null) {
-//                    for (int j = 0; j < resources.length; j++) {
-//                        String resource = resources[j];
-//                        try {
-//                            resourceData.put(resource, resourceJSON.getDouble(resource) + (vehicleConstants[j] * newDistance));
-//                            Log.d("resourceData", resource+": " + String.valueOf(resourceJSON.getDouble(resource) + (vehicleConstants[j] * newDistance)));
-//                        } catch (JSONException e1) {
-//                            e1.printStackTrace();
-//                        }
-//                    }
-//                    currentUser.put("resourceData", resourceData);
-//                }
-//
-//                currentUser.saveInBackground();
-//            }
-//        });
-
-
-//        ParseQuery<ParseUser> query = ParseQuery.getQuery("_User");
-//        query.whereEqualTo("fbId", currentUser.get("fbId"));
-//        query.findInBackground(new FindCallback<ParseUser>() {
-//            public void done(List<ParseUser> userList, ParseException e) {
-//                if (e == null && userList.size() > 0) {
-//                    ParseUser user =
-//                    double points = userList.get(0).getInt("totalPoints");
-//                    points += newPoints;
-//                    currentUser.put("totalPoints", points);
-//                    currentUser.saveInBackground();
-//                    for (int i = 0; i <  )
-//                } else if (e != null) {
-//                    Log.e("points", "Error: " + e.getMessage());
-//                }
-//            }
-//        });
 
     }
 
@@ -422,8 +376,6 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
         double longitude = location.getLongitude();
         LatLng latLng = new LatLng(latitude, longitude);
 
-         /*Display latitude*/
-        //((TextView) findViewById(R.id.latitude)).setText(Double.toString(location.getLatitude()));
         if (location != null)
             points.add(latLng);
         CameraPosition cameraPosition = new CameraPosition.Builder()
@@ -438,7 +390,16 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
 
         LatLng start = new LatLng(mLastKnownLocation.getLatitude(), mLastKnownLocation.getLongitude());
         LatLng end = new LatLng(latLng.latitude, latLng.longitude);
-        dist = (CalculationByDistance(start, end)) * 0.000621371;
+        //dist = (CalculationByDistance(start, end)) * 0.000621371;
+        Location locationA = new Location("point A");
+        locationA.setLatitude(start.latitude);
+        locationA.setLongitude(start.longitude);
+        Location locationB = new Location("point B");
+        locationB.setLatitude(end.latitude);
+        locationB.setLongitude(end.longitude);
+
+        dist = locationA.distanceTo(locationB) * 0.0006213171;
+        Log.d("DistanceIn", String.valueOf(dist));
 
         totalDistance += dist;
         ((TextView) v.findViewById(R.id.tvDistCounter)).setText(String.format("%.2f", totalDistance));

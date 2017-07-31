@@ -1,42 +1,42 @@
 [
     {
-        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/anim/abc_fade_out.xml",
-        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/anim/abc_fade_out.xml"
+        "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/anim/abc_grow_fade_in_from_bottom.xml",
+        "source": "/Users/famakindaniel7/.android/build-cache/08d8b3b42e3b02e764e2e5751aba8a1a82b1592f/output/res/anim/abc_grow_fade_in_from_bottom.xml"
     },
     {
-        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/anim/abc_popup_exit.xml",
-        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/anim/abc_popup_exit.xml"
+        "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/anim/abc_slide_out_bottom.xml",
+        "source": "/Users/famakindaniel7/.android/build-cache/08d8b3b42e3b02e764e2e5751aba8a1a82b1592f/output/res/anim/abc_slide_out_bottom.xml"
     },
     {
-        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/anim/abc_slide_in_top.xml",
-        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/anim/abc_slide_in_top.xml"
+        "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/anim/abc_slide_in_top.xml",
+        "source": "/Users/famakindaniel7/.android/build-cache/08d8b3b42e3b02e764e2e5751aba8a1a82b1592f/output/res/anim/abc_slide_in_top.xml"
     },
     {
-        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/anim/abc_slide_out_bottom.xml",
-        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/anim/abc_slide_out_bottom.xml"
+        "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/anim/abc_shrink_fade_out_from_bottom.xml",
+        "source": "/Users/famakindaniel7/.android/build-cache/08d8b3b42e3b02e764e2e5751aba8a1a82b1592f/output/res/anim/abc_shrink_fade_out_from_bottom.xml"
     },
     {
-        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/anim/abc_popup_enter.xml",
-        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/anim/abc_popup_enter.xml"
+        "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/anim/abc_slide_in_bottom.xml",
+        "source": "/Users/famakindaniel7/.android/build-cache/08d8b3b42e3b02e764e2e5751aba8a1a82b1592f/output/res/anim/abc_slide_in_bottom.xml"
     },
     {
-        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/anim/abc_fade_in.xml",
-        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/anim/abc_fade_in.xml"
+        "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/anim/abc_slide_out_top.xml",
+        "source": "/Users/famakindaniel7/.android/build-cache/08d8b3b42e3b02e764e2e5751aba8a1a82b1592f/output/res/anim/abc_slide_out_top.xml"
     },
     {
-        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/anim/abc_grow_fade_in_from_bottom.xml",
-        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/anim/abc_grow_fade_in_from_bottom.xml"
+        "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/anim/abc_fade_in.xml",
+        "source": "/Users/famakindaniel7/.android/build-cache/08d8b3b42e3b02e764e2e5751aba8a1a82b1592f/output/res/anim/abc_fade_in.xml"
     },
     {
-        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/anim/abc_slide_out_top.xml",
-        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/anim/abc_slide_out_top.xml"
+        "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/anim/abc_fade_out.xml",
+        "source": "/Users/famakindaniel7/.android/build-cache/08d8b3b42e3b02e764e2e5751aba8a1a82b1592f/output/res/anim/abc_fade_out.xml"
     },
     {
-        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/anim/abc_shrink_fade_out_from_bottom.xml",
-        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/anim/abc_shrink_fade_out_from_bottom.xml"
+        "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/anim/abc_popup_enter.xml",
+        "source": "/Users/famakindaniel7/.android/build-cache/08d8b3b42e3b02e764e2e5751aba8a1a82b1592f/output/res/anim/abc_popup_enter.xml"
     },
     {
-        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/anim/abc_slide_in_bottom.xml",
-        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/anim/abc_slide_in_bottom.xml"
+        "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/anim/abc_popup_exit.xml",
+        "source": "/Users/famakindaniel7/.android/build-cache/08d8b3b42e3b02e764e2e5751aba8a1a82b1592f/output/res/anim/abc_popup_exit.xml"
     }
 ]
