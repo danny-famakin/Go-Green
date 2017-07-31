@@ -75,6 +75,7 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
         currentUser = ParseUser.getCurrentUser();
         if((currentUser != null)){
             loadFeed();
+            Log.d("loadfeed", "load");
         }
 
         else {
@@ -325,6 +326,8 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
 
         TabLayout tabLayout = (TabLayout) findViewById(R.id.sliding_tabs);
         tabLayout.setupWithViewPager(ViewPager);
+        Log.d("loadfeed", "loaded");
+
     }
 }
 
