@@ -11,7 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableString;
-import android.text.format.DateUtils;
 import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -33,7 +32,6 @@ import com.parse.ParseUser;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -44,7 +42,7 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
  * Created by melissaperez on 7/17/17.
  */
 
-public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder>  {
+public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder> {
 
     private List<Action> mActions;
     Context context;
@@ -69,9 +67,9 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
         if (timeStamp == null) {
             timeStamp = new Date();
         }
-        relativeTime = getRelativeTimeAgo(timeStamp);
+        relativeTime = TimeStampUtils.getRelativeTimeAgo(timeStamp);
 
-        holder.tvTimeStamp.setText(shortenTimeStamp(relativeTime));
+        holder.tvTimeStamp.setText(TimeStampUtils.shortenTimeStamp(relativeTime, context));
         holder.tvPoints.setText(String.format("%.1f", action.getDouble("points")));
 
 
@@ -84,6 +82,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
                     // load propic
                     final String imgUrl = userList.get(0).getString("profileImgUrl");
                     final String username = userList.get(0).getString("name");
+                    final String Id = userList.get(0).getString("fbId");
                     Glide.with(context)
                             .load(imgUrl)
                             .placeholder(R.drawable.ic_placeholder)
@@ -97,10 +96,12 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
 
                             Intent i = new Intent (context, OtherUserActivity.class);
                             i.putExtra("profImage", imgUrl);
-                            i.putExtra("screen_name", username);
+                            i.putExtra("screenName", username);
+                            i.putExtra("Id", Id);
                             context.startActivity(i);
                         }
                     });
+
 
                     // load action body: bold name, compose rest of body using function below
                     String name = userList.get(0).getString("name");
@@ -226,6 +227,8 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
 
                 @Override
                 public void onClick(View v) {
+
+
                     final int position = getAdapterPosition();
                     final Action currentAction = mActions.get(position);
                     String body = " " + composeActionBody(currentAction);
@@ -234,10 +237,22 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
                     bundle.putString("fbId", currentAction.getUid());
                     bundle.putString("body", body);
                     bundle.putString("points",String.format("%.1f", currentAction.getDouble("points")));
-                    bundle.putString("relativeTime", shortenTimeStamp(relativeTime));
+                    bundle.putString("relativeTime", TimeStampUtils.shortenTimeStamp(relativeTime, context));
                     bundle.putString("objectID", currentAction.getObjectId().toString());
+                    bundle.putString("actionType", currentAction.getActionType());
+                    bundle.putString("numberOf", String.valueOf(currentAction.getMagnitude()));
+                    bundle.putString("subType", currentAction.getSubType());
+                    try {
+                        bundle.putString("fuel", String.valueOf(currentAction.getJSONObject("resourceData").get("fuel")));
+                        bundle.putString("water", String.valueOf(currentAction.getJSONObject("resourceData").get("water")));
+                        bundle.putString("trees", String.valueOf(currentAction.getJSONObject("resourceData").get("trees")));
+                        bundle.putString("emissions", String.valueOf(currentAction.getJSONObject("resourceData").get("emissions")));
+                    }catch (JSONException e1){
+                        e1.printStackTrace();
+                    }
                     DetailFragment detailFragment = DetailFragment.newInstance();
                     detailFragment.setArguments(bundle);
+
                     FragmentTransaction ft = ((AppCompatActivity) context).getSupportFragmentManager()
                             .beginTransaction();
                     // make change
@@ -250,37 +265,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
         }
     }
 
-    public String getRelativeTimeAgo(Date date) {
-        long dateMillis = date.getTime();
-        long currentMillis = new Date().getTime();
 
-        if (currentMillis < dateMillis) {
-            currentMillis = dateMillis;
-        }
-
-        String relativeDate = DateUtils.getRelativeTimeSpanString(dateMillis,
-
-                currentMillis, DateUtils.SECOND_IN_MILLIS).toString();
-
-        return relativeDate;
-    }
-
-    public String shortenTimeStamp(String timestamp) {
-        String[] splitTime = timestamp.trim().split("\\s+");
-        List<String> times = Arrays.asList("second", "seconds", "minute", "minutes", "hour", "hours", "day", "days", "week", "weeks");
-        // deal with recent tweets of form "# _ ago"
-        if (splitTime.length > 1 && times.contains(splitTime[1])) {
-            timestamp = splitTime[0] + splitTime[1].charAt(0);
-        }
-        // deal with old tweets of form M D, Y
-        else if (splitTime.length > 2 && splitTime[2].equals(context.getString(R.string.current_year))) {
-            timestamp = splitTime[0] + " " + splitTime[1].substring(0, splitTime[1].length() - 1);
-        }
-        else if (splitTime[0].equals("Yesterday")) {
-            timestamp = "1d";
-        }
-        return timestamp;
-    }
 
     public String composeActionBody(Action action) {
         String body = "";

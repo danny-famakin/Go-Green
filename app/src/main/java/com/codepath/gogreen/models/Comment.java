@@ -1,7 +1,18 @@
 package com.codepath.gogreen.models;
 
+import android.util.Log;
+
 import com.parse.ParseClassName;
 import com.parse.ParseObject;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 
 /**
  * Created by melissaperez on 7/27/17.
@@ -11,10 +22,20 @@ import com.parse.ParseObject;
 public class Comment extends ParseObject {
     public String uid;
     public String body;
-    public String aid;
+    public Date date;
+    public static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.US);
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
 
     public String getUid(){
-        return this.getString("uid");
+        return uid;
     }
 
     public void setUid(String uid){
@@ -23,7 +44,7 @@ public class Comment extends ParseObject {
     }
 
     public String getBody(){
-        return this.getString("body");
+        return body;
     }
 
     public void setBody(String body){
@@ -31,12 +52,33 @@ public class Comment extends ParseObject {
         this.put("body", body);
     }
 
-    public String getAid(){
-        return this.getString("aid");
+    public JSONObject toJSON() {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("uid", uid);
+            jsonObject.put("body",  body);
+            jsonObject.put("date", sdf.format(date));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return jsonObject;
     }
 
-    public void setAid(String aid){
-        this.aid = aid;
-        this.put("aid", aid);
+    public static Comment fromJSON(JSONObject jsonObject) throws JSONException {
+        Comment comment = new Comment();
+        try {
+            comment.uid = jsonObject.getString("uid");
+            comment.body = jsonObject.getString("body");
+
+            String dateStr = jsonObject.getString("date");
+            Date parseDate = sdf.parse(dateStr);
+            Log.d("date", parseDate.toString());
+            comment.date = parseDate;
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return comment;
     }
 }

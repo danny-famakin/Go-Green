@@ -71,6 +71,7 @@ dependencies {
     annotationProcessor 'org.parceler:parceler:1.1.6'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
 
+
 //    compile project(':ParseUI-Widget')
 
 }

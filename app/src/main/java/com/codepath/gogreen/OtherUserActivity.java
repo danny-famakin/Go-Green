@@ -25,7 +25,6 @@ import org.json.JSONException;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 import static android.view.View.GONE;
-import static com.codepath.gogreen.R.id.ivProfilePic;
 
 /**
  * Created by famakindaniel7 on 7/25/17.
@@ -35,7 +34,7 @@ public class OtherUserActivity extends AppCompatActivity {
     Context context;
     ImageView profileImage;
     TextView tvName, tvJoinDate;
-    String screen_name;
+    String screenName;
     String profImg;
     String Id;
     ToggleButton addFriends;
@@ -51,14 +50,15 @@ public class OtherUserActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         context = this;
-        profileImage = (ImageView) findViewById(ivProfilePic);
+
+        profileImage = (ImageView) findViewById(R.id.ivProfilePicDet);
         tvName = (TextView) findViewById(R.id.tvName);
         tvJoinDate = (TextView) findViewById(R.id.tvJoin);
         logOut = (Button) findViewById(R.id.btnLogOut);
         addFriends = (ToggleButton) findViewById(R.id.addFriends);
         logOut.setVisibility(GONE);
 
-        screen_name = getIntent().getStringExtra("screen_name");
+        screenName = getIntent().getStringExtra("screenName");
         profImg = getIntent().getStringExtra("profImage");
         Id = getIntent().getStringExtra("Id");
 
@@ -73,6 +73,10 @@ public class OtherUserActivity extends AppCompatActivity {
                     try {
                         if (friendsList.get(i).equals(Id)){
                             addFriends.setText("Friends");
+                        }
+                        if (Id.equals(currentUser.get("fbId"))){
+                            addFriends.setVisibility(GONE);
+                            tvName.setText("Your Profile");
                         }
                     } catch (JSONException e1) {
                         e1.printStackTrace();
@@ -95,6 +99,8 @@ public class OtherUserActivity extends AppCompatActivity {
                         try {
                             if (friendsList.get(i) != Id) {
                                 friendsList.put(Id);
+                                currentUser.put("friends", friendsList);
+                                currentUser.saveInBackground();
                             }
 
                         } catch (JSONException e1) {
@@ -123,7 +129,7 @@ public class OtherUserActivity extends AppCompatActivity {
                 .placeholder(R.drawable.ic_placeholder)
                 .bitmapTransform(new CropCircleTransformation(context))
                 .into(profileImage);
-        tvName.setText(screen_name);
+        tvName.setText(screenName);
 
 
 

@@ -18,6 +18,7 @@ public class Action extends ParseObject {
     public double points;
     public JSONArray favorited;
     public JSONObject resourceData;
+    public JSONArray comments;
 
 
     public String getSubType() {
@@ -77,6 +78,15 @@ public class Action extends ParseObject {
         this.favorited = favorited;
         this.put("favorited", favorited);
 
+    }
+
+    public void setResourceData(JSONObject resourceData){
+        this.resourceData = resourceData;
+        this.put("resourceData", resourceData);
+    }
+
+    public JSONObject getResourceData(){
+        return resourceData;
     }
 
     public JSONArray getFavorited(){

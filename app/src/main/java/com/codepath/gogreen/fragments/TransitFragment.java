@@ -497,7 +497,6 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
         } else {
             Toast.makeText(getContext(), "Stopped Tracking", Toast.LENGTH_SHORT).show();
             stopTrack();
-            //logDistance();
         }
     }
 }
