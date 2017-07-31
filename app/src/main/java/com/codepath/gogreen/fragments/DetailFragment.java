@@ -236,6 +236,18 @@ public class DetailFragment extends Fragment {
         }else if (actionType.equals("transit")&& subType.equals("bus")){
             pieChart.setCenterText("Bus");
             drawPieChart(pieChart);
+        }else if (actionType.equals("transit")&& subType.equals("subway")){
+            pieChart.setCenterText("Subway");
+            drawPieChart(pieChart);
+        }else if (actionType.equals("transit")&& subType.equals("train")){
+            pieChart.setCenterText("Train");
+            drawPieChart(pieChart);
+        }else if (actionType.equals("transit")&& subType.equals("bike")){
+            pieChart.setCenterText("Bike");
+            drawPieChart(pieChart);
+        }else if (actionType.equals("transit")&& subType.equals("walking")){
+            pieChart.setCenterText("Walking");
+            drawPieChart(pieChart);
         }
 
 
