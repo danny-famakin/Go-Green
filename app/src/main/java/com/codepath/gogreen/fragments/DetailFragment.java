@@ -341,19 +341,9 @@ public class DetailFragment extends Fragment {
                 int pos = e.toString().indexOf("E");
                 String envValues = e.toString().substring(pos + 16);
 
-                int vos = 0;
-                for (int i = 0; i < yData.length; i++) {
-                    if (yData[i] == Double.parseDouble(envValues)) {
-
-                        String str = h.toString().substring(15,16);
-                        Log.d("onValueSelected", str);
-                        vos = Integer.parseInt(str);
-                        break;
-                    }
-                }
                 String str = h.toString().substring(14,15);
                 Log.d("onValueSelected", str);
-                vos = Integer.parseInt(str);
+                int vos = Integer.parseInt(str);
 
 
                 String env = xData[vos];
