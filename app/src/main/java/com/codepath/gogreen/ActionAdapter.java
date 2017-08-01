@@ -1,12 +1,15 @@
 package com.codepath.gogreen;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
@@ -47,6 +50,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
     private List<Action> mActions;
     Context context;
     String relativeTime;
+    String time;
 
     public ActionAdapter(List<Action> actions) {
         mActions = actions;
@@ -68,8 +72,8 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
             timeStamp = new Date();
         }
         relativeTime = TimeStampUtils.getRelativeTimeAgo(timeStamp);
-
-        holder.tvTimeStamp.setText(TimeStampUtils.shortenTimeStamp(relativeTime, context));
+        time = TimeStampUtils.shortenTimeStamp(relativeTime, context);
+        holder.tvTimeStamp.setText(time);
         holder.tvPoints.setText(String.format("%.1f", action.getDouble("points")));
 
 
@@ -97,11 +101,14 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
                         public void onClick(View v) {
 
                             Intent i = new Intent (context, OtherUserActivity.class);
+                            ActivityOptionsCompat options = ActivityOptionsCompat.
+                                    makeSceneTransitionAnimation((Activity) context, holder.ivProfilePic, ViewCompat.
+                                            getTransitionName(holder.ivProfilePic));
                             i.putExtra("profImage", imgUrl);
                             i.putExtra("screenName", username);
                             i.putExtra("Id", Id);
                             i.putExtra("points", points);
-                            context.startActivity(i);
+                            context.startActivity(i, options.toBundle());
                         }
                     });
 
@@ -112,6 +119,43 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
                     SpannableString str = new SpannableString(name + body);
                     str.setSpan(new StyleSpan(Typeface.BOLD), 0, name.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                     holder.tvAction.setText(str);
+
+                    holder.rlAction.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            String body = " " + composeActionBody(action);
+
+                            Bundle bundle = new Bundle();
+
+                            bundle.putString("fbId", action.getUid());
+                            bundle.putString("body", body);
+                            bundle.putString("points",String.format("%.1f", action.getDouble("points")));
+                            bundle.putString("relativeTime", time);
+                            bundle.putString("objectID", action.getObjectId().toString());
+
+
+                            try {
+                                bundle.putString("action", action.toJSON().toString());
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            bundle.putString("body", body);
+                            bundle.putString("authorName", username);
+                            bundle.putString("authorImg", imgUrl);
+                            bundle.putString("objectID", action.getObjectId().toString());
+
+                            DetailFragment detailFragment = DetailFragment.newInstance();
+                            detailFragment.setArguments(bundle);
+
+                            FragmentTransaction ft = ((AppCompatActivity) context).getSupportFragmentManager()
+                                    .beginTransaction();
+                            // make change
+                            ft.replace(R.id.flContainer, detailFragment, "TAG_FRAGMENT");
+                            // commit
+                            ft.commit();
+
+                        }
+                    });
                 } else if (e != null) {
                     Log.e("action", "Error: " + e.getMessage());
                 }
@@ -225,51 +269,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
 
             }
         });
-            rlAction.setOnClickListener(new View.OnClickListener() {
 
-
-                @Override
-                public void onClick(View v) {
-
-
-                    final int position = getAdapterPosition();
-                    final Action currentAction = mActions.get(position);
-                    String body = " " + composeActionBody(currentAction);
-
-                    Bundle bundle = new Bundle();
-                    try {
-                        bundle.putString("action", currentAction.toJSON().toString());
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                    bundle.putString("body", body);
-//                    bundle.putString("points",String.format("%.1f", currentAction.getDouble("points")));
-//                    bundle.putString("relativeTime", TimeStampUtils.shortenTimeStamp(relativeTime, context));
-                    bundle.putString("objectID", currentAction.getObjectId().toString());
-//                    bundle.putString("actionType", currentAction.getActionType());
-//                    bundle.putString("numberOf", String.valueOf(currentAction.getMagnitude()));
-//                    bundle.putString("subType", currentAction.getSubType());
-//                    try {
-//                        bundle.put("resourceData", currentAction.getJSONObject("resourceData"));
-//                        bundle.putString("fuel", String.valueOf(currentAction.getJSONObject("resourceData").get("fuel")));
-//                        bundle.putString("water", String.valueOf(currentAction.getJSONObject("resourceData").get("water")));
-//                        bundle.putString("trees", String.valueOf(currentAction.getJSONObject("resourceData").get("trees")));
-//                        bundle.putString("emissions", String.valueOf(currentAction.getJSONObject("resourceData").get("emissions")));
-//                    }catch (JSONException e1){
-//                        e1.printStackTrace();
-//                    }
-                    DetailFragment detailFragment = DetailFragment.newInstance();
-                    detailFragment.setArguments(bundle);
-
-                    FragmentTransaction ft = ((AppCompatActivity) context).getSupportFragmentManager()
-                            .beginTransaction();
-                    // make change
-                    ft.replace(R.id.flContainer, detailFragment, "TAG_FRAGMENT");
-                    // commit
-                    ft.commit();
-
-                }
-            });
         }
     }
 
