@@ -315,7 +315,7 @@ public class DetailFragment extends Fragment {
                     Toast.makeText(getContext(), env + " saved: " + envValues + "L" , Toast.LENGTH_SHORT).show();
                 }
                 else if (env.equals("Fuel")){
-                    Toast.makeText(getContext(), env + " saved: " + envValues + "lbs", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), env + " saved: " + envValues + "L", Toast.LENGTH_SHORT).show();
                 }
                 else if (env.equals("Trees")){
                     Toast.makeText(getContext(), env + " saved: " + envValues + " " + env, Toast.LENGTH_SHORT).show();

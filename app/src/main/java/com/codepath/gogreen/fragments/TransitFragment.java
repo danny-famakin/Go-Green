@@ -11,7 +11,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
@@ -76,7 +75,7 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
     private boolean mLocationPermissionGranted;
     private static final long INTERVAL = 1000 * 5 * 1; //1 minute
     private static final long FASTEST_INTERVAL = 1000 * 5 * 1;
-    private static final float SMALLEST_DISPLACEMENT = 0.25F;
+    private static final float SMALLEST_DISPLACEMENT = 5;
 
     // The geographical location where the device is currently located. That is, the last-known
     // location retrieved by the Fused Location Provider.
@@ -94,6 +93,7 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
     private TextView distance;
     private double dist;
     Polyline polyline;
+
 
     public static TransitFragment newInstance() {
 
@@ -122,14 +122,16 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        transitConstants.put("bus", new Double[] {0.2976, .0077, 0., 0.});
-        transitConstants.put("subway", new Double[] {.7408, .0454, 0., 0.});
-        transitConstants.put("train", new Double[] {0.7408, .0454, 0., 0.});
-        transitConstants.put("bike", new Double[] {0.9590, .0856, 0., 0.});
-        transitConstants.put("walking", new Double[] {0.9590, 0.0843, 0., 0.});
+        transitConstants.put("bus", new Double[]{0.2976, .0077, 0., 0.});
+        transitConstants.put("subway", new Double[]{.7408, .0454, 0., 0.});
+        transitConstants.put("train", new Double[]{0.7408, .0454, 0., 0.});
+        transitConstants.put("bike", new Double[]{0.9590, .0856, 0., 0.});
+        transitConstants.put("walking", new Double[]{0.9590, 0.0843, 0., 0.});
 
         inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         v = inflater.inflate(R.layout.activity_log_transit, null);
+        //v.inflate(R.layout.activity_log_transit, null);
+
 
         Spinner spVehicle = (Spinner) v.findViewById(R.id.spVehicle);
         distance = (TextView) v.findViewById(R.id.tvDistCounter);
@@ -162,34 +164,33 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
         }
 
         track = (ToggleButton) v.findViewById(R.id.btnTrack);
+
         track.setOnClickListener(this);
         // Build the Play services client for use by the Fused Location Provider and the Places API.
         // Use the addApi() method to request the Google Places API and the Fused Location Provider.
         //createLocationRequest();
-        mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
-                .enableAutoManage(getActivity() /*FragmentActivity */,
-                        this /* OnConnectionFailedListener */)
-                .addConnectionCallbacks(this)
-                .addApi(LocationServices.API)
-                .addApi(Places.GEO_DATA_API)
-                .addApi(Places.PLACE_DETECTION_API)
-                .build();
-        mGoogleApiClient.connect();
 
-
+            mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
+                    .enableAutoManage(getActivity() /*FragmentActivity */,
+                            this /* OnConnectionFailedListener */)
+                    .addConnectionCallbacks(this)
+                    .addApi(LocationServices.API)
+                    .addApi(Places.GEO_DATA_API)
+                    .addApi(Places.PLACE_DETECTION_API)
+                    .build();
+            mGoogleApiClient.connect();
     }
 
-
-
     @Override
-    public void onDestroy()
-    {
+    public void onDestroy() {
         super.onDestroy();
-        try{
-            SupportMapFragment fragment = (SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.map);
-            if (fragment != null && fragment.isResumed()) getFragmentManager().beginTransaction().remove(fragment).commit();
-        }catch (InflateException e){
-
+            //SupportMapFragment fragment = (SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.map);
+        SupportMapFragment fragment = (SupportMapFragment)getFragmentManager().findFragmentById(R.id.map);
+            if (fragment != null && fragment.isResumed())
+                getFragmentManager().beginTransaction().remove(fragment).commit();
+        if (mGoogleApiClient != null){
+        mGoogleApiClient.stopAutoManage(getActivity());
+        //mGoogleApiClient.disconnect();
         }
     }
 
@@ -229,8 +230,9 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
 
             }
 
-
             modal.dismiss();
+            //onDestroy();
+
         }
         else {
         }
@@ -240,8 +242,8 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
         newPoints = (pointValues[index] * newDistance);
         updateResources("transit", vehicleType, newPoints, newDistance, transitConstants.get(vehicleType), 0);
 
-
     }
+
 
 
     @Override
@@ -439,12 +441,8 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
                 .position(new LatLng(points.get(0).latitude, points.get(0).longitude))); //add Marker in current position
         polyline = mMap.addPolyline(options);//add Polyline
     }
-
     public void disconnect(){
-        //if (mGoogleApiClient.isConnected()) {
-        //LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
         mGoogleApiClient.disconnect();
-        //}
     }
     public void stopTrack(){
         disconnect();
@@ -452,7 +450,7 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
 
     @Override
     public void onClick(View v) {
-        if (track.isChecked()) {
+            if (track.isChecked()) {
             Toast.makeText(getContext(), "Tracking", Toast.LENGTH_SHORT).show();
             beginTrack();
         } else {

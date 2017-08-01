@@ -27,7 +27,7 @@ import org.json.JSONObject;
  * Created by anyazhang on 7/13/17.
  */
 
-public class ModalFragment extends Fragment {
+public class ModalFragment extends Fragment{
     Context context;
     MaterialDialog modal;
     public OnItemSelectedListener listener;
@@ -54,24 +54,6 @@ public class ModalFragment extends Fragment {
     }
 
     public void openModal(View view) {
-//        String action_id = getArguments().getString("action_id");
-//        int layoutResourceId = 0;
-//        switch (action_id) {
-//            case "transit":
-//                layoutResourceId = R.layout.activity_log_transit;
-//                transitFragment = new TransitFragment();
-//                replaceFragment(transitFragment);
-//                break;
-//            case "water":
-//                layoutResourceId = R.layout.activity_log_water;
-//                break;
-//            case "reuse":
-//                layoutResourceId = R.layout.activity_log_reuse;
-//                break;
-//            case "recycle":
-//                layoutResourceId = R.layout.activity_log_recycle;
-//                break;
-//        }
 
          modal = new MaterialDialog.Builder(getContext())
                 .customView(view, false)
