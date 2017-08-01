@@ -3,8 +3,10 @@ package com.codepath.gogreen.fragments;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -35,7 +37,7 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
-import com.parse.FindCallback;
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
@@ -43,10 +45,10 @@ import com.parse.SaveCallback;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
@@ -68,14 +70,14 @@ public class DetailFragment extends Fragment {
     EditText etWriteComment;
     Button btComment;
     PieChart pieChart;
-    String actionID;
+    String actionId;
     ArrayList<Comment> comments;
     RecyclerView rvComments;
     CommentAdapter commentAdapter;
     MaterialDialog modal;
     ParseUser user;
 
-    String fuel, water, trees, emissions, actionType, numberOf, subType, body;
+    String fuel, water, trees, emissions, numberOf, body;
 
     Action action;
 
@@ -97,12 +99,21 @@ public class DetailFragment extends Fragment {
         v = inflater.inflate(R.layout.comment_fragment, null);
         user = ParseUser.getCurrentUser();
 
-        String fbId = getArguments().getString("fbId");
-        String points = getArguments().getString("points");
+        actionId = getArguments().getString("objectID");
         String relativeTime = getArguments().getString("relativeTime");
-        actionID = getArguments().getString("objectID");
         body = getArguments().getString("body");
         context = getActivity();
+        String points = getArguments().getString("points");
+
+        JSONObject jsonObject;
+        try {
+            jsonObject = new JSONObject(getArguments().getString("action"));
+            action = Action.fromJSON(jsonObject);
+            action.setObjectId(actionId);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
 
         ivProfilePicDet = (ImageView) v.findViewById(R.id.ivProfilePicDet);
         tvAction = (TextView) v.findViewById(R.id.tvAction);
@@ -117,22 +128,14 @@ public class DetailFragment extends Fragment {
         tvPoints.setText(points);
         tvTimeStamp.setText(relativeTime);
 
-
-        fuel = getArguments().getString("fuel");
-        water = getArguments().getString("water");
-        trees = getArguments().getString("trees");
-        emissions = getArguments().getString("emissions");
-        actionType = getArguments().getString("actionType");
-        numberOf = getArguments().getString("numberOf");
-        subType = getArguments().getString("subType");
-
         ParseQuery<ParseUser> query = ParseQuery.getQuery("_User");
-        query.whereEqualTo("fbId", fbId);
-        query.findInBackground(new FindCallback<ParseUser>() {
-            public void done(List<ParseUser> userList, ParseException e) {
-                if (e == null && userList.size() > 0) {
+        query.whereEqualTo("fbId", action.getUid());
+        query.getFirstInBackground(new GetCallback<ParseUser>() {
+            @Override
+            public void done(ParseUser author, ParseException e) {
+                if (e == null) {
                     // load propic
-                    String imgUrl = userList.get(0).getString("profileImgUrl");
+                    String imgUrl = author.getString("profileImgUrl");
                     Log.d("imageeee", imgUrl);
                     Glide.with(context)
                             .load(imgUrl)
@@ -141,7 +144,7 @@ public class DetailFragment extends Fragment {
                             .into(ivProfilePicDet);
 //
 //                    load action body: bold name, compose rest of body using function below
-                    String name = userList.get(0).getString("name");
+                    String name = author.getString("name");
                     SpannableString str = new SpannableString(name + body);
                     str.setSpan(new StyleSpan(Typeface.BOLD), 0, name.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                     tvAction.setText(str);
@@ -153,17 +156,18 @@ public class DetailFragment extends Fragment {
 
 
         ParseQuery<Action> actionQuery = ParseQuery.getQuery("Action");
-        actionQuery.whereEqualTo("objectId", actionID);
-        actionQuery.findInBackground(new FindCallback<Action>() {
-            public void done(List<Action> actionList, ParseException e) {
-                if (e == null && actionList.size() > 0) {
+        actionQuery.whereEqualTo("objectId", actionId);
+        actionQuery.getFirstInBackground(new GetCallback<Action>() {
+            @Override
+            public void done(Action object, ParseException e) {
+                if (e == null) {
                     Log.d("actionComments", "reloading");
-                    action = actionList.get(0);
+
                     // load original comments
-                    JSONArray commentJSON = action.getJSONArray("comments");
+                    JSONArray commentJSON = object.getJSONArray("comments");
                     if (commentJSON == null) {
                         commentJSON = new JSONArray();
-                        action.put("comments", commentJSON);
+                        object.put("comments", commentJSON);
                     }
                     for (int i = 0; i < commentJSON.length(); i++) {
                         try {
@@ -220,45 +224,87 @@ public class DetailFragment extends Fragment {
         });
         pieChart = (PieChart) v.findViewById(R.id.pieChart);
 
+        pieChart.setCenterText(points);
+        try {
+            drawPieChart(pieChart);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-        if (actionType.equals("reuse")) {
-            pieChart.setCenterText("Reuse");
-            drawPieChart(pieChart);
-        } else if (actionType.equals("recycle") && subType.equals("can")) {
-            pieChart.setCenterText("Cans");
-            drawPieChart(pieChart);
-        } else if (actionType.equals("recycle") && subType.equals("bottle")) {
-            pieChart.setCenterText("Bottles");
-            drawPieChart(pieChart);
-        } else if (actionType.equals("recycle") && subType.equals("paper")) {
-            pieChart.setCenterText("Paper");
-            drawPieChart(pieChart);
-        }else if (actionType.equals("transit")&& subType.equals("bus")){
-            pieChart.setCenterText("Bus");
-            drawPieChart(pieChart);
-        }else if (actionType.equals("transit")&& subType.equals("subway")){
-            pieChart.setCenterText("Subway");
-            drawPieChart(pieChart);
-        }else if (actionType.equals("transit")&& subType.equals("train")){
-            pieChart.setCenterText("Train");
-            drawPieChart(pieChart);
-        }else if (actionType.equals("transit")&& subType.equals("bike")){
-            pieChart.setCenterText("Bike");
-            drawPieChart(pieChart);
-        }else if (actionType.equals("transit")&& subType.equals("walking")){
-            pieChart.setCenterText("Walking");
-            drawPieChart(pieChart);
+
+        // load initial favorite state
+        JSONArray favoritedBy = action.getFavorited();
+        boolean isFaved = false;
+        if(favoritedBy != null) {
+            for (int a = 0; a < favoritedBy.length(); a++) {
+                try {
+                    if (String.valueOf(favoritedBy.get(a)).equals(user.getString("fbId"))) {
+                        isFaved = true;
+                        ivFavorite.setImageResource(R.drawable.ic_faved);
+                        break;
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+            tvLikes.setText(String.valueOf(favoritedBy.length()));
+        }
+        if(!isFaved){
+            ivFavorite.setImageResource(R.drawable.ic_fave);
         }
 
 
         modal = new MaterialDialog.Builder(getContext())
                 .customView(v, false)
                 .show();
+
+
+        // Set favorite on click listener
+        ivFavorite.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            public void onClick(View v) {
+                boolean isFaved = false;
+                ParseUser current = ParseUser.getCurrentUser();
+                JSONArray favoritedBy = action.getFavorited();
+                //   Log.d("hopeee", String.valueOf(ids));
+                if (favoritedBy == null) {
+                    favoritedBy = new JSONArray();
+                }
+                for (int i = 0; i < favoritedBy.length(); i++) {
+                    try {
+                        if (favoritedBy.get(i).equals(current.getString("fbId"))) {
+                            isFaved = true;
+                            favoritedBy.remove(i);
+                            ivFavorite.setImageResource(R.drawable.ic_fave);
+                            int likes = Integer.valueOf(tvLikes.getText().toString());
+                            tvLikes.setText(String.valueOf(likes - 1));
+                            break;
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+                if (!isFaved) {
+                    favoritedBy.put(current.getString("fbId"));
+                    ivFavorite.setImageResource(R.drawable.ic_faved);
+                    int likes = Integer.valueOf(tvLikes.getText().toString());
+                    tvLikes.setText(String.valueOf(likes + 1));
+                }
+
+                action.setFavorited(favoritedBy);
+                action.saveInBackground();
+
+            }
+        });
+
     }
 
-    public void drawPieChart(PieChart pChart){
-        final double[] yData = {Double.parseDouble(numberOf) * Double.parseDouble(fuel), Double.parseDouble(numberOf) *Double.parseDouble(water),
-                Double.parseDouble(numberOf) *Double.parseDouble(trees), Double.parseDouble(numberOf) *Double.parseDouble(emissions)};
+    public void drawPieChart(PieChart pChart) throws JSONException {
+        final double[] yData = {action.getMagnitude() * action.getResourceData().getDouble("fuel"), action.getMagnitude() * action.getResourceData().getDouble("water"),
+                action.getMagnitude() * action.getResourceData().getDouble("trees"), action.getMagnitude() * action.getResourceData().getDouble("emissions")};
         final String[] xData = {"Fuel", "Water", "Trees", "Emissions"};
 
         ArrayList<PieEntry> yEntry = new ArrayList<>();
@@ -299,11 +345,15 @@ public class DetailFragment extends Fragment {
                 for (int i = 0; i < yData.length; i++) {
                     if (yData[i] == Double.parseDouble(envValues)) {
 
-                        String str = h.toString().substring(14,15);
+                        String str = h.toString().substring(15,16);
+                        Log.d("onValueSelected", str);
                         vos = Integer.parseInt(str);
                         break;
                     }
                 }
+                String str = h.toString().substring(14,15);
+                Log.d("onValueSelected", str);
+                vos = Integer.parseInt(str);
 
 
                 String env = xData[vos];

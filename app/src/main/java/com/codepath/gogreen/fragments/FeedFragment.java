@@ -52,7 +52,6 @@ public class FeedFragment extends FloatingMenuFragment {
         rvActions.addItemDecoration(new DividerItemDecoration(getContext()));
         // set the adapter
         rvActions.setAdapter(actionAdapter);
-        friendIdList = loadFriends();
         update();
 
         swipeContainer = (SwipeRefreshLayout) v.findViewById(R.id.swiper);
@@ -73,6 +72,7 @@ public class FeedFragment extends FloatingMenuFragment {
     }
 
     public void update() {
+        friendIdList = loadFriends();
         ParseQuery<Action> query = ParseQuery.getQuery("Action");
         query.whereContainedIn("uid", friendIdList);
         query.findInBackground(new FindCallback<Action>() {

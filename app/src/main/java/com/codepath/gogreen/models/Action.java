@@ -4,11 +4,13 @@ import com.parse.ParseClassName;
 import com.parse.ParseObject;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
  * Created by anyazhang on 7/14/17.
  */
+
 @ParseClassName("Action")
 public class Action extends ParseObject {
     public String uid;
@@ -86,12 +88,53 @@ public class Action extends ParseObject {
     }
 
     public JSONObject getResourceData(){
-        return resourceData;
+        return this.getJSONObject("resourceData");
     }
 
     public JSONArray getFavorited(){
-        return favorited;
+        return this.getJSONArray("favorited");
     }
 
+    public void setComments(JSONArray commentArray){
+        this.comments = commentArray;
+        this.put("comments", commentArray);
+    }
+
+    public JSONArray getComments() {
+        return this.getJSONArray("comments");
+    }
+    public JSONObject toJSON() throws JSONException {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("actionType", getActionType());
+        jsonObject.put("subType", getSubType());
+        jsonObject.put("uid", getUid());
+        jsonObject.put("magnitude", getMagnitude());
+        jsonObject.put("points", getPoints());
+        jsonObject.put("favorited", getFavorited());
+        jsonObject.put("resourceData", getResourceData());
+        jsonObject.put("comments", getComments());
+
+        return jsonObject;
+
+    }
+
+    public static Action fromJSON(JSONObject jsonObject) throws JSONException {
+        Action action = new Action();
+        action.setActionType(jsonObject.getString("actionType"));
+        if (jsonObject.has("subType")) {
+            action.setSubType(jsonObject.getString("subType"));
+        }
+        action.setUid(jsonObject.getString("uid"));
+        action.setMagnitude(jsonObject.getDouble("magnitude"));
+        action.setPoints(jsonObject.getDouble("points"));
+        if (jsonObject.has("favorited")) {
+            action.setFavorited(jsonObject.getJSONArray("favorited"));
+        }
+        action.setResourceData(jsonObject.getJSONObject("resourceData"));
+        if (jsonObject.has("comments")) {
+            action.setComments(jsonObject.getJSONArray("comments"));
+        }
+        return action;
+    }
 
 }

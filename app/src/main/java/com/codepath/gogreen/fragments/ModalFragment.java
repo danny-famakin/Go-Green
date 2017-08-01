@@ -20,6 +20,7 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import org.apache.commons.lang3.StringUtils;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -40,6 +41,7 @@ public class ModalFragment extends Fragment {
         onOpenModal();
     }
 
+
     public static ModalFragment newInstance(String action_id) {
 
         Bundle args = new Bundle();
@@ -54,24 +56,6 @@ public class ModalFragment extends Fragment {
     }
 
     public void openModal(View view) {
-//        String action_id = getArguments().getString("action_id");
-//        int layoutResourceId = 0;
-//        switch (action_id) {
-//            case "transit":
-//                layoutResourceId = R.layout.activity_log_transit;
-//                transitFragment = new TransitFragment();
-//                replaceFragment(transitFragment);
-//                break;
-//            case "water":
-//                layoutResourceId = R.layout.activity_log_water;
-//                break;
-//            case "reuse":
-//                layoutResourceId = R.layout.activity_log_reuse;
-//                break;
-//            case "recycle":
-//                layoutResourceId = R.layout.activity_log_recycle;
-//                break;
-//        }
 
          modal = new MaterialDialog.Builder(getContext())
                 .customView(view, false)
@@ -168,7 +152,9 @@ public class ModalFragment extends Fragment {
                         action.setMagnitude(newMagnitude);
                     }
                     action.setPoints(newPoints);
-                    action.put("resourceData", actionResourceData);
+                    action.setResourceData(actionResourceData);
+                    action.setComments(new JSONArray());
+                    action.setFavorited(new JSONArray());
 
                     action.saveInBackground(new SaveCallback() {
                         @Override
