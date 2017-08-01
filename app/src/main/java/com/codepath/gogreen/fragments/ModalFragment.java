@@ -28,7 +28,7 @@ import org.json.JSONObject;
  * Created by anyazhang on 7/13/17.
  */
 
-public class ModalFragment extends Fragment {
+public class ModalFragment extends Fragment{
     Context context;
     MaterialDialog modal;
     public OnItemSelectedListener listener;

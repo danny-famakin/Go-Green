@@ -32,7 +32,7 @@ public class ProfileActivity extends AppCompatActivity {
     TextView tvName;
     String imageURL;
     ToggleButton addFriend;
-    TextView tvJoinDate;
+    TextView tvJoinDate, tvPoints;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +45,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         ivProfilePic = (ImageView) findViewById(R.id.ivProfilePicDet);
         tvName = (TextView) findViewById(R.id.tvName);
+        tvPoints = (TextView) findViewById(R.id.tvPoints);
         tvJoinDate = (TextView) findViewById(R.id.tvJoin);
         addFriend = (ToggleButton) findViewById(R.id.addFriends);
         addFriend.setVisibility(GONE);
@@ -91,7 +92,9 @@ public class ProfileActivity extends AppCompatActivity {
                 .placeholder(R.drawable.ic_placeholder)
                 .bitmapTransform(new CropCircleTransformation(context))
                 .into(ivProfilePic);
-
+        double pts = currentUser.getDouble("totalPoints");
+        String points = String.format("%.1f", pts);
+        tvPoints.setText(points);
         tvName.setText(currentUser.getString("name"));
         SimpleDateFormat sdf = new SimpleDateFormat("MMMM YYYY", Locale.US);
         Date joinDate = currentUser.getDate("joinDate");

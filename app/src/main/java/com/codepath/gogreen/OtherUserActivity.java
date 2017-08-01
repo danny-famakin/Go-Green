@@ -33,10 +33,11 @@ import static android.view.View.GONE;
 public class OtherUserActivity extends AppCompatActivity {
     Context context;
     ImageView profileImage;
-    TextView tvName, tvJoinDate;
+    TextView tvName, tvJoinDate, tvPoints;
     String screenName;
     String profImg;
     String Id;
+    String points;
     ToggleButton addFriends;
     Button logOut;
     ParseUser currentUser;
@@ -56,11 +57,15 @@ public class OtherUserActivity extends AppCompatActivity {
         tvJoinDate = (TextView) findViewById(R.id.tvJoin);
         logOut = (Button) findViewById(R.id.btnLogOut);
         addFriends = (ToggleButton) findViewById(R.id.addFriends);
+        tvPoints = (TextView) findViewById(R.id.tvPoints);
         logOut.setVisibility(GONE);
 
         screenName = getIntent().getStringExtra("screenName");
         profImg = getIntent().getStringExtra("profImage");
         Id = getIntent().getStringExtra("Id");
+        points = getIntent().getStringExtra("points");
+
+        tvPoints.setText(points);
 
         loadData();
         ParseUser.getCurrentUser().fetchInBackground(new GetCallback<ParseObject>() {
