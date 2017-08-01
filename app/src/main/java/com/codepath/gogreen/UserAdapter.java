@@ -66,6 +66,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
                 i.putExtra("screenName", String.valueOf(user.get("name")));
                 i.putExtra("profImage", user.getString("profileImgUrl"));
                 i.putExtra("Id", String.valueOf(user.get("fbId")));
+                i.putExtra("joinDate", user.getDate("joinDate"));
                 double pts = user.getDouble("totalPoints");
                 String points = String.format("%.1f", pts);
                 i.putExtra("points", points);

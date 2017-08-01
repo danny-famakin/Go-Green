@@ -22,6 +22,10 @@ import com.parse.ParseUser;
 import org.json.JSONArray;
 import org.json.JSONException;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 import static android.view.View.GONE;
@@ -121,6 +125,13 @@ public class OtherUserActivity extends AppCompatActivity {
                 .bitmapTransform(new CropCircleTransformation(context))
                 .into(profileImage);
         tvName.setText(screenName);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("MMMM YYYY", Locale.US);
+        Date joinDate = (Date)getIntent().getSerializableExtra("joinDate");
+        if (joinDate != null) {
+        String dateString = "Joined in " + sdf.format(joinDate);
+        tvJoinDate.setText(dateString);
+        }
     }
 
 

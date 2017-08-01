@@ -209,8 +209,9 @@ public class DetailFragment extends Fragment {
 
                     addComment(comment);
                     JSONArray commentArray = action.getJSONArray("comments");
-                    commentArray.put(comment.toJSON());
                     action.put("comments", commentArray);
+                    commentArray.put(comment.toJSON());
+
 
                     action.saveInBackground(new SaveCallback() {
                         @Override

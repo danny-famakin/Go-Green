@@ -87,6 +87,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
                     final String imgUrl = userList.get(0).getString("profileImgUrl");
                     final String username = userList.get(0).getString("name");
                     final String Id = userList.get(0).getString("fbId");
+                    final Date joinDate = userList.get(0).getDate("joinDate");
                     final double pts = userList.get(0).getDouble("totalPoints");
                     final String points = String.format("%.1f", pts);
                     Glide.with(context)
@@ -107,6 +108,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
                             i.putExtra("profImage", imgUrl);
                             i.putExtra("screenName", username);
                             i.putExtra("Id", Id);
+                            i.putExtra("joinDate", joinDate);
                             i.putExtra("points", points);
                             context.startActivity(i, options.toBundle());
                         }
