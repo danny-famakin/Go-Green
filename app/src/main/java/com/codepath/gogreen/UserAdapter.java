@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,11 +26,13 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     private List<ParseUser> mUsers;
     Context context;
+    boolean displayRank;
 
 
 
-    public UserAdapter(List<ParseUser> users) {
+    public UserAdapter(List<ParseUser> users, boolean rank) {
         mUsers = users;
+        displayRank = rank;
     }
 
     @Override
@@ -43,8 +46,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     public void onBindViewHolder(final UserAdapter.ViewHolder holder, int position) {
         final ParseUser user = mUsers.get(position);
-        holder.tvRank.setText(String.valueOf(position + 1));
+        if (displayRank) {
+            holder.tvRank.setText(String.valueOf(position + 1));
+        }
         holder.tvName.setText(user.getString("name"));
+        Log.d("userAdapter", user.getString("name"));
         double points = user.getDouble("totalPoints");
         holder.tvPoints.setText(String.format("%.1f", points));
 

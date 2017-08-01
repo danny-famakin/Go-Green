@@ -31,20 +31,10 @@ import com.codepath.gogreen.fragments.TabPagerAdapter;
 import com.codepath.gogreen.fragments.TransitFragment;
 import com.codepath.gogreen.fragments.WaterFragment;
 import com.codepath.gogreen.models.Action;
-import com.facebook.AccessToken;
-import com.facebook.GraphRequest;
-import com.facebook.GraphResponse;
-import com.facebook.HttpMethod;
 import com.oguzdev.circularfloatingactionmenu.library.FloatingActionMenu;
 import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 import com.parse.ParseUser;
 import com.parse.ui.ParseLoginBuilder;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 
 public class FeedActivity extends AppCompatActivity implements ModalFragment.OnItemSelectedListener {
@@ -53,12 +43,13 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
     ViewPager ViewPager;
     public Context context;
     ParseUser currentUser;
+    FrameLayout flContainer;
     FloatingActionMenu actionMenu;
     SubActionButton button1;
     SubActionButton button2;
     SubActionButton button3;
     SubActionButton button4;
-
+    SearchFragment searchFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +57,7 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
         setContentView(R.layout.activity_feed);
         context = this;
 
+        flContainer = (FrameLayout)findViewById(R.id.flContainer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -212,38 +204,6 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
     }
 
 
-    public void getFriends() {
-        new GraphRequest(
-                AccessToken.getCurrentAccessToken(),
-                "/me/friends",
-                null,
-                HttpMethod.GET,
-                new GraphRequest.Callback() {
-                    public void onCompleted(GraphResponse response) {
-            /* handle the result */
-                        ParseUser user = ParseUser.getCurrentUser();
-                        try {
-                            ArrayList<String> friends = new ArrayList<String>();
-                            JSONArray jsonArrayFriends = response.getJSONObject().getJSONArray("data");
-                            for (int i = 0; i < jsonArrayFriends.length(); i++) {
-                                JSONObject friendlistObject = jsonArrayFriends.getJSONObject(i);
-                                String friendListID = friendlistObject.getString("id");
-                                friends.add(friendListID);
-                            }
-                            user.put("friends", friends);
-                            user.saveInBackground();
-                            loadFeed();
-                            } catch(JSONException e){
-                                e.printStackTrace();
-                            }
-
-
-
-                    }
-                }
-        ).executeAsync();
-    }
-
     public SubActionButton createSubActionButton(int iconId) {
         SubActionButton.Builder itemBuilder = new SubActionButton.Builder(this);
         int subActionButtonSize = 280;
@@ -260,19 +220,45 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_feed, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
+        MenuItemCompat.setOnActionExpandListener(searchItem, new MenuItemCompat.OnActionExpandListener() {
+            @Override
+            public boolean onMenuItemActionExpand(MenuItem item) {
+                return true;
+            }
+
+            @Override
+            public boolean onMenuItemActionCollapse(MenuItem item) {
+                // Write your code here
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                if (searchFragment != null) {
+                    ft.remove(searchFragment).commit();
+                }
+                return true;
+            }
+        });
+
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                // perform query here
-                Intent i = new Intent(context, SearchActivity.class);
-                i.putExtra("search_users", query);
-                context.startActivity(i);
                 searchView.clearFocus();
                 return true;
             }
             @Override
             public boolean onQueryTextChange(String newText) {
+                if (!newText.isEmpty()) {
+                    searchFragment = SearchFragment.newInstance(newText);
+                    final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                    // make change
+                    flContainer.setVisibility(View.VISIBLE);
+                    ft.replace(R.id.flContainer, searchFragment, "TAG_FRAGMENT");
+                    // commit
+                    ft.commit();
+
+
+
+
+                }
                 return false;
             }
         });
@@ -280,6 +266,17 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
 
     }
 
+
+    @Override
+    public void onBackPressed() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//        ft.setCustomAnimations(android.R.anim.slide_in_left,
+//                android.R.anim.slide_out_right);
+//        flContainer.setVisibility(View.GONE);
+        ft.remove(searchFragment).commit();
+
+        Log.d("back", "pressed");
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

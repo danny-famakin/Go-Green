@@ -20,6 +20,7 @@ import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
 import org.apache.commons.lang3.StringUtils;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -39,6 +40,7 @@ public class ModalFragment extends Fragment{
         super.onCreate(savedInstanceState);
         onOpenModal();
     }
+
 
     public static ModalFragment newInstance(String action_id) {
 
@@ -150,7 +152,9 @@ public class ModalFragment extends Fragment{
                         action.setMagnitude(newMagnitude);
                     }
                     action.setPoints(newPoints);
-                    action.put("resourceData", actionResourceData);
+                    action.setResourceData(actionResourceData);
+                    action.setComments(new JSONArray());
+                    action.setFavorited(new JSONArray());
 
                     action.saveInBackground(new SaveCallback() {
                         @Override

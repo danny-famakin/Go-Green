@@ -34,7 +34,7 @@ public class FloatingMenuFragment extends Fragment {
     LayoutInflater inflater;
     View v;
     Context context;
-    public ArrayList<String> friendIdList;
+    public ArrayList<String> friendsList;
     ParseUser currentUser;
 
 
@@ -165,12 +165,7 @@ public class FloatingMenuFragment extends Fragment {
     }
 
     public ArrayList<String> loadFriends() {
-//        ParseUser.getCurrentUser().fetchInBackground(new GetCallback<ParseObject>() {
-//            @Override
-//            public void done(ParseObject object, ParseException e) {
-//
-//            }
-//        });
+        Log.d("loadFriends", "loading");
         currentUser = ParseUser.getCurrentUser();
         final String userId = currentUser.getString("fbId");
         ArrayList<String> friendsList = new ArrayList<String>();
@@ -179,12 +174,14 @@ public class FloatingMenuFragment extends Fragment {
         for (int i = 0; i < friends.length(); i++) {
             try {
                 friendsList.add(friends.getString(i));
-            } catch (JSONException e) {
-                e.printStackTrace();
+            } catch (JSONException ex) {
+                ex.printStackTrace();
             }
         }
         friendsList.add(userId);
         return friendsList;
+
+
     }
 
 }

@@ -244,6 +244,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
                     String body = " " + composeActionBody(currentAction);
 
                     Bundle bundle = new Bundle();
+
                     bundle.putString("fbId", currentAction.getUid());
                     bundle.putString("body", body);
                     bundle.putString("points",String.format("%.1f", currentAction.getDouble("points")));
@@ -252,14 +253,28 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
                     bundle.putString("actionType", currentAction.getActionType());
                     bundle.putString("numberOf", String.valueOf(currentAction.getMagnitude()));
                     bundle.putString("subType", currentAction.getSubType());
+
                     try {
-                        bundle.putString("fuel", String.valueOf(currentAction.getJSONObject("resourceData").get("fuel")));
-                        bundle.putString("water", String.valueOf(currentAction.getJSONObject("resourceData").get("water")));
-                        bundle.putString("trees", String.valueOf(currentAction.getJSONObject("resourceData").get("trees")));
-                        bundle.putString("emissions", String.valueOf(currentAction.getJSONObject("resourceData").get("emissions")));
-                    }catch (JSONException e1){
-                        e1.printStackTrace();
+                        bundle.putString("action", currentAction.toJSON().toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
+                    bundle.putString("body", body);
+//                    bundle.putString("points",String.format("%.1f", currentAction.getDouble("points")));
+//                    bundle.putString("relativeTime", TimeStampUtils.shortenTimeStamp(relativeTime, context));
+                    bundle.putString("objectID", currentAction.getObjectId().toString());
+//                    bundle.putString("actionType", currentAction.getActionType());
+//                    bundle.putString("numberOf", String.valueOf(currentAction.getMagnitude()));
+//                    bundle.putString("subType", currentAction.getSubType());
+//                    try {
+//                        bundle.put("resourceData", currentAction.getJSONObject("resourceData"));
+//                        bundle.putString("fuel", String.valueOf(currentAction.getJSONObject("resourceData").get("fuel")));
+//                        bundle.putString("water", String.valueOf(currentAction.getJSONObject("resourceData").get("water")));
+//                        bundle.putString("trees", String.valueOf(currentAction.getJSONObject("resourceData").get("trees")));
+//                        bundle.putString("emissions", String.valueOf(currentAction.getJSONObject("resourceData").get("emissions")));
+//                    }catch (JSONException e1){
+//                        e1.printStackTrace();
+//                    }
                     DetailFragment detailFragment = DetailFragment.newInstance();
                     detailFragment.setArguments(bundle);
 

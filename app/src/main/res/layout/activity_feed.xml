@@ -37,11 +37,12 @@
         android:layout_height="match_parent"
         android:layout_below="@+id/sliding_tabs"/>
 
-    <FrameLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/flContainer">
-    </FrameLayout>
+        <FrameLayout
+            android:id="@+id/flContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbar"
+            android:visibility="gone"></FrameLayout>
 
 </RelativeLayout>
     <android.support.design.widget.FloatingActionButton

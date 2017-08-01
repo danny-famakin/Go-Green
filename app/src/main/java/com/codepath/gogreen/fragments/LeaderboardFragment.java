@@ -40,12 +40,11 @@ public class LeaderboardFragment extends FloatingMenuFragment {
         View v = inflater.inflate(R.layout.fragment_leaderboard, container, false);
         rvUsers = (RecyclerView) v.findViewById(R.id.rvLeaderboard);
         users = new ArrayList<>();
-        userAdapter = new UserAdapter(users);
+        userAdapter = new UserAdapter(users, true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         rvUsers.setLayoutManager(linearLayoutManager);
         // set the adapter
         rvUsers.setAdapter(userAdapter);
-        friendIdList = loadFriends();
         update();
         return v;
     }
@@ -61,7 +60,7 @@ public class LeaderboardFragment extends FloatingMenuFragment {
     }
 
     public void update() {
-//        loadFriends();
+        friendIdList = loadFriends();
         ParseQuery<ParseUser> query = ParseQuery.getQuery("_User");
         query.whereContainedIn("fbId", friendIdList);
         query.orderByAscending("totalPoints");
