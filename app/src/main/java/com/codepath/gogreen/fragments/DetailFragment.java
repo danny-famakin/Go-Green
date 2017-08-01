@@ -128,31 +128,19 @@ public class DetailFragment extends Fragment {
         tvPoints.setText(points);
         tvTimeStamp.setText(relativeTime);
 
-        ParseQuery<ParseUser> query = ParseQuery.getQuery("_User");
-        query.whereEqualTo("fbId", action.getUid());
-        query.getFirstInBackground(new GetCallback<ParseUser>() {
-            @Override
-            public void done(ParseUser author, ParseException e) {
-                if (e == null) {
-                    // load propic
-                    String imgUrl = author.getString("profileImgUrl");
-                    Log.d("imageeee", imgUrl);
-                    Glide.with(context)
-                            .load(imgUrl)
-                            .placeholder(R.drawable.ic_placeholder)
-                            .bitmapTransform(new CropCircleTransformation(context))
-                            .into(ivProfilePicDet);
+        String imgUrl = getArguments().getString("authorImg");
+        Glide.with(context)
+                .load(imgUrl)
+                .placeholder(R.drawable.ic_placeholder)
+                .bitmapTransform(new CropCircleTransformation(context))
+                .into(ivProfilePicDet);
 //
 //                    load action body: bold name, compose rest of body using function below
-                    String name = author.getString("name");
-                    SpannableString str = new SpannableString(name + body);
-                    str.setSpan(new StyleSpan(Typeface.BOLD), 0, name.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    tvAction.setText(str);
-                } else if (e != null) {
-                    Log.e("action", "Error: " + e.getMessage());
-                }
-            }
-        });
+        String name = getArguments().getString("authorName");
+        SpannableString str = new SpannableString(name + body);
+        str.setSpan(new StyleSpan(Typeface.BOLD), 0, name.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        tvAction.setText(str);
+
 
 
         ParseQuery<Action> actionQuery = ParseQuery.getQuery("Action");
@@ -342,19 +330,9 @@ public class DetailFragment extends Fragment {
                 int pos = e.toString().indexOf("E");
                 String envValues = e.toString().substring(pos + 16);
 
-                int vos = 0;
-                for (int i = 0; i < yData.length; i++) {
-                    if (yData[i] == Double.parseDouble(envValues)) {
-
-                        String str = h.toString().substring(15,16);
-                        Log.d("onValueSelected", str);
-                        vos = Integer.parseInt(str);
-                        break;
-                    }
-                }
                 String str = h.toString().substring(14,15);
                 Log.d("onValueSelected", str);
-                vos = Integer.parseInt(str);
+                int vos = Integer.parseInt(str);
 
 
                 String env = xData[vos];
