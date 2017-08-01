@@ -1,7 +1,10 @@
 package com.codepath.gogreen;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -51,13 +54,16 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent (context, OtherUserActivity.class);
+                ActivityOptionsCompat options = ActivityOptionsCompat.
+                        makeSceneTransitionAnimation((Activity) context, holder.ivProfilePic,
+                                ViewCompat.getTransitionName(holder.ivProfilePic));
                 i.putExtra("screenName", String.valueOf(user.get("name")));
                 i.putExtra("profImage", user.getString("profileImgUrl"));
                 i.putExtra("Id", String.valueOf(user.get("fbId")));
                 double pts = user.getDouble("totalPoints");
                 String points = String.format("%.1f", pts);
                 i.putExtra("points", points);
-                context.startActivity(i);
+                context.startActivity(i, options.toBundle());
             }
         });
 

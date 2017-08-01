@@ -144,12 +144,12 @@
         "source": "/Users/anyazhang/.android/build-cache/ca3f5c94e2f1cfb62bd5980c160bcd1099922de7/output/res/layout/messenger_button_send_blue_small.xml"
     },
     {
-        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/layout/abc_list_menu_item_radio.xml",
-        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/layout/abc_list_menu_item_radio.xml"
-    },
-    {
         "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/layout/com_parse_ui_parse_login_help_fragment.xml",
         "source": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/bundles/debug/res/layout/com_parse_ui_parse_login_help_fragment.xml"
+    },
+    {
+        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/layout/abc_list_menu_item_radio.xml",
+        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/layout/abc_list_menu_item_radio.xml"
     },
     {
         "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/layout/abc_list_menu_item_layout.xml",

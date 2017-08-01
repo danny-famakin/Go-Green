@@ -1,12 +1,15 @@
 package com.codepath.gogreen;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
@@ -47,6 +50,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
     private List<Action> mActions;
     Context context;
     String relativeTime;
+    String time;
 
     public ActionAdapter(List<Action> actions) {
         mActions = actions;
@@ -68,8 +72,8 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
             timeStamp = new Date();
         }
         relativeTime = TimeStampUtils.getRelativeTimeAgo(timeStamp);
-
-        holder.tvTimeStamp.setText(TimeStampUtils.shortenTimeStamp(relativeTime, context));
+        time = TimeStampUtils.shortenTimeStamp(relativeTime, context);
+        holder.tvTimeStamp.setText(time);
         holder.tvPoints.setText(String.format("%.1f", action.getDouble("points")));
 
 
@@ -97,11 +101,14 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
                         public void onClick(View v) {
 
                             Intent i = new Intent (context, OtherUserActivity.class);
+                            ActivityOptionsCompat options = ActivityOptionsCompat.
+                                    makeSceneTransitionAnimation((Activity) context, holder.ivProfilePic, ViewCompat.
+                                            getTransitionName(holder.ivProfilePic));
                             i.putExtra("profImage", imgUrl);
                             i.putExtra("screenName", username);
                             i.putExtra("Id", Id);
                             i.putExtra("points", points);
-                            context.startActivity(i);
+                            context.startActivity(i, options.toBundle());
                         }
                     });
 
@@ -240,7 +247,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
                     bundle.putString("fbId", currentAction.getUid());
                     bundle.putString("body", body);
                     bundle.putString("points",String.format("%.1f", currentAction.getDouble("points")));
-                    bundle.putString("relativeTime", TimeStampUtils.shortenTimeStamp(relativeTime, context));
+                    bundle.putString("relativeTime", time);
                     bundle.putString("objectID", currentAction.getObjectId().toString());
                     bundle.putString("actionType", currentAction.getActionType());
                     bundle.putString("numberOf", String.valueOf(currentAction.getMagnitude()));
