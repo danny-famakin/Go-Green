@@ -22,15 +22,28 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.formatter.DefaultAxisValueFormatter;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
+import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.ui.ParseLoginBuilder;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
@@ -46,6 +59,21 @@ public class ProfileActivity extends AppCompatActivity {
     ToggleButton addFriend;
     TextView tvJoinDate;
     BarChart barChart;
+    DateFormat fmt;
+    int counter;
+    Calendar cal;
+    double fuelValue;
+    double waterValue;
+    double treesValue;
+    int i;
+    double emissionsValue;
+    JSONObject resourceData;
+    final List<BarEntry> yFuel = new ArrayList<BarEntry>();
+    final List<BarEntry> yWater = new ArrayList<BarEntry>();
+    final List<BarEntry> yTrees = new ArrayList<BarEntry>();
+    final List<BarEntry> yEmissions = new ArrayList<BarEntry>();
+    ArrayList labels;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,11 +91,24 @@ public class ProfileActivity extends AppCompatActivity {
         barChart = (BarChart) findViewById(R.id.barChart);
         addFriend.setVisibility(GONE);
         currentUser = ParseUser.getCurrentUser();
+        fmt = DateFormat.getDateInstance(DateFormat.LONG);
+        labels = new ArrayList<>();
+
+        cal = new GregorianCalendar();
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+
 
         // ensure user logged in
         if((currentUser != null)){
             Log.d("loggedin", "true");
-            loadData();
+            try {
+                loadData();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
 
         else {
@@ -88,17 +129,28 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });
+
+        ScheduledThreadPoolExecutor sch = (ScheduledThreadPoolExecutor)
+                Executors.newScheduledThreadPool(5);
+
+        sch.scheduleAtFixedRate(periodicTask, 0, 24, TimeUnit.HOURS);
+
+
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (requestCode == 0 && resultCode == android.app.Activity.RESULT_OK) {
-            loadData();
+            try {
+                loadData();
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         } else {
 
         }
     }
 
-    public void loadData() {
+    public void loadData() throws JSONException {
         currentUser = ParseUser.getCurrentUser();
         Glide.with(context)
                 .load(currentUser.getString("profileImgUrl"))
@@ -114,57 +166,40 @@ public class ProfileActivity extends AppCompatActivity {
             tvJoinDate.setText(dateString);
         }
 
-//        ArrayList<BarEntry> BarEntry = new ArrayList<>();
-//
-//        BarEntry.add(new BarEntry(2f, 0));
-//        BarEntry.add(new BarEntry(4f, 1));
-//        BarEntry.add(new BarEntry(6f, 2));
-//        BarEntry.add(new BarEntry(8f, 3));
-//        BarEntry.add(new BarEntry(7f, 4));
-//        BarEntry.add(new BarEntry(3f, 5));
-//
-//        BarDataSet dataSet = new BarDataSet(BarEntry, "Projects");
-//
-//        ArrayList<String> labels = new ArrayList<>();
-//
-//        labels.add("January");
-//        labels.add("February");
-//        labels.add("March");
-//        labels.add("April");
-//        labels.add("May");
-//        labels.add("June");
-//
-//        BarData data = new BarData(dataSet);
-//
-//        dataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-//        barChart.setData(data);
+//        alarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
+//                SystemClock.elapsedRealtime() + AlarmManager.INTERVAL_HALF_HOUR,
+//                AlarmManager.INTERVAL_HALF_HOUR, alarmIntent);
 
-      //  barChart.setDescription("No of Projects");
+
+    }
+
+    public void barChart(final int counter) throws JSONException {
+
 
         barChart.setDrawBarShadow(false);
         barChart.setDrawValueAboveBar(true);
-       // barChart.setDescription("");
-        barChart.setMaxVisibleValueCount(50);
         barChart.setPinchZoom(false);
         barChart.setDrawGridBackground(false);
+        barChart.setDragEnabled(true);
+        barChart.getDescription().setEnabled(false);
+
+
+        //JSONObject resourceData = currentUser.getJSONObject("resourceData");
+
+      //  Log.d("testingggg", String.valueOf(resourceData.get("water")));
 
         XAxis xl = barChart.getXAxis();
         xl.setGranularity(1f);
         xl.setCenterAxisLabels(true);
-        xl.setValueFormatter(new DefaultAxisValueFormatter(20) {
-            @Override
-            public String getFormattedValue(float value, AxisBase axis) {
-                return String.valueOf((int) value);
-            }
 
-            @Override
-            public int getDecimalDigits() {
-                return 0;
-            }
-        });
+       // xl.setDrawLabels(true);
+
+
+
+        xl.setValueFormatter(new IndexAxisValueFormatter(labels));
 
         YAxis leftAxis = barChart.getAxisLeft();
-        leftAxis.setValueFormatter(new DefaultAxisValueFormatter(20) {
+        leftAxis.setValueFormatter(new DefaultAxisValueFormatter(0) {
             @Override
             public String getFormattedValue(float value, AxisBase axis) {
                 return String.valueOf((int) value);
@@ -177,64 +212,137 @@ public class ProfileActivity extends AppCompatActivity {
         });
         leftAxis.setDrawGridLines(false);
         leftAxis.setSpaceTop(30f);
-        leftAxis.setAxisMinValue(0f); // this replaces setStartAtZero(true
+        xl.setAxisMinimum((float) 0); // this replaces setStartAtZero(true
+        leftAxis.setAxisMinimum(0f);
         barChart.getAxisRight().setEnabled(false);
 
         //data
-        float groupSpace = 0.1f;
+        float groupSpace = 0.12f;
         float barSpace = 0f; // x2 dataset
-        float barWidth = 0.46f; // x2 dataset
-        // (0.46 + 0.02) * 2 + 0.04 = 1.00 -> interval per "group"
-
-        int startYear = 1980;
-        int endYear = 1985;
+        float barWidth = 0.22f; // x2 dataset
 
 
-        List<BarEntry> yVals1 = new ArrayList<BarEntry>();
-        List<BarEntry> yVals2 = new ArrayList<BarEntry>();
 
 
-        for (int i = startYear; i < endYear; i++) {
-            yVals1.add(new BarEntry(i, 0.4f));
+        for (i = 1; i < counter; i++) {
+            // start of today
+
+
+            cal.add(Calendar.DAY_OF_MONTH, -counter + i);
+            Date finalDate = cal.getTime();
+
+      //      Log.d("finalllllllllllll", String.valueOf(finalDate));
+
+            cal.add(Calendar.DAY_OF_MONTH, -1);
+            Date initalDate = cal.getTime();
+
+      //      Log.d("initialllllll", String.valueOf(initalDate));
+
+            ParseQuery<ParseObject> query = ParseQuery.getQuery("Action");
+            query.whereGreaterThanOrEqualTo("createdAt", initalDate);
+            query.whereLessThan("createdAt", finalDate);
+            List<ParseObject> actionList;
+            try {
+                actionList = query.find();
+                for (int j = 0; j < actionList.size(); j++) {
+                    resourceData = actionList.get(j).getJSONObject("resourceData");
+                    try {
+                        fuelValue += resourceData.getDouble("fuel");
+                        waterValue += resourceData.getDouble("water");
+                        treesValue += resourceData.getDouble("trees");
+                        emissionsValue += resourceData.getDouble("emissions");
+
+                        Log.d("fueellll", String.valueOf(fuelValue));
+                    } catch (JSONException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+                onLoadData(i);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+
+
+
+            cal.add(Calendar.DAY_OF_MONTH, counter + 1 - i);
+
         }
 
-        for (int i = startYear; i < endYear; i++) {
-            yVals2.add(new BarEntry(i, 0.7f));
-        }
 
 
-        BarDataSet set1, set2;
+   //     Log.d("fuuueell", String.valueOf(yFuel));
+
+
+        BarDataSet fuel, water, trees, emissions;
 
         if (barChart.getData() != null && barChart.getData().getDataSetCount() > 0) {
-            set1 = (BarDataSet)barChart.getData().getDataSetByIndex(0);
-            set2 = (BarDataSet)barChart.getData().getDataSetByIndex(1);
-            set1.setValues(yVals1);
-            set2.setValues(yVals2);
+            fuel = (BarDataSet)barChart.getData().getDataSetByIndex(0);
+            water = (BarDataSet)barChart.getData().getDataSetByIndex(1);
+            trees = (BarDataSet)barChart.getData().getDataSetByIndex(2);
+            emissions = (BarDataSet)barChart.getData().getDataSetByIndex(3);
+
+            fuel.setValues(yFuel);
+            water.setValues(yWater);
+            trees.setValues(yTrees);
+            emissions.setValues(yEmissions);
             barChart.getData().notifyDataChanged();
             barChart.notifyDataSetChanged();
         } else {
             // create 2 datasets with different types
-            set1 = new BarDataSet(yVals1, "Company A");
-            set1.setColor(Color.rgb(104, 241, 175));
-            set2 = new BarDataSet(yVals2, "Company B");
-            set2.setColor(Color.rgb(164, 228, 251));
+            fuel = new BarDataSet(yFuel, "Fuel");
+            fuel.setColor(Color.rgb(104, 241, 175));
+            water = new BarDataSet(yWater, "Water");
+            water.setColor(Color.rgb(164, 228, 251));
+            trees = new BarDataSet(yTrees, "Trees");
+            trees.setColor(Color.rgb(124, 250, 151));
+            emissions = new BarDataSet(yEmissions, "Emissions");
+            emissions.setColor(Color.rgb(200, 247, 180));
 
             ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
-            dataSets.add(set1);
-            dataSets.add(set2);
+            dataSets.add(fuel);
+            dataSets.add(water);
+            dataSets.add(trees);
+            dataSets.add(emissions);
+
 
             BarData data = new BarData(dataSets);
             barChart.setData(data);
         }
 
         barChart.getBarData().setBarWidth(barWidth);
-        barChart.getXAxis().setAxisMinValue(startYear);
-        barChart.groupBars(startYear, groupSpace, barSpace);
+        barChart.groupBars(0, groupSpace, barSpace);
+
+      //  barChart.fitScreen();
         barChart.invalidate();
 
-
-
-
-
     }
+
+    Runnable periodicTask = new Runnable(){
+        @Override
+        public void run() {
+            try{
+                counter = currentUser.getInt("dayCounter");
+                labels.add("Day " + counter);
+                counter++;
+                currentUser.put("dayCounter", counter);
+                barChart(counter);
+            }catch(Exception e){
+
+            }
+        }
+    };
+
+    public void onLoadData(int i) {
+        yFuel.add(new BarEntry(i, Float.valueOf(String.valueOf(fuelValue))));
+        yWater.add(new BarEntry(i, (float) waterValue));
+        yTrees.add(new BarEntry(i, (float) treesValue));
+        yEmissions.add(new BarEntry(i, (float)emissionsValue));
+       // Log.d("entryyy", String.valueOf(yFuel));
+    }
+
+
 }
+
+
+

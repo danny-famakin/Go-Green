@@ -94,31 +94,17 @@ public class OtherUserActivity extends AppCompatActivity {
                 JSONArray friendsList = currentUser.getJSONArray("friends");
 
                 if (addFriends.isChecked()) {
-
-                    for (int i = 0; i < friendsList.length(); i++) {
-                        try {
-                            if (friendsList.get(i) != Id) {
-                                friendsList.put(Id);
-                                currentUser.put("friends", friendsList);
-                                currentUser.saveInBackground();
-                            }
-
-                        } catch (JSONException e1) {
-                            e1.printStackTrace();
-                        }
+                    if (friendIndex(friendsList) == -1) {
+                        friendsList.put(Id);
                     }
-                }  if(!addFriends.isChecked()){
-                    for(int i= 0; i < friendsList.length(); i++){
-                        try {
-                            if (Id.equals(friendsList.get(i)))
-                                    friendsList.remove(i);
-                            currentUser.put("friends", friendsList);
-                            currentUser.saveInBackground();
-                        } catch (JSONException e1) {
-                            e1.printStackTrace();
-                        }
-                    }
-                }
+
+                }  else if(!addFriends.isChecked()){
+                    int i = friendIndex(friendsList);
+                    if (i != -1) {
+                        friendsList.remove(i);
+                    }                }
+                currentUser.put("friends", friendsList);
+                currentUser.saveInBackground();
             }
         });
     }
@@ -130,8 +116,22 @@ public class OtherUserActivity extends AppCompatActivity {
                 .bitmapTransform(new CropCircleTransformation(context))
                 .into(profileImage);
         tvName.setText(screenName);
+    }
 
 
+    public int friendIndex(JSONArray friendsList) {
+        for (int i = 0; i < friendsList.length(); i++) {
+            try {
+                if (friendsList.get(i).equals(Id)) {
+                    return i;
+                }
+
+            } catch (JSONException e1) {
+                e1.printStackTrace();
+            }
+        }
+        return -1;
+    }
 
         //SimpleDateFormat sdf = new SimpleDateFormat("MMMM YYYY", Locale.US);
         //Date joinDate = otherUser.getDate("joinDate");
@@ -139,6 +139,6 @@ public class OtherUserActivity extends AppCompatActivity {
             //String dateString = "Joined in " + sdf.format(joinDate);
             //tvJoinDate.setText(dateString);
         //}
-    }
+
 }
 

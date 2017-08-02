@@ -1,6 +1,34 @@
 [
     {
+<<<<<<< HEAD
         "outputFile": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-ldltr-v21/values-ldltr-v21.xml",
+=======
+        "outputFile": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-ldltr-v21/values-ldltr-v21.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 112,
+                    "endOffset": 163
+                },
+                "from": {
+                    "file": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/values-ldltr-v21/values-ldltr-v21.xml",
+                    "position": {
+                        "startLine": 2,
+                        "startColumn": 4,
+                        "startOffset": 55,
+                        "endColumn": 112,
+                        "endOffset": 163
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "outputFile": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-ldltr-v21/values-ldltr-v21.xml",
+>>>>>>> 2478cd591d76bc0cac8053b0aa9e80d56fae3b47
         "map": [
             {
                 "to": {

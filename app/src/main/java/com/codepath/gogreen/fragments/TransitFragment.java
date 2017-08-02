@@ -126,7 +126,7 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
         transitConstants.put("subway", new Double[] {.7408, .0454, 0., 0.});
         transitConstants.put("train", new Double[] {0.7408, .0454, 0., 0.});
         transitConstants.put("bike", new Double[] {0.9590, .0856, 0., 0.});
-        transitConstants.put("walk", new Double[] {0.9590, 0.0843, 0., 0.});
+        transitConstants.put("walking", new Double[] {0.9590, 0.0843, 0., 0.});
 
         inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         v = inflater.inflate(R.layout.activity_log_transit, null);

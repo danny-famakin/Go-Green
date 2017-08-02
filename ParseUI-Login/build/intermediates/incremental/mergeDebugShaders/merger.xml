@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD
 <merger version="3"><dataSet config="main"><source path="/Users/melissaperez/Go-Green/ParseUI-Login/src/main/shaders"/></dataSet><dataSet config="debug"><source path="/Users/melissaperez/Go-Green/ParseUI-Login/src/debug/shaders"/></dataSet></merger>
+=======
+<merger version="3"><dataSet config="main"><source path="/Users/anyazhang/Documents/Go-Green/ParseUI-Login/src/main/shaders"/></dataSet><dataSet config="debug"><source path="/Users/anyazhang/Documents/Go-Green/ParseUI-Login/src/debug/shaders"/></dataSet></merger>
+>>>>>>> 2478cd591d76bc0cac8053b0aa9e80d56fae3b47
