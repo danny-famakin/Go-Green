@@ -140,7 +140,6 @@ public class OtherUserActivity extends AppCompatActivity {
             Intent profile = new Intent(OtherUserActivity.this, ProfileActivity.class);
             startActivity(profile);
             return true;
-
         }
 
 

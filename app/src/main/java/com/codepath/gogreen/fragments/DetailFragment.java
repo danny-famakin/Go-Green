@@ -76,6 +76,9 @@ public class DetailFragment extends Fragment {
     CommentAdapter commentAdapter;
     MaterialDialog modal;
     ParseUser user;
+    ArrayList<Double> yData;
+    ArrayList<String> xData;
+    double POINT_THRESHOLD = 0.05;
 
     String fuel, water, trees, emissions, numberOf, body;
 
@@ -300,16 +303,25 @@ public class DetailFragment extends Fragment {
     }
 
     public void drawPieChart(PieChart pChart) throws JSONException {
-        final double[] yData = {action.getMagnitude() * action.getPointData().getDouble("fuel"), action.getMagnitude() * action.getPointData().getDouble("water"),
-                action.getMagnitude() * action.getPointData().getDouble("trees"), action.getMagnitude() * action.getPointData().getDouble("emissions")};
-        final String[] xData = {"Fuel", "Water", "Trees", "Emissions"};
+
+        String[] resources = new ResourceUtils().resources;
+
+        yData = new ArrayList<>();
+        xData = new ArrayList<>();
+
+        for (int i = 0; i < resources.length; i++) {
+            if (action.getPointData().getDouble(resources[i]) > POINT_THRESHOLD) {
+                yData.add(action.getMagnitude() * action.getPointData().getDouble(resources[i]));
+                xData.add(resources[i]);
+            }
+        }
 
         ArrayList<PieEntry> yEntry = new ArrayList<>();
         ArrayList<String> xEntry = new ArrayList<>();
 
-        for (int i = 0; i < yData.length; i++) {
-            double aYData = yData[i];
-            yEntry.add(new PieEntry((float) aYData));
+        for (int i = 0; i < yData.size(); i++) {
+            double aYData = yData.get(i);
+            yEntry.add(new PieEntry((float) aYData, xData.get(i)));
         }
         for (String aXData : xData) {
             xEntry.add(aXData);
@@ -343,7 +355,7 @@ public class DetailFragment extends Fragment {
                 int vos = Integer.parseInt(str);
 
 
-                String env = xData[vos];
+                String env = xData.get(vos);
                 Log.d("MessagesF", String.valueOf(vos));
 
                 if (env.equals("Emissions")) {
