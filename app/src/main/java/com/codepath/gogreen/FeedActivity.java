@@ -36,6 +36,8 @@ import com.oguzdev.circularfloatingactionmenu.library.SubActionButton;
 import com.parse.ParseUser;
 import com.parse.ui.ParseLoginBuilder;
 
+import static com.codepath.gogreen.R.id.myProfile;
+
 
 public class FeedActivity extends AppCompatActivity implements ModalFragment.OnItemSelectedListener {
 
@@ -220,6 +222,7 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_feed, menu);
         MenuItem searchItem = menu.findItem(R.id.action_search);
+        MenuItem profileImage = menu.findItem(myProfile);
         MenuItemCompat.setOnActionExpandListener(searchItem, new MenuItemCompat.OnActionExpandListener() {
             @Override
             public boolean onMenuItemActionExpand(MenuItem item) {
@@ -285,7 +288,7 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        if (id == R.id.myProfile) {
+        if (id == myProfile) {
             Intent profile = new Intent(FeedActivity.this, ProfileActivity.class);
             startActivity(profile);
             return true;

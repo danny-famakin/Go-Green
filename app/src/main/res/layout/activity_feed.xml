@@ -6,12 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
+
     tools:context="com.codepath.gogreen.FeedActivity">
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        >
+        android:layout_height="wrap_content">
 
     <include
         android:id="@+id/toolbar"
@@ -30,19 +30,22 @@
         android:layout_gravity="bottom"
         android:layout_below="@id/toolbar"
         app:layout_anchorGravity="bottom"
+
         app:tabMode="fixed"/>
     <android.support.v4.view.ViewPager
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/sliding_tabs"/>
+        android:layout_below="@+id/sliding_tabs" />
 
         <FrameLayout
             android:id="@+id/flContainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/toolbar"
-            android:visibility="gone"></FrameLayout>
+            android:visibility="gone">
+
+        </FrameLayout>
 
 </RelativeLayout>
     <android.support.design.widget.FloatingActionButton

@@ -147,7 +147,8 @@
             android:layout_marginTop="6dp"
             android:layout_toLeftOf="@+id/btComment"
             android:layout_toStartOf="@+id/btComment"
-            android:hint="Write a comment" />
+            android:hint="Write a comment"
+            android:textSize="14sp" />
 
     <Button
         android:id="@+id/btComment"

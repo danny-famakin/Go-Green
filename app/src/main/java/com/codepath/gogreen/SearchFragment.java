@@ -36,7 +36,6 @@ public class SearchFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
     }
 
     @Override
@@ -51,6 +50,7 @@ public class SearchFragment extends Fragment {
         userAdapter = new UserAdapter(users, false);
         rvResult.setAdapter(userAdapter);
         tvError = (TextView) v.findViewById(R.id.tvError);
+
         try {
             search();
         } catch (ParseException e) {
@@ -99,6 +99,4 @@ public class SearchFragment extends Fragment {
             }
         });
     }
-
-
 }
