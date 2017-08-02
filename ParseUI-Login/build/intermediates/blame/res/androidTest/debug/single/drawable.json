@@ -16,12 +16,12 @@
         "source": "/Users/famakindaniel7/.android/build-cache/08d8b3b42e3b02e764e2e5751aba8a1a82b1592f/output/res/drawable/abc_vector_test.xml"
     },
     {
-        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/drawable/com_facebook_button_login_logo.xml",
-        "source": "/Users/anyazhang/.android/build-cache/ca3f5c94e2f1cfb62bd5980c160bcd1099922de7/output/res/drawable/com_facebook_button_login_logo.xml"
-    },
-    {
         "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/drawable/abc_edit_text_material.xml",
         "source": "/Users/famakindaniel7/.android/build-cache/08d8b3b42e3b02e764e2e5751aba8a1a82b1592f/output/res/drawable/abc_edit_text_material.xml"
+    },
+    {
+        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/drawable/com_facebook_button_login_logo.xml",
+        "source": "/Users/anyazhang/.android/build-cache/ca3f5c94e2f1cfb62bd5980c160bcd1099922de7/output/res/drawable/com_facebook_button_login_logo.xml"
     },
     {
         "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/drawable/abc_btn_default_mtrl_shape.xml",
@@ -92,24 +92,24 @@
         "source": "/Users/anyazhang/.android/build-cache/ca3f5c94e2f1cfb62bd5980c160bcd1099922de7/output/res/drawable/messenger_button_white_bg_round.xml"
     },
     {
-        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/drawable/abc_text_cursor_material.xml",
-        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/drawable/abc_text_cursor_material.xml"
-    },
-    {
         "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/drawable/abc_tab_indicator_material.xml",
         "source": "/Users/famakindaniel7/.android/build-cache/08d8b3b42e3b02e764e2e5751aba8a1a82b1592f/output/res/drawable/abc_tab_indicator_material.xml"
+    },
+    {
+        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/drawable/abc_text_cursor_material.xml",
+        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/drawable/abc_text_cursor_material.xml"
     },
     {
         "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/drawable/com_facebook_send_button_icon.xml",
         "source": "/Users/anyazhang/.android/build-cache/ca3f5c94e2f1cfb62bd5980c160bcd1099922de7/output/res/drawable/com_facebook_send_button_icon.xml"
     },
     {
-        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/drawable/com_facebook_favicon_blue.xml",
-        "source": "/Users/anyazhang/.android/build-cache/ca3f5c94e2f1cfb62bd5980c160bcd1099922de7/output/res/drawable/com_facebook_favicon_blue.xml"
-    },
-    {
         "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/drawable/abc_ic_voice_search_api_material.xml",
         "source": "/Users/famakindaniel7/.android/build-cache/08d8b3b42e3b02e764e2e5751aba8a1a82b1592f/output/res/drawable/abc_ic_voice_search_api_material.xml"
+    },
+    {
+        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/drawable/com_facebook_favicon_blue.xml",
+        "source": "/Users/anyazhang/.android/build-cache/ca3f5c94e2f1cfb62bd5980c160bcd1099922de7/output/res/drawable/com_facebook_favicon_blue.xml"
     },
     {
         "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/drawable/abc_ratingbar_small_material.xml",
@@ -128,12 +128,12 @@
         "source": "/Users/famakindaniel7/.android/build-cache/65b744043945fbfef49a086777704f4091c5d16c/output/res/drawable/com_facebook_send_button_icon.xml"
     },
     {
-        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/drawable/abc_ratingbar_material.xml",
-        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/drawable/abc_ratingbar_material.xml"
-    },
-    {
         "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/drawable/abc_btn_radio_material.xml",
         "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/drawable/abc_btn_radio_material.xml"
+    },
+    {
+        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/drawable/abc_ratingbar_material.xml",
+        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/drawable/abc_ratingbar_material.xml"
     },
     {
         "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/drawable/com_facebook_button_like_background.xml",
