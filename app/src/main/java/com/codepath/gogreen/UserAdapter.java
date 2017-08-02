@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -26,13 +27,13 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     private List<ParseUser> mUsers;
     Context context;
-    boolean displayRank;
+    boolean isSourceLeaderboard;
 
 
 
-    public UserAdapter(List<ParseUser> users, boolean rank) {
+    public UserAdapter(List<ParseUser> users, boolean source) {
         mUsers = users;
-        displayRank = rank;
+        isSourceLeaderboard = source;
     }
 
     @Override
@@ -46,9 +47,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     public void onBindViewHolder(final UserAdapter.ViewHolder holder, int position) {
         final ParseUser user = mUsers.get(position);
-        if (displayRank) {
+        if (isSourceLeaderboard) {
+            holder.tvRank.setVisibility(View.VISIBLE);
             holder.tvRank.setText(String.valueOf(position + 1));
         }
+        else {
+            holder.tvRank.setVisibility(View.GONE);
+        }
+
         holder.tvName.setText(user.getString("name"));
         Log.d("userAdapter", user.getString("name"));
         double points = user.getDouble("totalPoints");
@@ -90,6 +96,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         public TextView tvName;
         public TextView tvPoints;
         public ImageView ivProfilePic;
+        public LinearLayout userInfo;
 
 
         public ViewHolder(View itemView) {
@@ -98,6 +105,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             tvName = (TextView) itemView.findViewById(R.id.tvName);
             tvPoints = (TextView) itemView.findViewById(R.id.tvPoints);
             ivProfilePic = (ImageView) itemView.findViewById(R.id.ivProfilePic);
+            userInfo = (LinearLayout) itemView.findViewById(R.id.userInfo);
         }
     }
 
