@@ -294,8 +294,8 @@ public class DetailFragment extends Fragment {
     }
 
     public void drawPieChart(PieChart pChart) throws JSONException {
-        final double[] yData = {action.getMagnitude() * action.getResourceData().getDouble("fuel"), action.getMagnitude() * action.getResourceData().getDouble("water"),
-                action.getMagnitude() * action.getResourceData().getDouble("trees"), action.getMagnitude() * action.getResourceData().getDouble("emissions")};
+        final double[] yData = {action.getMagnitude() * action.getPointData().getDouble("fuel"), action.getMagnitude() * action.getPointData().getDouble("water"),
+                action.getMagnitude() * action.getPointData().getDouble("trees"), action.getMagnitude() * action.getPointData().getDouble("emissions")};
         final String[] xData = {"Fuel", "Water", "Trees", "Emissions"};
 
         ArrayList<PieEntry> yEntry = new ArrayList<>();

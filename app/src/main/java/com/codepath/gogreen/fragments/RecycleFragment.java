@@ -13,7 +13,9 @@ import android.widget.Spinner;
 
 import com.codepath.gogreen.R;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import static com.codepath.gogreen.R.array.materials;
@@ -27,7 +29,7 @@ public class RecycleFragment extends ModalFragment {
     EditText etNumber;
     LayoutInflater inflater;
     View view;
-    double pointValues[] = {1, 1, 0.1};
+    double pointValues[] = new double[3];
     double newPoints;
     int INT_MIN = 1;
     int INT_MAX = 200;
@@ -45,9 +47,17 @@ public class RecycleFragment extends ModalFragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        recycleConstants.put("bottle", new Double[] {0.1012, .0292, 0.36, 0.});
-        recycleConstants.put("can", new Double[] {0.4270, .6512, 62.7, 0.});
-        recycleConstants.put("paper", new Double[] {0.0877, .0019, 0., 0.03});
+        Double[] bottleConstants = {0.1012, .0292, 0.36, 0.};
+        Double[] canConstants = {0.4270, .6512, 62.7, 0.};
+        Double[] paperConstants = {0.0877, .0019, 0., 0.03};
+        recycleConstants.put("bottle", bottleConstants);
+        recycleConstants.put("can", canConstants);
+        recycleConstants.put("paper", paperConstants);
+        List<Double[]> constants = Arrays.asList(bottleConstants, canConstants, paperConstants);
+        for (int i = 0; i < constants.size(); i++) {
+            pointValues[i] = new ResourceUtils().sumPoints(constants.get(i));
+        }
+
 
         inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = inflater.inflate(R.layout.activity_log_recycle, null);

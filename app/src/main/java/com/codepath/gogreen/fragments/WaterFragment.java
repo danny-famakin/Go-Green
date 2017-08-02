@@ -36,6 +36,7 @@ public class WaterFragment extends ModalFragment {
     boolean showering;
     double newPoints;
     int MIN_SECS = 30;
+    public static double SHOWER_POINTS;
     Double[] waterConstants = new Double[] {0.1499, 0.0102, 9.46, 0.};
 
     public static WaterFragment newInstance() {
@@ -55,6 +56,7 @@ public class WaterFragment extends ModalFragment {
         v = inflater.inflate(R.layout.activity_log_water, null);
 
         showering = true;
+        SHOWER_POINTS = new ResourceUtils().sumPoints(waterConstants);
         tvTimer = (TextView) v.findViewById(R.id.tvTimer);
         tvErrorMsg = (TextView) v.findViewById(R.id.tvErrorMsg);
         btStartPause = (Button) v.findViewById(R.id.btStartPause);
@@ -165,7 +167,7 @@ public class WaterFragment extends ModalFragment {
         else {
             savedTime = 0;
         }
-        newPoints = 2 * savedTime;
+        newPoints = SHOWER_POINTS * savedTime;
 
         updateResources("water", null, newPoints, savedTime, waterConstants, newTime);
 

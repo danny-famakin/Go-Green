@@ -61,8 +61,6 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
-
         // check if necessary to display login screen
         currentUser = ParseUser.getCurrentUser();
         if((currentUser != null)){
