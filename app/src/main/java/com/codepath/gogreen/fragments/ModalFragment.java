@@ -128,7 +128,7 @@ public class ModalFragment extends Fragment{
 //                Double[] subTypeConstants = actionConstants.get(subType);
 
                 JSONObject actionPointData = new JSONObject();
-                double[] resourcePoints = new ResourceUtils().getResourcePoints(subTypeConstants);
+                double[] resourcePoints = new ResourceUtils(context).getResourcePoints(subTypeConstants);
 
 
                 if (resourceJSON != null) {

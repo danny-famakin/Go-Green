@@ -1,7 +1,6 @@
 package com.codepath.gogreen.fragments;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -66,7 +65,7 @@ public class DetailFragment extends Fragment {
     TextView tvLikes;
     ImageButton ivFavorite;
     ImageButton ivReply;
-    Context context;
+    ImageView ivIcon;
     EditText etWriteComment;
     Button btComment;
     PieChart pieChart;
@@ -79,6 +78,7 @@ public class DetailFragment extends Fragment {
     ArrayList<Double> yData;
     ArrayList<String> xData;
     double POINT_THRESHOLD = 0.05;
+    Context context;
 
     String fuel, water, trees, emissions, numberOf, body;
 
@@ -98,6 +98,7 @@ public class DetailFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context = getContext();
         inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         v = inflater.inflate(R.layout.fragment_details, null);
         user = ParseUser.getCurrentUser();
@@ -105,7 +106,6 @@ public class DetailFragment extends Fragment {
         actionId = getArguments().getString("objectID");
         String relativeTime = getArguments().getString("relativeTime");
         body = getArguments().getString("body");
-        context = getActivity();
         String points = getArguments().getString("points");
 
         JSONObject jsonObject;
@@ -125,6 +125,7 @@ public class DetailFragment extends Fragment {
         tvLikes = (TextView) v.findViewById(R.id.tvLikes);
         ivFavorite = (ImageButton) v.findViewById(R.id.ivFavorite);
         ivReply = (ImageButton) v.findViewById(R.id.ivReply);
+        ivIcon = (ImageView) v.findViewById(R.id.ivIcon);
         etWriteComment = (EditText) v.findViewById(R.id.etWriteComment);
         btComment = (Button) v.findViewById(R.id.btComment);
         rvComments = (RecyclerView) v.findViewById(R.id.rvComments);
@@ -224,7 +225,7 @@ public class DetailFragment extends Fragment {
         });
         pieChart = (PieChart) v.findViewById(R.id.pieChart);
 
-        pieChart.setCenterText(points);
+//        pieChart.setCenterText(points);
         try {
             drawPieChart(pieChart);
         } catch (JSONException e) {
@@ -304,7 +305,8 @@ public class DetailFragment extends Fragment {
 
     public void drawPieChart(PieChart pChart) throws JSONException {
 
-        String[] resources = new ResourceUtils().resources;
+        String[] resources = new ResourceUtils(context).resources;
+        ivIcon.setImageResource(new ResourceUtils(context).getInverseImage(action.getActionType()));
 
         yData = new ArrayList<>();
         xData = new ArrayList<>();
@@ -331,13 +333,7 @@ public class DetailFragment extends Fragment {
         dataSet.setValueTextSize(12);
         dataSet.setSelectionShift(7);
 
-        ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(Color.BLUE);
-        colors.add(Color.CYAN);
-        //colors.add(Color.GREEN);
-        colors.add(Color.rgb(153, 255, 153));
-        //colors.add(Color.YELLOW);
-        colors.add(Color.rgb(229, 255, 204));
+        ArrayList<Integer> colors = new ResourceUtils(context).getColorArray(action.getActionType(), yData.size());
 
         dataSet.setColors(colors);
 
