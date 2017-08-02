@@ -55,8 +55,6 @@ public class FloatingMenuFragment extends Fragment {
             }
         });
 
-        loadFriends();
-
 // repeat many times:
 
         SubActionButton button1 = createSubActionButton(R.drawable.ic_transit2);

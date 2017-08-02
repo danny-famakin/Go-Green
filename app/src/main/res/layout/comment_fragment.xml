@@ -10,6 +10,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/rlPost"
+            android:layout_marginRight="8dp"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true">
@@ -31,6 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/ivProfilePicDet"
             android:layout_marginLeft="9dp"
+            android:layout_marginRight="8dp"
             android:layout_marginStart="9dp"
             android:layout_toEndOf="@+id/ivProfilePicDet"
             android:layout_toLeftOf="@+id/tvTimeStamp"
@@ -110,9 +112,9 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="1dp"
+            android:layout_height="0dp"
             android:background="@android:color/darker_gray"
-            android:layout_below="@id/rlPost"
+            android:layout_below="@+id/pieChart"
             android:layout_marginTop="6dp"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="8dp"
@@ -133,7 +135,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/rlComment"
-        android:layout_below="@+id/pieChart"
+        android:layout_below="@+id/line"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
 
@@ -167,10 +169,10 @@
             android:id="@+id/rvComments"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:scrollbars="vertical"
+            android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
+            android:background="@color/offWhite"
+            android:scrollbars="vertical" />
     </RelativeLayout>
 
 

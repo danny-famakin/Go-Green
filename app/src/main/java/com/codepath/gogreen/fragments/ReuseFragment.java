@@ -19,10 +19,11 @@ public class ReuseFragment extends ModalFragment {
     LayoutInflater inflater;
     View v;
     int total;
-    int totalBagPoints;
-    int newPoints;
+    double totalBagPoints;
+    double newPoints;
     int INT_MIN = 1;
     int INT_MAX = 10;
+    double BAG_POINTS;
     Double[] bagConstants = new Double[] {0.0794, 0.0124, 1.2, 0.};
 
 
@@ -43,6 +44,8 @@ public class ReuseFragment extends ModalFragment {
         v = inflater.inflate(R.layout.activity_log_reuse, null);
         bags = (EditText) v.findViewById(R.id.etBags);
 
+        BAG_POINTS = new ResourceUtils().sumPoints(bagConstants);
+
         openModal(v);
     }
 
@@ -52,7 +55,7 @@ public class ReuseFragment extends ModalFragment {
         if(isValid(bags, INT_MIN, INT_MAX)) {
             int newBags = Integer.valueOf(bags.getText().toString());
             total += newBags;
-            newPoints = newBags * 10;
+            newPoints = newBags * BAG_POINTS;
             totalBagPoints += newPoints;
             updateResources("reuse", null, newPoints, newBags, bagConstants, 0);
 

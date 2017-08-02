@@ -62,7 +62,7 @@ public class OtherUserActivity extends AppCompatActivity {
         logOut = (Button) findViewById(R.id.btnLogOut);
         addFriends = (ToggleButton) findViewById(R.id.addFriends);
         tvPoints = (TextView) findViewById(R.id.tvPoints);
-        logOut.setVisibility(GONE);
+
 
         screenName = getIntent().getStringExtra("screenName");
         profImg = getIntent().getStringExtra("profImage");

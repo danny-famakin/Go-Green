@@ -24,6 +24,7 @@
         android:layout_alignTop="@+id/ivProfilePicDet"
         android:layout_marginLeft="8dp"
         android:layout_marginStart="8dp"
+        android:layout_marginRight="8dp"
         android:layout_toEndOf="@+id/ivProfilePicDet"
         android:layout_toLeftOf="@+id/tvTimeStamp"
         android:layout_toRightOf="@+id/ivProfilePicDet"

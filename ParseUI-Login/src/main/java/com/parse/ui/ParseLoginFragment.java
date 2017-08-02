@@ -257,6 +257,7 @@ public class ParseLoginFragment extends ParseLoginFragmentBase {
                             e.toString());
                 }
             } else if (user.isNew()) {
+                Log.d("user", "new");
                 Bundle parameters = new Bundle();
                 parameters.putString("fields", "email,name,picture.height(961)");
                 new GraphRequest(
@@ -266,6 +267,7 @@ public class ParseLoginFragment extends ParseLoginFragmentBase {
                         HttpMethod.GET,
                         new GraphRequest.Callback() {
                             public void onCompleted(GraphResponse response) {
+                                Log.d("user response", "received");
                                 ParseUser parseUser = ParseUser.getCurrentUser();
 
          /* handle the result */
@@ -292,6 +294,7 @@ public class ParseLoginFragment extends ParseLoginFragmentBase {
                                     parseUser.put("totalPoints", 0);
                                     parseUser.put("joinDate", new Date());
                                     parseUser.put("friends", new JSONArray());
+                                    parseUser.put("dayCounter", 0);
                                     JSONObject resourceData = new JSONObject();
                                     resourceData.put("emissions", 0.0);
                                     resourceData.put("fuel", 0.0);
@@ -301,6 +304,9 @@ public class ParseLoginFragment extends ParseLoginFragmentBase {
                                     parseUser.put("resourceData", resourceData);
 
                                     parseUser.saveInBackground();
+                                    Log.d("user", "loaded");
+                                    loginSuccess();
+
 
                                 } catch (JSONException e) {
                                     e.printStackTrace();
@@ -308,7 +314,6 @@ public class ParseLoginFragment extends ParseLoginFragmentBase {
                             }
                         }
                 ).executeAsync();
-                loginSuccess();
 
             } else {
                 loginSuccess();

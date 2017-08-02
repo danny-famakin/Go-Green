@@ -39,7 +39,9 @@ import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -53,10 +55,11 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
     //TextView distance;
     LayoutInflater inflater;
     View v;
-    double[] pointValues = {5, 3, 1.5};
+    double[] pointValues = new double[5];
     double newPoints;
     Map<String, Double[]> transitConstants = new HashMap<String, Double[]>();
     double totalDistance;
+    String[] vehicles = {"bus", "subway", "train", "bike", "walking"};
 
 
     private static final String TAG = TransitFragment.class.getSimpleName();
@@ -122,11 +125,21 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        transitConstants.put("bus", new Double[]{0.2976, .0077, 0., 0.});
-        transitConstants.put("subway", new Double[]{.7408, .0454, 0., 0.});
-        transitConstants.put("train", new Double[]{0.7408, .0454, 0., 0.});
-        transitConstants.put("bike", new Double[]{0.9590, .0856, 0., 0.});
-        transitConstants.put("walking", new Double[]{0.9590, 0.0843, 0., 0.});
+        Double[] busConstants = {0.2976, .0077, 0., 0.};
+        Double[] subwayConstants = {.7408, .0454, 0., 0.};
+        Double[] trainConstants = {0.7408, .0454, 0., 0.};
+        Double[] bikeConstants = {0.9590, .0856, 0., 0.};
+        Double[] walkingConstants = {0.9590, 0.0843, 0., 0.};
+        transitConstants.put("bus", busConstants);
+        transitConstants.put("subway", subwayConstants);
+        transitConstants.put("train", trainConstants);
+        transitConstants.put("bike", bikeConstants);
+        transitConstants.put("walking", walkingConstants);
+
+        List<Double[]> constants = Arrays.asList(busConstants, subwayConstants, trainConstants, bikeConstants, walkingConstants);
+        for (int i = 0; i < constants.size(); i++) {
+            pointValues[i] = new ResourceUtils().sumPoints(constants.get(i));
+        }
 
         inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         v = inflater.inflate(R.layout.activity_log_transit, null);
@@ -212,24 +225,7 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
 
         if (distance != null) {
             newDistance = Double.parseDouble(distance.getText().toString());
-            switch (vehicleType) {
-                case "bus":
-                case "subway":
-                case "train":
-                    updateData(0);
-                    break;
-                case "walking":
-                case "bike":
-                    updateData(1);
-                    break;
-                case "carpool":
-                    updateData(2);
-                    break;
-                default:
-                    Log.d("update", "failure");
-
-            }
-
+            updateData();
             modal.dismiss();
             //onDestroy();
 
@@ -238,8 +234,9 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
         }
     }
 
-    private void updateData(int index) {
-        newPoints = (pointValues[index] * newDistance);
+    private void updateData() {
+        double pointVal = Arrays.asList(vehicles).indexOf(vehicleType);
+        newPoints = (pointVal * newDistance);
         updateResources("transit", vehicleType, newPoints, newDistance, transitConstants.get(vehicleType), 0);
 
     }
