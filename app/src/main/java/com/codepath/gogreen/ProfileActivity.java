@@ -326,10 +326,15 @@ public class ProfileActivity extends AppCompatActivity {
         public void run() {
             try{
                 counter = currentUser.getInt("dayCounter");
-                labels.add("Day " + counter);
-                counter++;
-                currentUser.put("dayCounter", counter);
-                barChart(counter);
+                if (counter == 0){
+                    counter++;
+                }
+                else {
+                    labels.add("Day " + counter);
+                    counter++;
+                    currentUser.put("dayCounter", counter);
+                    barChart(counter);
+                }
             }catch(Exception e){
 
             }
