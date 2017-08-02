@@ -138,16 +138,19 @@
         android:layout_below="@+id/line"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true">
+
         <EditText
             android:id="@+id/etWriteComment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/rvComments"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
+            android:layout_below="@+id/rvComments"
+            android:layout_marginTop="6dp"
             android:layout_toLeftOf="@+id/btComment"
             android:layout_toStartOf="@+id/btComment"
-            android:layout_marginTop="6dp"/>
+            android:hint="Write a comment"
+            android:textSize="14sp" />
 
     <Button
         android:id="@+id/btComment"

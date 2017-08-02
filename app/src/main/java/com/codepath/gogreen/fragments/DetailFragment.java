@@ -196,12 +196,18 @@ public class DetailFragment extends Fragment {
                     Log.d("timestamp created", date.toString());
 
                     addComment(comment);
+
+
+
                     JSONArray commentArray = new JSONArray();
                     if (action.has("comments")) {
                         commentArray = action.getJSONArray("comments");
                     }
                     commentArray.put(comment.toJSON());
+
                     action.put("comments", commentArray);
+                    commentArray.put(comment.toJSON());
+
 
                     action.saveInBackground(new SaveCallback() {
                         @Override

@@ -11,8 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -28,13 +26,14 @@ import jp.wasabeef.glide.transformations.CropCircleTransformation;
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     private List<ParseUser> mUsers;
     Context context;
-    boolean isSourceLeaderboard;
+    boolean displayRank;
+    ParseUser currentUser;
 
 
 
-    public UserAdapter(List<ParseUser> users, boolean source) {
+    public UserAdapter(List<ParseUser> users, boolean rank) {
         mUsers = users;
-        isSourceLeaderboard = source;
+        displayRank = rank;
     }
 
     @Override
@@ -48,7 +47,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     public void onBindViewHolder(final UserAdapter.ViewHolder holder, int position) {
         final ParseUser user = mUsers.get(position);
-        if (isSourceLeaderboard) {
+        if (displayRank) {
             holder.tvRank.setVisibility(View.VISIBLE);
             holder.tvRank.setText(String.valueOf(position + 1));
         }
@@ -60,24 +59,34 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         Log.d("userAdapter", user.getString("name"));
         double points = user.getDouble("totalPoints");
         holder.tvPoints.setText(String.format("%.1f", points));
+        currentUser = ParseUser.getCurrentUser();
+        final String uId  = currentUser.getString("fbId");
 
-
-        holder.rlUser.setOnClickListener(new View.OnClickListener(){
+        holder.ivProfilePic.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
-                Intent i = new Intent (context, OtherUserActivity.class);
+                if (uId.equals(user.get("fbId"))){
+                    Intent p = new Intent (context, ProfileActivity.class);
+                    ActivityOptionsCompat options = ActivityOptionsCompat.
+                            makeSceneTransitionAnimation((Activity) context, holder.ivProfilePic,
+                                    ViewCompat.getTransitionName(holder.ivProfilePic));
+                    context.startActivity(p, options.toBundle());
+                }
+                else {
+                    Intent i = new Intent (context, OtherUserActivity.class);
                 ActivityOptionsCompat options = ActivityOptionsCompat.
                         makeSceneTransitionAnimation((Activity) context, holder.ivProfilePic,
                                 ViewCompat.getTransitionName(holder.ivProfilePic));
                 i.putExtra("screenName", String.valueOf(user.get("name")));
                 i.putExtra("profImage", user.getString("profileImgUrl"));
                 i.putExtra("Id", String.valueOf(user.get("fbId")));
-                i.putExtra("joinDate", String.valueOf(user.get("joinDate")));
+                i.putExtra("joinDate", user.getDate("joinDate"));
                 double pts = user.getDouble("totalPoints");
                 String points = String.format("%.1f", pts);
                 i.putExtra("points", points);
                 context.startActivity(i, options.toBundle());
+                }
             }
         });
 
@@ -98,8 +107,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         public TextView tvName;
         public TextView tvPoints;
         public ImageView ivProfilePic;
-        public LinearLayout userInfo;
-        public RelativeLayout rlUser;
 
 
         public ViewHolder(View itemView) {
@@ -108,9 +115,6 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             tvName = (TextView) itemView.findViewById(R.id.tvName);
             tvPoints = (TextView) itemView.findViewById(R.id.tvPoints);
             ivProfilePic = (ImageView) itemView.findViewById(R.id.ivProfilePic);
-            userInfo = (LinearLayout) itemView.findViewById(R.id.userInfo);
-            rlUser = (RelativeLayout) itemView.findViewById(R.id.rlUser);
-
         }
     }
 

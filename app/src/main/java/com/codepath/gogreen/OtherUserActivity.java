@@ -1,13 +1,15 @@
 package com.codepath.gogreen;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -23,13 +25,14 @@ import com.parse.ParseUser;
 import org.json.JSONArray;
 import org.json.JSONException;
 
-import java.sql.Date;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 import static android.view.View.GONE;
+import static com.codepath.gogreen.R.id.myProfile;
 
 /**
  * Created by famakindaniel7 on 7/25/17.
@@ -60,23 +63,14 @@ public class OtherUserActivity extends AppCompatActivity {
         profileImage = (ImageView) findViewById(R.id.ivProfilePicDet);
         tvName = (TextView) findViewById(R.id.tvName);
         tvJoinDate = (TextView) findViewById(R.id.tvJoin);
-        logOut = (Button) findViewById(R.id.btnLogOut);
         addFriends = (ToggleButton) findViewById(R.id.addFriends);
         tvPoints = (TextView) findViewById(R.id.tvPoints);
-        logOut.setVisibility(GONE);
+
 
         screenName = getIntent().getStringExtra("screenName");
         profImg = getIntent().getStringExtra("profImage");
         Id = getIntent().getStringExtra("Id");
         points = getIntent().getStringExtra("points");
-        String dateStr = getIntent().getStringExtra("joinDate");
-        Log.d("dateStr", dateStr);
-        Date joinDate = Date.valueOf(dateStr);
-        SimpleDateFormat sdf = new SimpleDateFormat("MMMM YYYY", Locale.US);
-        if (joinDate != null) {
-            String dateString = "Joined in " + sdf.format(joinDate);
-            tvJoinDate.setText(dateString);
-        }
 
         tvPoints.setText(points);
 
@@ -127,6 +121,32 @@ public class OtherUserActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_other_profile, menu);
+        return super.onCreateOptionsMenu(menu);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        if (id == myProfile) {
+            Intent profile = new Intent(OtherUserActivity.this, ProfileActivity.class);
+            startActivity(profile);
+            return true;
+
+        }
+
+
+        return super.onOptionsItemSelected(item);
+    }
+
     public void loadData() {
         Glide.with(context)
                 .load(profImg)
@@ -134,6 +154,13 @@ public class OtherUserActivity extends AppCompatActivity {
                 .bitmapTransform(new CropCircleTransformation(context))
                 .into(profileImage);
         tvName.setText(screenName);
+
+        SimpleDateFormat sdf = new SimpleDateFormat("MMMM YYYY", Locale.US);
+        Date joinDate = (Date)getIntent().getSerializableExtra("joinDate");
+        if (joinDate != null) {
+        String dateString = "Joined in " + sdf.format(joinDate);
+        tvJoinDate.setText(dateString);
+        }
     }
 
 
