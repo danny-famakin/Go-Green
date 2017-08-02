@@ -4,8 +4,40 @@
         "source": "/Users/melissaperez/.android/build-cache/ade19dd7df75653b515f79bf8e0026b7d43ea680/output/res/color-v23/abc_tint_seek_thumb.xml"
     },
     {
+        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/color-v23/abc_color_highlight_material.xml",
+        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/color-v23/abc_color_highlight_material.xml"
+    },
+    {
+        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/color-v23/abc_tint_default.xml",
+        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/color-v23/abc_tint_default.xml"
+    },
+    {
         "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/color-v23/abc_color_highlight_material.xml",
         "source": "/Users/melissaperez/.android/build-cache/ade19dd7df75653b515f79bf8e0026b7d43ea680/output/res/color-v23/abc_color_highlight_material.xml"
+    },
+    {
+        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/color-v23/abc_tint_edittext.xml",
+        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/color-v23/abc_tint_edittext.xml"
+    },
+    {
+        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/color-v23/abc_tint_switch_track.xml",
+        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/color-v23/abc_tint_switch_track.xml"
+    },
+    {
+        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/color-v23/abc_tint_btn_checkable.xml",
+        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/color-v23/abc_tint_btn_checkable.xml"
+    },
+    {
+        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/color-v23/abc_btn_colored_borderless_text_material.xml",
+        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/color-v23/abc_btn_colored_borderless_text_material.xml"
+    },
+    {
+        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/color-v23/abc_btn_colored_text_material.xml",
+        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/color-v23/abc_btn_colored_text_material.xml"
+    },
+    {
+        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/color-v23/abc_tint_switch_thumb.xml",
+        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/color-v23/abc_tint_switch_thumb.xml"
     },
     {
         "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/color-v23/abc_tint_default.xml",
@@ -14,6 +46,10 @@
     {
         "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/color-v23/abc_tint_spinner.xml",
         "source": "/Users/melissaperez/.android/build-cache/ade19dd7df75653b515f79bf8e0026b7d43ea680/output/res/color-v23/abc_tint_spinner.xml"
+    },
+    {
+        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/color-v23/abc_tint_seek_thumb.xml",
+        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/color-v23/abc_tint_seek_thumb.xml"
     },
     {
         "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/color-v23/abc_tint_btn_checkable.xml",
@@ -30,6 +66,10 @@
     {
         "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/color-v23/abc_btn_colored_text_material.xml",
         "source": "/Users/melissaperez/.android/build-cache/ade19dd7df75653b515f79bf8e0026b7d43ea680/output/res/color-v23/abc_btn_colored_text_material.xml"
+    },
+    {
+        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/color-v23/abc_tint_spinner.xml",
+        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/color-v23/abc_tint_spinner.xml"
     },
     {
         "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/color-v23/abc_tint_switch_track.xml",

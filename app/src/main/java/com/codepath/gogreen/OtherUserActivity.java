@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -21,6 +22,10 @@ import com.parse.ParseUser;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
@@ -64,6 +69,14 @@ public class OtherUserActivity extends AppCompatActivity {
         profImg = getIntent().getStringExtra("profImage");
         Id = getIntent().getStringExtra("Id");
         points = getIntent().getStringExtra("points");
+        String dateStr = getIntent().getStringExtra("joinDate");
+        Log.d("dateStr", dateStr);
+        Date joinDate = Date.valueOf(dateStr);
+        SimpleDateFormat sdf = new SimpleDateFormat("MMMM YYYY", Locale.US);
+        if (joinDate != null) {
+            String dateString = "Joined in " + sdf.format(joinDate);
+            tvJoinDate.setText(dateString);
+        }
 
         tvPoints.setText(points);
 
