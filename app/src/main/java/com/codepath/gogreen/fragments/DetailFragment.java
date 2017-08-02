@@ -96,7 +96,7 @@ public class DetailFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        v = inflater.inflate(R.layout.comment_fragment, null);
+        v = inflater.inflate(R.layout.fragment_details, null);
         user = ParseUser.getCurrentUser();
 
         actionId = getArguments().getString("objectID");

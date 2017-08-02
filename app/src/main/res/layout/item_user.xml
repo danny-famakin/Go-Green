@@ -5,7 +5,8 @@
     android:layout_height="64dp"
     android:layout_centerHorizontal="true"
     android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp">
+    android:layout_marginRight="5dp"
+    android:id="@+id/rlUser">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
