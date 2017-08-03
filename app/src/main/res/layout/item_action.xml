@@ -44,7 +44,7 @@
         android:layout_below="@+id/tvAction"
         android:layout_marginTop="8dp"
         android:layout_marginLeft="4dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="5dp"
         android:text="Points earned:" />
 
     <TextView
@@ -75,7 +75,7 @@
         android:background="@android:color/transparent"
         android:scaleType="fitCenter"
         app:srcCompat="@drawable/ic_fave"
-        android:layout_below="@+id/ivProfilePicDet"
+        android:layout_below="@+id/tvPointsCaption"
         android:layout_alignStart="@+id/tvPointsCaption" />
 
     <ImageButton
