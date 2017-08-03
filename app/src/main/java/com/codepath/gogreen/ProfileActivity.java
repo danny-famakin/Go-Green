@@ -350,12 +350,15 @@ public class ProfileActivity extends AppCompatActivity {
                 counter = currentUser.getInt("dayCounter");
                 if (counter == 0){
                     counter++;
+                    currentUser.put("dayCounter", counter);
+                    currentUser.saveInBackground();
                 }
                 else {
                     labels.add("Day " + counter);
                     counter++;
                     currentUser.put("dayCounter", counter);
                     barChart(counter);
+                    currentUser.saveInBackground();
                 }
             }catch(Exception e){
 

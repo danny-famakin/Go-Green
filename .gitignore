@@ -39,7 +39,7 @@ import-summary.txt
 build/**
 bin/**
 tmp/**
-*.json
+.json
 ParseUI-Login/build/**
 tmp/**/*
 *.tmp
