@@ -294,7 +294,6 @@ public class ParseLoginFragment extends ParseLoginFragmentBase {
                                     parseUser.put("totalPoints", 0);
                                     parseUser.put("joinDate", new Date());
                                     parseUser.put("friends", new JSONArray());
-                                    parseUser.put("dayCounter", 0);
                                     JSONObject resourceData = new JSONObject();
                                     resourceData.put("emissions", 0.0);
                                     resourceData.put("fuel", 0.0);

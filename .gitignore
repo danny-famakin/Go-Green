@@ -39,6 +39,8 @@ import-summary.txt
 build/**
 bin/**
 tmp/**
+.json
+ParseUI-Login/build/**
 tmp/**/*
 *.tmp
 *.bak

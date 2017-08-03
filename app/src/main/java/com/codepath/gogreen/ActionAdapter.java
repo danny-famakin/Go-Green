@@ -101,9 +101,13 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
                             .placeholder(R.drawable.ic_placeholder)
                             .bitmapTransform(new CropCircleTransformation(context))
                             .into(holder.ivProfilePic);
-                    //if (action.getActionType().equals("recycle")){
-                        //holder.ivProfilePic.setBackgroundResource(R.drawable.recycle_backgnd);
-                    //}
+//                    if (action.getActionType().equals("recycle")){
+//                        holder.ivProfilePic.setBackgroundResource(R.drawable.recycle_backgnd);
+//                    } else if (action.getActionType().equals("reuse")){
+//                        holder.ivProfilePic.setBackgroundResource(R.drawable.reuse_backgnd);
+//                    } else if (action.getActionType().equals("transit")){
+//
+//                    }
                     //Load user profile on clicking profile image
                     holder.ivProfilePic.setOnClickListener(new View.OnClickListener(){
 
@@ -143,6 +147,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
 //                    str.setSpan(new ForegroundColorSpan(color), name.length(), str.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                     holder.tvAction.setText(TextUtils.concat(str," " ,body));
 //                    holder.line.setBackgroundColor(color);
+                    holder.tvComments.setText(String.valueOf(action.getJSONArray("comments").length()));
 
                     holder.rlAction.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -226,6 +231,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
         public TextView tvAction;
         public TextView tvTimeStamp;
         public TextView tvPoints;
+        public TextView tvComments;
         public ImageView ivProfilePic;
         public ImageButton ivFavorite;
         public ImageButton ivReply;
@@ -239,11 +245,13 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
             tvTimeStamp = (TextView) itemView.findViewById(R.id.tvTimeStamp);
             tvPoints = (TextView) itemView.findViewById(R.id.tvPoints);
             ivProfilePic = (ImageView) itemView.findViewById(R.id.ivProfilePicDet);
+            tvComments = (TextView) itemView.findViewById(R.id.tvComments);
             ivFavorite = (ImageButton) itemView.findViewById(R.id.ivFavorite);
             ivReply = (ImageButton) itemView.findViewById(R.id.ivReply);
             tvLikes = (TextView) itemView.findViewById(R.id.tvLikes);
             rlAction = (RelativeLayout) itemView.findViewById(R.id.rlAction);
             line = (View) itemView.findViewById(R.id.line);
+
 
             ivFavorite.setOnClickListener(new View.OnClickListener(){
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)

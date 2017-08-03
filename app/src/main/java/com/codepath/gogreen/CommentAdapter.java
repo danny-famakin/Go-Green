@@ -105,7 +105,6 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.ViewHold
 
         public ViewHolder(View itemView) {
             super(itemView);
-
             ivComment = (ImageView) itemView.findViewById(R.id.ivComment);
             tvPost = (TextView) itemView.findViewById(R.id.tvPost);
             tvName = (TextView) itemView.findViewById(R.id.tvName);
