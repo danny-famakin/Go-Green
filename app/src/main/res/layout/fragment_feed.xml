@@ -1,6 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent" android:layout_width="match_parent"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/tvHelp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:text="Hmm...it looks like you don't have any actions yet. Use the search icon to find your Facebook friends or use the log button to add an action!"
+        android:visibility="gone" />
+
+<android.support.v4.widget.SwipeRefreshLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/swiper"
@@ -8,6 +21,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     tools:context="com.codepath.gogreen.FeedActivity">
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvFeed"
@@ -18,4 +32,8 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="88dp" />
 
+
+
+
 </android.support.v4.widget.SwipeRefreshLayout>
+</LinearLayout>

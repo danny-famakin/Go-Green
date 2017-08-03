@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.codepath.gogreen.ActionAdapter;
 import com.codepath.gogreen.DividerItemDecoration;
@@ -33,6 +34,7 @@ public class FeedFragment extends TabsFragment {
     ParseUser currentUser;
     private SwipeRefreshLayout swipeContainer;
     ArrayList<String> friendIdList;
+    TextView tvHelp;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -45,6 +47,7 @@ public class FeedFragment extends TabsFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_feed, container, false);
         rvActions = (RecyclerView) v.findViewById(R.id.rvFeed);
+        tvHelp = (TextView) v.findViewById(R.id.tvHelp);
         actions = new ArrayList<>();
         actionAdapter = new ActionAdapter(actions);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
@@ -78,7 +81,14 @@ public class FeedFragment extends TabsFragment {
         query.findInBackground(new FindCallback<Action>() {
             public void done(List<Action> actionList, ParseException e) {
                 if (e == null) {
-                    addItems(actionList);
+                    if (actionList.size() == 0) {
+                        Log.d("actionList", "no actions");
+                        tvHelp.setVisibility(View.VISIBLE);
+                    } else {
+                        Log.d("actionList", actionList.size() + " actions");
+                        tvHelp.setVisibility(View.GONE);
+                        addItems(actionList);
+                    }
                 } else {
                     Log.d("action", "Error: " + e.getMessage());
                 }
