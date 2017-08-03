@@ -43,9 +43,6 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
@@ -64,6 +61,7 @@ public class ProfileActivity extends AppCompatActivity {
     DateFormat fmt;
     int counter;
     Calendar cal;
+    Calendar calendar;
     double fuelValue;
     double waterValue;
     double treesValue;
@@ -104,6 +102,32 @@ public class ProfileActivity extends AppCompatActivity {
         cal.set(Calendar.MILLISECOND, 0);
 
 
+        calendar = new GregorianCalendar();
+        calendar.set(2017,7,1);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        calendar.set(Calendar.MILLISECOND, 0);
+
+
+        long diff = cal.getTimeInMillis() - calendar.getTimeInMillis();
+        long days = diff / (24 * 60 * 60 * 1000);
+
+        int daysCounter = (int) days;
+
+        for( int i = 1; i < daysCounter; i++){
+            labels.add("Day " + i);
+        }
+
+        try {
+            barChart(daysCounter);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+
+
         // ensure user logged in
         if((currentUser != null)){
             Log.d("loggedin", "true");
@@ -121,13 +145,15 @@ public class ProfileActivity extends AppCompatActivity {
 
         }
 
-        ScheduledThreadPoolExecutor sch = (ScheduledThreadPoolExecutor)
-                Executors.newScheduledThreadPool(5);
-
-        sch.scheduleAtFixedRate(periodicTask, 0, 24, TimeUnit.HOURS);
+//        ScheduledThreadPoolExecutor sch = (ScheduledThreadPoolExecutor)
+//                Executors.newScheduledThreadPool(5);
+//
+//        sch.scheduleAtFixedRate(periodicTask, 0, 24, TimeUnit.HOURS);
 
 
     }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -264,6 +290,7 @@ public class ProfileActivity extends AppCompatActivity {
       //      Log.d("initialllllll", String.valueOf(initalDate));
 
             ParseQuery<ParseObject> query = ParseQuery.getQuery("Action");
+            query.whereEqualTo("uid", currentUser.getString("fbId"));
             query.whereGreaterThanOrEqualTo("createdAt", initalDate);
             query.whereLessThan("createdAt", finalDate);
             List<ParseObject> actionList;
@@ -343,28 +370,28 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
-    Runnable periodicTask = new Runnable(){
-        @Override
-        public void run() {
-            try{
-                counter = currentUser.getInt("dayCounter");
-                if (counter == 0){
-                    counter++;
-                    currentUser.put("dayCounter", counter);
-                    currentUser.saveInBackground();
-                }
-                else {
-                    labels.add("Day " + counter);
-                    counter++;
-                    currentUser.put("dayCounter", counter);
-                    barChart(counter);
-                    currentUser.saveInBackground();
-                }
-            }catch(Exception e){
-
-            }
-        }
-    };
+//    Runnable periodicTask = new Runnable(){
+//        @Override
+//        public void run() {
+//            try{
+//                counter = currentUser.getInt("dayCounter");
+//                if (counter == 0){
+//                    counter++;
+//                    currentUser.put("dayCounter", counter);
+//                    currentUser.saveInBackground();
+//                }
+//                else {
+//                    labels.add("Day " + counter);
+//                    counter++;
+//                    currentUser.put("dayCounter", counter);
+//                    barChart(counter);
+//                    currentUser.saveInBackground();
+//                }
+//            }catch(Exception e){
+//
+//            }
+//        }
+//    };
 
     public void onLoadData(int i) {
         yFuel.add(new BarEntry(i, Float.valueOf(String.valueOf(fuelValue))));

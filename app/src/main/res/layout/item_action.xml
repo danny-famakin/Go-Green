@@ -8,7 +8,9 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/itemAction">
+        android:id="@+id/itemAction"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
 
     <ImageView
@@ -18,7 +20,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:transitionName="profileTrans"
         app:srcCompat="@drawable/ic_placeholder" />
         <!--android:paddingBottom="4dp"-->
@@ -97,13 +99,18 @@
             android:text="0"
             android:textAllCaps="false" />
 
-    <ImageButton
-        android:id="@+id/ivReply"
-        android:layout_width="22dp"
-        android:layout_height="22dp"
-        android:background="@android:color/transparent"
-        app:srcCompat="@drawable/ic_reply"
-        android:layout_below="@+id/ivProfilePicDet"/>
+        <ImageButton
+            android:id="@+id/ivReply"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_alignBottom="@id/ivFavorite"
+            android:layout_marginLeft="4dp"
+            android:layout_toEndOf="@id/tvComments"
+            android:layout_toRightOf="@id/tvComments"
+            android:background="@android:color/transparent"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/ic_comment" />
+
 
     <ImageView
         android:id="@+id/ivLeaf"
@@ -134,6 +141,7 @@
         android:layout_height="0dp"
         android:background="@android:color/darker_gray"
         android:layout_below="@+id/itemAction"
+        android:layout_marginTop="8dp"
         android:layout_marginLeft="4dp"
         android:layout_marginRight="4dp"
         android:id="@+id/line"/>

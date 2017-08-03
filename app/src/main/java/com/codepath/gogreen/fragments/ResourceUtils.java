@@ -34,9 +34,9 @@ public class ResourceUtils {
 
     public void getColors() {
         colors.put("transit", new Integer[] {Color.parseColor("#679D4C"), Color.parseColor("#A8C799"), Color.parseColor("#E9F1E5"), context.getResources().getColor(R.color.colorPrimaryDark)});
-        colors.put("water", new Integer[] {Color.parseColor("#4CCBA9"), Color.parseColor("#99E1CE"), Color.parseColor("#E5F7F2"), context.getResources().getColor(R.color.colorAccentDark)});
+        colors.put("water", new Integer[] {Color.parseColor("#4CCBA9"), Color.parseColor("#7FDAC2"), Color.parseColor("#B2E9DA"), context.getResources().getColor(R.color.colorAccentDark)});
         colors.put("reuse", new Integer[] {Color.parseColor("#4C81BE"), Color.parseColor("#99B7DA"), Color.parseColor("#E5EDF5"), context.getResources().getColor(R.color.darkBlue)});
-        colors.put("recycle", new Integer[] {Color.parseColor("#C6E369"), Color.parseColor("#DEEFA9"), Color.parseColor("#F6FBE9"), context.getResources().getColor(R.color.lightGreen)});
+        colors.put("recycle", new Integer[] {context.getResources().getColor(R.color.lightGreen), Color.parseColor("#C6E369"), Color.parseColor("#DEEFA9"), context.getResources().getColor(R.color.colorPrimary)});
     }
 
 
