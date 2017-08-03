@@ -14,6 +14,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.SpannedString;
+import android.text.TextUtils;
+import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,6 +29,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.codepath.gogreen.fragments.DetailFragment;
+import com.codepath.gogreen.fragments.ResourceUtils;
 import com.codepath.gogreen.models.Action;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -129,16 +133,19 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
 
                     // load action body: bold name, compose rest of body using function below
                     String name = userList.get(0).getString("name");
-                    String body = " " + composeActionBody(action);
-                    SpannableString str = new SpannableString(name + body);
+                    final int color = new ResourceUtils(context).getColorArray(action.getActionType(), 4).get(3);
+                    SpannedString body = composeActionBody(action, color);
+                    SpannableString str = new SpannableString(name);
                     str.setSpan(new StyleSpan(Typeface.BOLD), 0, name.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                    holder.tvAction.setText(str);
+//                    str.setSpan(new ForegroundColorSpan(color), name.length(), str.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    holder.tvAction.setText(TextUtils.concat(str," " ,body));
+//                    holder.line.setBackgroundColor(color);
                     holder.tvComments.setText(String.valueOf(action.getJSONArray("comments").length()));
 
                     holder.rlAction.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            String body = " " + composeActionBody(action);
+                            String body = " " + composeActionBody(action, color);
 
                             Bundle bundle = new Bundle();
 
@@ -223,6 +230,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
         public ImageButton ivReply;
         public TextView tvLikes;
         public RelativeLayout rlAction;
+        public View line;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -235,6 +243,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
             ivReply = (ImageButton) itemView.findViewById(R.id.ivReply);
             tvLikes = (TextView) itemView.findViewById(R.id.tvLikes);
             rlAction = (RelativeLayout) itemView.findViewById(R.id.rlAction);
+            line = (View) itemView.findViewById(R.id.line);
 
 
             ivFavorite.setOnClickListener(new View.OnClickListener(){
@@ -293,29 +302,44 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
 
 
 
-    public String composeActionBody(Action action) {
-        String body = "";
+    public SpannedString composeActionBody(Action action, int color) {
+        SpannedString body = new SpannedString("");
+        SpannableString str = new SpannableString("");
+
         switch (action.getString("actionType").toString()) {
             case "transit":
                 String vehicle;
                 String subType = action.getSubType();
 
                 if (subType.equals("bus") || subType.equals("subway") || subType.equals("train")) {
-                    body = "took the " + subType + " for";
-                } else if (subType.equals("walk") || subType.equals("bike")) {
-                    body = checkPastTense(subType);
+                    str = new SpannableString("took the " + subType + " for");
+                    str.setSpan(new ForegroundColorSpan(color), 0, 9 + subType.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+                } else if (subType.equals("walking") || subType.equals("bike")) {
+                    if (subType.substring(subType.length() - 3, subType.length()).equals("ing")) {
+                        subType = subType.substring(0, subType.length() - 3);
+                    }
+                    str = new SpannableString(checkPastTense(subType));
+                    str.setSpan(new ForegroundColorSpan(color), 0, str.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
                 } else if (subType.equals("carpool")) {
-                    body = "carpooled for";
+                    str = new SpannableString("carpooled for");
+                    str.setSpan(new ForegroundColorSpan(color), 0, str.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
                 } else {
                     Log.e("transit", "subtype none of the above");
                 }
-                body += " " + checkUnits(action.getMagnitude(), context.getResources().getString(R.string.distance_units), false);
+                body = (SpannedString) TextUtils.concat(str, " ", new SpannableString(checkUnits(action.getMagnitude(), context.getResources().getString(R.string.distance_units), false)));
                 break;
             case "water":
-                body = "took a " + String.format("%.1f", action.getMagnitude()) + " " + context.getResources().getString(R.string.shower_units) + " shower";
+                str = new SpannableString("took a " + String.format("%.1f", action.getMagnitude()) + " " + context.getResources().getString(R.string.shower_units) + " shower");
+                str.setSpan(new ForegroundColorSpan(color), str.length() - 6, str.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                body = new SpannedString(str);
                 break;
             case "reuse":
-                body = "reused " + checkUnits(action.getMagnitude(), "bag", true);
+                str = new SpannableString("reused " + checkUnits(action.getMagnitude(), "bag", true));
+                str.setSpan(new ForegroundColorSpan(color), 0, 6, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                body = new SpannedString(str);
                 break;
             case "recycle":
                 String units = action.getSubType();
@@ -324,7 +348,9 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
                     units = "sheet";
                     suffix = " of paper";
                 }
-                body = "recycled " + checkUnits(action.getMagnitude(), units, true) + suffix;
+                str = new SpannableString("recycled " + checkUnits(action.getMagnitude(), units, true) + suffix);
+                str.setSpan(new ForegroundColorSpan(color), 0, 8, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                body = new SpannedString(str);
                 break;
         }
 

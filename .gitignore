@@ -65,3 +65,6 @@ local.properties
 
 .DS_Store
 .gitignore~
+
+#Parse build files
+ParseUI-Login/build/
