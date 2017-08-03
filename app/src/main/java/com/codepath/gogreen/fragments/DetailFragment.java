@@ -1,6 +1,7 @@
 package com.codepath.gogreen.fragments;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -325,7 +326,8 @@ public class DetailFragment extends Fragment {
 
         for (int i = 0; i < yData.size(); i++) {
             double aYData = yData.get(i);
-            yEntry.add(new PieEntry((float) aYData, xData.get(i)));
+            PieEntry pEntry = new PieEntry((float) aYData, xData.get(i));
+            yEntry.add(pEntry);
         }
         for (String aXData : xData) {
             xEntry.add(aXData);
@@ -333,6 +335,7 @@ public class DetailFragment extends Fragment {
         PieDataSet dataSet = new PieDataSet(yEntry, "Environmental Impact");
         dataSet.setSliceSpace(3);
         dataSet.setValueTextSize(12);
+        dataSet.setValueTextColor(Color.WHITE);
         dataSet.setSelectionShift(7);
 
         ArrayList<Integer> colors = new ResourceUtils(context).getColorArray(action.getActionType(), yData.size());
@@ -376,13 +379,16 @@ public class DetailFragment extends Fragment {
         });
 
         PieData data = new PieData(dataSet);
+        data.setDrawValues(true);
         pChart.setData(data);
         pChart.invalidate();
         pChart.getLegend().setEnabled(false);
         pChart.getDescription().setEnabled(false);
-        data.setDrawValues(false);
         pChart.setHoleRadius(50);
-        pChart.setTransparentCircleAlpha(1);
+//        pChart.setTransparentCircleAlpha(1);
+        pChart.setTransparentCircleColor(Color.WHITE);
+        pChart.setTransparentCircleAlpha(100);
+
         pChart.setRotationEnabled(true);
     }
 
@@ -408,8 +414,7 @@ public class DetailFragment extends Fragment {
             rvComments.setLayoutParams(params);
         }
         else {
-            int height= (int) getResources().getDimension(R.dimen.view_height); //get height
-
+            int height= (int) context.getResources().getDimension(R.dimen.view_height); //get height
             ViewGroup.LayoutParams params_new=rvComments.getLayoutParams();
             params_new.height= height;
             rvComments.setLayoutParams(params_new);
