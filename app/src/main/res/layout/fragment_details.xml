@@ -165,6 +165,7 @@
             android:layout_alignParentStart="true"
             android:layout_below="@+id/rvComments"
             android:layout_marginTop="6dp"
+            android:layout_marginLeft="8dp"
             android:layout_toLeftOf="@+id/btComment"
             android:layout_toStartOf="@+id/btComment"
             android:hint="Write a comment"
