@@ -97,9 +97,9 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
                             .placeholder(R.drawable.ic_placeholder)
                             .bitmapTransform(new CropCircleTransformation(context))
                             .into(holder.ivProfilePic);
-                    //if (action.getActionType().equals("recycle")){
-                        //holder.ivProfilePic.setBackgroundResource(R.drawable.recycle_backgnd);
-                    //}
+                    if (action.getActionType().equals("recycle")){
+                        holder.ivProfilePic.setBackgroundResource(R.drawable.recycle_backgnd);
+                    }
                     //Load user profile on clicking profile image
                     holder.ivProfilePic.setOnClickListener(new View.OnClickListener(){
 
