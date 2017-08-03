@@ -15,6 +15,7 @@ import android.text.style.StyleSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -254,6 +255,7 @@ public class DetailFragment extends Fragment {
             ivFavorite.setImageResource(R.drawable.ic_fave);
         }
 
+        updateHeight();
 
         modal = new MaterialDialog.Builder(getContext())
                 .customView(v, false)
@@ -394,6 +396,25 @@ public class DetailFragment extends Fragment {
         Log.d("comment", comment.getUid());
         comments.add(comments.size(), comment);
         commentAdapter.notifyItemInserted(comments.size());
+
+        updateHeight();
+
+    }
+
+    public void updateHeight() {
+        if (comments.size() < 4) {
+            ViewGroup.LayoutParams params = rvComments.getLayoutParams();
+            params.height = RecyclerView.LayoutParams.WRAP_CONTENT;
+            rvComments.setLayoutParams(params);
+        }
+        else {
+            int height= (int) getResources().getDimension(R.dimen.view_height); //get height
+
+            ViewGroup.LayoutParams params_new=rvComments.getLayoutParams();
+            params_new.height= height;
+            rvComments.setLayoutParams(params_new);
+
+        }
     }
 
 }
