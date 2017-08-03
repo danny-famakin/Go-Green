@@ -14,10 +14,6 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginTop="16dp"
-        android:paddingBottom="4dp"
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp"
-        android:paddingTop="4dp"
         android:transitionName="profileTrans"
         app:srcCompat="@drawable/ic_placeholder" />
 
@@ -84,7 +80,7 @@
         android:layout_height="22dp"
         android:background="@android:color/transparent"
         app:srcCompat="@drawable/ic_reply"
-        android:layout_below="@+id/ivProfilePicDet"/>?
+        android:layout_below="@+id/ivProfilePicDet"/>
 
     <ImageView
         android:id="@+id/ivLeaf"
