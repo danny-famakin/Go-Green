@@ -5,7 +5,8 @@
     android:layout_height="64dp"
     android:layout_centerHorizontal="true"
     android:layout_marginLeft="5dp"
-    android:layout_marginRight="5dp">
+    android:layout_marginRight="5dp"
+    android:id="@+id/rlUser">
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
@@ -13,7 +14,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:id="@+id/userInfo">
 
         <TextView
             android:id="@+id/tvRank"

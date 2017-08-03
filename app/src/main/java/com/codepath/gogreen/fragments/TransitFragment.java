@@ -138,7 +138,7 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
 
         List<Double[]> constants = Arrays.asList(busConstants, subwayConstants, trainConstants, bikeConstants, walkingConstants);
         for (int i = 0; i < constants.size(); i++) {
-            pointValues[i] = new ResourceUtils().sumPoints(constants.get(i));
+            pointValues[i] = new ResourceUtils(context).sumPoints(constants.get(i));
         }
 
         inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);

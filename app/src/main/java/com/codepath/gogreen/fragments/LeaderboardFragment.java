@@ -23,7 +23,7 @@ import java.util.List;
  * Created by anyazhang on 7/13/17.
  */
 
-public class LeaderboardFragment extends FloatingMenuFragment {
+public class LeaderboardFragment extends TabsFragment {
     ArrayList<ParseUser> users;
     RecyclerView rvUsers;
     UserAdapter userAdapter;

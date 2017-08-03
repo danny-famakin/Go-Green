@@ -1,12 +1,15 @@
 package com.codepath.gogreen;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -29,6 +32,7 @@ import java.util.Locale;
 import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 import static android.view.View.GONE;
+import static com.codepath.gogreen.R.id.myProfile;
 
 /**
  * Created by famakindaniel7 on 7/25/17.
@@ -50,7 +54,7 @@ public class OtherUserActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_profile);
+        setContentView(R.layout.activity_profile);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -59,7 +63,6 @@ public class OtherUserActivity extends AppCompatActivity {
         profileImage = (ImageView) findViewById(R.id.ivProfilePicDet);
         tvName = (TextView) findViewById(R.id.tvName);
         tvJoinDate = (TextView) findViewById(R.id.tvJoin);
-        logOut = (Button) findViewById(R.id.btnLogOut);
         addFriends = (ToggleButton) findViewById(R.id.addFriends);
         tvPoints = (TextView) findViewById(R.id.tvPoints);
 
@@ -116,6 +119,31 @@ public class OtherUserActivity extends AppCompatActivity {
                 currentUser.saveInBackground();
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.menu_other_profile, menu);
+        return super.onCreateOptionsMenu(menu);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        if (id == myProfile) {
+            Intent profile = new Intent(OtherUserActivity.this, ProfileActivity.class);
+            startActivity(profile);
+            return true;
+        }
+
+
+        return super.onOptionsItemSelected(item);
     }
 
     public void loadData() {

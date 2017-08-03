@@ -26,7 +26,7 @@ import java.util.List;
  * Created by anyazhang on 7/13/17.
  */
 
-public class FeedFragment extends FloatingMenuFragment {
+public class FeedFragment extends TabsFragment {
     ArrayList<Action> actions;
     RecyclerView rvActions;
     ActionAdapter actionAdapter;

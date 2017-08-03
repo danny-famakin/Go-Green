@@ -39,6 +39,7 @@ import-summary.txt
 build/**
 bin/**
 tmp/**
+ParseUI-Login/build/**
 tmp/**/*
 *.tmp
 *.bak

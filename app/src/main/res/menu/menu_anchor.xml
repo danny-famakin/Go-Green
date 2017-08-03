@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
     <item
         android:id="@+id/overflow"
-        android:icon="?android:attr/listChoiceIndicatorSingle"
+        android:icon="@drawable/ic_settings"
         android:title="Options"
         app:showAsAction="always" />
 </menu>

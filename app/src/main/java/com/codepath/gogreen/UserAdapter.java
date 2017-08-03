@@ -48,9 +48,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     public void onBindViewHolder(final UserAdapter.ViewHolder holder, int position) {
         final ParseUser user = mUsers.get(position);
         if (displayRank) {
-            //holder.tvRank.setText(String.valueOf(position + 1));
+            holder.tvRank.setVisibility(View.VISIBLE);
+            holder.tvRank.setText(String.valueOf(position + 1));
+        }
+        else {
             holder.tvRank.setVisibility(View.GONE);
         }
+
         holder.tvName.setText(user.getString("name"));
         Log.d("userAdapter", user.getString("name"));
         double points = user.getDouble("totalPoints");
