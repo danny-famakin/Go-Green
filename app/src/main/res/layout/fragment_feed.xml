@@ -7,7 +7,7 @@
         android:id="@+id/tvHelp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:text="Hmm...it looks like you don't have any actions yet. Use the search icon to find your Facebook friends or use the log button to add an action!"
