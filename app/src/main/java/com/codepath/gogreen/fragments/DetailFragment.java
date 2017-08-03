@@ -1,7 +1,6 @@
 package com.codepath.gogreen.fragments;
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -66,7 +65,7 @@ public class DetailFragment extends Fragment {
     TextView tvLikes;
     ImageButton ivFavorite;
     ImageButton ivReply;
-    Context context;
+    ImageView ivIcon;
     EditText etWriteComment;
     Button btComment;
     PieChart pieChart;
@@ -76,6 +75,10 @@ public class DetailFragment extends Fragment {
     CommentAdapter commentAdapter;
     MaterialDialog modal;
     ParseUser user;
+    ArrayList<Double> yData;
+    ArrayList<String> xData;
+    double POINT_THRESHOLD = 0.05;
+    Context context;
 
     String fuel, water, trees, emissions, numberOf, body;
 
@@ -95,14 +98,14 @@ public class DetailFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        context = getContext();
         inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        v = inflater.inflate(R.layout.comment_fragment, null);
+        v = inflater.inflate(R.layout.fragment_details, null);
         user = ParseUser.getCurrentUser();
 
         actionId = getArguments().getString("objectID");
         String relativeTime = getArguments().getString("relativeTime");
         body = getArguments().getString("body");
-        context = getActivity();
         String points = getArguments().getString("points");
 
         JSONObject jsonObject;
@@ -122,6 +125,7 @@ public class DetailFragment extends Fragment {
         tvLikes = (TextView) v.findViewById(R.id.tvLikes);
         ivFavorite = (ImageButton) v.findViewById(R.id.ivFavorite);
         ivReply = (ImageButton) v.findViewById(R.id.ivReply);
+        ivIcon = (ImageView) v.findViewById(R.id.ivIcon);
         etWriteComment = (EditText) v.findViewById(R.id.etWriteComment);
         btComment = (Button) v.findViewById(R.id.btComment);
         rvComments = (RecyclerView) v.findViewById(R.id.rvComments);
@@ -196,12 +200,18 @@ public class DetailFragment extends Fragment {
                     Log.d("timestamp created", date.toString());
 
                     addComment(comment);
+
+
+
                     JSONArray commentArray = new JSONArray();
                     if (action.has("comments")) {
                         commentArray = action.getJSONArray("comments");
                     }
                     commentArray.put(comment.toJSON());
+
                     action.put("comments", commentArray);
+                    commentArray.put(comment.toJSON());
+
 
                     action.saveInBackground(new SaveCallback() {
                         @Override
@@ -215,7 +225,7 @@ public class DetailFragment extends Fragment {
         });
         pieChart = (PieChart) v.findViewById(R.id.pieChart);
 
-        pieChart.setCenterText(points);
+//        pieChart.setCenterText(points);
         try {
             drawPieChart(pieChart);
         } catch (JSONException e) {
@@ -294,16 +304,26 @@ public class DetailFragment extends Fragment {
     }
 
     public void drawPieChart(PieChart pChart) throws JSONException {
-        final double[] yData = {action.getMagnitude() * action.getPointData().getDouble("fuel"), action.getMagnitude() * action.getPointData().getDouble("water"),
-                action.getMagnitude() * action.getPointData().getDouble("trees"), action.getMagnitude() * action.getPointData().getDouble("emissions")};
-        final String[] xData = {"Fuel", "Water", "Trees", "Emissions"};
+
+        String[] resources = new ResourceUtils(context).resources;
+        ivIcon.setImageResource(new ResourceUtils(context).getInverseImage(action.getActionType()));
+
+        yData = new ArrayList<>();
+        xData = new ArrayList<>();
+
+        for (int i = 0; i < resources.length; i++) {
+            if (action.getPointData().getDouble(resources[i]) > POINT_THRESHOLD) {
+                yData.add(action.getMagnitude() * action.getPointData().getDouble(resources[i]));
+                xData.add(resources[i]);
+            }
+        }
 
         ArrayList<PieEntry> yEntry = new ArrayList<>();
         ArrayList<String> xEntry = new ArrayList<>();
 
-        for (int i = 0; i < yData.length; i++) {
-            double aYData = yData[i];
-            yEntry.add(new PieEntry((float) aYData));
+        for (int i = 0; i < yData.size(); i++) {
+            double aYData = yData.get(i);
+            yEntry.add(new PieEntry((float) aYData, xData.get(i)));
         }
         for (String aXData : xData) {
             xEntry.add(aXData);
@@ -313,13 +333,7 @@ public class DetailFragment extends Fragment {
         dataSet.setValueTextSize(12);
         dataSet.setSelectionShift(7);
 
-        ArrayList<Integer> colors = new ArrayList<>();
-        colors.add(Color.BLUE);
-        colors.add(Color.CYAN);
-        //colors.add(Color.GREEN);
-        colors.add(Color.rgb(153, 255, 153));
-        //colors.add(Color.YELLOW);
-        colors.add(Color.rgb(229, 255, 204));
+        ArrayList<Integer> colors = new ResourceUtils(context).getColorArray(action.getActionType(), yData.size());
 
         dataSet.setColors(colors);
 
@@ -337,7 +351,7 @@ public class DetailFragment extends Fragment {
                 int vos = Integer.parseInt(str);
 
 
-                String env = xData[vos];
+                String env = xData.get(vos);
                 Log.d("MessagesF", String.valueOf(vos));
 
                 if (env.equals("Emissions")) {

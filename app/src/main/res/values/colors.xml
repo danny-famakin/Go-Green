@@ -12,10 +12,10 @@
     <color name="colorAccentDark">#00b686</color>
     <color name="red">#b71c1c</color>
     <color name="offWhite">#f5f5f5</color>
+    <color name="black">#1f1f1f</color>
+    <color name="grey">#3f3f3f</color>
     <color name="lightGreen">#ADD729</color>
     <color name="darkBlue">#004BA3</color>
-
-
 
 
 </resources>

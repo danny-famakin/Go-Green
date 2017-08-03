@@ -56,7 +56,7 @@ public class WaterFragment extends ModalFragment {
         v = inflater.inflate(R.layout.activity_log_water, null);
 
         showering = true;
-        SHOWER_POINTS = new ResourceUtils().sumPoints(waterConstants);
+        SHOWER_POINTS = new ResourceUtils(context).sumPoints(waterConstants);
         tvTimer = (TextView) v.findViewById(R.id.tvTimer);
         tvErrorMsg = (TextView) v.findViewById(R.id.tvErrorMsg);
         btStartPause = (Button) v.findViewById(R.id.btStartPause);

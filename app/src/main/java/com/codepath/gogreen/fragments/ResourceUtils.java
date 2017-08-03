@@ -1,5 +1,12 @@
 package com.codepath.gogreen.fragments;
 
+import android.content.Context;
+import android.graphics.Color;
+
+import com.codepath.gogreen.R;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -8,14 +15,28 @@ import java.util.HashMap;
 
 public class ResourceUtils {
     public static HashMap<String, Double> weights = new HashMap<>();
+    public static HashMap<String, Integer[]> colors = new HashMap<>();
     public String[] resources = new String[] {"emissions", "fuel", "water", "trees"};
+    private Context context;
 
-    public HashMap getWeights() {
+
+    public ResourceUtils(Context context){
+        this.context=context;
+    }
+
+
+    public void getWeights() {
         weights.put("fuel", 20.);
         weights.put("emissions", 5.);
         weights.put("water", 0.1);
         weights.put("trees", 1.);
-        return weights;
+    }
+
+    public void getColors() {
+        colors.put("transit", new Integer[] {Color.parseColor("#679D4C"), Color.parseColor("#A8C799"), Color.parseColor("#E9F1E5"), context.getResources().getColor(R.color.colorPrimaryDark)});
+        colors.put("water", new Integer[] {Color.parseColor("#4CCBA9"), Color.parseColor("#99E1CE"), Color.parseColor("#E5F7F2"), context.getResources().getColor(R.color.colorAccentDark)});
+        colors.put("reuse", new Integer[] {Color.parseColor("#4C81BE"), Color.parseColor("#99B7DA"), Color.parseColor("#E5EDF5"), context.getResources().getColor(R.color.darkBlue)});
+        colors.put("recycle", new Integer[] {Color.parseColor("#C6E369"), Color.parseColor("#DEEFA9"), Color.parseColor("#F6FBE9"), context.getResources().getColor(R.color.lightGreen)});
     }
 
 
@@ -36,5 +57,25 @@ public class ResourceUtils {
         }
         return resourcePoints;
     }
+
+    public ArrayList<Integer> getColorArray(String resource, int size) {
+        getColors();
+        return new ArrayList<>(Arrays.asList(colors.get(resource)).subList(0, size));
+    }
+
+    public Integer getInverseImage(String actionType) {
+        switch (actionType) {
+            case "transit":
+                return R.drawable.ic_transit_inverse;
+            case "water":
+                return R.drawable.ic_water_inverse;
+            case "recycle":
+                return R.drawable.ic_recycle_inverse;
+            case "reuse":
+                return R.drawable.ic_bag_inverse;
+        }
+        return -1;
+    }
+
 
 }

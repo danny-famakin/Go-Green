@@ -55,7 +55,7 @@ public class RecycleFragment extends ModalFragment {
         recycleConstants.put("paper", paperConstants);
         List<Double[]> constants = Arrays.asList(bottleConstants, canConstants, paperConstants);
         for (int i = 0; i < constants.size(); i++) {
-            pointValues[i] = new ResourceUtils().sumPoints(constants.get(i));
+            pointValues[i] = new ResourceUtils(context).sumPoints(constants.get(i));
         }
 
 

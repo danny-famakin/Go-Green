@@ -44,7 +44,7 @@ public class ReuseFragment extends ModalFragment {
         v = inflater.inflate(R.layout.activity_log_reuse, null);
         bags = (EditText) v.findViewById(R.id.etBags);
 
-        BAG_POINTS = new ResourceUtils().sumPoints(bagConstants);
+        BAG_POINTS = new ResourceUtils(context).sumPoints(bagConstants);
 
         openModal(v);
     }

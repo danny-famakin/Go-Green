@@ -27,6 +27,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     private List<ParseUser> mUsers;
     Context context;
     boolean displayRank;
+    ParseUser currentUser;
 
 
 
@@ -47,29 +48,45 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     public void onBindViewHolder(final UserAdapter.ViewHolder holder, int position) {
         final ParseUser user = mUsers.get(position);
         if (displayRank) {
+            holder.tvRank.setVisibility(View.VISIBLE);
             holder.tvRank.setText(String.valueOf(position + 1));
         }
+        else {
+            holder.tvRank.setVisibility(View.GONE);
+        }
+
         holder.tvName.setText(user.getString("name"));
         Log.d("userAdapter", user.getString("name"));
         double points = user.getDouble("totalPoints");
         holder.tvPoints.setText(String.format("%.1f", points));
-
+        currentUser = ParseUser.getCurrentUser();
+        final String uId  = currentUser.getString("fbId");
 
         holder.ivProfilePic.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
-                Intent i = new Intent (context, OtherUserActivity.class);
+                if (uId.equals(user.get("fbId"))){
+                    Intent p = new Intent (context, ProfileActivity.class);
+                    ActivityOptionsCompat options = ActivityOptionsCompat.
+                            makeSceneTransitionAnimation((Activity) context, holder.ivProfilePic,
+                                    ViewCompat.getTransitionName(holder.ivProfilePic));
+                    context.startActivity(p, options.toBundle());
+                }
+                else {
+                    Intent i = new Intent (context, OtherUserActivity.class);
                 ActivityOptionsCompat options = ActivityOptionsCompat.
                         makeSceneTransitionAnimation((Activity) context, holder.ivProfilePic,
                                 ViewCompat.getTransitionName(holder.ivProfilePic));
                 i.putExtra("screenName", String.valueOf(user.get("name")));
                 i.putExtra("profImage", user.getString("profileImgUrl"));
                 i.putExtra("Id", String.valueOf(user.get("fbId")));
+                i.putExtra("joinDate", user.getDate("joinDate"));
                 double pts = user.getDouble("totalPoints");
                 String points = String.format("%.1f", pts);
                 i.putExtra("points", points);
                 context.startActivity(i, options.toBundle());
+                }
             }
         });
 
