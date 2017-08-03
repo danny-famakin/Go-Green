@@ -8,7 +8,9 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/itemAction">
+        android:id="@+id/itemAction"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
 
     <ImageView
@@ -90,6 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/tvLikes"
             android:layout_marginLeft="56dp"
+            android:layout_marginRight="4dp"
             android:layout_toEndOf="@+id/ivFavorite"
             android:layout_toRightOf="@+id/ivFavorite"
             android:elevation="0dp"
@@ -97,13 +100,15 @@
             android:text="0"
             android:textAllCaps="false" />
 
-    <ImageButton
-        android:id="@+id/ivReply"
-        android:layout_width="22dp"
-        android:layout_height="22dp"
-        android:background="@android:color/transparent"
-        app:srcCompat="@drawable/ic_reply"
-        android:layout_below="@+id/ivProfilePicDet"/>
+        <ImageButton
+            android:id="@+id/ivReply"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_alignBottom="@+id/tvComments"
+            android:layout_toEndOf="@+id/tvComments"
+            android:background="@android:color/transparent"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/ic_reply" />
 
     <ImageView
         android:id="@+id/ivLeaf"
