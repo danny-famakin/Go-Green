@@ -22,13 +22,13 @@
         android:id="@+id/tvPointsCaption"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Earn 1 point for each item recycled!"
+        android:layout_alignLeft="@+id/tvTitle"
+        android:layout_alignStart="@+id/tvTitle"
 
 
         android:layout_below="@+id/tvTitle"
-        android:layout_alignLeft="@+id/tvTitle"
-        android:layout_alignStart="@+id/tvTitle" />
+        android:layout_marginTop="8dp"
+        android:text="Earn points for recycling common materials!" />
 
     <TextView
         android:id="@+id/tvItems"

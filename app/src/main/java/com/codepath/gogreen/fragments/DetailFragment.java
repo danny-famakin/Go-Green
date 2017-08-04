@@ -322,8 +322,9 @@ public class DetailFragment extends Fragment {
         xData = new ArrayList<>();
 
         for (int i = 0; i < resources.length; i++) {
-            if (action.getPointData().getDouble(resources[i]) > POINT_THRESHOLD) {
-                yData.add(action.getPointData().getDouble(resources[i]));
+            double points = action.getResourceData().getDouble(resources[i]) * new ResourceUtils(context).getWeights().get(resources[i]);
+            if (points > POINT_THRESHOLD) {
+                yData.add(points);
                 xData.add(resources[i]);
             }
         }

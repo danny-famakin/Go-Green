@@ -78,6 +78,7 @@ public class FeedFragment extends TabsFragment {
         friendIdList = loadFriends();
         ParseQuery<Action> query = ParseQuery.getQuery("Action");
         query.whereContainedIn("uid", friendIdList);
+        query.orderByAscending("_created_at");
         query.findInBackground(new FindCallback<Action>() {
             public void done(List<Action> actionList, ParseException e) {
                 if (e == null) {

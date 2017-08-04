@@ -24,22 +24,20 @@
         android:layout_marginTop="15dp"
         android:layout_below="@+id/toolbar"
         android:transitionName="profileTrans"
-        android:layout_marginLeft="7dp"
+        android:layout_marginLeft="16dp"
         />
     <RelativeLayout
         android:id="@+id/header"
-        android:layout_below="@+id/toolbar"
-        android:layout_toRightOf="@id/ivProfilePicDet"
         android:layout_marginLeft="5dp"
-        android:layout_alignTop="@id/ivProfilePicDet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        >
+        android:layout_alignTop="@+id/ivProfilePicDet"
+        android:layout_toEndOf="@+id/ivProfilePicDet">
     <TextView
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        android:layout_marginLeft="12dp"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="16dp"
         android:text="Name"
@@ -51,12 +49,11 @@
             android:id="@+id/tvJoin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignStart="@id/tvName"
             android:layout_below="@+id/tvName"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="8dp"
-            android:layout_alignStart="@id/tvName"
-            android:text="TextView"
-            android:textStyle="italic" />
+            android:text="TextView" />
     </RelativeLayout>
     <ToggleButton
         android:id="@+id/addFriends"
@@ -68,30 +65,38 @@
         android:textColor="@color/offWhite"
         android:textOff="Add"
         android:textOn="Friends"
-        android:layout_below="@+id/tvPoints"
+        android:layout_below="@+id/llPoints"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="11dp" />
 
-    <TextView
-        android:id="@+id/tvPointsCaption"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Total points:"
-        android:layout_marginTop="14dp"
-        android:layout_alignTop="@+id/tvPoints"
-        android:layout_toLeftOf="@+id/ivProfilePicDet"
-        android:layout_toStartOf="@+id/ivProfilePicDet" />
 
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/llPoints"
+    android:layout_centerHorizontal="true"
+    android:layout_below="@+id/ivProfilePicDet"
+    android:layout_marginTop="20dp"
+    >
     <TextView
         android:id="@+id/tvPoints"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
         android:text="0"
         android:textColor="@color/colorAccentDark"
         android:textSize="40sp"
-        android:layout_below="@+id/ivProfilePicDet"
-        android:layout_centerHorizontal="true" />
+        android:layout_gravity="center_vertical"/>
+
+    <ImageView
+        android:id="@+id/ivLeaf"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="4dp"
+        android:layout_above="@+id/addFriends"
+        android:layout_toEndOf="@+id/header"
+        app:srcCompat="@drawable/ic_leaf4"
+        android:layout_gravity="center_vertical"/>
+</LinearLayout>
 
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/barChart"

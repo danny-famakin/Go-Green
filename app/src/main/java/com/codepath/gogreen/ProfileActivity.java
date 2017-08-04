@@ -115,6 +115,7 @@ public class ProfileActivity extends AppCompatActivity {
         long days = diff / (24 * 60 * 60 * 1000);
 
         int daysCounter = (int) days;
+        Log.d("daysCounter", String.valueOf(daysCounter));
             labels.add("");
         for( int i = 1; i < daysCounter; i++){
             labels.add("Day " + i);
@@ -233,6 +234,7 @@ public class ProfileActivity extends AppCompatActivity {
         barChart.setDrawGridBackground(false);
         barChart.setDragEnabled(true);
         barChart.getDescription().setEnabled(false);
+        barChart.setScaleEnabled(true);
 
 
         //JSONObject resourceData = currentUser.getJSONObject("resourceData");
