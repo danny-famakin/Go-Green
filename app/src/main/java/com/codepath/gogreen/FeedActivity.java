@@ -269,17 +269,6 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
 
 
     @Override
-    public void onBackPressed() {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-//        ft.setCustomAnimations(android.R.anim.slide_in_left,
-//                android.R.anim.slide_out_right);
-//        flContainer.setVisibility(View.GONE);
-        ft.remove(searchFragment).commit();
-
-        Log.d("back", "pressed");
-    }
-
-    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long

@@ -44,4 +44,9 @@
         completions."
     </string>
 
+    <string name="emissions_units">pound</string>
+    <string name="water_units">liter</string>
+    <string name="trees_units">pound</string>
+    <string name="fuel_units">liter</string>
+
 </resources>

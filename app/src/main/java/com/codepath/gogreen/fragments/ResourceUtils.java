@@ -16,7 +16,7 @@ import java.util.HashMap;
 public class ResourceUtils {
     public static HashMap<String, Double> weights = new HashMap<>();
     public static HashMap<String, Integer[]> colors = new HashMap<>();
-    public String[] resources = new String[] {"emissions", "fuel", "water", "trees"};
+    public String[] resources = new String[] {"fuel", "emissions", "water", "trees"};
     private Context context;
 
 
@@ -75,6 +75,23 @@ public class ResourceUtils {
                 return R.drawable.ic_bag_inverse;
         }
         return -1;
+    }
+
+    // returns string containing plural form of unit only if magnitude != 1
+    public String checkUnits(double magnitude, String format, String units, boolean castToInt) {
+        if (magnitude == 1.) {
+            if (castToInt) {
+                return (int) magnitude + " " + units;
+            } else {
+                return String.format(format, magnitude) + " " + units;
+            }
+        } else {
+            if (castToInt) {
+                return (int) magnitude + " " + units + "s";
+            } else {
+                return String.format(format, magnitude) + " " + units + "s";
+            }
+        }
     }
 
 

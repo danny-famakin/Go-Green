@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context="com.codepath.gogreen.fragments.DetailFragment">
+    tools:context="com.codepath.gogreen.fragments.DetailFragment"
+    android:animateLayoutChanges="true"
+    >
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -45,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvAction"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="8dp"
             android:layout_marginLeft="4dp"
             android:layout_marginTop="8dp"
             android:layout_toEndOf="@+id/ivLeaf"
@@ -114,7 +116,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="@android:color/darker_gray"
-            android:layout_below="@+id/rlChart"
+            android:layout_below="@+id/llResourceStatement"
             android:layout_marginTop="6dp"
             android:layout_marginBottom="5dp"
             android:layout_marginLeft="8dp"
@@ -133,10 +135,9 @@
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/pieChart"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
+        android:layout_height="250dp"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="5dp"/>
+        android:layout_alignParentEnd="true" />
 
 
 
@@ -151,6 +152,28 @@
 
     </RelativeLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/llResourceStatement"
+        android:layout_below="@id/rlChart"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/ivResourceIcon"
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/ic_water_resource" />
+    <TextView
+        android:id="@+id/tvResourceStatement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text=""/>
+    </LinearLayout>
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -196,6 +219,7 @@
             android:scrollbars="vertical"
             />
     </RelativeLayout>
+
 
 
 
