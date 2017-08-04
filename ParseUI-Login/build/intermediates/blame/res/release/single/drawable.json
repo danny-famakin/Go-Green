@@ -544,6 +544,10 @@
         "source": "/Users/famakindaniel7/.android/build-cache/65b744043945fbfef49a086777704f4091c5d16c/output/res/drawable/com_facebook_button_login_background.xml"
     },
     {
+        "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/drawable/login_gradient.xml",
+        "source": "/Users/melissaperez/Go-Green/ParseUI-Login/src/main/res/drawable/login_gradient.xml"
+    },
+    {
         "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/drawable/com_facebook_auth_dialog_background.xml",
         "source": "/Users/famakindaniel7/.android/build-cache/65b744043945fbfef49a086777704f4091c5d16c/output/res/drawable/com_facebook_auth_dialog_background.xml"
     },
