@@ -2,8 +2,8 @@ package com.codepath.gogreen;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
@@ -62,16 +62,17 @@ public class ProfileActivity extends AppCompatActivity {
     int counter;
     Calendar cal;
     Calendar calendar;
-    double fuelValue;
-    double waterValue;
-    double treesValue;
     int i;
-    double emissionsValue;
+
+    double recyclePoints;
+    double reusePoints;
+    double waterPoints;
+    double transitPoints;
     JSONObject resourceData;
-    final List<BarEntry> yFuel = new ArrayList<BarEntry>();
-    final List<BarEntry> yWater = new ArrayList<BarEntry>();
-    final List<BarEntry> yTrees = new ArrayList<BarEntry>();
-    final List<BarEntry> yEmissions = new ArrayList<BarEntry>();
+    final List<BarEntry> entries = new ArrayList<BarEntry>();
+//    final List<BarEntry> yWater = new ArrayList<BarEntry>();
+//    final List<BarEntry> yTrees = new ArrayList<BarEntry>();
+//    final List<BarEntry> yEmissions = new ArrayList<BarEntry>();
     ArrayList labels;
 
 
@@ -114,7 +115,7 @@ public class ProfileActivity extends AppCompatActivity {
         long days = diff / (24 * 60 * 60 * 1000);
 
         int daysCounter = (int) days;
-
+            labels.add("");
         for( int i = 1; i < daysCounter; i++){
             labels.add("Day " + i);
         }
@@ -226,7 +227,6 @@ public class ProfileActivity extends AppCompatActivity {
 
     public void barChart(final int counter) throws JSONException {
 
-
         barChart.setDrawBarShadow(false);
         barChart.setDrawValueAboveBar(true);
         barChart.setPinchZoom(false);
@@ -240,8 +240,10 @@ public class ProfileActivity extends AppCompatActivity {
       //  Log.d("testingggg", String.valueOf(resourceData.get("water")));
 
         XAxis xl = barChart.getXAxis();
+      //  xl.setGranularityEnabled(false);
         xl.setGranularity(1f);
-        xl.setCenterAxisLabels(true);
+        xl.setCenterAxisLabels(false);
+        xl.setAxisMinimum(0f);
 
        // xl.setDrawLabels(true);
 
@@ -263,9 +265,11 @@ public class ProfileActivity extends AppCompatActivity {
         });
         leftAxis.setDrawGridLines(false);
         leftAxis.setSpaceTop(30f);
-        xl.setAxisMinimum((float) 0); // this replaces setStartAtZero(true
+       // xl.setAxisMinimum((float) 0); // this replaces setStartAtZero(true
         leftAxis.setAxisMinimum(0f);
         barChart.getAxisRight().setEnabled(false);
+   //     barChart.moveViewTo();
+
 
         //data
         float groupSpace = 0.12f;
@@ -279,15 +283,14 @@ public class ProfileActivity extends AppCompatActivity {
             // start of today
 
 
-            cal.add(Calendar.DAY_OF_MONTH, -counter + i);
+            cal.add(Calendar.DAY_OF_MONTH, -counter + i + 1);
             Date finalDate = cal.getTime();
-
-      //      Log.d("finalllllllllllll", String.valueOf(finalDate));
+            Log.d("finalllllllllllll", String.valueOf(finalDate));
 
             cal.add(Calendar.DAY_OF_MONTH, -1);
             Date initalDate = cal.getTime();
 
-      //      Log.d("initialllllll", String.valueOf(initalDate));
+            Log.d("initialllllll", String.valueOf(initalDate));
 
             ParseQuery<ParseObject> query = ParseQuery.getQuery("Action");
             query.whereEqualTo("uid", currentUser.getString("fbId"));
@@ -297,73 +300,82 @@ public class ProfileActivity extends AppCompatActivity {
             try {
                 actionList = query.find();
                 for (int j = 0; j < actionList.size(); j++) {
-                    resourceData = actionList.get(j).getJSONObject("resourceData");
-                    try {
-                        fuelValue += resourceData.getDouble("fuel");
-                        waterValue += resourceData.getDouble("water");
-                        treesValue += resourceData.getDouble("trees");
-                        emissionsValue += resourceData.getDouble("emissions");
-
-                        Log.d("fueellll", String.valueOf(fuelValue));
-                    } catch (JSONException e1) {
-                        e1.printStackTrace();
+                    switch (actionList.get(j).getString("actionType")) {
+                        case "recycle":
+                            recyclePoints += actionList.get(j).getDouble("points");
+                            break;
+                        case "reuse":
+                            reusePoints += actionList.get(j).getDouble("points");
+                            break;
+                        case "water":
+                            waterPoints += actionList.get(j).getDouble("points");
+                            break;
+                        case "transit":
+                            transitPoints += actionList.get(j).getDouble("points");
+                            break;
                     }
+
+
+
                 }
                 onLoadData(i);
+                cal.add(Calendar.DAY_OF_MONTH, counter + 1 - i);
+
             } catch (ParseException e) {
                 e.printStackTrace();
             }
 
-
-
-
-            cal.add(Calendar.DAY_OF_MONTH, counter + 1 - i);
-
         }
 
 
+            //     Log.d("fuuueell", String.valueOf(yFuel));
 
-   //     Log.d("fuuueell", String.valueOf(yFuel));
 
-
-        BarDataSet fuel, water, trees, emissions;
+        BarDataSet entry, water, trees, emissions;
 
         if (barChart.getData() != null && barChart.getData().getDataSetCount() > 0) {
-            fuel = (BarDataSet)barChart.getData().getDataSetByIndex(0);
-            water = (BarDataSet)barChart.getData().getDataSetByIndex(1);
-            trees = (BarDataSet)barChart.getData().getDataSetByIndex(2);
-            emissions = (BarDataSet)barChart.getData().getDataSetByIndex(3);
+            entry = (BarDataSet)barChart.getData().getDataSetByIndex(0);
+            // water = (BarDataSet)barChart.getData().getDataSetByIndex(1);
+            // trees = (BarDataSet)barChart.getData().getDataSetByIndex(2);
+            // emissions = (BarDataSet)barChart.getData().getDataSetByIndex(3);
 
-            fuel.setValues(yFuel);
-            water.setValues(yWater);
-            trees.setValues(yTrees);
-            emissions.setValues(yEmissions);
+            entry.setValues(entries);
+//            water.setValues(yWater);
+//            trees.setValues(yTrees);
+//            emissions.setValues(yEmissions);
             barChart.getData().notifyDataChanged();
             barChart.notifyDataSetChanged();
         } else {
-            // create 2 datasets with different types
-            fuel = new BarDataSet(yFuel, "Fuel");
-            fuel.setColor(Color.rgb(104, 241, 175));
-            water = new BarDataSet(yWater, "Water");
-            water.setColor(Color.rgb(164, 228, 251));
-            trees = new BarDataSet(yTrees, "Trees");
-            trees.setColor(Color.rgb(124, 250, 151));
-            emissions = new BarDataSet(yEmissions, "Emissions");
-            emissions.setColor(Color.rgb(200, 247, 180));
+//            // create 2 datasets with different types
+//            entry = new BarDataSet(yFuel, "Fuel");
+//            fuel.setColor(Color.rgb(104, 241, 175));
+////            water = new BarDataSet(yWater, "Water");
+////            water.setColor(Color.rgb(164, 228, 251));
+////            trees = new BarDataSet(yTrees, "Trees");
+////            trees.setColor(Color.rgb(124, 250, 151));
+////            emissions = new BarDataSet(yEmissions, "Emissions");
+////            emissions.setColor(Color.rgb(200, 247, 180));
+//
+//            ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
+//            dataSets.add(entry);
+////            dataSets.add(water);
+////            dataSets.add(trees);
+////            dataSets.add(emissions);
+//
+//
+//            BarData data = new BarData(dataSets);
+//            barChart.setData(data);
 
+            entry = new BarDataSet(entries, "");
+            entry.setColors(getColors());
+            entry.setStackLabels(new String[]{"Recycle", "Reuse", "Water", "Transit"});
             ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
-            dataSets.add(fuel);
-            dataSets.add(water);
-            dataSets.add(trees);
-            dataSets.add(emissions);
-
-
+            dataSets.add(entry);
             BarData data = new BarData(dataSets);
             barChart.setData(data);
         }
 
         barChart.getBarData().setBarWidth(barWidth);
-        barChart.groupBars(0, groupSpace, barSpace);
 
       //  barChart.fitScreen();
         barChart.invalidate();
@@ -393,15 +405,31 @@ public class ProfileActivity extends AppCompatActivity {
 //        }
 //    };
 
+
     public void onLoadData(int i) {
-        yFuel.add(new BarEntry(i, Float.valueOf(String.valueOf(fuelValue))));
-        yWater.add(new BarEntry(i, (float) waterValue));
-        yTrees.add(new BarEntry(i, (float) treesValue));
-        yEmissions.add(new BarEntry(i, (float)emissionsValue));
+        entries.add(new BarEntry(i, new float[] { (float) recyclePoints, (float) reusePoints, (float) waterPoints, (float)transitPoints }));
+      //  yWater.add(new BarEntry(i, (float) waterValue));
+      //  yTrees.add(new BarEntry(i, (float) treesValue));
+     //   yEmissions.add(new BarEntry(i, (float)emissionsValue));
        // Log.d("entryyy", String.valueOf(yFuel));
     }
 
 
+    public int[] getColors() {
+        int stacksize = 4;
+
+        // have as many colors as stack-values per entry
+        int[] colors = new int[stacksize];
+
+        colors[0] = ResourcesCompat.getColor(getResources(), R.color.lightGreen, null);
+        colors[1] = ResourcesCompat.getColor(getResources(), R.color.darkBlue, null);
+        colors[2] = ResourcesCompat.getColor(getResources(), R.color.colorAccentDark, null);
+        colors[3] = ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null);
+
+
+
+        return colors;
+    }
 }
 
 
