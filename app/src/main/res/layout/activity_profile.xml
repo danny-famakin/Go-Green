@@ -18,14 +18,46 @@
 
     <ImageView
         android:id="@+id/ivProfilePicDet"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         app:srcCompat="@android:drawable/btn_star"
         android:layout_marginTop="15dp"
-        android:layout_below="@+id/tvJoin"
+        android:layout_below="@+id/toolbar"
         android:transitionName="profileTrans"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginLeft="7dp"
+        />
+    <RelativeLayout
+        android:id="@+id/header"
+        android:layout_below="@+id/toolbar"
+        android:layout_toRightOf="@id/ivProfilePicDet"
+        android:layout_marginLeft="5dp"
+        android:layout_alignTop="@id/ivProfilePicDet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
 
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="Name"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="24sp" />
+
+
+        <TextView
+            android:id="@+id/tvJoin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvName"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:layout_alignStart="@id/tvName"
+            android:text="TextView"
+            android:textStyle="italic" />
+    </RelativeLayout>
     <ToggleButton
         android:id="@+id/addFriends"
         android:layout_width="wrap_content"
@@ -39,27 +71,6 @@
         android:layout_below="@+id/tvPoints"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="11dp" />
-
-    <TextView
-        android:id="@+id/tvName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
-        android:text="Name"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="24sp" />
-
-
-    <TextView
-        android:id="@+id/tvJoin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tvName"
-        android:layout_marginTop="8dp"
-        android:layout_centerHorizontal="true"
-        android:text="TextView" />
 
     <TextView
         android:id="@+id/tvPointsCaption"
@@ -91,6 +102,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/addFriends"
+        android:layout_marginTop="5dp"
         />
 
 
