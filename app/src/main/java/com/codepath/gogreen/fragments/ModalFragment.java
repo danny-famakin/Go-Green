@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
@@ -162,7 +161,6 @@ public class ModalFragment extends Fragment{
                     action.saveInBackground(new SaveCallback() {
                         @Override
                         public void done(ParseException e) {
-                            Toast.makeText(getActivity(), "Action logged", Toast.LENGTH_SHORT).show();
                             listener.updateFeed(action);
                         }
                     });
