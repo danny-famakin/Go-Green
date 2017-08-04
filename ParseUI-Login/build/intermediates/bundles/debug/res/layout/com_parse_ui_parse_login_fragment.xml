@@ -8,10 +8,7 @@
     android:gravity="center"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/background"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+
 
     <include
         layout="@layout/com_parse_ui_parse_login_app_logo"

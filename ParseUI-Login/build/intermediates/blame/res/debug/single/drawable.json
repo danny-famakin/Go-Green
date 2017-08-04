@@ -436,6 +436,10 @@
         "source": "/Users/anyazhang/.android/build-cache/ca3f5c94e2f1cfb62bd5980c160bcd1099922de7/output/res/drawable/com_facebook_send_button_icon.xml"
     },
     {
+        "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable/grassroots_banner.jpg",
+        "source": "/Users/famakindaniel7/Go-Green/ParseUI-Login/src/main/res/drawable/grassroots_banner.jpg"
+    },
+    {
         "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable/abc_ratingbar_material.xml",
         "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/drawable/abc_ratingbar_material.xml"
     },
