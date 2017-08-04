@@ -290,6 +290,7 @@ public class ProfileActivity extends AppCompatActivity {
       //      Log.d("initialllllll", String.valueOf(initalDate));
 
             ParseQuery<ParseObject> query = ParseQuery.getQuery("Action");
+            query.whereEqualTo("uid", currentUser.getString("fbId"));
             query.whereGreaterThanOrEqualTo("createdAt", initalDate);
             query.whereLessThan("createdAt", finalDate);
             List<ParseObject> actionList;
