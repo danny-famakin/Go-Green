@@ -54,7 +54,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
     private List<Action> mActions;
     Context context;
     String relativeTime;
-    String time;
+    String timeShort;
     ParseUser currentUser;
 
     public ActionAdapter(List<Action> actions) {
@@ -77,8 +77,8 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
             timeStamp = new Date();
         }
         relativeTime = TimeStampUtils.getRelativeTimeAgo(timeStamp);
-        time = TimeStampUtils.shortenTimeStamp(relativeTime, context);
-        holder.tvTimeStamp.setText(time);
+        timeShort = TimeStampUtils.shortenTimeStamp(relativeTime, context);
+        holder.tvTimeStamp.setText(timeShort);
         holder.tvPoints.setText(String.format("%.1f", action.getDouble("points")));
         currentUser = ParseUser.getCurrentUser();
         final String uId = currentUser.getString("fbId");
@@ -152,7 +152,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
                             bundle.putString("fbId", action.getUid());
                             bundle.putString("body", body);
                             bundle.putString("points",String.format("%.1f", action.getDouble("points")));
-                            bundle.putString("relativeTime", time);
+                            bundle.putString("timeStamp", holder.tvTimeStamp.getText().toString());
                             bundle.putString("objectID", action.getObjectId().toString());
 
 
@@ -329,7 +329,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
                 } else {
                     Log.e("transit", "subtype none of the above");
                 }
-                body = (SpannedString) TextUtils.concat(str, " ", new SpannableString(checkUnits(action.getMagnitude(), context.getResources().getString(R.string.distance_units), false)));
+                body = (SpannedString) TextUtils.concat(str, " ", new SpannableString(new ResourceUtils(context).checkUnits(action.getMagnitude(), "%.1f", context.getResources().getString(R.string.distance_units), false)));
                 break;
             case "water":
                 str = new SpannableString("took a " + String.format("%.1f", action.getMagnitude()) + " " + context.getResources().getString(R.string.shower_units) + " shower");
@@ -337,7 +337,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
                 body = new SpannedString(str);
                 break;
             case "reuse":
-                str = new SpannableString("reused " + checkUnits(action.getMagnitude(), "bag", true));
+                str = new SpannableString("reused " + new ResourceUtils(context).checkUnits(action.getMagnitude(), "%.1f", "bag", true));
                 str.setSpan(new ForegroundColorSpan(color), 0, 6, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 body = new SpannedString(str);
                 break;
@@ -348,7 +348,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
                     units = "sheet";
                     suffix = " of paper";
                 }
-                str = new SpannableString("recycled " + checkUnits(action.getMagnitude(), units, true) + suffix);
+                str = new SpannableString("recycled " + new ResourceUtils(context).checkUnits(action.getMagnitude(), "%.1f", units, true) + suffix);
                 str.setSpan(new ForegroundColorSpan(color), 0, 8, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 body = new SpannedString(str);
                 break;
@@ -358,22 +358,7 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
 
     }
 
-    // returns string containing plural form of unit only if magnitude != 1
-    public String checkUnits(double magnitude, String units, boolean castToInt) {
-        if (magnitude == 1.) {
-            if (castToInt) {
-                return (int) magnitude + " " + units;
-            } else {
-                return String.format("%.1f", magnitude) + " " + units;
-            }
-        } else {
-            if (castToInt) {
-                return (int) magnitude + " " + units + "s";
-            } else {
-                return String.format("%.1f", magnitude) + " " + units + "s";
-            }
-        }
-    }
+
 
     // appends "d" or "ed"
     public String checkPastTense(String word) {
