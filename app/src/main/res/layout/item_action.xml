@@ -15,11 +15,12 @@
 
     <ImageView
         android:id="@+id/ivProfilePicDet"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
+
         android:layout_marginTop="8dp"
         android:transitionName="profileTrans"
         app:srcCompat="@drawable/ic_placeholder" />

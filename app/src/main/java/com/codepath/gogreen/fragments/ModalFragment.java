@@ -98,10 +98,10 @@ public class ModalFragment extends Fragment{
         String errormsg;
         if (StringUtils.isBlank(text)) {
             errormsg = "field required!";
-        } else if (Integer.parseInt(text) < min){
+        } else if (Long.parseLong(text) < min){
             errormsg = "minimum = " + String.valueOf(min);
 
-        } else if (Integer.parseInt(text) > max) {
+        } else if (Long.parseLong(text) > max) {
             errormsg = "maximum = " + String.valueOf(max);
         } else {
             editText.setError(null);
@@ -174,11 +174,6 @@ public class ModalFragment extends Fragment{
                 currentUser.saveInBackground();
             }
         });
-
-
-
-
-
     }
 
 }
