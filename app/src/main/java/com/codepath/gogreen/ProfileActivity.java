@@ -294,22 +294,26 @@ public class ProfileActivity extends AppCompatActivity {
             // start of today
 
 
-            cal.add(Calendar.DAY_OF_MONTH, -counter + i + 1);
+            cal.add(Calendar.DAY_OF_MONTH, -counter + i );
+            Date initialDate = cal.getTime();
+            Log.d("hope", String.valueOf(initialDate));
+
+            cal.add(Calendar.DAY_OF_MONTH, 1);
             Date finalDate = cal.getTime();
-            Log.d("finalllllllllllll", String.valueOf(finalDate));
 
-            cal.add(Calendar.DAY_OF_MONTH, -1);
-            Date initalDate = cal.getTime();
-
-            Log.d("initialllllll", String.valueOf(initalDate));
+           Log.d("desperate", String.valueOf(finalDate));
 
             ParseQuery<ParseObject> query = ParseQuery.getQuery("Action");
             query.whereEqualTo("uid", currentUser.getString("fbId"));
-            query.whereGreaterThanOrEqualTo("createdAt", initalDate);
+            query.whereGreaterThanOrEqualTo("createdAt", initialDate);
             query.whereLessThan("createdAt", finalDate);
             List<ParseObject> actionList;
             try {
                 actionList = query.find();
+                recyclePoints = 0;
+                reusePoints = 0;
+                waterPoints = 0;
+                transitPoints = 0;
                 for (int j = 0; j < actionList.size(); j++) {
                     switch (actionList.get(j).getString("actionType")) {
                         case "recycle":
@@ -330,7 +334,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                 }
                 onLoadData(i);
-                cal.add(Calendar.DAY_OF_MONTH, counter + 1 - i);
+                cal.add(Calendar.DAY_OF_MONTH, counter - i - 1);
 
             } catch (ParseException e) {
                 e.printStackTrace();
