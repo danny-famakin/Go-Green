@@ -11,6 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/ParseLoginUI.EditText"
+        android:textColorHint="#fff"
+        android:backgroundTint="#1de9b6"
         android:hint="@string/com_parse_ui_username_input_hint" />
 
     <EditText
@@ -21,6 +23,8 @@
         android:layout_marginTop="@dimen/com_parse_ui_small_vertical_spacing"
         android:fontFamily="sans-serif"
         android:hint="@string/com_parse_ui_password_input_hint"
+        android:textColorHint="#fff"
+        android:backgroundTint="#1de9b6"
         android:inputType="textPassword"
         android:selectAllOnFocus="true" />
 
@@ -36,6 +40,7 @@
             android:id="@+id/parse_login_button"
             style="@style/ParseLoginUI.Button"
             android:layout_weight="0.5"
+            android:background="@drawable/btn_outline"
             android:text="@string/com_parse_ui_parse_login_button_label" />
 
         <Button
@@ -44,6 +49,7 @@
             android:layout_marginLeft="@dimen/com_parse_ui_small_horizontal_spacing"
             android:layout_marginBottom="3dp"
             android:layout_weight="0.5"
+            android:background="@drawable/btn_outline"
             android:text="@string/com_parse_ui_parse_signup_button_label" />
     </LinearLayout>
 
@@ -51,7 +57,7 @@
         android:id="@+id/parse_login_help"
         style="@style/ParseLoginUI.HelpButton"
         android:layout_marginTop="@dimen/com_parse_ui_small_vertical_spacing"
-        android:textColor="#00b686"
+        android:textColor="#fff"
         android:layout_marginBottom="@dimen/com_parse_ui_small_vertical_spacing"
         android:text="@string/com_parse_ui_forgot_password_button_label" />
 </LinearLayout>
