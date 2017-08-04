@@ -35,9 +35,9 @@ public class ResourceUtils {
 
     public void getColors() {
         colors.put("transit", new Integer[] {Color.parseColor("#679D4C"), Color.parseColor("#A8C799"), Color.parseColor("#C2D7B7"), Color.parseColor("#527D3C")});
-        colors.put("water", new Integer[] {Color.parseColor("#4CCBA9"), Color.parseColor("#7FDAC2"), Color.parseColor("#B2E9DA"), context.getResources().getColor(R.color.colorAccentDark)});
-        colors.put("reuse", new Integer[] {Color.parseColor("#6F9ACB"), Color.parseColor("#5A8BC5"), Color.parseColor("#99B7DA"), context.getResources().getColor(R.color.bluee)});
-        colors.put("recycle", new Integer[] {Color.parseColor("#9CC124"), Color.parseColor("#C6E369"), Color.parseColor("#ADD729"), context.getResources().getColor(R.color.colorPrimary)});
+        colors.put("water", new Integer[] {Color.parseColor("#B2E9DA"), Color.parseColor("#7FDAC2"), Color.parseColor("#4CCBA9"), context.getResources().getColor(R.color.colorAccentDark)});
+        colors.put("reuse", new Integer[] {Color.parseColor("#B2C9E3"), Color.parseColor("#7FA5D1"), Color.parseColor("#4C81BE"), context.getResources().getColor(R.color.darkBlue)});
+        colors.put("recycle", new Integer[] {Color.parseColor("#C6E369"), Color.parseColor("#ADD729"), Color.parseColor("#9CC124"), context.getResources().getColor(R.color.colorPrimary)});
     }
 
 
