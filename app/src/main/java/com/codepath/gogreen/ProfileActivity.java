@@ -124,7 +124,7 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
         try {
-            barChart(daysCounter);
+            barChart(daysCounter + 1);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -294,14 +294,14 @@ public class ProfileActivity extends AppCompatActivity {
             // start of today
 
 
-            cal.add(Calendar.DAY_OF_MONTH, -counter + i );
+            cal.add(Calendar.DAY_OF_MONTH, -counter + i + 1 );
             Date initialDate = cal.getTime();
-            Log.d("hope", String.valueOf(initialDate));
+            Log.d("hopee", String.valueOf(initialDate));
 
             cal.add(Calendar.DAY_OF_MONTH, 1);
             Date finalDate = cal.getTime();
 
-           Log.d("desperate", String.valueOf(finalDate));
+           Log.d("desperatee", String.valueOf(finalDate));
 
             ParseQuery<ParseObject> query = ParseQuery.getQuery("Action");
             query.whereEqualTo("uid", currentUser.getString("fbId"));
@@ -334,7 +334,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                 }
                 onLoadData(i);
-                cal.add(Calendar.DAY_OF_MONTH, counter - i - 1);
+                cal.add(Calendar.DAY_OF_MONTH, counter - i - 2);
 
             } catch (ParseException e) {
                 e.printStackTrace();
