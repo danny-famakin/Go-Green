@@ -22,8 +22,6 @@ public class Action extends ParseObject {
     public JSONObject resourceData;
     public JSONArray comments;
 
-    public JSONObject pointData;
-
 
     public String getSubType() {
         return this.getString("subType");
@@ -107,15 +105,6 @@ public class Action extends ParseObject {
     }
 
 
-    public JSONObject getPointData() {
-        return this.getJSONObject("pointData");
-    }
-
-    public void setPointData(JSONObject pointData) {
-        this.pointData = pointData;
-        this.put("pointData", pointData);
-    }
-
     public JSONObject toJSON() throws JSONException {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("actionType", getActionType());
@@ -126,7 +115,6 @@ public class Action extends ParseObject {
         jsonObject.put("favorited", getFavorited());
         jsonObject.put("resourceData", getResourceData());
         jsonObject.put("comments", getComments());
-        jsonObject.put("pointData", getPointData());
 
         return jsonObject;
 
@@ -147,9 +135,6 @@ public class Action extends ParseObject {
         action.setResourceData(jsonObject.getJSONObject("resourceData"));
         if (jsonObject.has("comments")) {
             action.setComments(jsonObject.getJSONArray("comments"));
-        }
-        if (jsonObject.has("pointData")) {
-            action.setPointData(jsonObject.getJSONObject("pointData"));
         }
         return action;
     }

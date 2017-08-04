@@ -25,7 +25,7 @@
         android:layout_alignStart="@+id/tvTitle"
         android:layout_below="@+id/tvTitle"
         android:layout_marginTop="8dp"
-        android:text="Earn points for using alternative transit!!" />
+        android:text="Earn points for using alternative transit!" />
 
     <FrameLayout
         android:layout_width="match_parent"

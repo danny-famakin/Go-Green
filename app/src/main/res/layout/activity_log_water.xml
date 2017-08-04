@@ -44,7 +44,7 @@
         android:layout_alignStart="@+id/tvTitle"
         android:layout_below="@+id/tvTitle"
         android:layout_marginTop="8dp"
-        android:text="The average American shower lasts 8.2 minutes. Earn 2 points per minute under that length!" />
+        android:text="The average American shower lasts 8.2 minutes. Earn points for every minute under that length!" />
 
     <TextView
         android:id="@+id/tvTimer"

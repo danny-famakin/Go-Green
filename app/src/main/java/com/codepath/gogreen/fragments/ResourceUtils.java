@@ -16,7 +16,7 @@ import java.util.HashMap;
 public class ResourceUtils {
     public static HashMap<String, Double> weights = new HashMap<>();
     public static HashMap<String, Integer[]> colors = new HashMap<>();
-    public String[] resources = new String[] {"fuel", "emissions", "water", "trees"};
+    public String[] resources = new String[] {"emissions", "fuel", "water", "trees"};
     private Context context;
 
 
@@ -25,11 +25,12 @@ public class ResourceUtils {
     }
 
 
-    public void getWeights() {
+    public HashMap<String, Double> getWeights() {
+        weights.put("emissions", 4.);
         weights.put("fuel", 20.);
-        weights.put("emissions", 5.);
         weights.put("water", 0.1);
         weights.put("trees", 1.);
+        return weights;
     }
 
     public void getColors() {

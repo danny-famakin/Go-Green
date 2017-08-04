@@ -127,7 +127,6 @@ public class ModalFragment extends Fragment{
                 JSONObject resourceJSON = currentUser.getJSONObject("resourceData");
 //                Double[] subTypeConstants = actionConstants.get(subType);
 
-                JSONObject actionPointData = new JSONObject();
                 double[] resourcePoints = new ResourceUtils(context).getResourcePoints(subTypeConstants);
 
 
@@ -137,7 +136,6 @@ public class ModalFragment extends Fragment{
                         try {
                             userResourceData.put(resource, resourceJSON.getDouble(resource) + (subTypeConstants[j] * newMagnitude));
                             actionResourceData.put(resource, (subTypeConstants[j] * newMagnitude));
-                            actionPointData.put(resource, resourcePoints[j] * newMagnitude);
                             Log.d("resourcedata", resource+" "+ String.valueOf((subTypeConstants[j] * newMagnitude)));
                         } catch (JSONException e1) {
                             e1.printStackTrace();
@@ -160,7 +158,6 @@ public class ModalFragment extends Fragment{
                     action.setResourceData(actionResourceData);
                     action.setComments(new JSONArray());
                     action.setFavorited(new JSONArray());
-                    action.setPointData(actionPointData);
 
                     action.saveInBackground(new SaveCallback() {
                         @Override
