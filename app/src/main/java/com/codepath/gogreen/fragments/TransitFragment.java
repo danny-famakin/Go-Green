@@ -145,6 +145,11 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
         v = inflater.inflate(R.layout.activity_log_transit, null);
         //v.inflate(R.layout.activity_log_transit, null);
 
+        //FrameLayout flmap = (FrameLayout) v.findViewById(R.id.flMap) ;
+        //FragmentManager fm = getFragmentManager();
+        //mapFragment = SupportMapFragment.newInstance();
+        //fm.beginTransaction().replace(R.id.map,mapFragment).commit();
+        //mapFragment.getMapAsync(this);
 
         Spinner spVehicle = (Spinner) v.findViewById(R.id.spVehicle);
         distance = (TextView) v.findViewById(R.id.tvDistCounter);
@@ -194,7 +199,7 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
             mGoogleApiClient.connect();
     }
 
-    @Override
+    /*@Override
     public void onDestroy() {
         super.onDestroy();
             //SupportMapFragment fragment = (SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.map);
@@ -205,7 +210,7 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
         mGoogleApiClient.stopAutoManage(getActivity());
         //mGoogleApiClient.disconnect();
         }
-    }
+    }*/
 
 
     @Override
@@ -248,6 +253,7 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
         // Build the map.
         SupportMapFragment mapFragment = (SupportMapFragment) getFragmentManager()
                 .findFragmentById(R.id.map);
+
         mapFragment.getMapAsync(this);
         createLocationRequest();
     }

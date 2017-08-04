@@ -117,17 +117,17 @@ public class ProfileActivity extends AppCompatActivity {
         int daysCounter = (int) days;
         Log.d("daysCounter", String.valueOf(daysCounter));
             labels.add("");
-        for( int i = 1; i < daysCounter; i++){
-            labels.add("Day " + i);
-        }
+//        for( int i = 1; i < daysCounter; i++){
+//            labels.add("Day " + i);
+//        }
 
         try {
             barChart(daysCounter + 1);
         } catch (JSONException e) {
             e.printStackTrace();
+        } catch (java.text.ParseException e) {
+            e.printStackTrace();
         }
-
-
 
 
         // ensure user logged in
@@ -226,7 +226,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
 
-    public void barChart(final int counter) throws JSONException {
+    public void barChart(final int counter) throws JSONException, java.text.ParseException {
 
         barChart.setDrawBarShadow(false);
         barChart.setDrawValueAboveBar(true);
@@ -251,7 +251,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
 
-        xl.setValueFormatter(new IndexAxisValueFormatter(labels));
+
 
         YAxis leftAxis = barChart.getAxisLeft();
         leftAxis.setValueFormatter(new DefaultAxisValueFormatter(0) {
@@ -287,6 +287,19 @@ public class ProfileActivity extends AppCompatActivity {
 
             cal.add(Calendar.DAY_OF_MONTH, -counter + i + 1 );
             Date initialDate = cal.getTime();
+
+            SimpleDateFormat month_date = new SimpleDateFormat("MMM");
+            String month_name = month_date.format(cal.getTime());
+
+            SimpleDateFormat day_date = new SimpleDateFormat("dd");
+            String day_number = day_date.format(cal.getTime());
+
+            String addLabel = month_name + " " + day_number;
+
+            labels.add(addLabel);
+
+            xl.setValueFormatter(new IndexAxisValueFormatter(labels));
+
             Log.d("hopee", String.valueOf(initialDate));
 
             cal.add(Calendar.DAY_OF_MONTH, 1);
