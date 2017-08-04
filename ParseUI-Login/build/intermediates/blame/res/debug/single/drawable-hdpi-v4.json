@@ -348,12 +348,12 @@
         "source": "/Users/famakindaniel7/.android/build-cache/08d8b3b42e3b02e764e2e5751aba8a1a82b1592f/output/res/drawable-hdpi-v4/abc_scrubber_control_off_mtrl_alpha.png"
     },
     {
-        "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_ic_star_half_black_16dp.png",
-        "source": "/Users/famakindaniel7/.android/build-cache/08d8b3b42e3b02e764e2e5751aba8a1a82b1592f/output/res/drawable-hdpi-v4/abc_ic_star_half_black_16dp.png"
-    },
-    {
         "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_ic_menu_paste_mtrl_am_alpha.png",
         "source": "/Users/famakindaniel7/.android/build-cache/08d8b3b42e3b02e764e2e5751aba8a1a82b1592f/output/res/drawable-hdpi-v4/abc_ic_menu_paste_mtrl_am_alpha.png"
+    },
+    {
+        "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-hdpi-v4/abc_ic_star_half_black_16dp.png",
+        "source": "/Users/famakindaniel7/.android/build-cache/08d8b3b42e3b02e764e2e5751aba8a1a82b1592f/output/res/drawable-hdpi-v4/abc_ic_star_half_black_16dp.png"
     },
     {
         "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable-hdpi-v4/com_facebook_tooltip_black_background.9.png",

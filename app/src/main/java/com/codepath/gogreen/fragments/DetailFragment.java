@@ -21,13 +21,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
 import com.codepath.gogreen.CommentAdapter;
 import com.codepath.gogreen.DividerItemDecoration;
+import com.codepath.gogreen.PointFormatter;
 import com.codepath.gogreen.R;
 import com.codepath.gogreen.models.Action;
 import com.codepath.gogreen.models.Comment;
@@ -79,10 +80,13 @@ public class DetailFragment extends Fragment {
     ParseUser user;
     ArrayList<Double> yData;
     ArrayList<String> xData;
+    TextView tvResourceStatement;
+    LinearLayout llResourceStatement;
+    ImageView ivResourceIcon;
     double POINT_THRESHOLD = 0.05;
     Context context;
 
-    String fuel, water, trees, emissions, numberOf, body;
+    String body;
 
     Action action;
 
@@ -106,7 +110,7 @@ public class DetailFragment extends Fragment {
         user = ParseUser.getCurrentUser();
 
         actionId = getArguments().getString("objectID");
-        String relativeTime = getArguments().getString("relativeTime");
+        String timeShort = getArguments().getString("timeStamp");
         body = getArguments().getString("body");
         String points = getArguments().getString("points");
 
@@ -128,11 +132,14 @@ public class DetailFragment extends Fragment {
         ivFavorite = (ImageButton) v.findViewById(R.id.ivFavorite);
         ivReply = (ImageButton) v.findViewById(R.id.ivReply);
         ivIcon = (ImageView) v.findViewById(R.id.ivIcon);
+        ivResourceIcon = (ImageView) v.findViewById(R.id.ivResourceIcon);
+        llResourceStatement = (LinearLayout) v.findViewById(R.id.llResourceStatement);
         etWriteComment = (EditText) v.findViewById(R.id.etWriteComment);
         btComment = (Button) v.findViewById(R.id.btComment);
         rvComments = (RecyclerView) v.findViewById(R.id.rvComments);
+        tvResourceStatement = (TextView) v.findViewById(R.id.tvResourceStatement);
         tvPoints.setText(points);
-        tvTimeStamp.setText(relativeTime);
+        tvTimeStamp.setText(timeShort);
 
         String imgUrl = getArguments().getString("authorImg");
         Glide.with(context)
@@ -202,6 +209,7 @@ public class DetailFragment extends Fragment {
                     Log.d("timestamp created", date.toString());
 
                     addComment(comment);
+                    rvComments.scrollToPosition(comments.size()-1);
 
 
 
@@ -227,7 +235,6 @@ public class DetailFragment extends Fragment {
         });
         pieChart = (PieChart) v.findViewById(R.id.pieChart);
 
-//        pieChart.setCenterText(points);
         try {
             drawPieChart(pieChart);
         } catch (JSONException e) {
@@ -316,24 +323,20 @@ public class DetailFragment extends Fragment {
 
         for (int i = 0; i < resources.length; i++) {
             if (action.getPointData().getDouble(resources[i]) > POINT_THRESHOLD) {
-                yData.add(action.getMagnitude() * action.getPointData().getDouble(resources[i]));
+                yData.add(action.getPointData().getDouble(resources[i]));
                 xData.add(resources[i]);
             }
         }
 
-        ArrayList<PieEntry> yEntry = new ArrayList<>();
-        ArrayList<String> xEntry = new ArrayList<>();
+        ArrayList<PieEntry> entries = new ArrayList<>();
 
         for (int i = 0; i < yData.size(); i++) {
-            double aYData = yData.get(i);
-            PieEntry pEntry = new PieEntry((float) aYData, xData.get(i));
-            yEntry.add(pEntry);
+            PieEntry pEntry = new PieEntry((float) (double) yData.get(i), xData.get(i));
+            entries.add(pEntry);
         }
-        for (String aXData : xData) {
-            xEntry.add(aXData);
-        }
-        PieDataSet dataSet = new PieDataSet(yEntry, "Environmental Impact");
-        dataSet.setSliceSpace(3);
+
+        PieDataSet dataSet = new PieDataSet(entries, "Environmental Impact");
+        dataSet.setSliceSpace(2);
         dataSet.setValueTextSize(12);
         dataSet.setValueTextColor(Color.WHITE);
         dataSet.setSelectionShift(7);
@@ -342,57 +345,59 @@ public class DetailFragment extends Fragment {
 
         dataSet.setColors(colors);
 
+
+        PieData data = new PieData(dataSet);
+        data.setDrawValues(true);
+        data.setValueFormatter(new PointFormatter());
+        pChart.setData(data);
+        pChart.invalidate();
+        pChart.getLegend().setEnabled(false);
+        pChart.getDescription().setEnabled(false);
+        pChart.setHoleRadius(45);
+        pChart.setTransparentCircleColor(Color.WHITE);
+        pChart.setTransparentCircleAlpha(100);
+
+        pChart.setRotationEnabled(true);
         pChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry e, Highlight h) {
                 Log.d(TAG, "onValueSelected: " + e.toString());
                 Log.d(TAG, "onValueSelected: " + h.toString());
 
-                int pos = e.toString().indexOf("E");
-                String envValues = e.toString().substring(pos + 16);
-
-                String str = h.toString().substring(14,15);
-                Log.d("onValueSelected", str);
-                int vos = Integer.parseInt(str);
-
-
-                String env = xData.get(vos);
-                Log.d("MessagesF", String.valueOf(vos));
-
-                if (env.equals("Emissions")) {
-                    Toast.makeText(getContext(), env + " reduced by: " + envValues + "lbs", Toast.LENGTH_SHORT).show();
-                } else if (env.equals("Water")){
-                    Toast.makeText(getContext(), env + " saved: " + envValues + "L" , Toast.LENGTH_SHORT).show();
+                String resourceClicked = xData.get((int) h.getX());
+                Log.d(TAG, "onValueSelected: " + resourceClicked);
+                String resourceStatement = "";
+                int iconId = getResources().getIdentifier("ic_" + resourceClicked+"_resource", "drawable", "com.codepath.gogreen");
+                try {
+                    int unitId = getResources().getIdentifier(resourceClicked+"_units", "string", "com.codepath.gogreen");
+                    String verb = " saved: ";
+                    if (resourceClicked.equals("emissions")) {
+                        verb = " reduced: ";
+                    }
+                    resourceStatement = resourceClicked + verb +
+                            new ResourceUtils(context).checkUnits(action.getResourceData().getDouble(resourceClicked), "%.2f", getString(unitId), false);
+                } catch (JSONException e1) {
+                    e1.printStackTrace();
                 }
-                else if (env.equals("Fuel")){
-                    Toast.makeText(getContext(), env + " saved: " + envValues + "L", Toast.LENGTH_SHORT).show();
-                }
-                else if (env.equals("Trees")){
-                    Toast.makeText(getContext(), env + " saved: " + envValues + " " + env, Toast.LENGTH_SHORT).show();
+                ivResourceIcon.setImageResource(iconId);
+                tvResourceStatement.setText(resourceStatement);
+                llResourceStatement.setVisibility(View.VISIBLE);
+                if (comments.size() > 2) {
+                    int height= (int) context.getResources().getDimension(R.dimen.view_height_statement); //get height
+                    ViewGroup.LayoutParams params_new=rvComments.getLayoutParams();
+                    params_new.height= height;
+                    rvComments.setLayoutParams(params_new);
                 }
             }
 
             @Override
             public void onNothingSelected() {
-
+                llResourceStatement.setVisibility(View.GONE);
+                updateHeight();
             }
         });
 
-        PieData data = new PieData(dataSet);
-        data.setDrawValues(true);
-        pChart.setData(data);
-        pChart.invalidate();
-        pChart.getLegend().setEnabled(false);
-        pChart.getDescription().setEnabled(false);
-        pChart.setHoleRadius(50);
-//        pChart.setTransparentCircleAlpha(1);
-        pChart.setTransparentCircleColor(Color.WHITE);
-        pChart.setTransparentCircleAlpha(100);
-
-        pChart.setRotationEnabled(true);
     }
-
-
 
 
 

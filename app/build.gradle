@@ -70,8 +70,8 @@ dependencies {
     compile 'jp.wasabeef:glide-transformations:2.0.2'
     annotationProcessor 'org.parceler:parceler:1.1.6'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
-    compile 'com.github.blackfizz:eazegraph:1.2.2@aar'
-    compile 'com.nineoldandroids:library:2.4.0'
+    compile 'jp.wasabeef:blurry:2.1.1'
+
 
 
 //    compile project(':ParseUI-Widget')

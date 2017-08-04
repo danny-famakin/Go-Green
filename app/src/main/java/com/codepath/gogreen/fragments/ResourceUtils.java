@@ -16,7 +16,7 @@ import java.util.HashMap;
 public class ResourceUtils {
     public static HashMap<String, Double> weights = new HashMap<>();
     public static HashMap<String, Integer[]> colors = new HashMap<>();
-    public String[] resources = new String[] {"emissions", "fuel", "water", "trees"};
+    public String[] resources = new String[] {"fuel", "emissions", "water", "trees"};
     private Context context;
 
 
@@ -33,10 +33,10 @@ public class ResourceUtils {
     }
 
     public void getColors() {
-        colors.put("transit", new Integer[] {Color.parseColor("#679D4C"), Color.parseColor("#A8C799"), Color.parseColor("#E9F1E5"), context.getResources().getColor(R.color.colorPrimaryDark)});
+        colors.put("transit", new Integer[] {Color.parseColor("#679D4C"), Color.parseColor("#A8C799"), Color.parseColor("#C2D7B7"), Color.parseColor("#527D3C")});
         colors.put("water", new Integer[] {Color.parseColor("#4CCBA9"), Color.parseColor("#7FDAC2"), Color.parseColor("#B2E9DA"), context.getResources().getColor(R.color.colorAccentDark)});
-        colors.put("reuse", new Integer[] {Color.parseColor("#4C81BE"), Color.parseColor("#99B7DA"), Color.parseColor("#E5EDF5"), context.getResources().getColor(R.color.darkBlue)});
-        colors.put("recycle", new Integer[] {context.getResources().getColor(R.color.lightGreen), Color.parseColor("#C6E369"), Color.parseColor("#DEEFA9"), context.getResources().getColor(R.color.colorPrimary)});
+        colors.put("reuse", new Integer[] {Color.parseColor("#6F9ACB"), Color.parseColor("#5A8BC5"), Color.parseColor("#99B7DA"), context.getResources().getColor(R.color.bluee)});
+        colors.put("recycle", new Integer[] {Color.parseColor("#9CC124"), Color.parseColor("#C6E369"), Color.parseColor("#ADD729"), context.getResources().getColor(R.color.colorPrimary)});
     }
 
 
@@ -75,6 +75,23 @@ public class ResourceUtils {
                 return R.drawable.ic_bag_inverse;
         }
         return -1;
+    }
+
+    // returns string containing plural form of unit only if magnitude != 1
+    public String checkUnits(double magnitude, String format, String units, boolean castToInt) {
+        if (magnitude == 1.) {
+            if (castToInt) {
+                return (int) magnitude + " " + units;
+            } else {
+                return String.format(format, magnitude) + " " + units;
+            }
+        } else {
+            if (castToInt) {
+                return (int) magnitude + " " + units + "s";
+            } else {
+                return String.format(format, magnitude) + " " + units + "s";
+            }
+        }
     }
 
 
