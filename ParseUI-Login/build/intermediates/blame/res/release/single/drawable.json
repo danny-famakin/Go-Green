@@ -1,5 +1,9 @@
 [
     {
+        "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/drawable/grassroots_banner.jpg",
+        "source": "/Users/melissaperez/Go-Green/ParseUI-Login/src/main/res/drawable/grassroots_banner.jpg"
+    },
+    {
         "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/drawable/abc_list_selector_holo_light.xml",
         "source": "/Users/melissaperez/.android/build-cache/ade19dd7df75653b515f79bf8e0026b7d43ea680/output/res/drawable/abc_list_selector_holo_light.xml"
     },
@@ -28,12 +32,12 @@
         "source": "/Users/melissaperez/Go-Green/ParseUI-Login/src/main/res/drawable/com_parse_ui_parse_login_button_background_selector.xml"
     },
     {
-        "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/drawable/com_facebook_button_send_background.xml",
-        "source": "/Users/famakindaniel7/.android/build-cache/65b744043945fbfef49a086777704f4091c5d16c/output/res/drawable/com_facebook_button_send_background.xml"
-    },
-    {
         "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/drawable/com_facebook_button_background.xml",
         "source": "/Users/anyazhang/.android/build-cache/ca3f5c94e2f1cfb62bd5980c160bcd1099922de7/output/res/drawable/com_facebook_button_background.xml"
+    },
+    {
+        "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/drawable/com_facebook_button_send_background.xml",
+        "source": "/Users/famakindaniel7/.android/build-cache/65b744043945fbfef49a086777704f4091c5d16c/output/res/drawable/com_facebook_button_send_background.xml"
     },
     {
         "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/drawable/messenger_button_blue_bg_selector.xml",
@@ -322,6 +326,10 @@
     {
         "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/drawable/com_facebook_button_icon.xml",
         "source": "/Users/anyazhang/.android/build-cache/ca3f5c94e2f1cfb62bd5980c160bcd1099922de7/output/res/drawable/com_facebook_button_icon.xml"
+    },
+    {
+        "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/drawable/btn_outline.xml",
+        "source": "/Users/melissaperez/Go-Green/ParseUI-Login/src/main/res/drawable/btn_outline.xml"
     },
     {
         "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/release/drawable/notification_icon_background.xml",
