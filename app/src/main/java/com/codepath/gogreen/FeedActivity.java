@@ -52,6 +52,7 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
     SubActionButton button3;
     SubActionButton button4;
     SearchFragment searchFragment;
+    int formerQueryLength;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -239,6 +240,7 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
         });
 
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        formerQueryLength = 0;
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -247,17 +249,20 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
             }
             @Override
             public boolean onQueryTextChange(String newText) {
-                if (!newText.isEmpty()) {
-                    searchFragment = SearchFragment.newInstance(newText);
-                    final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                    // make change
-                    flContainer.setVisibility(View.VISIBLE);
-                    ft.replace(R.id.flContainer, searchFragment, "TAG_FRAGMENT");
-                    // commit
-                    ft.commit();
-
-
-
+                if (!(newText.isEmpty() && formerQueryLength == 0)) {
+                    if (searchFragment == null || newText.length() == 1 || formerQueryLength > newText.length() || newText.equals("")) {
+                        searchFragment = SearchFragment.newInstance(newText);
+                        final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                        // make change
+                        flContainer.setVisibility(View.VISIBLE);
+                        ft.replace(R.id.flContainer, searchFragment, "TAG_FRAGMENT");
+                        // commit
+                        ft.commit();
+                    }
+                    else {
+                        searchFragment.updateSearch(newText);
+                    }
+                    formerQueryLength = newText.length();
 
                 }
                 return false;
