@@ -48,10 +48,12 @@
     <string name="water_units">liter</string>
     <string name="trees_units">pound</string>
     <string name="fuel_units">liter</string>
-    <string name="about">
-        We hear statistics about the environment all the time, but they almost always focus on a the impact of a large percentage of Americans or a
-        long period of time. Grassroots aims to both enable and encourage you to measure your personal contribution to the environment through everyday actions.
-        \nOur resource calculations are based on statistics compiled from a myriad of sources. To learn more, visit the links below!
+    <string name="about1">
+        We hear statistics about the environment all the time, but they almost always focus on the impact of a huge population or a
+        long period of time. Grassroots encourages individuals to measure their personal contribution to the environment through everyday actions.
+    </string>
+    <string name="about2">
+    Our resource calculations are based on statistics compiled from a variety of websites and studies. To learn more, check out our sources below!
     </string>
 
     <string name="Bags0"><a href="http://www.google.com">google</a></string>

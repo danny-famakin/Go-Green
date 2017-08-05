@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
         android:layout_marginLeft="12dp"
         android:layout_marginStart="12dp"
         android:layout_marginTop="16dp"
@@ -15,46 +14,71 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
     <TextView
-        android:id="@+id/tvPointsCaption"
+        android:id="@+id/tvQuestion1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/tvTitle"
         android:layout_alignStart="@+id/tvTitle"
-        android:layout_marginRight="16dp"
-        android:layout_marginEnd="16dp"
         android:layout_below="@+id/tvTitle"
-        android:layout_marginTop="8dp"
-        android:text="@string/about" />
+        android:text="Why use Grassroots?"
+        android:layout_marginTop="12dp"
+        android:textColor="@color/colorPrimary" />
 
-    <!--<ScrollView-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:layout_alignStart="@+id/tvPointsCaption"-->
-        <!--android:layout_below="@+id/tvPointsCaption">-->
+    <TextView
+        android:id="@+id/tvAbout1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="@string/about1"
+        android:layout_below="@+id/tvQuestion1"
+        android:layout_alignStart="@+id/tvQuestion1" />
 
-        <!--<LinearLayout-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:orientation="vertical">-->
+    <TextView
+        android:id="@+id/tvQuestion2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tvAbout2"
+        android:layout_below="@+id/tvAbout1"
+        android:layout_marginTop="12dp"
+        android:text="Where are all these numbers from?"
+        android:textColor="@color/colorPrimary" />
 
-            <!--<TextView-->
-                <!--android:id="@+id/tvSect1"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:text="Reusable Bags"-->
-                <!--android:textAppearance="@style/TextAppearance.AppCompat.Medium"-->
-                <!--android:textColor="@color/colorPrimary" />-->
-        <!--</>-->
-    <!--</ScrollView>-->
+    <TextView
+        android:id="@+id/tvAbout2"
+        android:layout_marginTop="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/tvTitle"
+        android:layout_below="@+id/tvQuestion2"
+        android:layout_marginRight="16dp"
+        android:text="@string/about2" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"
+        android:layout_below="@+id/tvAbout2"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:id="@+id/line"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvSources"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_alignStart="@+id/tvPointsCaption"
-        android:layout_below="@+id/tvPointsCaption"
+        android:layout_alignStart="@+id/tvAbout2"
+        android:layout_below="@+id/line"
         android:divider="@color/androidTextColor"
-        android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
-        android:layout_alignEnd="@+id/tvPointsCaption" />
+        android:layout_alignEnd="@+id/tvAbout2" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignTop="@+id/tvTitle"
+        android:layout_toEndOf="@+id/tvTitle"
+        android:layout_marginLeft="4dp"
+        app:srcCompat="@drawable/ic_leaf4" />
+
 </RelativeLayout>

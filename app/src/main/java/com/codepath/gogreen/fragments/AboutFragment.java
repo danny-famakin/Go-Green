@@ -6,8 +6,12 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.codepath.gogreen.R;
@@ -35,6 +39,10 @@ public class AboutFragment extends Fragment {
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         v = inflater.inflate(R.layout.fragment_about, null);
+
+        SpannableString title = new SpannableString("About Grassroots");
+        title.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.colorPrimary)), 6, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        ((TextView) v.findViewById(R.id.tvTitle)).setText(title);
 
         sourceList = (RecyclerView) v.findViewById(R.id.rvSources);
         // Create and populate a List of planet names.
