@@ -3,6 +3,7 @@ package com.codepath.gogreen;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
@@ -16,6 +17,7 @@ import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.bumptech.glide.Glide;
+import com.codepath.gogreen.fragments.AboutFragment;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
@@ -180,6 +182,13 @@ public class ProfileActivity extends AppCompatActivity {
                         context.startActivity(i);
                         return  true;
                     case R.id.info:
+                        FragmentTransaction ft = ((AppCompatActivity) context).getSupportFragmentManager()
+                                .beginTransaction();
+                        // make change
+                        ft.replace(R.id.flContainer, new AboutFragment(), "TAG_FRAGMENT");
+                        // commit
+                        ft.commit();
+
 
                 }
                 return false;
@@ -395,9 +404,10 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
         barChart.getBarData().setBarWidth(barWidth);
+        barChart.animateY(1500);
 
       //  barChart.fitScreen();
-        barChart.invalidate();
+       // barChart.invalidate();
 
     }
 

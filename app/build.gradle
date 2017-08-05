@@ -15,6 +15,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            lintOptions {
+                disable 'MissingTranslation'
+            }
+
         }
     }
 }
@@ -41,7 +45,6 @@ dependencies {
     compile project(':ParseUI-Login')
 
 //    compile project(':ParseUI-Widget')
-
 
     compile 'com.github.bumptech.glide:glide:3.8.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
@@ -71,7 +74,7 @@ dependencies {
     annotationProcessor 'org.parceler:parceler:1.1.6'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
     compile 'jp.wasabeef:blurry:2.1.1'
-
+    compile group: 'commons-io', name: 'commons-io', version: '2.5'
 
 
 //    compile project(':ParseUI-Widget')
