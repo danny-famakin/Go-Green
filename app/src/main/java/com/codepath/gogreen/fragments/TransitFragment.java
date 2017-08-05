@@ -96,6 +96,7 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
     private TextView distance;
     private double dist;
     Polyline polyline;
+    int counter;
 
 
     public static TransitFragment newInstance() {
@@ -125,6 +126,7 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        counter++;
         Double[] busConstants = {0.2976, .0077, 0., 0.};
         Double[] subwayConstants = {.7408, .0454, 0., 0.};
         Double[] trainConstants = {0.7408, .0454, 0., 0.};
@@ -183,29 +185,36 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
         // Use the addApi() method to request the Google Places API and the Fused Location Provider.
         //createLocationRequest();
 
-            mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
-                    .enableAutoManage(getActivity() /*FragmentActivity */,
-                            this /* OnConnectionFailedListener */)
-                    .addConnectionCallbacks(this)
-                    .addApi(LocationServices.API)
-                    .addApi(Places.GEO_DATA_API)
-                    .addApi(Places.PLACE_DETECTION_API)
-                    .build();
-            mGoogleApiClient.connect();
+        if(mGoogleApiClient == null || !mGoogleApiClient.isConnected()){
+            try {
+                mGoogleApiClient = new GoogleApiClient.Builder(getActivity())
+                        .enableAutoManage(getActivity() /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                        .addConnectionCallbacks(this)
+                        .addApi(LocationServices.API)
+                        .addApi(Places.GEO_DATA_API)
+                        .addApi(Places.PLACE_DETECTION_API)
+                        .build();
+                mGoogleApiClient.connect();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
     @Override
-    public void onDestroy() {
-        super.onDestroy();
-            //SupportMapFragment fragment = (SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.map);
-        SupportMapFragment fragment = (SupportMapFragment)getFragmentManager().findFragmentById(R.id.map);
-            if (fragment != null && fragment.isResumed())
-                getFragmentManager().beginTransaction().remove(fragment).commit();
-        if (mGoogleApiClient != null){
-        mGoogleApiClient.stopAutoManage(getActivity());
-        //mGoogleApiClient.disconnect();
+    public void onDestroyView() {
+        super.onDestroyView();
+        //SupportMapFragment fragment = (SupportMapFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.map);
+        SupportMapFragment fragment = (SupportMapFragment) getFragmentManager().findFragmentById(R.id.map);
+        if (fragment != null && fragment.isResumed())
+            getFragmentManager().beginTransaction().remove(fragment).commit();
+        if (mGoogleApiClient != null) {
+            mGoogleApiClient.stopAutoManage(getActivity());
+            mGoogleApiClient.disconnect();
         }
     }
+
 
 
     @Override
@@ -227,7 +236,7 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
             newDistance = Double.parseDouble(distance.getText().toString());
             updateData();
             modal.dismiss();
-            //onDestroy();
+            onDestroyView();
 
         }
         else {

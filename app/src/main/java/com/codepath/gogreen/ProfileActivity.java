@@ -395,9 +395,10 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
         barChart.getBarData().setBarWidth(barWidth);
+        barChart.animateY(1500);
 
       //  barChart.fitScreen();
-        barChart.invalidate();
+       // barChart.invalidate();
 
     }
 
