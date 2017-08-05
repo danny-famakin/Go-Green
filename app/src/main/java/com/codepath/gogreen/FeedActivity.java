@@ -249,7 +249,7 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
             }
             @Override
             public boolean onQueryTextChange(String newText) {
-                if (!(newText.isEmpty() && formerQueryLength == 0)) {
+                if ((!newText.isEmpty() || formerQueryLength != 0) && isSearchViewFocused(searchView)) {
                     if (searchFragment == null || newText.length() == 1 || formerQueryLength > newText.length() || newText.equals("")) {
                         searchFragment = SearchFragment.newInstance(newText);
                         final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -270,6 +270,11 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
         });
         return true;
 
+    }
+    //https://stackoverflow.com/questions/24082745/searchview-isfocused-always-returns-false
+    private boolean isSearchViewFocused(SearchView sview) {
+        View et_search =  sview.findViewById(R.id.search_src_text);
+        return et_search.isFocused();
     }
 
 
