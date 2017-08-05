@@ -109,7 +109,7 @@ public class ParseLoginFragment extends ParseLoginFragmentBase {
         View v = inflater.inflate(R.layout.com_parse_ui_parse_login_fragment,
                 parent, false);
 
-        Bitmap result = blur(getContext(), BitmapFactory.decodeResource(getResources(),R.drawable.grassroots_banner));
+        Bitmap result = blur(getContext(), BitmapFactory.decodeResource(getResources(),R.drawable.grassroots));
         Drawable drawable = new BitmapDrawable(result);
         v.setBackground(drawable);
 
