@@ -55,5 +55,6 @@
         android:layout_below="@+id/tvPointsCaption"
         android:divider="@color/androidTextColor"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="16dp"
+        android:layout_alignEnd="@+id/tvPointsCaption" />
 </RelativeLayout>

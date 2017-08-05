@@ -608,6 +608,10 @@
         "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/drawable/abc_btn_colored_material.xml"
     },
     {
+        "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable/grassroots_banner.jpg",
+        "source": "/Users/melissaperez/Go-Green/ParseUI-Login/src/main/res/drawable/grassroots_banner.jpg"
+    },
+    {
         "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable/abc_item_background_holo_dark.xml",
         "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/drawable/abc_item_background_holo_dark.xml"
     },
@@ -626,6 +630,10 @@
     {
         "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable/com_parse_ui_parse_login_button_background_selector.xml",
         "source": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/src/main/res/drawable/com_parse_ui_parse_login_button_background_selector.xml"
+    },
+    {
+        "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable/btn_outline.xml",
+        "source": "/Users/melissaperez/Go-Green/ParseUI-Login/src/main/res/drawable/btn_outline.xml"
     },
     {
         "merged": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/res/merged/debug/drawable/com_facebook_button_login_logo.xml",
