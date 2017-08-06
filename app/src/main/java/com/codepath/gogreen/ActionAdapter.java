@@ -245,7 +245,8 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
             rlAction = (RelativeLayout) itemView.findViewById(R.id.rlAction);
             line = (View) itemView.findViewById(R.id.line);
 
-
+            //Typeface myTypeFace = Typeface.createFromAsset(context.getAssets(), "fonts/JosefinSansSemiBold.ttf");
+            //tvAction.setTypeface(myTypeFace);
             ivFavorite.setOnClickListener(new View.OnClickListener(){
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override

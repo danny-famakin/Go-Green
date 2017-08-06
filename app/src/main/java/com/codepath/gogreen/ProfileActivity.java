@@ -55,7 +55,8 @@ public class ProfileActivity extends AppCompatActivity {
     ImageView ivProfilePic;
     Context context;
     ParseUser currentUser;
-    TextView tvName;
+    TextView tvName, resTrees, resEmissions, resWater, resFuel;
+    View line;
     String imageURL;
     ToggleButton addFriend;
     TextView tvJoinDate, tvPoints;
@@ -72,9 +73,6 @@ public class ProfileActivity extends AppCompatActivity {
     double transitPoints;
     JSONObject resourceData;
     final List<BarEntry> entries = new ArrayList<BarEntry>();
-//    final List<BarEntry> yWater = new ArrayList<BarEntry>();
-//    final List<BarEntry> yTrees = new ArrayList<BarEntry>();
-//    final List<BarEntry> yEmissions = new ArrayList<BarEntry>();
     ArrayList labels;
 
 
@@ -92,11 +90,32 @@ public class ProfileActivity extends AppCompatActivity {
         tvPoints = (TextView) findViewById(R.id.tvPoints);
         tvJoinDate = (TextView) findViewById(R.id.tvJoin);
         addFriend = (ToggleButton) findViewById(R.id.addFriends);
+        resTrees = (TextView) findViewById(R.id.resTrees);
+        resEmissions = (TextView) findViewById(R.id.resEmissions);
+        resFuel = (TextView) findViewById(R.id.resFuel);
+        resWater = (TextView) findViewById(R.id.resWater);
         barChart = (BarChart) findViewById(R.id.barChart);
         addFriend.setVisibility(GONE);
         currentUser = ParseUser.getCurrentUser();
         fmt = DateFormat.getDateInstance(DateFormat.LONG);
         labels = new ArrayList<>();
+        resourceData = currentUser.getJSONObject("resourceData");
+        String trees = null;
+        String emissions = null;
+        String fuel = null;
+        String water = null;
+        try {
+            trees = String.valueOf(resourceData.getLong("trees"));
+            emissions = String.valueOf(resourceData.getLong("emissions"));
+            fuel = String.valueOf(resourceData.getLong("fuel"));
+            water = String.valueOf(resourceData.getLong("water"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        resTrees.setText(trees + " trees saved");
+        resEmissions.setText("emissions reduced: " + emissions + " pounds");
+        resFuel.setText("fuel saved: " + fuel + " liters");
+        resWater.setText("water saved: "+ water + " liters");
 
         cal = new GregorianCalendar();
         cal.set(Calendar.HOUR_OF_DAY, 0);
@@ -119,9 +138,6 @@ public class ProfileActivity extends AppCompatActivity {
         int daysCounter = (int) days;
         Log.d("daysCounter", String.valueOf(daysCounter));
             labels.add("");
-//        for( int i = 1; i < daysCounter; i++){
-//            labels.add("Day " + i);
-//        }
 
         try {
             barChart(daysCounter + 1);
@@ -148,13 +164,6 @@ public class ProfileActivity extends AppCompatActivity {
             startActivityForResult(builder.build(), 0);
 
         }
-
-//        ScheduledThreadPoolExecutor sch = (ScheduledThreadPoolExecutor)
-//                Executors.newScheduledThreadPool(5);
-//
-//        sch.scheduleAtFixedRate(periodicTask, 0, 24, TimeUnit.HOURS);
-
-
     }
 
 
@@ -227,12 +236,6 @@ public class ProfileActivity extends AppCompatActivity {
             String dateString = "Joined in " + sdf.format(joinDate);
             tvJoinDate.setText(dateString);
         }
-
-//        alarmMgr.setInexactRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP,
-//                SystemClock.elapsedRealtime() + AlarmManager.INTERVAL_HALF_HOUR,
-//                AlarmManager.INTERVAL_HALF_HOUR, alarmIntent);
-
-
     }
 
     public void barChart(final int counter) throws JSONException, java.text.ParseException {
@@ -245,20 +248,10 @@ public class ProfileActivity extends AppCompatActivity {
         barChart.getDescription().setEnabled(false);
         barChart.setScaleEnabled(true);
 
-
-        //JSONObject resourceData = currentUser.getJSONObject("resourceData");
-
-      //  Log.d("testingggg", String.valueOf(resourceData.get("water")));
-
         XAxis xl = barChart.getXAxis();
-      //  xl.setGranularityEnabled(false);
         xl.setGranularity(1f);
         xl.setCenterAxisLabels(false);
         xl.setAxisMinimum(0f);
-
-       // xl.setDrawLabels(true);
-
-
 
 
 
@@ -342,9 +335,6 @@ public class ProfileActivity extends AppCompatActivity {
                             transitPoints += actionList.get(j).getDouble("points");
                             break;
                     }
-
-
-
                 }
                 onLoadData(i);
                 cal.add(Calendar.DAY_OF_MONTH, counter - i - 2);
@@ -356,43 +346,14 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
 
-            //     Log.d("fuuueell", String.valueOf(yFuel));
-
-
         BarDataSet entry, water, trees, emissions;
 
         if (barChart.getData() != null && barChart.getData().getDataSetCount() > 0) {
             entry = (BarDataSet)barChart.getData().getDataSetByIndex(0);
-            // water = (BarDataSet)barChart.getData().getDataSetByIndex(1);
-            // trees = (BarDataSet)barChart.getData().getDataSetByIndex(2);
-            // emissions = (BarDataSet)barChart.getData().getDataSetByIndex(3);
-
             entry.setValues(entries);
-//            water.setValues(yWater);
-//            trees.setValues(yTrees);
-//            emissions.setValues(yEmissions);
             barChart.getData().notifyDataChanged();
             barChart.notifyDataSetChanged();
         } else {
-//            // create 2 datasets with different types
-//            entry = new BarDataSet(yFuel, "Fuel");
-//            fuel.setColor(Color.rgb(104, 241, 175));
-////            water = new BarDataSet(yWater, "Water");
-////            water.setColor(Color.rgb(164, 228, 251));
-////            trees = new BarDataSet(yTrees, "Trees");
-////            trees.setColor(Color.rgb(124, 250, 151));
-////            emissions = new BarDataSet(yEmissions, "Emissions");
-////            emissions.setColor(Color.rgb(200, 247, 180));
-//
-//            ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
-//            dataSets.add(entry);
-////            dataSets.add(water);
-////            dataSets.add(trees);
-////            dataSets.add(emissions);
-//
-//
-//            BarData data = new BarData(dataSets);
-//            barChart.setData(data);
 
             entry = new BarDataSet(entries, "");
             entry.setColors(getColors());
@@ -405,42 +366,11 @@ public class ProfileActivity extends AppCompatActivity {
 
         barChart.getBarData().setBarWidth(barWidth);
         barChart.animateY(1500);
-
-      //  barChart.fitScreen();
-       // barChart.invalidate();
-
     }
-
-//    Runnable periodicTask = new Runnable(){
-//        @Override
-//        public void run() {
-//            try{
-//                counter = currentUser.getInt("dayCounter");
-//                if (counter == 0){
-//                    counter++;
-//                    currentUser.put("dayCounter", counter);
-//                    currentUser.saveInBackground();
-//                }
-//                else {
-//                    labels.add("Day " + counter);
-//                    counter++;
-//                    currentUser.put("dayCounter", counter);
-//                    barChart(counter);
-//                    currentUser.saveInBackground();
-//                }
-//            }catch(Exception e){
-//
-//            }
-//        }
-//    };
 
 
     public void onLoadData(int i) {
         entries.add(new BarEntry(i, new float[] { (float) recyclePoints, (float) reusePoints, (float) waterPoints, (float)transitPoints }));
-      //  yWater.add(new BarEntry(i, (float) waterValue));
-      //  yTrees.add(new BarEntry(i, (float) treesValue));
-     //   yEmissions.add(new BarEntry(i, (float)emissionsValue));
-       // Log.d("entryyy", String.valueOf(yFuel));
     }
 
 
@@ -454,8 +384,6 @@ public class ProfileActivity extends AppCompatActivity {
         colors[1] = ResourcesCompat.getColor(getResources(), R.color.darkBlue, null);
         colors[2] = ResourcesCompat.getColor(getResources(), R.color.colorAccentDark, null);
         colors[3] = ResourcesCompat.getColor(getResources(), R.color.colorPrimaryDark, null);
-
-
 
         return colors;
     }

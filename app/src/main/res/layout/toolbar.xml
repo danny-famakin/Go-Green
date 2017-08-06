@@ -9,5 +9,4 @@
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
     android:theme="@style/ToolbarTheme"
     app:titleTextAppearance="@style/Toolbar.TitleText"
-
     />
