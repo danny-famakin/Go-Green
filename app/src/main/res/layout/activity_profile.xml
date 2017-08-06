@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:paddingBottom="7dp">
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -12,8 +16,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/toolbar"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        app:layout_scrollFlags="scroll|enterAlways|snap"
         />
 
     <ImageView
@@ -21,7 +25,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         app:srcCompat="@android:drawable/btn_star"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="10dp"
         android:layout_below="@+id/toolbar"
         android:transitionName="profileTrans"
         android:layout_marginLeft="16dp"
@@ -39,11 +43,9 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="12dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="16dp"
         android:text="Name"
         android:textColor="@color/colorPrimaryDark"
         android:textSize="24sp" />
-
 
         <TextView
             android:id="@+id/tvJoin"
@@ -54,7 +56,41 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="8dp"
             android:text="TextView" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/llPoints"
+            android:paddingRight="5dp"
+            android:paddingBottom="55dp"
+            android:layout_marginBottom="5dp"
+            android:layout_alignStart="@id/tvJoin"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/tvJoin"
+            android:layout_marginTop="7dp"
+            >
+            <TextView
+                android:id="@+id/tvPoints"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0"
+                android:textColor="@color/colorAccentDark"
+                android:textSize="20sp"
+                android:layout_gravity="center_vertical"/>
+
+            <ImageView
+                android:id="@+id/ivLeaf"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginLeft="4dp"
+                android:layout_above="@+id/addFriends"
+                android:layout_toEndOf="@+id/header"
+                app:srcCompat="@drawable/ic_leaf4"
+                android:layout_gravity="center_vertical"/>
+        </LinearLayout>
+
     </RelativeLayout>
+
     <ToggleButton
         android:id="@+id/addFriends"
         android:layout_width="wrap_content"
@@ -65,49 +101,47 @@
         android:textColor="@color/offWhite"
         android:textOff="Add"
         android:textOn="Friends"
-        android:layout_below="@+id/llPoints"
+        android:layout_below="@+id/header"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="11dp" />
+        android:layout_marginTop="11dp"
+        android:visibility="gone"/>
 
 
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/llPoints"
-    android:layout_centerHorizontal="true"
-    android:layout_below="@+id/ivProfilePicDet"
-    android:layout_marginTop="20dp"
-    >
     <TextView
-        android:id="@+id/tvPoints"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="0"
-        android:textColor="@color/colorAccentDark"
-        android:textSize="40sp"
-        android:layout_gravity="center_vertical"/>
+        android:id="@+id/dailyAct"
+        android:text="Daily Activity"
+        android:paddingTop="5dp"
+        android:layout_above="@+id/barChart"
+        android:layout_marginBottom="7dp"
+        android:layout_marginTop="7dp"
+        android:textSize="18sp"
+        android:textColor="#000"
+        android:layout_centerHorizontal="true"/>
 
-    <ImageView
-        android:id="@+id/ivLeaf"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+    <View
+        android:layout_width="250dp"
+        android:layout_height="0.5dp"
+        android:background="@android:color/darker_gray"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/barChart"
+        android:layout_marginBottom="6dp"
+        android:layout_marginTop="4dp"
         android:layout_marginLeft="4dp"
-        android:layout_above="@+id/addFriends"
-        android:layout_toEndOf="@+id/header"
-        app:srcCompat="@drawable/ic_leaf4"
-        android:layout_gravity="center_vertical"/>
-</LinearLayout>
+        android:layout_marginRight="4dp"
+        android:id="@+id/line"/>
 
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/barChart"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="260dp"
+        android:layout_marginBottom="-10dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/addFriends"
-        android:layout_marginTop="5dp"
         />
 
     <FrameLayout
@@ -116,4 +150,113 @@
         android:id="@+id/flContainer">
     </FrameLayout>
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/envCont"
+        android:layout_centerHorizontal="true"
+        android:text="Environmental Contributions"
+        android:layout_marginTop="15dp"
+        android:textSize="18sp"
+        android:textColor="#000"
+        android:layout_below="@+id/barChart"
+        android:layout_marginBottom="7dp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/infoEmissions"
+        android:layout_below="@id/envCont"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true">
+
+        <ImageView
+            android:id="@+id/emissions"
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/ic_emissions_resource" />
+        <TextView
+            android:id="@+id/resEmissions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="5dp"
+            android:text="0"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/infoFuel"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/infoEmissions"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true">
+
+        <ImageView
+            android:id="@+id/fuel"
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/ic_fuel_resource" />
+        <TextView
+            android:id="@+id/resFuel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginStart="5dp"
+            android:text="0"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/infoWater"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/infoFuel"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true">
+
+        <ImageView
+            android:id="@+id/water"
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/ic_water_resource" />
+        <TextView
+            android:id="@+id/resWater"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="5dp"
+            android:text="0"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/infoTrees"
+        android:layout_marginTop="5dp"
+        android:layout_below="@id/infoWater"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true">
+
+        <ImageView
+            android:id="@+id/trees"
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/ic_trees_resource" />
+        <TextView
+            android:id="@+id/resTrees"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:layout_marginLeft="5dp"
+            android:text="0"/>
+    </LinearLayout>
+
 </RelativeLayout>
+
+</ScrollView>
