@@ -285,7 +285,7 @@ public class ProfileActivity extends AppCompatActivity {
         //data
         float groupSpace = 0.12f;
         float barSpace = 0f; // x2 dataset
-        float barWidth = 0.22f; // x2 dataset
+        float barWidth = 0.42f; // x2 dataset
 
 
 
