@@ -9,9 +9,10 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginLeft="12dp"
-        android:layout_marginStart="12dp"
         android:layout_marginTop="16dp"
-        android:id="@+id/llTitle">
+        android:id="@+id/llTitle"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true">
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
@@ -20,15 +21,15 @@
         android:text="About"
         android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
-    <ImageView
-        android:layout_gravity="center_vertical"
-        android:id="@+id/ivLogo"
-        android:layout_width="124dp"
-        android:layout_height="32dp"
-        android:layout_marginLeft="4dp"
-        android:cropToPadding="false"
-        android:scaleType="centerInside"
-        app:srcCompat="@drawable/logo_bold" />
+        <ImageView
+            android:id="@+id/ivLogo"
+            android:layout_width="130dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="4dp"
+            android:cropToPadding="false"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/logo_bold" />
     </LinearLayout>
 
     <TextView
@@ -38,7 +39,7 @@
         android:layout_alignStart="@+id/llTitle"
         android:layout_below="@+id/llTitle"
         android:text="Why use Grassroots?"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="4dp"
         android:textColor="@color/colorPrimary" />
 
     <TextView
