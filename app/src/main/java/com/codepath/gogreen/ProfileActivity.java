@@ -86,7 +86,7 @@ public class ProfileActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
-        getSupportActionBar().setLogo(R.drawable.toolbar_logo);
+//        getSupportActionBar().setLogo(R.drawable.toolbar_logo);
         context = this;
 
         ivProfilePic = (ImageView) findViewById(R.id.ivProfilePicDet);
