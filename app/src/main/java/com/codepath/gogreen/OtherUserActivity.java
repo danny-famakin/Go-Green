@@ -58,6 +58,8 @@ public class OtherUserActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+//        getSupportActionBar().setLogo(R.drawable.toolbar_logo);
         context = this;
 
         profileImage = (ImageView) findViewById(R.id.ivProfilePicDet);
@@ -84,7 +86,7 @@ public class OtherUserActivity extends AppCompatActivity {
                 for (int i = 0; i < friendsList.length(); i++) {
                     try {
                         if (friendsList.get(i).equals(Id)){
-                            addFriends.setText("Friends");
+                            addFriends.setText("Following");
                         }
                         if (Id.equals(currentUser.get("fbId"))){
                             addFriends.setVisibility(GONE);

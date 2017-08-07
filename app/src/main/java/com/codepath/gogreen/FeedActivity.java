@@ -27,7 +27,7 @@ import com.bumptech.glide.Glide;
 import com.codepath.gogreen.fragments.ModalFragment;
 import com.codepath.gogreen.fragments.RecycleFragment;
 import com.codepath.gogreen.fragments.ReuseFragment;
-import com.codepath.gogreen.fragments.TabPagerAdapter;
+import com.codepath.gogreen.fragments.SearchFragment;
 import com.codepath.gogreen.fragments.TransitFragment;
 import com.codepath.gogreen.fragments.WaterFragment;
 import com.codepath.gogreen.models.Action;
@@ -52,6 +52,8 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
     SubActionButton button3;
     SubActionButton button4;
     SearchFragment searchFragment;
+    int formerQueryLength;
+    boolean searchFocused;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +64,8 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
         flContainer = (FrameLayout)findViewById(R.id.flContainer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+//        getSupportActionBar().setLogo(R.drawable.toolbar_logo);
 
         // check if necessary to display login screen
         currentUser = ParseUser.getCurrentUser();
@@ -91,10 +95,10 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
         SubActionButton.Builder itemBuilder = new SubActionButton.Builder(this);
 // repeat many times:
 
-        button1 = createSubActionButton(R.drawable.ic_transit2);
-        button2 = createSubActionButton(R.drawable.ic_water2);
-        button3 = createSubActionButton(R.drawable.ic_bag3);
-        button4 = createSubActionButton(R.drawable.ic_can2);
+        button1 = createSubActionButton(R.drawable.ic_transit);
+        button2 = createSubActionButton(R.drawable.ic_water);
+        button3 = createSubActionButton(R.drawable.ic_bag);
+        button4 = createSubActionButton(R.drawable.ic_can);
 
 
 
@@ -224,21 +228,25 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
         MenuItemCompat.setOnActionExpandListener(searchItem, new MenuItemCompat.OnActionExpandListener() {
             @Override
             public boolean onMenuItemActionExpand(MenuItem item) {
+                searchFocused = true;
                 return true;
             }
 
             @Override
             public boolean onMenuItemActionCollapse(MenuItem item) {
+                searchFocused = false;
                 // Write your code here
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 if (searchFragment != null) {
                     ft.remove(searchFragment).commit();
                 }
+
                 return true;
             }
         });
 
         final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        formerQueryLength = 0;
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -247,17 +255,20 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
             }
             @Override
             public boolean onQueryTextChange(String newText) {
-                if (!newText.isEmpty()) {
-                    searchFragment = SearchFragment.newInstance(newText);
-                    final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-                    // make change
-                    flContainer.setVisibility(View.VISIBLE);
-                    ft.replace(R.id.flContainer, searchFragment, "TAG_FRAGMENT");
-                    // commit
-                    ft.commit();
-
-
-
+                if ((!newText.isEmpty() || formerQueryLength != 0) && searchFocused) {
+                    if (searchFragment == null || newText.length() == 1 || formerQueryLength > newText.length() || newText.equals("")) {
+                        searchFragment = SearchFragment.newInstance(newText);
+                        final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                        // make change
+                        flContainer.setVisibility(View.VISIBLE);
+                        ft.replace(R.id.flContainer, searchFragment, "TAG_FRAGMENT");
+                        // commit
+                        ft.commit();
+                    }
+                    else {
+                        searchFragment.updateSearch(newText);
+                    }
+                    formerQueryLength = newText.length();
 
                 }
                 return false;
@@ -291,6 +302,11 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
 
         Log.d("FeedActivity", String.valueOf(action.getMagnitude()) + " points awarded for " + action.getActionType());
 
+    }
+
+    public void refreshFeed() {
+        PagerAdapter.feedFragment.actionAdapter.clear();
+        PagerAdapter.feedFragment.update();
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {

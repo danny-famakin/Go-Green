@@ -1,4 +1,4 @@
-package com.codepath.gogreen.fragments;
+package com.codepath.gogreen;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -26,7 +26,7 @@ public class ResourceUtils {
 
 
     public HashMap<String, Double> getWeights() {
-        weights.put("emissions", 4.);
+        weights.put("emissions", 2.);
         weights.put("fuel", 20.);
         weights.put("water", 0.1);
         weights.put("trees", 1.);

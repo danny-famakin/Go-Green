@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.codepath.gogreen.ActionAdapter;
+import com.codepath.gogreen.models.ActionAdapter;
 import com.codepath.gogreen.DividerItemDecoration;
 import com.codepath.gogreen.R;
 import com.codepath.gogreen.models.Action;
@@ -30,7 +30,7 @@ import java.util.List;
 public class FeedFragment extends TabsFragment {
     ArrayList<Action> actions;
     RecyclerView rvActions;
-    ActionAdapter actionAdapter;
+    public ActionAdapter actionAdapter;
     ParseUser currentUser;
     private SwipeRefreshLayout swipeContainer;
     ArrayList<String> friendIdList;
@@ -79,6 +79,7 @@ public class FeedFragment extends TabsFragment {
         ParseQuery<Action> query = ParseQuery.getQuery("Action");
         query.whereContainedIn("uid", friendIdList);
         query.orderByAscending("_created_at");
+        query.setLimit(1000);
         query.findInBackground(new FindCallback<Action>() {
             public void done(List<Action> actionList, ParseException e) {
                 if (e == null) {

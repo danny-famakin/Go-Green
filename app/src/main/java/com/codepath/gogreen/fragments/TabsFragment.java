@@ -47,7 +47,9 @@ public class TabsFragment extends Fragment {
 
         for (int i = 0; i < friends.length(); i++) {
             try {
-                friendsList.add(friends.getString(i));
+                if (friends.getString(i) != null) {
+                    friendsList.add(friends.getString(i));
+                }
             } catch (JSONException ex) {
                 ex.printStackTrace();
             }

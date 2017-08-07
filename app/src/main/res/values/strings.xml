@@ -53,6 +53,10 @@
         long period of time. Grassroots encourages individuals to measure their personal contribution to the environment through everyday actions.
     </string>
     <string name="about2">
+        Our formula for points is as follows:\n
+        <b># points</b> = 2 &#x00D7; <b>lbs of CO2</b> + 20 &#x00D7; <b>L of fuel</b> + 0.1 &#x00D7; <b>L of water</b> + 1 &#x00D7; <b>lbs of trees</b>
+    </string>
+    <string name="about3">
     Our resource calculations are based on statistics compiled from a variety of websites and studies. To learn more, check out our sources below!
     </string>
 

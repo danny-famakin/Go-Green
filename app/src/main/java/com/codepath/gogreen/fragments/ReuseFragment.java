@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.codepath.gogreen.R;
+import com.codepath.gogreen.ResourceUtils;
 
 /**
  * Created by melissaperez on 7/14/17.

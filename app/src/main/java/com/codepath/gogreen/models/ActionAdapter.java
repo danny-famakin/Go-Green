@@ -1,4 +1,4 @@
-package com.codepath.gogreen;
+package com.codepath.gogreen.models;
 
 import android.app.Activity;
 import android.content.Context;
@@ -28,9 +28,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.codepath.gogreen.OtherUserActivity;
+import com.codepath.gogreen.ProfileActivity;
+import com.codepath.gogreen.R;
+import com.codepath.gogreen.ResourceUtils;
+import com.codepath.gogreen.TimeStampUtils;
 import com.codepath.gogreen.fragments.DetailFragment;
-import com.codepath.gogreen.fragments.ResourceUtils;
-import com.codepath.gogreen.models.Action;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -142,7 +145,8 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
 //                    holder.line.setBackgroundColor(color);
                     holder.tvComments.setText(String.valueOf(action.getJSONArray("comments").length()));
 
-                    holder.rlAction.setOnClickListener(new View.OnClickListener() {
+                    holder.ivReply.setOnClickListener(new View.OnClickListener() {
+
                         @Override
                         public void onClick(View v) {
                             String body = " " + composeActionBody(action, color);
@@ -165,6 +169,43 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
                             bundle.putString("authorName", username);
                             bundle.putString("authorImg", imgUrl);
                             bundle.putString("objectID", action.getObjectId().toString());
+                            bundle.putBoolean("comment", true);
+
+                            DetailFragment detailFragment = DetailFragment.newInstance();
+                            detailFragment.setArguments(bundle);
+
+                            FragmentTransaction ft = ((AppCompatActivity) context).getSupportFragmentManager()
+                                    .beginTransaction();
+                            // make change
+                            ft.replace(R.id.flContainer, detailFragment, "TAG_FRAGMENT");
+                            // commit
+                            ft.commit();
+                        }
+                    });
+                    holder.rlAction.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            String body = " " + composeActionBody(action, color);
+
+                            Bundle bundle = new Bundle();
+
+                            bundle.putString("fbId", action.getUid());
+                            bundle.putString("body", body);
+                            bundle.putString("points",String.format("%.1f", action.getDouble("points")));
+                            bundle.putString("timeStamp", holder.tvTimeStamp.getText().toString());
+                            bundle.putString("objectID", action.getObjectId().toString());
+                            bundle.putBoolean("comment", false);
+
+                            try {
+                                bundle.putString("action", action.toJSON().toString());
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            bundle.putString("body", body);
+                            bundle.putString("authorName", username);
+                            bundle.putString("authorImg", imgUrl);
+                            bundle.putString("objectID", action.getObjectId().toString());
+
 
                             DetailFragment detailFragment = DetailFragment.newInstance();
                             detailFragment.setArguments(bundle);
@@ -227,9 +268,9 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
         public TextView tvComments;
         public ImageView ivProfilePic;
         public ImageButton ivFavorite;
-        public ImageButton ivReply;
         public TextView tvLikes;
         public RelativeLayout rlAction;
+        public ImageView ivReply;
         public View line;
 
         public ViewHolder(View itemView) {
@@ -245,7 +286,8 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
             rlAction = (RelativeLayout) itemView.findViewById(R.id.rlAction);
             line = (View) itemView.findViewById(R.id.line);
 
-
+            //Typeface myTypeFace = Typeface.createFromAsset(context.getAssets(), "fonts/JosefinSansSemiBold.ttf");
+            //tvAction.setTypeface(myTypeFace);
             ivFavorite.setOnClickListener(new View.OnClickListener(){
             @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override

@@ -1,4 +1,4 @@
-package com.codepath.gogreen;
+package com.codepath.gogreen.fragments;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -6,11 +6,14 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.codepath.gogreen.R;
+import com.codepath.gogreen.models.UserAdapter;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;
@@ -87,16 +90,30 @@ public class SearchFragment extends Fragment {
         //query.whereMatches("name", search, "r");
         query.orderByAscending("name");
         query.setLimit(200);
-        query.findInBackground(new FindCallback<ParseUser>() {
-            public void done(List<ParseUser> userList, ParseException e) {
-                if (e == null && userList.size() > 0) {
-                    tvError.setVisibility(View.GONE);
-                    users.clear();
-                    addItems(userList);
-                } else {
-                    tvError.setVisibility(View.VISIBLE);
+        if (users.size() == 0) {
+            query.findInBackground(new FindCallback<ParseUser>() {
+                public void done(List<ParseUser> userList, ParseException e) {
+                    if (e == null && userList.size() > 0) {
+                        tvError.setVisibility(View.GONE);
+                            addItems(userList);
+                    } else {
+                        tvError.setVisibility(View.VISIBLE);
+                    }
                 }
+            });
+        }
+    }
+
+    public void updateSearch(String searchQuery) {
+        Log.d("users", String.valueOf(users.size()));
+        for (int i = 0; i < users.size(); i++) {
+            Log.d("user #" + String.valueOf(i), users.get(i).getString("name").toLowerCase());
+            Log.d("user query", searchQuery.toLowerCase());
+            if (!users.get(i).getString("name").toLowerCase().contains(searchQuery.toLowerCase())) {
+                users.remove(i);
+                userAdapter.notifyItemRemoved(i);
+                i -= 1;
             }
-        });
+        }
     }
 }

@@ -98,7 +98,7 @@
             android:layout_alignLeft="@+id/tvAction"
             android:layout_alignStart="@+id/tvAction"
             android:layout_alignTop="@+id/tvPointsCaption"
-            app:srcCompat="@drawable/ic_leaf4" />
+            app:srcCompat="@drawable/ic_leaf" />
 
         <TextView
             android:id="@+id/tvLikes"
@@ -216,8 +216,7 @@
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
             android:background="@color/offWhite"
-            android:scrollbars="vertical"
-            />
+            android:scrollbars="vertical" />
     </RelativeLayout>
 
 

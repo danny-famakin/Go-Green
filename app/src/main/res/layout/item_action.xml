@@ -29,19 +29,20 @@
         <!--android:paddingRight="4dp"-->
         <!--android:paddingTop="4dp"-->
 
-    <TextView
-        android:id="@+id/tvAction"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/ivProfilePicDet"
-        android:layout_marginLeft="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_toEndOf="@+id/ivProfilePicDet"
-        android:layout_toLeftOf="@+id/tvTimeStamp"
-        android:layout_toRightOf="@+id/ivProfilePicDet"
-        android:layout_toStartOf="@+id/tvTimeStamp"
-        android:text="TextView" />
+        <TextView
+            android:id="@+id/tvAction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/ivProfilePicDet"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@+id/ivProfilePicDet"
+            android:layout_toLeftOf="@+id/tvTimeStamp"
+            android:layout_toRightOf="@+id/ivProfilePicDet"
+            android:layout_toStartOf="@+id/tvTimeStamp"
+            android:text="TextView"
+            android:textSize="14sp" />
 
         <TextView
             android:id="@+id/tvPointsCaption"
@@ -123,7 +124,7 @@
         android:layout_alignLeft="@+id/tvAction"
         android:layout_alignStart="@+id/tvAction"
         android:layout_alignTop="@+id/tvPointsCaption"
-        app:srcCompat="@drawable/ic_leaf4" />
+        app:srcCompat="@drawable/ic_leaf" />
 
         <TextView
             android:id="@+id/tvLikes"

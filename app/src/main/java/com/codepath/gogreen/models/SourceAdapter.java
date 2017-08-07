@@ -1,4 +1,4 @@
-package com.codepath.gogreen;
+package com.codepath.gogreen.models;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -14,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.codepath.gogreen.R;
 
 import java.util.ArrayList;
 import java.util.List;

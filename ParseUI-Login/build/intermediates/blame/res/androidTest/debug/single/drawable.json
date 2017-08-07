@@ -16,12 +16,12 @@
         "source": "/Users/melissaperez/Go-Green/ParseUI-Login/build/intermediates/bundles/debug/res/drawable/btn_outline.xml"
     },
     {
-        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/drawable/abc_edit_text_material.xml",
-        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/drawable/abc_edit_text_material.xml"
-    },
-    {
         "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/drawable/abc_vector_test.xml",
         "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/drawable/abc_vector_test.xml"
+    },
+    {
+        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/drawable/abc_edit_text_material.xml",
+        "source": "/Users/anyazhang/.android/build-cache/54651b968e40a1889187ff2e275f2a529424842f/output/res/drawable/abc_edit_text_material.xml"
     },
     {
         "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/drawable/abc_vector_test.xml",
@@ -250,6 +250,10 @@
     {
         "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/drawable/grassroots_banner.jpg",
         "source": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/bundles/debug/res/drawable/grassroots_banner.jpg"
+    },
+    {
+        "merged": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/drawable/grassroots.jpg",
+        "source": "/Users/anyazhang/Documents/Go-Green/ParseUI-Login/build/intermediates/bundles/debug/res/drawable/grassroots.jpg"
     },
     {
         "merged": "/Users/famakindaniel7/Go-Green/ParseUI-Login/build/intermediates/res/merged/androidTest/debug/drawable/com_facebook_button_like_background.xml",
