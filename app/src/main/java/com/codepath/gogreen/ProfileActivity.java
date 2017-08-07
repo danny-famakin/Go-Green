@@ -2,6 +2,7 @@ package com.codepath.gogreen;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.res.ResourcesCompat;
@@ -66,6 +67,7 @@ public class ProfileActivity extends AppCompatActivity {
     Calendar cal;
     Calendar calendar;
     int i;
+    double TREES_PER_POUND = 0.0085;
 
     double recyclePoints;
     double reusePoints;
@@ -105,14 +107,14 @@ public class ProfileActivity extends AppCompatActivity {
         String fuel = null;
         String water = null;
         try {
-            trees = String.valueOf(resourceData.getLong("trees"));
-            emissions = String.valueOf(resourceData.getLong("emissions"));
-            fuel = String.valueOf(resourceData.getLong("fuel"));
-            water = String.valueOf(resourceData.getLong("water"));
+            trees = String.format("%.2f", resourceData.getDouble("trees")  * TREES_PER_POUND);
+            emissions = String.format("%.2f",resourceData.getDouble("emissions"));
+            fuel = String.format("%.2f",resourceData.getDouble("fuel"));
+            water = String.format("%.3f",resourceData.getDouble("water"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        resTrees.setText(trees + " trees saved");
+        resTrees.setText("trees saved: " + trees );
         resEmissions.setText("emissions reduced: " + emissions + " pounds");
         resFuel.setText("fuel saved: " + fuel + " liters");
         resWater.setText("water saved: "+ water + " liters");
@@ -241,7 +243,7 @@ public class ProfileActivity extends AppCompatActivity {
     public void barChart(final int counter) throws JSONException, java.text.ParseException {
 
         barChart.setDrawBarShadow(false);
-        barChart.setDrawValueAboveBar(true);
+        barChart.setDrawValueAboveBar(false);
         barChart.setPinchZoom(false);
         barChart.setDrawGridBackground(false);
         barChart.setDragEnabled(true);
@@ -357,10 +359,11 @@ public class ProfileActivity extends AppCompatActivity {
 
             entry = new BarDataSet(entries, "");
             entry.setColors(getColors());
-            entry.setStackLabels(new String[]{"Recycle", "Reuse", "Water", "Transit"});
+            entry.setStackLabels(new String[]{"Recycling", "Reusing", "Showers", "Transit"});
             ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
             dataSets.add(entry);
             BarData data = new BarData(dataSets);
+            data.setValueTextColor(Color.WHITE);
             barChart.setData(data);
         }
 
@@ -370,7 +373,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
     public void onLoadData(int i) {
-        entries.add(new BarEntry(i, new float[] { (float) recyclePoints, (float) reusePoints, (float) waterPoints, (float)transitPoints }));
+        entries.add(new BarEntry(i, new float[] { (float) recyclePoints, (float) reusePoints, (float) waterPoints, (float) transitPoints }));
     }
 
 

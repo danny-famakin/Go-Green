@@ -53,6 +53,7 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
     SubActionButton button4;
     SearchFragment searchFragment;
     int formerQueryLength;
+    boolean searchFocused;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -225,16 +226,19 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
         MenuItemCompat.setOnActionExpandListener(searchItem, new MenuItemCompat.OnActionExpandListener() {
             @Override
             public boolean onMenuItemActionExpand(MenuItem item) {
+                searchFocused = true;
                 return true;
             }
 
             @Override
             public boolean onMenuItemActionCollapse(MenuItem item) {
+                searchFocused = false;
                 // Write your code here
                 FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                 if (searchFragment != null) {
                     ft.remove(searchFragment).commit();
                 }
+
                 return true;
             }
         });
@@ -249,7 +253,7 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
             }
             @Override
             public boolean onQueryTextChange(String newText) {
-                if ((!newText.isEmpty() || formerQueryLength != 0) && isSearchViewFocused(searchView)) {
+                if ((!newText.isEmpty() || formerQueryLength != 0) && searchFocused) {
                     if (searchFragment == null || newText.length() == 1 || formerQueryLength > newText.length() || newText.equals("")) {
                         searchFragment = SearchFragment.newInstance(newText);
                         final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -270,11 +274,6 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
         });
         return true;
 
-    }
-    //https://stackoverflow.com/questions/24082745/searchview-isfocused-always-returns-false
-    private boolean isSearchViewFocused(SearchView sview) {
-        View et_search =  sview.findViewById(R.id.search_src_text);
-        return et_search.isFocused();
     }
 
 

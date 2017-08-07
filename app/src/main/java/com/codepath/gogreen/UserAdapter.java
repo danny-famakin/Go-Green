@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -62,7 +63,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         currentUser = ParseUser.getCurrentUser();
         final String uId  = currentUser.getString("fbId");
 
-        holder.ivProfilePic.setOnClickListener(new View.OnClickListener(){
+        holder.rlUser.setOnClickListener(new View.OnClickListener(){
 
             @Override
             public void onClick(View v) {
@@ -107,6 +108,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
         public TextView tvName;
         public TextView tvPoints;
         public ImageView ivProfilePic;
+        public RelativeLayout rlUser;
 
 
         public ViewHolder(View itemView) {
@@ -115,6 +117,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             tvName = (TextView) itemView.findViewById(R.id.tvName);
             tvPoints = (TextView) itemView.findViewById(R.id.tvPoints);
             ivProfilePic = (ImageView) itemView.findViewById(R.id.ivProfilePic);
+            rlUser = (RelativeLayout) itemView.findViewById(R.id.rlUser);
         }
     }
 

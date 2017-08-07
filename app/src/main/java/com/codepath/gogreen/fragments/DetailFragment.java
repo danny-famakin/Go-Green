@@ -17,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -113,6 +114,14 @@ public class DetailFragment extends Fragment {
         String timeShort = getArguments().getString("timeStamp");
         body = getArguments().getString("body");
         String points = getArguments().getString("points");
+        if (getArguments().getBoolean("comment")) {
+            Log.d("comment", "focused");
+            EditText editText = (EditText) v.findViewById(R.id.etWriteComment);
+            editText.requestFocus();
+            InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT);
+
+        }
 
         JSONObject jsonObject;
         try {

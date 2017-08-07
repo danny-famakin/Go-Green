@@ -142,7 +142,8 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
 //                    holder.line.setBackgroundColor(color);
                     holder.tvComments.setText(String.valueOf(action.getJSONArray("comments").length()));
 
-                    holder.rlAction.setOnClickListener(new View.OnClickListener() {
+                    holder.ivReply.setOnClickListener(new View.OnClickListener() {
+
                         @Override
                         public void onClick(View v) {
                             String body = " " + composeActionBody(action, color);
@@ -165,6 +166,43 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
                             bundle.putString("authorName", username);
                             bundle.putString("authorImg", imgUrl);
                             bundle.putString("objectID", action.getObjectId().toString());
+                            bundle.putBoolean("comment", true);
+
+                            DetailFragment detailFragment = DetailFragment.newInstance();
+                            detailFragment.setArguments(bundle);
+
+                            FragmentTransaction ft = ((AppCompatActivity) context).getSupportFragmentManager()
+                                    .beginTransaction();
+                            // make change
+                            ft.replace(R.id.flContainer, detailFragment, "TAG_FRAGMENT");
+                            // commit
+                            ft.commit();
+                        }
+                    });
+                    holder.rlAction.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            String body = " " + composeActionBody(action, color);
+
+                            Bundle bundle = new Bundle();
+
+                            bundle.putString("fbId", action.getUid());
+                            bundle.putString("body", body);
+                            bundle.putString("points",String.format("%.1f", action.getDouble("points")));
+                            bundle.putString("timeStamp", holder.tvTimeStamp.getText().toString());
+                            bundle.putString("objectID", action.getObjectId().toString());
+                            bundle.putBoolean("comment", false);
+
+                            try {
+                                bundle.putString("action", action.toJSON().toString());
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                            bundle.putString("body", body);
+                            bundle.putString("authorName", username);
+                            bundle.putString("authorImg", imgUrl);
+                            bundle.putString("objectID", action.getObjectId().toString());
+
 
                             DetailFragment detailFragment = DetailFragment.newInstance();
                             detailFragment.setArguments(bundle);
@@ -227,9 +265,9 @@ public class ActionAdapter extends RecyclerView.Adapter<ActionAdapter.ViewHolder
         public TextView tvComments;
         public ImageView ivProfilePic;
         public ImageButton ivFavorite;
-        public ImageButton ivReply;
         public TextView tvLikes;
         public RelativeLayout rlAction;
+        public ImageView ivReply;
         public View line;
 
         public ViewHolder(View itemView) {

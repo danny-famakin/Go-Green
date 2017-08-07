@@ -49,7 +49,7 @@ public class RecycleFragment extends ModalFragment {
 
         Double[] bottleConstants = {0.1012, .0292, 0.36, 0.};
         Double[] canConstants = {0.4270, .6512, 62.7, 0.};
-        Double[] paperConstants = {0.0877, .0019, 0., 0.03};
+        Double[] paperConstants = {0.0877, .0019, 0.132, 0.03};
         recycleConstants.put("bottle", bottleConstants);
         recycleConstants.put("can", canConstants);
         recycleConstants.put("paper", paperConstants);
