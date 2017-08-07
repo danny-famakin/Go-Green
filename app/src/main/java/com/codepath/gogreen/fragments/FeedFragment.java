@@ -30,7 +30,7 @@ import java.util.List;
 public class FeedFragment extends TabsFragment {
     ArrayList<Action> actions;
     RecyclerView rvActions;
-    ActionAdapter actionAdapter;
+    public ActionAdapter actionAdapter;
     ParseUser currentUser;
     private SwipeRefreshLayout swipeContainer;
     ArrayList<String> friendIdList;

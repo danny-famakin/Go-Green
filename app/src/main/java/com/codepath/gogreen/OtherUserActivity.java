@@ -58,6 +58,8 @@ public class OtherUserActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setLogo(R.drawable.toolbar_logo);
         context = this;
 
         profileImage = (ImageView) findViewById(R.id.ivProfilePicDet);

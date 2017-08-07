@@ -27,13 +27,14 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
-import com.codepath.gogreen.models.CommentAdapter;
 import com.codepath.gogreen.DividerItemDecoration;
+import com.codepath.gogreen.FeedActivity;
 import com.codepath.gogreen.PointFormatter;
 import com.codepath.gogreen.R;
 import com.codepath.gogreen.ResourceUtils;
 import com.codepath.gogreen.models.Action;
 import com.codepath.gogreen.models.Comment;
+import com.codepath.gogreen.models.CommentAdapter;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
@@ -47,6 +48,7 @@ import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -210,7 +212,7 @@ public class DetailFragment extends Fragment {
         btComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!etWriteComment.getText().toString().equals("")) {
+                if (!StringUtils.isBlank(etWriteComment.getText().toString())) {
                     Comment comment = new Comment();
                     comment.setUid(user.getString("fbId"));
                     comment.setBody(etWriteComment.getText().toString());
@@ -438,4 +440,9 @@ public class DetailFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        ((FeedActivity) getActivity()).refreshFeed();
+    }
 }

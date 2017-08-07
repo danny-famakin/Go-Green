@@ -64,6 +64,8 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
         flContainer = (FrameLayout)findViewById(R.id.flContainer);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setLogo(R.drawable.toolbar_logo);
 
         // check if necessary to display login screen
         currentUser = ParseUser.getCurrentUser();
@@ -300,6 +302,11 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
 
         Log.d("FeedActivity", String.valueOf(action.getMagnitude()) + " points awarded for " + action.getActionType());
 
+    }
+
+    public void refreshFeed() {
+        PagerAdapter.feedFragment.actionAdapter.clear();
+        PagerAdapter.feedFragment.update();
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
