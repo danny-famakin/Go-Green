@@ -28,7 +28,6 @@ import android.widget.TextView;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
 import com.codepath.gogreen.DividerItemDecoration;
-import com.codepath.gogreen.FeedActivity;
 import com.codepath.gogreen.PointFormatter;
 import com.codepath.gogreen.R;
 import com.codepath.gogreen.ResourceUtils;
@@ -440,9 +439,4 @@ public class DetailFragment extends Fragment {
         }
     }
 
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        ((FeedActivity) getActivity()).refreshFeed();
-    }
 }

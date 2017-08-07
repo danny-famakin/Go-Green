@@ -61,9 +61,7 @@ public class FeedFragment extends TabsFragment {
         swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                actionAdapter.clear();
                 update();
-                swipeContainer.setRefreshing(false);
             }
         });
         // Configure the refreshing colors
@@ -83,6 +81,7 @@ public class FeedFragment extends TabsFragment {
         query.findInBackground(new FindCallback<Action>() {
             public void done(List<Action> actionList, ParseException e) {
                 if (e == null) {
+                    actionAdapter.clear();
                     if (actionList.size() == 0) {
                         Log.d("actionList", "no actions");
                         tvHelp.setVisibility(View.VISIBLE);
@@ -94,6 +93,8 @@ public class FeedFragment extends TabsFragment {
                 } else {
                     Log.d("action", "Error: " + e.getMessage());
                 }
+                swipeContainer.setRefreshing(false);
+
             }
         });
     }

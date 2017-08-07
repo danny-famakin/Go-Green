@@ -304,10 +304,6 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
 
     }
 
-    public void refreshFeed() {
-        PagerAdapter.feedFragment.actionAdapter.clear();
-        PagerAdapter.feedFragment.update();
-    }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         if (requestCode == 0 && resultCode == android.app.Activity.RESULT_OK) {
