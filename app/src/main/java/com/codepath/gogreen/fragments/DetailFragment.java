@@ -27,10 +27,11 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
-import com.codepath.gogreen.CommentAdapter;
+import com.codepath.gogreen.models.CommentAdapter;
 import com.codepath.gogreen.DividerItemDecoration;
 import com.codepath.gogreen.PointFormatter;
 import com.codepath.gogreen.R;
+import com.codepath.gogreen.ResourceUtils;
 import com.codepath.gogreen.models.Action;
 import com.codepath.gogreen.models.Comment;
 import com.github.mikephil.charting.charts.PieChart;
@@ -84,7 +85,7 @@ public class DetailFragment extends Fragment {
     TextView tvResourceStatement;
     LinearLayout llResourceStatement;
     ImageView ivResourceIcon;
-    double POINT_THRESHOLD = 0.05;
+    double POINT_THRESHOLD = 0.01;
     Context context;
 
     String body;

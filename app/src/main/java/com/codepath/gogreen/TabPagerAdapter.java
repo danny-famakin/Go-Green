@@ -1,4 +1,4 @@
-package com.codepath.gogreen.fragments;
+package com.codepath.gogreen;
 
 import android.content.Context;
 import android.support.v4.app.Fragment;
@@ -6,6 +6,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
 import com.codepath.gogreen.FeedActivity;
+import com.codepath.gogreen.fragments.FeedFragment;
+import com.codepath.gogreen.fragments.LeaderboardFragment;
 
 /**
  * Created by famakindaniel7 on 7/13/17.

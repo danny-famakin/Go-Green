@@ -84,7 +84,7 @@ public class OtherUserActivity extends AppCompatActivity {
                 for (int i = 0; i < friendsList.length(); i++) {
                     try {
                         if (friendsList.get(i).equals(Id)){
-                            addFriends.setText("Friends");
+                            addFriends.setText("Following");
                         }
                         if (Id.equals(currentUser.get("fbId"))){
                             addFriends.setVisibility(GONE);

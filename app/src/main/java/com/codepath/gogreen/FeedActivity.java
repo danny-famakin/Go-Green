@@ -27,7 +27,7 @@ import com.bumptech.glide.Glide;
 import com.codepath.gogreen.fragments.ModalFragment;
 import com.codepath.gogreen.fragments.RecycleFragment;
 import com.codepath.gogreen.fragments.ReuseFragment;
-import com.codepath.gogreen.fragments.TabPagerAdapter;
+import com.codepath.gogreen.fragments.SearchFragment;
 import com.codepath.gogreen.fragments.TransitFragment;
 import com.codepath.gogreen.fragments.WaterFragment;
 import com.codepath.gogreen.models.Action;
@@ -93,10 +93,10 @@ public class FeedActivity extends AppCompatActivity implements ModalFragment.OnI
         SubActionButton.Builder itemBuilder = new SubActionButton.Builder(this);
 // repeat many times:
 
-        button1 = createSubActionButton(R.drawable.ic_transit2);
-        button2 = createSubActionButton(R.drawable.ic_water2);
-        button3 = createSubActionButton(R.drawable.ic_bag3);
-        button4 = createSubActionButton(R.drawable.ic_can2);
+        button1 = createSubActionButton(R.drawable.ic_transit);
+        button2 = createSubActionButton(R.drawable.ic_water);
+        button3 = createSubActionButton(R.drawable.ic_bag);
+        button4 = createSubActionButton(R.drawable.ic_can);
 
 
 

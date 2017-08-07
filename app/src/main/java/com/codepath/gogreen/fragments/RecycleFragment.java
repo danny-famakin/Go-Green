@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.codepath.gogreen.R;
+import com.codepath.gogreen.ResourceUtils;
 
 import java.util.Arrays;
 import java.util.HashMap;

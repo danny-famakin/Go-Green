@@ -1,4 +1,4 @@
-package com.codepath.gogreen;
+package com.codepath.gogreen.models;
 
 import android.content.Context;
 import android.graphics.Typeface;
@@ -14,7 +14,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.codepath.gogreen.models.Comment;
+import com.codepath.gogreen.R;
+import com.codepath.gogreen.TimeStampUtils;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;

@@ -1,4 +1,4 @@
-package com.codepath.gogreen;
+package com.codepath.gogreen.models;
 
 import android.app.Activity;
 import android.content.Context;
@@ -28,9 +28,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.codepath.gogreen.OtherUserActivity;
+import com.codepath.gogreen.ProfileActivity;
+import com.codepath.gogreen.R;
+import com.codepath.gogreen.ResourceUtils;
+import com.codepath.gogreen.TimeStampUtils;
 import com.codepath.gogreen.fragments.DetailFragment;
-import com.codepath.gogreen.fragments.ResourceUtils;
-import com.codepath.gogreen.models.Action;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;

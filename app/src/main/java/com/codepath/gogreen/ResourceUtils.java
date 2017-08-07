@@ -1,4 +1,4 @@
-package com.codepath.gogreen.fragments;
+package com.codepath.gogreen;
 
 import android.content.Context;
 import android.graphics.Color;

@@ -21,6 +21,7 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.codepath.gogreen.R;
+import com.codepath.gogreen.ResourceUtils;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
@@ -141,6 +142,7 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
         List<Double[]> constants = Arrays.asList(busConstants, subwayConstants, trainConstants, bikeConstants, walkingConstants);
         for (int i = 0; i < constants.size(); i++) {
             pointValues[i] = new ResourceUtils(context).sumPoints(constants.get(i));
+            Log.d("pointValue", String.valueOf(pointValues[i]));
         }
 
         inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -233,8 +235,7 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
         Intent i = new Intent();
 
         if (distance != null) {
-            newDistance = 5.0;
-//                    Double.parseDouble(distance.getText().toString());
+            newDistance = Double.parseDouble(distance.getText().toString());
             updateData();
             modal.dismiss();
             onDestroyView();
@@ -245,8 +246,8 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
     }
 
     private void updateData() {
-        double pointVal = Arrays.asList(vehicles).indexOf(vehicleType);
-        newPoints = (pointVal * newDistance);
+        int i = Arrays.asList(vehicles).indexOf(vehicleType);
+        newPoints = (pointValues[i] * newDistance);
         updateResources("transit", vehicleType, newPoints, newDistance, transitConstants.get(vehicleType), 0);
 
     }

@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.codepath.gogreen.R;
-import com.codepath.gogreen.UserAdapter;
+import com.codepath.gogreen.models.UserAdapter;
 import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseQuery;

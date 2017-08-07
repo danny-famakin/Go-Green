@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.codepath.gogreen.R;
+import com.codepath.gogreen.ResourceUtils;
 
 /**
  * Created by anyazhang on 7/14/17.
@@ -35,7 +36,7 @@ public class WaterFragment extends ModalFragment {
     int milliseconds;
     boolean showering;
     double newPoints;
-    int MIN_SECS = 30;
+    int MIN_SECS = 0;
     public static double SHOWER_POINTS;
     Double[] waterConstants = new Double[] {0.1499, 0.0102, 9.46, 0.};
 

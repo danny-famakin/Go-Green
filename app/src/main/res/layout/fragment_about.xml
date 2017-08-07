@@ -99,6 +99,6 @@
         android:layout_alignTop="@+id/tvTitle"
         android:layout_toEndOf="@+id/tvTitle"
         android:layout_marginLeft="4dp"
-        app:srcCompat="@drawable/ic_leaf4" />
+        app:srcCompat="@drawable/ic_leaf" />
 
 </RelativeLayout>

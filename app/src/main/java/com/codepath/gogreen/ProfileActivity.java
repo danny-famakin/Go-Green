@@ -127,7 +127,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
         calendar = new GregorianCalendar();
-        calendar.set(2017,7,1);
+        calendar.set(2017,6,29);
         calendar.set(Calendar.HOUR_OF_DAY, 0);
         calendar.set(Calendar.MINUTE, 0);
         calendar.set(Calendar.SECOND, 0);
@@ -270,7 +270,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
         leftAxis.setDrawGridLines(false);
-        leftAxis.setSpaceTop(30f);
+        leftAxis.setSpaceTop(20f);
        // xl.setAxisMinimum((float) 0); // this replaces setStartAtZero(true
         leftAxis.setAxisMinimum(0f);
         barChart.getAxisRight().setEnabled(false);
@@ -365,6 +365,8 @@ public class ProfileActivity extends AppCompatActivity {
             BarData data = new BarData(dataSets);
             data.setValueTextColor(Color.WHITE);
             barChart.setData(data);
+            barChart.setVisibleXRangeMaximum(7);
+            barChart.moveViewToX(entries.size() - 6);
         }
 
         barChart.getBarData().setBarWidth(barWidth);

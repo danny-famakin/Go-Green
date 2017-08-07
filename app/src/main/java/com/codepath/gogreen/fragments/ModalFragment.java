@@ -11,6 +11,7 @@ import android.widget.EditText;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.codepath.gogreen.ResourceUtils;
 import com.codepath.gogreen.models.Action;
 import com.parse.GetCallback;
 import com.parse.ParseException;

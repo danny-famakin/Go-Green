@@ -1,4 +1,4 @@
-package com.codepath.gogreen;
+package com.codepath.gogreen.models;
 
 import android.app.Activity;
 import android.content.Context;
@@ -15,6 +15,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.codepath.gogreen.OtherUserActivity;
+import com.codepath.gogreen.ProfileActivity;
+import com.codepath.gogreen.R;
 import com.parse.ParseUser;
 
 import java.util.List;

@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.codepath.gogreen.R;
-import com.codepath.gogreen.SourceAdapter;
+import com.codepath.gogreen.models.SourceAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -69,12 +69,12 @@ public class AboutFragment extends Fragment {
         };
         final String[] transitLinks = {
                 "<a href=\"https://www.transit.dot.gov/sites/fta.dot.gov/files/docs/PublicTransportationsRoleInRespondingToClimateChange2010.pdf\">Federal Transit Authority</a>",
-                "<a href=\"http://planet3.org/2012/10/31/does-public-transportation-save-energy/\">Planet 3.0</a>",
                 "<a href=\"http://www.vtpi.org/tran_climate.pdf\">Victoria Transport Policy Institute</a>",
+                "<a href=\"http://www.apta.com/resources/reportsandpublications/Documents/apta_public_transportation_fuel_savings_final_010807.pdf\">American Public Transportation Association</a>",
                 "<a href=\"https://www.rita.dot.gov/bts/sites/rita.dot.gov.bts/files/publications/national_transportation_statistics/html/table_01_11.html\">Bureau of Transportation Statistics</a>",
                 "<a href=\"http://www.ci.benicia.ca.us/vertical/sites/%7BF991A639-AAED-4E1A-9735-86EA195E2C8D%7D/uploads/truecost_2014.pdf\">Official Website of the City of Benicia, California</a>",
-                "<a href=\"http://www.apta.com/resources/reportsandpublications/Documents/apta_public_transportation_fuel_savings_final_010807.pdf\">American Public Transportation Association</a>"
-               };
+                "<a href=\"http://planet3.org/2012/10/31/does-public-transportation-save-energy/\">Planet 3.0</a>",
+        };
         final String[] showerLinks = {
                 "<a href=\"https://www.epa.gov/watersense/showerheads\">US Environmental Protection Agency</a>",
                 "<a href=\"http://sustainability.yale.edu/sites/default/files/boola_shower.pdf\">Yale University Sustainability</a>",
@@ -105,11 +105,11 @@ public class AboutFragment extends Fragment {
 
         final String[] transitIcons = {
                 "https://www.brandsoftheworld.com/sites/default/files/styles/logo-thumbnail/public/032011/department_of_transportation.png?itok=SbsCg-Az",
-                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSY-FCL7Z4qLeff4RgMaHUsZOQc1WUeTVsXQU4WeLRc-CBVN8X",
                 "http://www.omegacentre.bartlett.ucl.ac.uk/wp-content/uploads/2014/11/victoria-trasport-policy-institute-logo.png",
+                "https://upload.wikimedia.org/wikipedia/en/thumb/2/20/American_Public_Transportation_Association_%28logo%29.svg/1200px-American_Public_Transportation_Association_%28logo%29.svg.png",
                 "https://www.brandsoftheworld.com/sites/default/files/styles/logo-thumbnail/public/032011/department_of_transportation.png?itok=SbsCg-Az",
                 "http://www.ci.benicia.ca.us/repository/designs/images/GOLogo144.png",
-                "https://upload.wikimedia.org/wikipedia/en/thumb/2/20/American_Public_Transportation_Association_%28logo%29.svg/1200px-American_Public_Transportation_Association_%28logo%29.svg.png"
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSSY-FCL7Z4qLeff4RgMaHUsZOQc1WUeTVsXQU4WeLRc-CBVN8X",
         };
 
         final String[] showerIcons = {
