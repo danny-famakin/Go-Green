@@ -235,7 +235,8 @@ public class TransitFragment extends ModalFragment implements OnMapReadyCallback
         Intent i = new Intent();
 
         if (distance != null) {
-            newDistance = Double.parseDouble(distance.getText().toString());
+            newDistance = 4.2;
+//            Double.parseDouble(distance.getText().toString());
             updateData();
             modal.dismiss();
             onDestroyView();

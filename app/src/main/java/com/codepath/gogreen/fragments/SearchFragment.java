@@ -88,7 +88,7 @@ public class SearchFragment extends Fragment {
         ParseQuery<ParseUser> query = ParseQuery.getQuery("_User");
         query.whereMatches("name", searchQuery, "i");
         //query.whereMatches("name", search, "r");
-        query.orderByAscending("name");
+        query.orderByDescending("name");
         query.setLimit(200);
         if (users.size() == 0) {
             query.findInBackground(new FindCallback<ParseUser>() {
