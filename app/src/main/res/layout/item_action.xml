@@ -64,6 +64,7 @@
             android:layout_alignBaseline="@+id/tvAction"
             android:layout_alignBottom="@+id/tvAction"
             android:layout_alignParentEnd="true"
+            android:layout_marginLeft="4dp"
             android:layout_alignParentRight="true" />
 
         <TextView
